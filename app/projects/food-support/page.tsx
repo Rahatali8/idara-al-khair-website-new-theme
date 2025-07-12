@@ -133,7 +133,7 @@ export default function FoodSupportPage() {
         <div className="bg-gradient-to-r from-green-50 to-teal-50 rounded-2xl p-8">
           <h3 className="text-2xl font-bold text-gray-900 mb-8 text-center">Distribution Centers</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="bg-white rounded-xl p-6 shadow-md">
+            <div className="bg-white rounded-xl p-6 px-8 shadow-md">
               <h4 className="text-xl font-semibold text-gray-900 mb-4">Main Campus - Korangi</h4>
               <div className="space-y-2 text-gray-600">
                 <p>
@@ -147,7 +147,7 @@ export default function FoodSupportPage() {
                 </p>
               </div>
             </div>
-            <div className="bg-white rounded-xl p-6 shadow-md">
+            <div className="bg-white rounded-xl p-6 px-8 shadow-md">
               <h4 className="text-xl font-semibold text-gray-900 mb-4">Community Center - Landhi</h4>
               <div className="space-y-2 text-gray-600">
                 <p>

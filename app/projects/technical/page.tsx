@@ -110,8 +110,8 @@ export default function TechnicalPage() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
               <Button size="lg" asChild className="bg-teal-600 hover:bg-teal-700">
                 <Link href="https://ait.iak.ngo/register" target="_blank">
-                  <Laptop className="mr-2 h-5 w-5" />
-                  Apply Now
+                <Laptop className="mr-2 h-5 w-5" />
+                Apply Now
                   <ExternalLink className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
@@ -290,7 +290,7 @@ export default function TechnicalPage() {
                   <CardDescription>{program.description}</CardDescription>
                 </CardHeader>
 
-                <CardContent className="space-y-4">
+                <CardContent className="space-y-4 px-8">
                   <div>
                     <h4 className="font-semibold text-gray-900 mb-2">Course Modules:</h4>
                     <ul className="space-y-1">
@@ -379,7 +379,7 @@ export default function TechnicalPage() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button size="lg" asChild className="bg-teal-600 hover:bg-teal-700">
               <Link href="https://ait.iak.ngo/register" target="_blank">
-                Apply for Admission
+              Apply for Admission
                 <ExternalLink className="ml-2 h-4 w-4" />
               </Link>
             </Button>

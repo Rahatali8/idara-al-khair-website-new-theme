@@ -296,7 +296,7 @@ export default function DonatePage() {
               },
             ].map((item, index) => (
               <Card key={index} className="hover:shadow-lg transition-shadow">
-                <CardContent className="p-6">
+                <CardContent className="p-6 px-8">
                   <div className="text-2xl font-bold text-teal-600 mb-2">{item.amount}</div>
                   <h3 className="text-lg font-semibold text-gray-900 mb-3">{item.impact}</h3>
                   <p className="text-gray-600 italic">"{item.story}"</p>
@@ -339,7 +339,7 @@ export default function DonatePage() {
                 },
               ].map((faq, index) => (
                 <Card key={index}>
-                  <CardContent className="p-6">
+                  <CardContent className="p-6 px-8">
                     <h3 className="text-lg font-semibold text-gray-900 mb-2">{faq.question}</h3>
                     <p className="text-gray-600">{faq.answer}</p>
                   </CardContent>

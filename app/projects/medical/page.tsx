@@ -1,5 +1,5 @@
 import Image from "next/image"
-import { ArrowLeft, Stethoscope, MapPin, Phone, Users, Heart, Award, Clock, Shield, Activity, Baby, UserCheck, Pill, Syringe, Microscope, Eye, Brain, Bone, Lungs } from "lucide-react"
+import { ArrowLeft, Stethoscope, MapPin, Phone, Users, Heart, Award, Clock, Shield, Activity, Baby, UserCheck, Pill, Syringe, Microscope, Eye, Brain, Bone } from "lucide-react"
 // import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -10,21 +10,21 @@ const medicalServices = [
     title: "General Medicine",
     description: "Comprehensive primary healthcare services with experienced physicians",
     icon: Stethoscope,
-    image: "/images/re ference.png",
+    image: "/al-khair.png",
     features: ["Health Checkups", "Diagnosis & Treatment", "Prescription Services", "Follow-up Care"]
   },
   {
     title: "Pediatric Care",
     description: "Specialized healthcare services for children and infants",
     icon: Baby,
-    image: "/images/reference.png",
+    image: "/al-khair.png",
     features: ["Child Vaccinations", "Growth Monitoring", "Nutrition Counseling", "Child Development"]
   },
   {
     title: "Women's Health",
     description: "Comprehensive women's healthcare including maternal services",
     icon: UserCheck,
-    image: "/",
+    image: "/al-khair.png",
     features: ["Prenatal Care", "Gynecological Services", "Family Planning", "Maternal Health"]
   },
   {
@@ -38,28 +38,28 @@ const medicalServices = [
     title: "Laboratory Services",
     description: "Advanced diagnostic testing and laboratory services",
     icon: Microscope,
-    image: "/images/reference.png",
+    image: "/al-khair.png",
     features: ["Blood Tests", "Pathology", "Microbiology", "Biochemistry"]
   },
   {
     title: "Pharmacy Services",
     description: "In-house pharmacy with essential medications",
     icon: Pill,
-    image: "/images/reference.png",
+    image: "/al-khair.png",
     features: ["Prescription Drugs", "Over-the-counter", "Medicine Counseling", "Generic Options"]
   },
   {
     title: "Vaccination Center",
     description: "Comprehensive vaccination services for all age groups",
     icon: Syringe,
-    image: "/images/reference.png",
+    image: "/al-khair.png",
     features: ["Child Vaccines", "Adult Vaccines", "Travel Vaccines", "Seasonal Vaccines"]
   },
   {
     title: "Specialist Consultations",
     description: "Expert consultations in various medical specialties",
     icon: Shield,
-    image: "/images/reference.png",
+    image: "/al-khair.png",
     features: ["Cardiology", "Dermatology", "Orthopedics", "Neurology"]
   }
 ]
@@ -132,7 +132,7 @@ export default function MedicalPage() {
             <div className="relative">
               <div className="relative h-96 lg:h-[500px] rounded-2xl overflow-hidden shadow-2xl">
                 <Image
-                  src="/images/reference.png"
+                  src="/al-khair.png"
                   alt="Al-Khair Hospital"
                   fill
                   className="object-cover"
@@ -262,7 +262,7 @@ export default function MedicalPage() {
                   <CardDescription>{service.description}</CardDescription>
                 </CardHeader>
 
-                <CardContent className="space-y-4">
+                <CardContent className="space-y-4 px-8">
                   <div>
                     <h4 className="font-semibold text-gray-900 mb-2">Services Include:</h4>
                     <ul className="space-y-1">
@@ -323,17 +323,17 @@ export default function MedicalPage() {
               name: "Dr. Ahmed Khan",
               specialty: "General Physician",
               experience: "15+ years experience",
-              image: "/placeholder-user.jpg"
+              image: "/al-khair.png"
             }, {
               name: "Dr. Sara Ali",
               specialty: "Pediatrician",
               experience: "10+ years experience",
-              image: "/placeholder-user.jpg"
+              image: "/al-khair.png"
             }, {
               name: "Dr. Imran Siddiqui",
               specialty: "Cardiologist",
               experience: "12+ years experience",
-              image: "/placeholder-user.jpg"
+              image: "/al-khair.png"
             }].map((doc, idx) => (
               <div key={idx} className="bg-white rounded-2xl shadow-lg p-6 flex flex-col items-center">
                 <Image src={doc.image} alt={doc.name} width={96} height={96} className="rounded-full mb-4 object-cover" />
@@ -389,15 +389,15 @@ export default function MedicalPage() {
             {[{
               title: "Operation Theater",
               desc: "Sterile, modern operation rooms for all types of surgeries.",
-              image: "/placeholder.jpg"
+              image: "/al-khair.png"
             }, {
               title: "Pharmacy",
               desc: "Fully stocked in-house pharmacy for all your medication needs.",
-              image: "/placeholder.jpg"
+              image: "/al-khair.png"
             }, {
               title: "Ambulance Service",
               desc: "24/7 ambulance service for emergency patient transport.",
-              image: "/placeholder.jpg"
+              image: "/al-khair.png"
             }].map((f, idx) => (
               <div key={idx} className="bg-gray-50 rounded-2xl shadow-lg p-4 flex flex-col items-center">
                 <Image src={f.image} alt={f.title} width={320} height={180} className="rounded-xl mb-4 object-cover" />

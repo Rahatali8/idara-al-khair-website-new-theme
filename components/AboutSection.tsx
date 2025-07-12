@@ -110,7 +110,7 @@ export default function AboutSection() {
           <div className="relative">
             <div className="relative h-96 lg:h-[500px] rounded-2xl overflow-hidden shadow-2xl">
               <Image
-                src="/placeholder.svg?height=500&width=600"
+                src="/al-khair.png"
                 alt="Idara Al-Khair campus and activities"
                 fill
                 className="object-cover"

@@ -9,7 +9,7 @@ const testimonials = [
     id: 1,
     name: "Fatima Ahmed",
     role: "Graduate Student",
-    image: "/placeholder.svg?height=80&width=80",
+    image: "/",
     content:
       "Idara Al-Khair gave me the opportunity to pursue higher education when my family couldn't afford it. Today, I'm a software engineer helping others in my community.",
     rating: 5,
@@ -18,7 +18,7 @@ const testimonials = [
     id: 2,
     name: "Dr. Hassan Ali",
     role: "Medical Volunteer",
-    image: "/placeholder.svg?height=80&width=80",
+    image: "/",
     content:
       "Working with Idara Al-Khair's medical camps has been incredibly rewarding. We've been able to provide healthcare to thousands of people in remote areas.",
     rating: 5,
@@ -27,7 +27,7 @@ const testimonials = [
     id: 3,
     name: "Aisha Khan",
     role: "Beneficiary Mother",
-    image: "/placeholder.svg?height=80&width=80",
+    image: "/",
     content:
       "The food support program helped my family during the most difficult time. My children never went hungry, and now they're thriving in school.",
     rating: 5,
@@ -36,7 +36,7 @@ const testimonials = [
     id: 4,
     name: "Muhammad Tariq",
     role: "Technical Graduate",
-    image: "/placeholder.svg?height=80&width=80",
+    image: "/",
     content:
       "The technical training I received opened doors to employment opportunities I never thought possible. I'm now running my own IT business.",
     rating: 5,

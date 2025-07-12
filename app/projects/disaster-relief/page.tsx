@@ -26,7 +26,7 @@ const reliefServices = [
       "Immediate response to natural disasters with rescue operations, first aid, and emergency shelter setup.",
     icon: AlertTriangle,
     services: ["Rescue Operations", "First Aid", "Emergency Shelter", "Evacuation Support", "Crisis Coordination"],
-    image: "/placeholder.svg?height=300&width=400",
+    image: "/emergency-resp.jpg",
     responseTime: "Within 24 Hours",
   },
   {
@@ -35,7 +35,7 @@ const reliefServices = [
       "Essential food supplies and clean drinking water distribution to affected communities during emergencies.",
     icon: Utensils,
     services: ["Cooked Meals", "Food Packages", "Clean Water", "Nutrition Support", "Kitchen Setup"],
-    image: "/placeholder.svg?height=300&width=400",
+    image: "/water-des.jpg",
     responseTime: "Immediate",
   },
   {
@@ -43,7 +43,7 @@ const reliefServices = [
     description: "Providing temporary housing solutions and shelter materials for displaced families and communities.",
     icon: Tent,
     services: ["Tent Distribution", "Temporary Housing", "Shelter Materials", "Bedding Supplies", "Privacy Solutions"],
-    image: "/placeholder.svg?height=300&width=400",
+    image: "/temp-shelter.jpg",
     responseTime: "Within 48 Hours",
   },
   {
@@ -51,7 +51,7 @@ const reliefServices = [
     description: "Emergency medical care, mobile health units, and medical supplies for disaster-affected populations.",
     icon: Heart,
     services: ["Mobile Clinics", "Emergency Medicine", "First Aid Training", "Health Screening", "Medical Supplies"],
-    image: "/placeholder.svg?height=300&width=400",
+    image: "/medical-aid.jpg",
     responseTime: "Within 12 Hours",
   },
   {
@@ -59,7 +59,7 @@ const reliefServices = [
     description: "Distribution of essential items including clothing, hygiene kits, and household necessities.",
     icon: Package,
     services: ["Clothing Distribution", "Hygiene Kits", "Household Items", "Baby Supplies", "Personal Care"],
-    image: "/placeholder.svg?height=300&width=400",
+    image: "/relief-aids.jpg",
     responseTime: "Within 72 Hours",
   },
   {
@@ -73,7 +73,7 @@ const reliefServices = [
       "Community Building",
       "Skill Training",
     ],
-    image: "/placeholder.svg?height=300&width=400",
+    image: "/rehlibation.jpg",
     responseTime: "Ongoing Support",
   },
 ]
@@ -84,28 +84,28 @@ const pastOperations = [
     affected: "50,000+ People",
     duration: "3 Months",
     support: "Emergency shelter, food distribution, medical aid",
-    image: "/placeholder.svg?height=200&width=300",
+    image: "/flood-rel.jpg",
   },
   {
     disaster: "Balochistan Earthquake 2019",
     affected: "25,000+ People",
     duration: "6 Months",
     support: "Rescue operations, temporary housing, rehabilitation",
-    image: "/placeholder.svg?height=200&width=300",
+    image: "/blochistan-erth.jpg",
   },
   {
     disaster: "Sindh Drought Relief 2018",
     affected: "75,000+ People",
     duration: "8 Months",
     support: "Water supply, livestock support, agricultural aid",
-    image: "/placeholder.svg?height=200&width=300",
+    image: "/sindh.jpg",
   },
   {
     disaster: "Punjab Flood Relief 2021",
     affected: "40,000+ People",
     duration: "4 Months",
     support: "Evacuation, food supplies, medical camps",
-    image: "/placeholder.svg?height=200&width=300",
+    image: "/punjab-rel.jpg",
   },
 ]
 
@@ -138,7 +138,7 @@ const stats = [
 
 export default function DisasterReliefPage() {
   return (
-    <main className="pt-20">
+    <main className="">
       {/* Hero Section */}
       <section className="py-20 bg-gradient-to-br from-teal-50 to-blue-100">
         <div className="container mx-auto px-4">

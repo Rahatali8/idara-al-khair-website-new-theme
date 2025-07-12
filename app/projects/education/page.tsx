@@ -176,7 +176,7 @@ export default function EducationPage() {
                   </CardDescription>
                 </CardHeader>
 
-                <CardContent className="space-y-4">
+                <CardContent className="space-y-4 px-8">
                   <p className="text-gray-600 text-sm">{campus.description}</p>
 
                   <div className="grid grid-cols-2 gap-4 text-sm">
@@ -271,7 +271,7 @@ export default function EducationPage() {
                   <CardTitle className="text-xl text-teal-600">{program.title}</CardTitle>
                   <CardDescription>{program.description}</CardDescription>
                 </CardHeader>
-                <CardContent>
+                <CardContent className="px-8">
                   <ul className="space-y-2">
                     {program.features.map((feature, idx) => (
                       <li key={idx} className="flex items-center text-sm text-gray-600">

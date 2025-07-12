@@ -1,36 +1,36 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import Image from "next/image"
 import { ChevronLeft, ChevronRight } from "lucide-react"
+import Image from "next/image"
 
 const carouselImages = [
   {
-    src: "/placeholder.svg?height=600&width=1200",
+    src: "/quality-education.jpg",
     alt: "Students in classroom learning",
     title: "Quality Education",
     description: "Providing world-class education to underserved communities",
   },
   {
-    src: "/placeholder.svg?height=600&width=1200",
+    src: "/food-security.jpg",
     alt: "Food distribution to families",
     title: "Food Security",
     description: "Ensuring no family goes hungry in our communities",
   },
   {
-    src: "/placeholder.svg?height=600&width=1200",
+    src: "/health-care.jpg",
     alt: "Medical camp providing healthcare",
     title: "Healthcare Access",
     description: "Bringing essential medical services to remote areas",
   },
   {
-    src: "/placeholder.svg?height=600&width=1200",
+    src: "/environment.jpg",
     alt: "Tree planting environmental initiative",
     title: "Environmental Care",
     description: "Creating a sustainable future through environmental initiatives",
   },
   {
-    src: "/placeholder.svg?height=600&width=1200",
+    src: "/skill-devp.jpg",
     alt: "Technical training center",
     title: "Skills Development",
     description: "Empowering youth with technical and vocational skills",
