@@ -3,56 +3,68 @@
 import { useState, useEffect } from "react"
 import Image from "next/image"
 import { ChevronLeft, ChevronRight, Heart } from "lucide-react"
-
 const donors = [
   {
-    name: "Ahmed Foundation",
-    logo: "/placeholder.svg?height=120&width=200",
+    name: "Japan Foundation",
+    logo: "/japan.png",
     contribution: "Education Sponsor",
     description: "Supporting 500+ students annually",
   },
   {
-    name: "Karachi Business Council",
-    logo: "/placeholder.svg?height=120&width=200",
+    name: "Cherity Giver",
+    logo: "Cherity-Giver.png",
     contribution: "Healthcare Partner",
     description: "Funding medical equipment and facilities",
   },
   {
-    name: "Al-Khidmat Foundation",
-    logo: "/placeholder.svg?height=120&width=200",
+    name: "Blessed Live Foundation",
+    logo: "Blessed-Live.png",
     contribution: "Disaster Relief Partner",
     description: "Joint emergency response operations",
   },
   {
-    name: "Saylani Welfare Trust",
-    logo: "/placeholder.svg?height=120&width=200",
+    name: "Hansalim Foundation",
+    logo: "chines.png",
     contribution: "Food Program Supporter",
     description: "Collaborative food distribution initiatives",
   },
   {
-    name: "Aga Khan Foundation",
-    logo: "/placeholder.svg?height=120&width=200",
+    name: "Coop Foundation",
+    logo: "coop.png",
     contribution: "Development Partner",
     description: "Community development programs",
   },
   {
-    name: "Edhi Foundation",
-    logo: "/placeholder.svg?height=120&width=200",
+    name: "Gift Usa Foundation",
+    logo: "Gift-Usa.png",
     contribution: "Humanitarian Partner",
     description: "Joint welfare and relief activities",
   },
   {
-    name: "TCF - The Citizens Foundation",
-    logo: "/placeholder.svg?height=120&width=200",
+    name: "JFSA Foundation",
+    logo: "JFSA.png",
     contribution: "Education Collaborator",
     description: "Shared educational initiatives",
   },
   {
-    name: "Indus Hospital",
-    logo: "/placeholder.svg?height=120&width=200",
+    name: "Meezan bank",
+    logo: "Meezan-bank.png",
     contribution: "Medical Partner",
     description: "Healthcare service collaboration",
   },
+  {
+    name: "one ummah",
+    logo: "one-ummah.png",
+    contribution: "Medical Partner",
+    description: "Healthcare service collaboration",
+  },
+  {
+    name: "pearls",
+    logo: "Pearls.png",
+    contribution: "Medical Partner",
+    description: "Healthcare service collaboration",
+  },
+  
 ]
 
 export default function DonorsCarousel() {
