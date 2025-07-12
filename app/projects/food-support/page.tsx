@@ -1,169 +1,179 @@
 import Image from "next/image"
-import { ArrowLeft, Users, Calendar, MapPin, Heart } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
+import { ArrowLeft, Users, Calendar, MapPin, Heart, ArrowRight } from "lucide-react"
 import Link from "next/link"
+
+const foodPrograms = [
+  {
+    title: "Roti Bank",
+    description: "Daily nutritious meals and monthly ration support for students and families in need.",
+    image: "/food-security.jpg",
+    link: "/projects/food-support/roti-bank",
+    features: ["Daily Lunch Program", "Monthly Ration", "Emergency Support", "200+ Recipients"],
+  },
+  {
+    title: "Ramzan Ration",
+    description: "Comprehensive food distribution during Ramadan, supporting 1,700+ families.",
+    image: "/relief-aids.jpg",
+    link: "/projects/food-support/ramzan-ration",
+    features: ["Ramadan Distribution", "Eid Support", "Sehri & Iftar", "1,700+ Families"],
+  },
+  {
+    title: "Poor Villages Program",
+    description: "Extending food support to rural communities across 15+ villages in Sindh.",
+    image: "/sindh.jpg",
+    link: "/projects/food-support/poor-villages",
+    features: ["Rural Development", "Agricultural Support", "15+ Villages", "500+ Families"],
+  },
+]
+
+const achievements = [
+  {
+    icon: Users,
+    title: "200+ Daily Recipients",
+    description: "Students and teachers receiving daily meals",
+  },
+  {
+    icon: Calendar,
+    title: "1,700+ Families",
+    description: "Supported during Ramadan",
+  },
+  {
+    icon: MapPin,
+    title: "15+ Villages",
+    description: "Rural communities served",
+  },
+  {
+    icon: Heart,
+    title: "20+ Years Service",
+    description: "Consistent food support",
+  },
+]
 
 export default function FoodSupportPage() {
   return (
-    <div className="min-h-screen bg-gray-50">
+    <main className="pt-20">
       {/* Hero Section */}
-      <div className="relative h-96 bg-gradient-to-r from-green-600 to-teal-600">
-        <div className="absolute inset-0 bg-black/40" />
-        <div className="relative container mx-auto px-4 h-full flex items-center">
-          <div className="text-white">
-            <Link href="/" className="inline-flex items-center text-white/80 hover:text-white mb-4">
-              <ArrowLeft className="w-4 h-4 mr-2" />
-              Back to Home
-            </Link>
-            <h1 className="text-5xl font-bold mb-4">Food Support Program</h1>
-            <p className="text-xl text-white/90 max-w-2xl">
-              Ensuring food security and nutrition for deserving families and students across our community
+      <section className="py-20 bg-gradient-to-br from-green-50 to-teal-100">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto text-center">
+            <Badge className="mb-4 bg-green-100 text-green-800 hover:bg-green-200">Food Support Program</Badge>
+            <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6">
+              <span className="text-green-600">Food Support</span> Programs
+            </h1>
+            <p className="text-xl md:text-2xl text-gray-600 leading-relaxed mb-8">
+              Ensuring food security and nutrition for deserving families across urban and rural communities. 
+              Our comprehensive programs serve over 2,000 families annually.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button size="lg" className="bg-green-600 hover:bg-green-700">
+                <Heart className="mr-2 h-5 w-5" />
+                Support Food Programs
+              </Button>
+              <Button size="lg" variant="outline">
+                Volunteer with Us
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Achievements */}
+      <section className="py-16 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {achievements.map((achievement, index) => (
+              <div key={index} className="text-center">
+                <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <achievement.icon className="w-8 h-8 text-green-600" />
+                </div>
+                <h3 className="text-2xl font-bold text-gray-900 mb-2">{achievement.title}</h3>
+                <p className="text-gray-600">{achievement.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Food Programs */}
+      <section className="py-20 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Our Food Programs</h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Comprehensive food support initiatives designed to address different aspects of food security 
+              and community development.
             </p>
           </div>
-        </div>
-      </div>
 
-      {/* Main Content */}
-      <div className="container mx-auto px-4 py-16">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
-          {/* Image */}
-          <div className="relative">
-            <Image
-              src="/placeholder.svg?height=400&width=600"
-              alt="Children receiving meals"
-              width={600}
-              height={400}
-              className="rounded-2xl shadow-lg"
-            />
-            <div className="absolute -bottom-6 -right-6 bg-white p-4 rounded-xl shadow-lg">
-              <div className="flex items-center space-x-2">
-                <Heart className="w-6 h-6 text-red-500" />
-                <span className="font-semibold text-gray-900">50,000+ Meals Served</span>
-              </div>
-            </div>
-          </div>
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            {foodPrograms.map((program, index) => (
+              <Card key={index} className="hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
+                <div className="relative h-64 overflow-hidden rounded-t-lg">
+                  <Image
+                    src={program.image || "/placeholder.svg"}
+                    alt={program.title}
+                    fill
+                    className="object-cover transition-transform duration-300 hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-black/20" />
+                </div>
 
-          {/* Content */}
-          <div>
-            <h2 className="text-3xl font-bold text-gray-900 mb-6">Food Support Program</h2>
-            <p className="text-lg text-gray-600 mb-8 leading-relaxed">
-              In addition to our educational projects, it is worth mentioning that Idara Al-Khair has been catering to
-              daily lunches for its deserving students along with grocery bags for many students' families since the
-              last twenty years. Details of the food support that we provide are as mentioned:
-            </p>
+                <CardHeader>
+                  <CardTitle className="text-2xl text-gray-900">{program.title}</CardTitle>
+                  <CardDescription className="text-lg">{program.description}</CardDescription>
+                </CardHeader>
 
-            <div className="space-y-6">
-              <div className="flex items-start space-x-4">
-                <div className="w-2 h-2 bg-green-500 rounded-full mt-3"></div>
-                <p className="text-gray-700">
-                  <strong>Daily Lunch Program:</strong> We provide lunches to 200 orphaned students, other deserving
-                  students and teachers on a daily basis
-                </p>
-              </div>
+                <CardContent className="space-y-4 px-8">
+                  <div>
+                    <span className="font-semibold text-gray-900 text-sm">Key Features:</span>
+                    <div className="flex flex-wrap gap-1 mt-2">
+                      {program.features.map((feature, idx) => (
+                        <Badge key={idx} variant="secondary" className="text-xs">
+                          {feature}
+                        </Badge>
+                      ))}
+                    </div>
+                  </div>
 
-              <div className="flex items-start space-x-4">
-                <div className="w-2 h-2 bg-green-500 rounded-full mt-3"></div>
-                <p className="text-gray-700">
-                  <strong>Monthly Ration Support:</strong> We distribute ration bags to 50 teachers and lower staff
-                  members on a monthly basis
-                </p>
-              </div>
-
-              <div className="flex items-start space-x-4">
-                <div className="w-2 h-2 bg-green-500 rounded-full mt-3"></div>
-                <p className="text-gray-700">
-                  <strong>Ramadan Distribution:</strong> We arrange for the distribution of ration bags to families of
-                  about 1700 students every Ramadan with the co-operation of other organizations
-                </p>
-              </div>
-
-              <div className="flex items-start space-x-4">
-                <div className="w-2 h-2 bg-green-500 rounded-full mt-3"></div>
-                <p className="text-gray-700">
-                  <strong>Monthly Rice Distribution:</strong> We ensure monthly distribution of rice to students
-                </p>
-              </div>
-
-              <div className="flex items-start space-x-4">
-                <div className="w-2 h-2 bg-green-500 rounded-full mt-3"></div>
-                <p className="text-gray-700">
-                  <strong>Emergency Support:</strong> We responsibly administer to the distribution of ration to those
-                  students whose parents are jobless
-                </p>
-              </div>
-            </div>
+                  <Button asChild className="w-full bg-green-600 hover:bg-green-700">
+                    <Link href={program.link}>
+                      Explore {program.title}
+                      <ArrowRight className="ml-2 h-4 w-4" />
+                    </Link>
+                  </Button>
+                </CardContent>
+              </Card>
+            ))}
           </div>
         </div>
+      </section>
 
-        {/* Stats Section */}
-        <div className="bg-white rounded-2xl shadow-lg p-8 mb-16">
-          <h3 className="text-2xl font-bold text-gray-900 mb-8 text-center">Our Impact</h3>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            <div className="text-center">
-              <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Users className="w-8 h-8 text-green-600" />
-              </div>
-              <div className="text-3xl font-bold text-gray-900 mb-2">200+</div>
-              <div className="text-gray-600">Daily Lunch Recipients</div>
-            </div>
-            <div className="text-center">
-              <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Calendar className="w-8 h-8 text-blue-600" />
-              </div>
-              <div className="text-3xl font-bold text-gray-900 mb-2">50+</div>
-              <div className="text-gray-600">Monthly Ration Bags</div>
-            </div>
-            <div className="text-center">
-              <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Heart className="w-8 h-8 text-purple-600" />
-              </div>
-              <div className="text-3xl font-bold text-gray-900 mb-2">1,700+</div>
-              <div className="text-gray-600">Ramadan Support</div>
-            </div>
-            <div className="text-center">
-              <div className="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <MapPin className="w-8 h-8 text-orange-600" />
-              </div>
-              <div className="text-3xl font-bold text-gray-900 mb-2">20+</div>
-              <div className="text-gray-600">Years of Service</div>
-            </div>
+      {/* Call to Action */}
+      <section className="py-20 bg-gradient-to-r from-green-600 to-teal-700 text-white">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="text-4xl font-bold mb-4">Join Our Food Security Mission</h2>
+          <p className="text-xl opacity-90 mb-8 max-w-3xl mx-auto">
+            Help us provide nutritious food to more families. Your support can ensure no one goes hungry 
+            and every family has access to essential nutrition.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button size="lg" className="bg-white text-green-600 hover:bg-gray-100">
+              Donate to Food Programs
+            </Button>
+            <Button
+              size="lg"
+              variant="outline"
+              asChild
+              className="border-white text-white hover:bg-white hover:text-green-600 bg-transparent"
+            >
+              <Link href="/contact">Become a Volunteer</Link>
+            </Button>
           </div>
         </div>
-
-        {/* Distribution Centers */}
-        <div className="bg-gradient-to-r from-green-50 to-teal-50 rounded-2xl p-8">
-          <h3 className="text-2xl font-bold text-gray-900 mb-8 text-center">Distribution Centers</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="bg-white rounded-xl p-6 px-8 shadow-md">
-              <h4 className="text-xl font-semibold text-gray-900 mb-4">Main Campus - Korangi</h4>
-              <div className="space-y-2 text-gray-600">
-                <p>
-                  <strong>Daily Lunch:</strong> 12:00 PM - 1:00 PM
-                </p>
-                <p>
-                  <strong>Ration Distribution:</strong> 1st Saturday of every month
-                </p>
-                <p>
-                  <strong>Address:</strong> Sector 51-B, Korangi, Karachi
-                </p>
-              </div>
-            </div>
-            <div className="bg-white rounded-xl p-6 px-8 shadow-md">
-              <h4 className="text-xl font-semibold text-gray-900 mb-4">Community Center - Landhi</h4>
-              <div className="space-y-2 text-gray-600">
-                <p>
-                  <strong>Emergency Support:</strong> Available daily
-                </p>
-                <p>
-                  <strong>Special Programs:</strong> Ramadan & Eid distributions
-                </p>
-                <p>
-                  <strong>Address:</strong> Landhi Town, Karachi
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+      </section>
+    </main>
   )
 }

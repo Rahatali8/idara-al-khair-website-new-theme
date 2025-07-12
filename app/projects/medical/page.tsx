@@ -103,7 +103,7 @@ const stats = [
 
 export default function MedicalPage() {
   return (
-    <main className="pt-20">
+    <main className="pt-20 overflow-x-hidden">
       {/* Hero Section */}
       <section className="py-20 bg-gradient-to-br from-teal-50 to-blue-100">
         <div className="container mx-auto px-4">

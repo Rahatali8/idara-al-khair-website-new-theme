@@ -1,0 +1,371 @@
+import Image from "next/image"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
+import { ArrowLeft, Users, Calendar, MapPin, Heart, Wrench, GraduationCap, Star, Clock, Award, Building, Thermometer, Snowflake, Fan } from "lucide-react"
+import Link from "next/link"
+
+const hvacStats = [
+  {
+    icon: Users,
+    title: "200+ Graduates",
+    description: "Successfully placed in HVAC industry",
+  },
+  {
+    icon: Wrench,
+    title: "Practical Training",
+    description: "Hands-on experience with real equipment",
+  },
+  {
+    icon: Award,
+    title: "Industry Certified",
+    description: "Internationally recognized certifications",
+  },
+  {
+    icon: Heart,
+    title: "High Demand",
+    description: "Growing HVAC industry opportunities",
+  },
+]
+
+const hvacCourses = [
+  {
+    title: "HVAC Installation",
+    description: "Learn to install and set up HVAC systems for residential and commercial buildings",
+    icon: "🔧",
+    duration: "3 Months",
+    seats: "25",
+    features: ["System Installation", "Ductwork", "Electrical Wiring", "Testing & Commissioning", "Safety Protocols"],
+    image: "/hardware.jpg",
+  },
+  {
+    title: "HVAC Maintenance",
+    description: "Comprehensive maintenance and repair of HVAC systems",
+    icon: "🛠️",
+    duration: "2 Months",
+    seats: "30",
+    features: ["Preventive Maintenance", "Troubleshooting", "Repair Techniques", "System Optimization", "Energy Efficiency"],
+    image: "/hardware.jpg",
+  },
+  {
+    title: "Refrigeration Systems",
+    description: "Specialized training in refrigeration and cooling systems",
+    icon: "❄️",
+    duration: "4 Months",
+    seats: "20",
+    features: ["Refrigeration Cycles", "Compressor Systems", "Cooling Units", "Commercial Refrigeration", "Cold Storage"],
+    image: "/hardware.jpg",
+  },
+  {
+    title: "Air Conditioning",
+    description: "Advanced air conditioning system design and installation",
+    icon: "🌬️",
+    duration: "3 Months",
+    seats: "25",
+    features: ["AC Installation", "Split Systems", "Central AC", "Ductless Systems", "Smart Controls"],
+    image: "/hardware.jpg",
+  },
+  {
+    title: "Energy Management",
+    description: "Energy-efficient HVAC systems and green technology",
+    icon: "⚡",
+    duration: "2 Months",
+    seats: "20",
+    features: ["Energy Audits", "Green Technology", "Smart Systems", "Sustainability", "Cost Optimization"],
+    image: "/hardware.jpg",
+  },
+  {
+    title: "Commercial HVAC",
+    description: "Large-scale commercial and industrial HVAC systems",
+    icon: "🏢",
+    duration: "4 Months",
+    seats: "15",
+    features: ["Commercial Systems", "Industrial HVAC", "Large-scale Projects", "Project Management", "Team Leadership"],
+    image: "/hardware.jpg",
+  },
+]
+
+const careerOpportunities = [
+  {
+    title: "HVAC Technician",
+    salary: "PKR 35,000 - 60,000",
+    description: "Install, maintain, and repair HVAC systems",
+    icon: "🔧",
+  },
+  {
+    title: "Refrigeration Specialist",
+    salary: "PKR 40,000 - 70,000",
+    description: "Specialize in refrigeration and cooling systems",
+    icon: "❄️",
+  },
+  {
+    title: "HVAC Engineer",
+    salary: "PKR 60,000 - 100,000",
+    description: "Design and oversee HVAC system projects",
+    icon: "🏗️",
+  },
+  {
+    title: "Energy Consultant",
+    salary: "PKR 50,000 - 80,000",
+    description: "Optimize energy efficiency in HVAC systems",
+    icon: "⚡",
+  },
+]
+
+const industryPartners = [
+  { name: "Daikin Pakistan", logo: "/placeholder-logo.png", sector: "Air Conditioning" },
+  { name: "Carrier Pakistan", logo: "/placeholder-logo.png", sector: "HVAC Systems" },
+  { name: "LG Electronics", logo: "/placeholder-logo.png", sector: "Cooling Solutions" },
+  { name: "Samsung HVAC", logo: "/placeholder-logo.png", sector: "Smart Systems" },
+  { name: "Mitsubishi Electric", logo: "/placeholder-logo.png", sector: "Commercial HVAC" },
+  { name: "Hitachi Cooling", logo: "/placeholder-logo.png", sector: "Industrial Systems" },
+]
+
+export default function HVACProgramPage() {
+  return (
+    <main className="pt-20">
+      {/* Hero Section */}
+      <section className="py-20 bg-gradient-to-br from-slate-50 via-blue-50 to-teal-50">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto text-center">
+            <Badge className="mb-4 bg-cyan-100 text-cyan-800 hover:bg-cyan-200">HVAC Program</Badge>
+            <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6">
+              <span className="bg-gradient-to-r from-teal-500 to-blue-600 bg-clip-text text-transparent">HVAC</span> Training Program
+            </h1>
+            <p className="text-xl md:text-2xl text-gray-600 leading-relaxed mb-8">
+              Comprehensive HVAC training program preparing students for high-demand careers in heating, 
+              ventilation, air conditioning, and refrigeration systems.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button size="lg" className="bg-gradient-to-r from-teal-500 to-blue-600 hover:from-teal-600 hover:to-blue-700">
+                <GraduationCap className="mr-2 h-5 w-5" />
+                Apply for Training
+              </Button>
+              <Button size="lg" variant="outline">
+                View Courses
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Stats Section */}
+      <section className="py-16 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {hvacStats.map((stat, index) => (
+              <div key={index} className="text-center">
+                <div className="w-16 h-16 bg-cyan-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <stat.icon className="w-8 h-8 text-cyan-600" />
+                </div>
+                <h3 className="text-2xl font-bold text-gray-900 mb-2">{stat.title}</h3>
+                <p className="text-gray-600">{stat.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* About HVAC Program */}
+      <section className="py-20 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <h2 className="text-4xl font-bold text-gray-900 mb-6">About HVAC Program</h2>
+              <p className="text-lg text-gray-600 mb-6">
+                Our HVAC Training Program is designed to meet the growing demand for skilled professionals 
+                in the heating, ventilation, air conditioning, and refrigeration industry. With Pakistan's 
+                expanding construction and industrial sectors, HVAC technicians are in high demand.
+              </p>
+              <p className="text-lg text-gray-600 mb-6">
+                Our program combines theoretical knowledge with extensive hands-on training using modern 
+                equipment. Students learn installation, maintenance, repair, and energy optimization of 
+                various HVAC systems.
+              </p>
+              <div className="grid grid-cols-2 gap-6">
+                <div className="flex items-center">
+                  <Clock className="w-6 h-6 text-cyan-600 mr-3" />
+                  <div>
+                    <h4 className="font-semibold text-gray-900">Duration</h4>
+                    <p className="text-gray-600">2-4 Months</p>
+                  </div>
+                </div>
+                <div className="flex items-center">
+                  <Users className="w-6 h-6 text-cyan-600 mr-3" />
+                  <div>
+                    <h4 className="font-semibold text-gray-900">Graduates</h4>
+                    <p className="text-gray-600">200+ Placed</p>
+                  </div>
+                </div>
+                <div className="flex items-center">
+                  <MapPin className="w-6 h-6 text-cyan-600 mr-3" />
+                  <div>
+                    <h4 className="font-semibold text-gray-900">Location</h4>
+                    <p className="text-gray-600">Karachi Central</p>
+                  </div>
+                </div>
+                <div className="flex items-center">
+                  <Award className="w-6 h-6 text-cyan-600 mr-3" />
+                  <div>
+                    <h4 className="font-semibold text-gray-900">Certification</h4>
+                    <p className="text-gray-600">Industry Recognized</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="relative h-96 rounded-lg overflow-hidden">
+              <Image
+                src="/hardware.jpg"
+                alt="HVAC Training Program"
+                fill
+                className="object-cover"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* HVAC Courses */}
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">HVAC Courses</h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Comprehensive training programs covering all aspects of HVAC systems and technology.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {hvacCourses.map((course, index) => (
+              <Card key={index} className="hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
+                <div className="relative h-48 overflow-hidden rounded-t-lg">
+                  <Image
+                    src={course.image || "/placeholder.svg"}
+                    alt={course.title}
+                    fill
+                    className="object-cover transition-transform duration-300 hover:scale-105"
+                  />
+                  <div className="absolute top-4 left-4">
+                    <Badge className="bg-cyan-600 text-white">{course.duration}</Badge>
+                  </div>
+                </div>
+
+                <CardHeader>
+                  <CardTitle className="text-xl text-gray-900">{course.title}</CardTitle>
+                  <CardDescription>{course.description}</CardDescription>
+                </CardHeader>
+
+                <CardContent className="space-y-4 px-8">
+                  <div className="flex justify-between text-sm">
+                    <span className="font-semibold text-gray-900">Available Seats:</span>
+                    <span className="text-cyan-600 font-bold">{course.seats}</span>
+                  </div>
+
+                  <div>
+                    <span className="font-semibold text-gray-900 text-sm">Skills Covered:</span>
+                    <div className="flex flex-wrap gap-1 mt-2">
+                      {course.features.map((feature, idx) => (
+                        <Badge key={idx} variant="secondary" className="text-xs">
+                          {feature}
+                        </Badge>
+                      ))}
+                    </div>
+                  </div>
+
+                  <Button className="w-full bg-gradient-to-r from-teal-500 to-blue-600 hover:from-teal-600 hover:to-blue-700">
+                    Apply Now
+                  </Button>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Career Opportunities */}
+      <section className="py-20 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">Career Opportunities</h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              High-demand career paths with excellent salary prospects in the growing HVAC industry.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {careerOpportunities.map((career, index) => (
+              <Card key={index} className="hover:shadow-lg transition-shadow text-center">
+                <CardHeader>
+                  <div className="text-4xl mb-4">{career.icon}</div>
+                  <CardTitle className="text-lg text-cyan-600">{career.title}</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-gray-600 mb-3">{career.description}</p>
+                  <Badge className="bg-cyan-100 text-cyan-800">
+                    {career.salary}
+                  </Badge>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Industry Partners */}
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">Industry Partners</h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              We partner with leading HVAC manufacturers and companies to ensure our graduates find excellent employment opportunities.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8">
+            {industryPartners.map((partner, index) => (
+              <Card key={index} className="hover:shadow-lg transition-shadow text-center">
+                <CardContent className="p-6">
+                  <div className="w-16 h-16 mx-auto mb-4 bg-gray-100 rounded-lg flex items-center justify-center">
+                    <Image
+                      src={partner.logo}
+                      alt={partner.name}
+                      width={40}
+                      height={40}
+                      className="object-contain"
+                    />
+                  </div>
+                  <h4 className="font-semibold text-gray-900 text-sm">{partner.name}</h4>
+                  <p className="text-xs text-gray-600">{partner.sector}</p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Call to Action */}
+      <section className="py-20 bg-gradient-to-r from-cyan-600 to-blue-700 text-white">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="text-4xl font-bold mb-4">Start Your HVAC Career</h2>
+          <p className="text-xl opacity-90 mb-8 max-w-3xl mx-auto">
+            Join the growing HVAC industry with our comprehensive training program. 
+            High demand, excellent salaries, and job security await.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button size="lg" className="bg-white text-teal-600 hover:bg-gray-100">
+              Apply for Training
+            </Button>
+            <Button
+              size="lg"
+              variant="outline"
+              asChild
+              className="border-white text-white hover:bg-white hover:text-cyan-600 bg-transparent"
+            >
+              <Link href="/contact">Contact Us</Link>
+            </Button>
+          </div>
+        </div>
+      </section>
+    </main>
+  )
+} 

@@ -2,75 +2,23 @@ import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { GraduationCap, Users, BookOpen, Award, MapPin, Phone, Star } from "lucide-react"
+import { GraduationCap, Users, BookOpen, Award, MapPin, Phone, Star, Building, ArrowRight } from "lucide-react"
 import Link from "next/link"
 
-const campuses = [
+const educationPrograms = [
   {
-    name: "Idara Al-Khair School - Main Campus",
-    location: "Karachi Central",
-    established: "1995",
-    students: "1,200+",
-    grades: "Pre-K to Grade 12",
-    image: "/placeholder.svg?height=300&width=400",
-    facilities: ["Science Labs", "Computer Lab", "Library", "Sports Ground", "Cafeteria"],
-    contact: "+92 21 1234 5678",
-    description: "Our flagship campus offering comprehensive education from early childhood to matriculation.",
+    title: "Our Campuses",
+    description: "Explore our six campuses across Karachi, each serving local communities with quality education and modern facilities.",
+    image: "/quality-education.jpg",
+    link: "/projects/education/campuses",
+    features: ["6 Campuses", "6000+ Students", "Modern Facilities", "Experienced Faculty"],
   },
   {
-    name: "Idara Al-Khair School - North Campus",
-    location: "North Karachi",
-    established: "2003",
-    students: "800+",
-    grades: "Pre-K to Grade 10",
-    image: "/placeholder.svg?height=300&width=400",
-    facilities: ["Modern Classrooms", "Science Lab", "Computer Center", "Playground"],
-    contact: "+92 21 2345 6789",
-    description: "Serving the North Karachi community with quality education and modern facilities.",
-  },
-  {
-    name: "Idara Al-Khair School - East Campus",
-    location: "Gulshan-e-Iqbal",
-    established: "2007",
-    students: "950+",
-    grades: "Pre-K to Grade 12",
-    image: "/placeholder.svg?height=300&width=400",
-    facilities: ["Digital Classrooms", "Science Labs", "Library", "Art Studio", "Sports Complex"],
-    contact: "+92 21 3456 7890",
-    description: "Modern educational facility with emphasis on technology integration and creative learning.",
-  },
-  {
-    name: "Idara Al-Khair School - West Campus",
-    location: "Orangi Town",
-    established: "2010",
-    students: "700+",
-    grades: "Pre-K to Grade 8",
-    image: "/placeholder.svg?height=300&width=400",
-    facilities: ["Smart Classrooms", "Computer Lab", "Library", "Health Center"],
-    contact: "+92 21 4567 8901",
-    description: "Providing accessible education to underserved communities in West Karachi.",
-  },
-  {
-    name: "Idara Al-Khair School - South Campus",
-    location: "Korangi",
-    established: "2012",
-    students: "600+",
-    grades: "Pre-K to Grade 10",
-    image: "/placeholder.svg?height=300&width=400",
-    facilities: ["Modern Labs", "IT Center", "Multipurpose Hall", "Playground"],
-    contact: "+92 21 5678 9012",
-    description: "Serving the industrial area with focus on technical and vocational preparation.",
-  },
-  {
-    name: "Idara Al-Khair School - Malir Campus",
-    location: "Malir",
-    established: "2015",
-    students: "500+",
-    grades: "Pre-K to Grade 12",
-    image: "/placeholder.svg?height=300&width=400",
-    facilities: ["Science Labs", "Computer Center", "Library", "Sports Facilities"],
-    contact: "+92 21 6789 0123",
-    description: "Our newest campus bringing quality education to the Malir district.",
+    title: "Al-Khair College",
+    description: "Our premier technical institute offering cutting-edge programs in computer science, business, and digital arts.",
+    image: "/Programming-language.jpg",
+    link: "/projects/education/alkhair-college",
+    features: ["Technical Programs", "Industry Partners", "Modern Labs", "Career Support"],
   },
 ]
 
@@ -109,8 +57,8 @@ export default function EducationPage() {
               Quality <span className="text-teal-600">Education</span> for All
             </h1>
             <p className="text-xl md:text-2xl text-gray-600 leading-relaxed mb-8">
-              Empowering students through comprehensive education across 6 campuses, serving over 6,000 students with
-              modern facilities and experienced faculty.
+              Empowering students through comprehensive education across multiple campuses and institutes, serving over 6,000 students 
+              with modern facilities and experienced faculty.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button size="lg" className="bg-teal-600 hover:bg-teal-700">
@@ -142,144 +90,52 @@ export default function EducationPage() {
         </div>
       </section>
 
-      {/* Campus Cards */}
+      {/* Education Programs */}
       <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Our Campuses</h2>
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Our Educational Institutes</h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Six strategically located campuses across Karachi, each designed to serve local communities with quality
-              education and modern facilities.
+              Discover our comprehensive educational offerings through our school campuses and technical college.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {campuses.map((campus, index) => (
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {educationPrograms.map((program, index) => (
               <Card key={index} className="hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
-                <div className="relative h-48 overflow-hidden rounded-t-lg">
+                <div className="relative h-64 overflow-hidden rounded-t-lg">
                   <Image
-                    src={campus.image || "/placeholder.svg"}
-                    alt={campus.name}
+                    src={program.image || "/placeholder.svg"}
+                    alt={program.title}
                     fill
                     className="object-cover transition-transform duration-300 hover:scale-105"
                   />
-                  <div className="absolute top-4 left-4">
-                    <Badge className="bg-teal-600 text-white">Est. {campus.established}</Badge>
-                  </div>
+                  <div className="absolute inset-0 bg-black/20" />
                 </div>
 
                 <CardHeader>
-                  <CardTitle className="text-xl text-gray-900">{campus.name}</CardTitle>
-                  <CardDescription className="flex items-center text-gray-600">
-                    <MapPin className="w-4 h-4 mr-1" />
-                    {campus.location}
-                  </CardDescription>
+                  <CardTitle className="text-2xl text-gray-900">{program.title}</CardTitle>
+                  <CardDescription className="text-lg">{program.description}</CardDescription>
                 </CardHeader>
 
                 <CardContent className="space-y-4 px-8">
-                  <p className="text-gray-600 text-sm">{campus.description}</p>
-
-                  <div className="grid grid-cols-2 gap-4 text-sm">
-                    <div>
-                      <span className="font-semibold text-gray-900">Students:</span>
-                      <p className="text-teal-600 font-bold">{campus.students}</p>
-                    </div>
-                    <div>
-                      <span className="font-semibold text-gray-900">Grades:</span>
-                      <p className="text-gray-600">{campus.grades}</p>
-                    </div>
-                  </div>
-
                   <div>
-                    <span className="font-semibold text-gray-900 text-sm">Facilities:</span>
+                    <span className="font-semibold text-gray-900 text-sm">Key Features:</span>
                     <div className="flex flex-wrap gap-1 mt-2">
-                      {campus.facilities.map((facility, idx) => (
+                      {program.features.map((feature, idx) => (
                         <Badge key={idx} variant="secondary" className="text-xs">
-                          {facility}
+                          {feature}
                         </Badge>
                       ))}
                     </div>
                   </div>
 
-                  <div className="flex items-center justify-between pt-4 border-t">
-                    <div className="flex items-center text-sm text-gray-600">
-                      <Phone className="w-4 h-4 mr-1" />
-                      {campus.contact}
-                    </div>
-                    <Button size="sm" variant="outline">
-                      Visit Campus
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Programs Offered */}
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Academic Programs</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Comprehensive educational programs designed to nurture young minds and prepare them for future success.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              {
-                title: "Early Childhood Education",
-                description: "Pre-K to Grade 2 with focus on foundational skills, creativity, and social development.",
-                features: ["Play-based Learning", "Montessori Method", "Art & Craft", "Basic Literacy & Numeracy"],
-              },
-              {
-                title: "Primary Education",
-                description: "Grade 3 to Grade 5 building strong academic foundation with modern teaching methods.",
-                features: ["Core Subjects", "Science Experiments", "Computer Basics", "Sports & Recreation"],
-              },
-              {
-                title: "Middle School",
-                description:
-                  "Grade 6 to Grade 8 preparing students for higher education with comprehensive curriculum.",
-                features: ["Advanced Sciences", "Mathematics", "Languages", "Social Studies", "Life Skills"],
-              },
-              {
-                title: "Secondary Education",
-                description: "Grade 9 to Grade 10 with focus on board exam preparation and career guidance.",
-                features: ["Board Exam Prep", "Career Counseling", "Practical Labs", "Extra-curricular Activities"],
-              },
-              {
-                title: "Higher Secondary",
-                description: "Grade 11 to Grade 12 with specialization tracks for university preparation.",
-                features: ["Science Track", "Commerce Track", "Arts Track", "University Prep", "Scholarship Guidance"],
-              },
-              {
-                title: "Special Programs",
-                description: "Additional support programs for students with diverse learning needs.",
-                features: [
-                  "Remedial Classes",
-                  "Gifted Student Program",
-                  "Special Needs Support",
-                  "Scholarship Program",
-                ],
-              },
-            ].map((program, index) => (
-              <Card key={index} className="hover:shadow-lg transition-shadow">
-                <CardHeader>
-                  <CardTitle className="text-xl text-teal-600">{program.title}</CardTitle>
-                  <CardDescription>{program.description}</CardDescription>
-                </CardHeader>
-                <CardContent className="px-8">
-                  <ul className="space-y-2">
-                    {program.features.map((feature, idx) => (
-                      <li key={idx} className="flex items-center text-sm text-gray-600">
-                        <Star className="w-4 h-4 mr-2 text-yellow-500 fill-current" />
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
+                  <Button asChild className="w-full bg-teal-600 hover:bg-teal-700">
+                    <Link href={program.link}>
+                      Explore {program.title}
+                      <ArrowRight className="ml-2 h-4 w-4" />
+                    </Link>
+                  </Button>
                 </CardContent>
               </Card>
             ))}

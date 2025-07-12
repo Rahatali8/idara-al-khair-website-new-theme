@@ -10,7 +10,7 @@ const projects = [
     id: "education",
     title: "Education",
     description: "Quality education from primary to higher levels, empowering students with knowledge and skills.",
-    image: "/placeholder.svg?height=300&width=400",
+    image: "/quality-education.jpg",
     icon: BookOpen,
     color: "from-blue-500 to-blue-600",
     stats: "6000+ Students",
@@ -19,7 +19,7 @@ const projects = [
     id: "food-support",
     title: "Food Support",
     description: "Ensuring food security through our Roti Bank and nutrition programs for families in need.",
-    image: "/placeholder.svg?height=300&width=400",
+    image: "/food-security.jpg",
     icon: Utensils,
     color: "from-green-500 to-green-600",
     stats: "50,000+ Meals",
@@ -28,7 +28,7 @@ const projects = [
     id: "medical",
     title: "Medical Center",
     description: "Comprehensive healthcare services including free medical camps and specialized treatments.",
-    image: "/placeholder.svg?height=300&width=400",
+    image: "/health-care.jpg",
     icon: Stethoscope,
     color: "from-red-500 to-red-600",
     stats: "25,000+ Patients",
@@ -37,19 +37,28 @@ const projects = [
     id: "technical",
     title: "Technical Institute",
     description: "Vocational training and IT education preparing youth for modern employment opportunities.",
-    image: "/placeholder.svg?height=300&width=400",
+    image: "/skill-devp.jpg",
     icon: Laptop,
     color: "from-purple-500 to-purple-600",
-    stats: "2000+ Graduates",
+    stats: "2000+ Got Skils",
   },
   {
     id: "disaster-relief",
     title: "Disaster Relief",
     description: "Emergency response and rehabilitation support during natural disasters and crises.",
-    image: "/placeholder.svg?height=300&width=400",
+    image: "/disaster.jpeg",
     icon: Shield,
     color: "from-orange-500 to-orange-600",
     stats: "100+ Operations",
+  },
+  {
+    id: "environment",
+    title: "environment-care",
+    description: "Creating a sustainable future through environmental initiatives.",
+    image: "/environment.jpg",
+    icon: Shield,
+    color: "from-orange-500 to-orange-600",
+    stats: "10000+ Plants Planted",
   },
 ]
 
@@ -67,7 +76,7 @@ export default function ProjectCards() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-6 md:px-12">
           {projects.map((project) => (
             <div
               key={project.id}

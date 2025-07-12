@@ -18,7 +18,7 @@ const carouselImages = [
     description: "Ensuring no family goes hungry in our communities",
   },
   {
-    src: "/health-care.jpg",
+    src: "/health-care.jpgj",
     alt: "Medical camp providing healthcare",
     title: "Healthcare Access",
     description: "Bringing essential medical services to remote areas",
