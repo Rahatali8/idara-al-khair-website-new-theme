@@ -10,7 +10,7 @@ const medicalServices = [
     title: "General Medicine",
     description: "Comprehensive primary healthcare services with experienced physicians",
     icon: Stethoscope,
-    image: "/images/reference.png",
+    image: "/images/re ference.png",
     features: ["Health Checkups", "Diagnosis & Treatment", "Prescription Services", "Follow-up Care"]
   },
   {
@@ -24,14 +24,14 @@ const medicalServices = [
     title: "Women's Health",
     description: "Comprehensive women's healthcare including maternal services",
     icon: UserCheck,
-    image: "/images/reference.png",
+    image: "/",
     features: ["Prenatal Care", "Gynecological Services", "Family Planning", "Maternal Health"]
   },
   {
     title: "Emergency Care",
     description: "24/7 emergency medical services for urgent healthcare needs",
     icon: Activity,
-    image: "/images/reference.png",
+    image: "/hospital.png",
     features: ["Trauma Care", "Critical Care", "Emergency Surgery", "Ambulance Services"]
   },
   {
