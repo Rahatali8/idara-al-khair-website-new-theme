@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button"
 import Link from "next/link"
 
 function AnimatedSphere() {
-  const meshRef = useRef<any>()
+  const meshRef = useRef<any>(null)
 
   useFrame((state) => {
     if (meshRef.current) {
