@@ -10,56 +10,63 @@ const medicalServices = [
     title: "General Medicine",
     description: "Comprehensive primary healthcare services with experienced physicians",
     icon: Stethoscope,
-    image: "/al-khair.png",
+    image: "/general-ward.png",
     features: ["Health Checkups", "Diagnosis & Treatment", "Prescription Services", "Follow-up Care"]
   },
   {
     title: "Pediatric Care",
     description: "Specialized healthcare services for children and infants",
     icon: Baby,
-    image: "/al-khair.png",
+    image: "/Pediatric-Care.jpg",
     features: ["Child Vaccinations", "Growth Monitoring", "Nutrition Counseling", "Child Development"]
   },
   {
     title: "Women's Health",
     description: "Comprehensive women's healthcare including maternal services",
     icon: UserCheck,
-    image: "/al-khair.png",
+    image: "/Women's-Health.jpg",
     features: ["Prenatal Care", "Gynecological Services", "Family Planning", "Maternal Health"]
   },
   {
     title: "Emergency Care",
     description: "24/7 emergency medical services for urgent healthcare needs",
     icon: Activity,
-    image: "/hospital.png",
+    image: "/Emergency-Care.jpg",
     features: ["Trauma Care", "Critical Care", "Emergency Surgery", "Ambulance Services"]
   },
   {
     title: "Laboratory Services",
     description: "Advanced diagnostic testing and laboratory services",
     icon: Microscope,
-    image: "/al-khair.png",
+    image: "/Laboratory-Services.jpg",
     features: ["Blood Tests", "Pathology", "Microbiology", "Biochemistry"]
   },
   {
     title: "Pharmacy Services",
     description: "In-house pharmacy with essential medications",
     icon: Pill,
-    image: "/al-khair.png",
+    image: "/Pharmacy-Services.jpg",
     features: ["Prescription Drugs", "Over-the-counter", "Medicine Counseling", "Generic Options"]
   },
   {
     title: "Vaccination Center",
     description: "Comprehensive vaccination services for all age groups",
     icon: Syringe,
-    image: "/al-khair.png",
+    image: "/Vaccination-Center.jpg",
     features: ["Child Vaccines", "Adult Vaccines", "Travel Vaccines", "Seasonal Vaccines"]
   },
   {
     title: "Specialist Consultations",
     description: "Expert consultations in various medical specialties",
     icon: Shield,
-    image: "/al-khair.png",
+    image: "/Specialist-Consultations.jpg",
+    features: ["Cardiology", "Dermatology", "Orthopedics", "Neurology"]
+  },
+  {
+    title: "Specialist Consultations",
+    description: "Expert consultations in various medical specialties",
+    icon: Shield,
+    image: "/Specialist-Consultations.jpg",
     features: ["Cardiology", "Dermatology", "Orthopedics", "Neurology"]
   }
 ]
