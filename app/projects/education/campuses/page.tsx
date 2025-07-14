@@ -12,7 +12,7 @@ const campuses = [
     established: "1995",
     students: "1,200+",
     grades: "Pre-K to Grade 12",
-    image: "/placeholder.svg?height=300&width=400",
+    image: "/al-khair.png",
     facilities: ["Science Labs", "Computer Lab", "Library", "Sports Ground", "Cafeteria"],
     contact: "+92 21 1234 5678",
     description: "Our flagship campus offering comprehensive education from early childhood to matriculation.",
@@ -45,7 +45,7 @@ const campuses = [
     established: "2010",
     students: "700+",
     grades: "Pre-K to Grade 8",
-    image: "/placeholder.svg?height=300&width=400",
+    image: "/campus 4.png",
     facilities: ["Smart Classrooms", "Computer Lab", "Library", "Health Center"],
     contact: "+92 21 4567 8901",
     description: "Providing accessible education to underserved communities in West Karachi.",
@@ -99,7 +99,7 @@ const achievements = [
 
 export default function CampusesPage() {
   return (
-    <main className="pt-20">
+    <main className="pt-4">
       {/* Hero Section */}
       <section className="py-20 bg-gradient-to-br from-teal-50 to-blue-100">
         <div className="container mx-auto px-4">

@@ -58,11 +58,11 @@ export default function DialysisCenterPage() {
           <div className="max-w-4xl mx-auto text-center">
             <Badge className="mb-4 bg-red-100 text-red-800 hover:bg-red-200">Coming Soon</Badge>
             <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6">
-              <span className="text-red-600">Dialysis Center</span> - Coming Soon
+              <span className="text-red-600">Al-Khair Hospital</span> - Coming Soon
             </h1>
             <p className="text-xl md:text-2xl text-gray-600 leading-relaxed mb-8">
-              We are excited to announce our new Dialysis Center, currently under development. 
-              This facility will provide specialized kidney care services to our community.
+              We are excited to announce our new Al-Khair Hospital, currently under development. 
+              This facility will provide specialized healthcare services to our community.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button size="lg" className="bg-red-600 hover:bg-red-700">
@@ -99,16 +99,16 @@ export default function DialysisCenterPage() {
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
-              <h2 className="text-4xl font-bold text-gray-900 mb-6">About Our Dialysis Center</h2>
+              <h2 className="text-4xl font-bold text-gray-900 mb-6">About Our Al-Khair Hospital</h2>
               <p className="text-lg text-gray-600 mb-6">
-                Our upcoming Dialysis Center will be a state-of-the-art facility dedicated to providing 
-                comprehensive kidney care services. We understand the critical need for accessible dialysis 
+                Our upcoming Al-Khair Hospital will be a state-of-the-art facility dedicated to providing 
+                comprehensive healthcare services. We understand the critical need for accessible medical 
                 treatment in our community.
               </p>
               <p className="text-lg text-gray-600 mb-6">
-                The center will feature modern dialysis equipment, experienced nephrologists, and a 
-                compassionate care team. Our goal is to provide high-quality kidney care services 
-                to patients who need regular dialysis treatment.
+                The hospital will feature modern medical equipment, experienced doctors, and a 
+                compassionate care team. Our goal is to provide high-quality healthcare services 
+                to patients who need regular treatment.
               </p>
               <div className="grid grid-cols-2 gap-6">
                 <div className="flex items-center">
@@ -144,7 +144,7 @@ export default function DialysisCenterPage() {
             <div className="relative h-96 rounded-lg overflow-hidden">
               <Image
                 src="/hospital.png"
-                alt="Dialysis Center - Coming Soon"
+                alt="Al-Khair Hospital - Coming Soon"
                 fill
                 className="object-cover"
               />
@@ -166,7 +166,7 @@ export default function DialysisCenterPage() {
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">Planned Services</h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Our Dialysis Center will offer comprehensive kidney care services with modern facilities 
+              Our Al-Khair Hospital will offer comprehensive healthcare services with modern facilities 
               and expert medical staff.
             </p>
           </div>
@@ -207,8 +207,8 @@ export default function DialysisCenterPage() {
               </div>
               <h2 className="text-3xl font-bold text-gray-900 mb-4">Coming Soon!</h2>
               <p className="text-lg text-gray-600 mb-6">
-                Our Dialysis Center is currently under development. We are working hard to bring 
-                you the best kidney care services. Stay tuned for updates on our opening date.
+                Our Al-Khair Hospital is currently under development. We are working hard to bring 
+                you the best healthcare services. Stay tuned for updates on our opening date.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button size="lg" className="bg-red-600 hover:bg-red-700">
@@ -226,14 +226,14 @@ export default function DialysisCenterPage() {
       {/* Call to Action */}
       <section className="py-20 bg-gradient-to-r from-red-600 to-pink-700 text-white">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-4xl font-bold mb-4">Support Our Dialysis Center</h2>
+          <h2 className="text-4xl font-bold mb-4">Support Our Al-Khair Hospital</h2>
           <p className="text-xl opacity-90 mb-8 max-w-3xl mx-auto">
-            Help us build this essential healthcare facility. Your support can make quality kidney care 
+            Help us build this essential healthcare facility. Your support can make quality healthcare 
             accessible to more patients in need.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button size="lg" className="bg-white text-red-600 hover:bg-gray-100">
-              Donate for Dialysis Center
+              Donate for Al-Khair Hospital
             </Button>
             <Button
               size="lg"
