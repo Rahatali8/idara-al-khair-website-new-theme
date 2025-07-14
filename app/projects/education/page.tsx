@@ -2,7 +2,7 @@ import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { GraduationCap, Users, BookOpen, Award, MapPin, Phone, Star, Building, ArrowRight } from "lucide-react"
+import { GraduationCap, Users, BookOpen, Award, MapPin, Phone, Star, Building, ArrowRight, Heart } from "lucide-react"
 import Link from "next/link"
 
 const educationPrograms = [
@@ -47,25 +47,29 @@ const achievements = [
 
 export default function EducationPage() {
   return (
-    <main className="pt-20">
+    <main className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-teal-50">
       {/* Hero Section */}
-      <section className="py-20 bg-gradient-to-br from-teal-50 to-blue-100">
-        <div className="container mx-auto px-4">
+      <section className="relative py-20 bg-gradient-to-br from-slate-50 via-blue-50 to-teal-50 overflow-hidden">
+        <div className="absolute inset-0 bg-black/5"></div>
+        <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
-            <Badge className="mb-4 bg-teal-100 text-teal-800 hover:bg-teal-200">Education Program</Badge>
-            <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6">
-              Quality <span className="text-teal-600">Education</span> for All
+            <Badge className="mb-6 bg-gradient-to-r from-teal-500 to-blue-600 text-white border-0 hover:from-teal-600 hover:to-blue-700">
+              <GraduationCap className="w-4 h-4 mr-2" />
+              Education Program
+            </Badge>
+            <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
+              Quality <span className="bg-gradient-to-r from-teal-500 to-blue-600 bg-clip-text text-transparent">Education</span> for All
             </h1>
-            <p className="text-xl md:text-2xl text-gray-600 leading-relaxed mb-8">
+            <p className="text-xl md:text-2xl text-gray-600 leading-relaxed mb-8 max-w-3xl mx-auto">
               Empowering students through comprehensive education across multiple campuses and institutes, serving over 6,000 students 
               with modern facilities and experienced faculty.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" className="bg-teal-600 hover:bg-teal-700">
+              <Button size="lg" className="bg-gradient-to-r from-teal-500 to-blue-600 hover:from-teal-600 hover:to-blue-700 text-white shadow-lg">
                 <GraduationCap className="mr-2 h-5 w-5" />
                 Apply for Admission
               </Button>
-              <Button size="lg" variant="outline">
+              <Button size="lg" variant="outline" className="border-2 border-teal-500 text-teal-600 hover:bg-teal-50 bg-transparent">
                 Download Prospectus
               </Button>
             </div>
@@ -74,13 +78,13 @@ export default function EducationPage() {
       </section>
 
       {/* Achievements */}
-      <section className="py-16 bg-white">
+      <section className="py-16 bg-gradient-to-r from-teal-50 to-blue-50">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {achievements.map((achievement, index) => (
-              <div key={index} className="text-center">
-                <div className="w-16 h-16 bg-teal-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <achievement.icon className="w-8 h-8 text-teal-600" />
+              <div key={index} className="text-center group">
+                <div className="w-16 h-16 bg-gradient-to-r from-teal-500 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform shadow-lg">
+                  <achievement.icon className="w-8 h-8 text-white" strokeWidth={2.5} />
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-2">{achievement.title}</h3>
                 <p className="text-gray-600">{achievement.description}</p>
@@ -91,10 +95,10 @@ export default function EducationPage() {
       </section>
 
       {/* Education Programs */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Our Educational Institutes</h2>
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">Our Educational Institutes</h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
               Discover our comprehensive educational offerings through our school campuses and technical college.
             </p>
@@ -102,7 +106,7 @@ export default function EducationPage() {
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {educationPrograms.map((program, index) => (
-              <Card key={index} className="hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
+              <Card key={index} className="bg-white shadow-xl hover:shadow-2xl transition-all duration-300 border-0">
                 <div className="relative h-64 overflow-hidden rounded-t-lg">
                   <Image
                     src={program.image || "/placeholder.svg"}
@@ -123,14 +127,14 @@ export default function EducationPage() {
                     <span className="font-semibold text-gray-900 text-sm">Key Features:</span>
                     <div className="flex flex-wrap gap-1 mt-2">
                       {program.features.map((feature, idx) => (
-                        <Badge key={idx} variant="secondary" className="text-xs">
+                        <Badge key={idx} className="bg-gradient-to-r from-teal-500 to-blue-600 text-white border-0">
                           {feature}
                         </Badge>
                       ))}
                     </div>
                   </div>
 
-                  <Button asChild className="w-full bg-teal-600 hover:bg-teal-700">
+                  <Button asChild className="w-full bg-gradient-to-r from-teal-500 to-blue-600 hover:from-teal-600 hover:to-blue-700 text-white shadow-lg">
                     <Link href={program.link}>
                       Explore {program.title}
                       <ArrowRight className="ml-2 h-4 w-4" />
@@ -144,7 +148,7 @@ export default function EducationPage() {
       </section>
 
       {/* Call to Action */}
-      <section className="py-20 bg-gradient-to-r from-teal-600 to-blue-700 text-white">
+      <section className="py-20 bg-gradient-to-r from-teal-500 to-blue-600 text-white">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-4xl font-bold mb-4">Join Our Educational Mission</h2>
           <p className="text-xl opacity-90 mb-8 max-w-3xl mx-auto">
@@ -152,7 +156,8 @@ export default function EducationPage() {
             future.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="bg-white text-teal-600 hover:bg-gray-100">
+            <Button size="lg" className="bg-white text-teal-600 hover:bg-gray-100 shadow-lg">
+              <Heart className="w-5 h-5 mr-2" />
               Donate to Education
             </Button>
             <Button

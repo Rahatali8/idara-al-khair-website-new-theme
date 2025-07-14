@@ -198,7 +198,7 @@ export default function ContactPage() {
           </div>
           <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {services.map((service, index) => (
-              <Card key={index} className="bg-white shadow-xl hover:shadow-2xl transition-all duration-500 border-0 group hover:-translate-y-4 hover:rotate-1 transform perspective-1000 hover:scale-105">
+              <Card key={index} className="bg-white shadow-xl hover:shadow-2xl transition-all duration-300 border-0 group hover:-translate-y-2 hover:opacity-90">
                 <CardHeader className="text-center pb-4">
                   <div className="w-16 h-16 bg-gradient-to-r from-teal-500 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300 shadow-lg">
                     <service.icon className="w-8 h-8 text-white" strokeWidth={2.5} />
@@ -225,7 +225,7 @@ export default function ContactPage() {
           </div>
           <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {contactInfo.map((info, index) => (
-              <Card key={index} className="bg-white shadow-xl hover:shadow-2xl transition-all duration-500 border-0 group hover:-translate-y-4 hover:rotate-1 transform perspective-1000 hover:scale-105">
+              <Card key={index} className="bg-white shadow-xl hover:shadow-2xl transition-all duration-300 border-0 group hover:-translate-y-2 hover:opacity-90">
                 <CardHeader className="text-center pb-4">
                   <div className="w-16 h-16 bg-gradient-to-r from-teal-500 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300 shadow-lg">
                     <info.icon className="w-8 h-8 text-white" strokeWidth={2.5} />
@@ -257,7 +257,7 @@ export default function ContactPage() {
           </div>
           <div className="max-w-4xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8">
             {donationMethods.map((method, index) => (
-              <Card key={index} className="bg-white border-0 shadow-xl hover:shadow-2xl transition-all duration-500 group hover:-translate-y-4 hover:rotate-1 transform perspective-1000 hover:scale-105">
+              <Card key={index} className="bg-white border-0 shadow-xl hover:shadow-2xl transition-all duration-300 group hover:-translate-y-2 hover:opacity-90">
                 <CardHeader className="text-center">
                   <div className="w-16 h-16 bg-gradient-to-r from-teal-500 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300 shadow-lg">
                     <Building2 className="w-8 h-8 text-white" strokeWidth={2.5} />
@@ -306,7 +306,7 @@ export default function ContactPage() {
           </div>
           <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
             {faqData.map((faq, index) => (
-              <Card key={index} className="bg-white border-0 shadow-xl hover:shadow-2xl transition-all duration-500 group hover:-translate-y-4 hover:rotate-1 transform perspective-1000 hover:scale-105">
+              <Card key={index} className="bg-white border-0 shadow-xl hover:shadow-2xl transition-all duration-300 group hover:-translate-y-2 hover:opacity-90">
                 <CardHeader>
                   <CardTitle className="text-lg text-gray-900">{faq.question}</CardTitle>
                 </CardHeader>

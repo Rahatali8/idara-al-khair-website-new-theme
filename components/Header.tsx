@@ -27,9 +27,24 @@ export default function Header() {
             <Link href="/" className="text-gray-700 hover:text-teal-600 font-medium transition-colors">
               Home
             </Link>
-            <Link href="/about" className="text-gray-700 hover:text-teal-600 font-medium transition-colors">
-              About Us
-            </Link>
+            {/* About Us Dropdown (Desktop) */}
+            <div className="relative group">
+              <button className="flex items-center text-gray-700 hover:text-teal-600 font-medium transition-colors">
+                About Us
+                <ChevronDown className="ml-1 w-4 h-4" />
+              </button>
+              <div className="absolute top-full left-0 mt-2 w-64 bg-white rounded-lg shadow-lg border border-gray-200 py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+                <Link href="/about/history" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-teal-600">
+                  History And Achievements
+                </Link>
+                <Link href="/about/board-of-directors" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-teal-600">
+                  Chairman and Board
+                </Link>
+                <Link href="/about/mission-and-values" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-teal-600">
+                  Mission And Values
+                </Link>
+              </div>
+            </div>
 
             {/* Projects Dropdown */}
             <div className="relative group">
@@ -197,13 +212,21 @@ export default function Header() {
               >
                 Home
               </Link>
-              <Link
-                href="/about"
-                className="text-gray-700 hover:text-teal-600 font-medium"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                About Us
-              </Link>
+              {/* About Us Dropdown (Mobile) */}
+              <div className="space-y-2">
+                <span className="text-gray-700 font-medium">About Us</span>
+                <div className="pl-4 space-y-2">
+                  <Link href="/about/history" className="block text-gray-600 hover:text-teal-600" onClick={() => setIsMenuOpen(false)}>
+                    History And Achievements
+                  </Link>
+                  <Link href="/about/board-of-directors" className="block text-gray-600 hover:text-teal-600" onClick={() => setIsMenuOpen(false)}>
+                    Chairman and Board
+                  </Link>
+                  <Link href="/about/mission-and-values" className="block text-gray-600 hover:text-teal-600" onClick={() => setIsMenuOpen(false)}>
+                    Mission And Values
+                  </Link>
+                </div>
+              </div>
 
               {/* Mobile Projects */}
               <div className="space-y-2">
