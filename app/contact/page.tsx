@@ -161,10 +161,16 @@ export default function ContactPage() {
                 <Phone className="w-5 h-5 mr-2" />
                 Call Now
               </Button>
-              <Button size="lg" variant="outline" className="border-2 border-teal-500 text-teal-600 hover:bg-teal-50 bg-transparent">
+              <a href="mailto:info@idaraalkhair.com">
+              <Button
+                size="lg"
+                variant="outline"
+                className="border-2 border-teal-500 text-teal-600 hover:bg-teal-50 bg-transparent"
+              >
                 <Mail className="w-5 h-5 mr-2" />
                 Send Email
               </Button>
+            </a>
             </div>
           </div>
         </div>

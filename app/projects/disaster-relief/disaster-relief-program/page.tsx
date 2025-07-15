@@ -156,10 +156,12 @@ export default function DisasterReliefProgramPage() {
                 <Phone className="mr-2 h-5 w-5" />
                 Emergency Hotline: 1122
               </Button>
+              <Link href={"/contact"}>
               <Button size="lg" variant="outline">
                 <Heart className="mr-2 h-5 w-5" />
                 Support Relief Efforts
               </Button>
+              </Link>
             </div>
           </div>
         </div>
