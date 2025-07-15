@@ -213,7 +213,7 @@ export default function HVACProgramPage() {
             </div>
             <div className="relative h-96 rounded-lg overflow-hidden">
               <Image
-                src="/hardware.jpg"
+                src="/HVAC-Center.jpg"
                 alt="HVAC Training Program"
                 fill
                 className="object-cover"
