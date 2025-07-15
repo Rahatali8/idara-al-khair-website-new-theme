@@ -34,54 +34,53 @@ const hvacCourses = [
     description: "Learn to install and set up HVAC systems for residential and commercial buildings",
     icon: "🔧",
     duration: "3 Months",
-    seats: "25",
+   
     features: ["System Installation", "Ductwork", "Electrical Wiring", "Testing & Commissioning", "Safety Protocols"],
-    image: "/hardware.jpg",
+    image: "/HVAC-installation.jpg",
   },
   {
     title: "HVAC Maintenance",
     description: "Comprehensive maintenance and repair of HVAC systems",
     icon: "🛠️",
     duration: "2 Months",
-    seats: "30",
-    features: ["Preventive Maintenance", "Troubleshooting", "Repair Techniques", "System Optimization", "Energy Efficiency"],
-    image: "/hardware.jpg",
+    
+    features: ["Preventive Maintenance", "Troubleshooting", "Repair Techniques", "System Optimization"],
+    image: "/HVAC-maintenance.jpg",
   },
   {
     title: "Refrigeration Systems",
     description: "Specialized training in refrigeration and cooling systems",
     icon: "❄️",
     duration: "4 Months",
-    seats: "20",
-    features: ["Refrigeration Cycles", "Compressor Systems", "Cooling Units", "Commercial Refrigeration", "Cold Storage"],
-    image: "/hardware.jpg",
+
+    features: ["Refrigeration Cycles", "Compressor Systems", "Cooling Units", "Commercial Refrigeration"],
+    image: "/Refrigiration-system.jpg",
   },
   {
     title: "Air Conditioning",
-    description: "Advanced air conditioning system design and installation",
+    description: "Advanced air conditioning system installation",
     icon: "🌬️",
     duration: "3 Months",
-    seats: "25",
+
     features: ["AC Installation", "Split Systems", "Central AC", "Ductless Systems", "Smart Controls"],
-    image: "/hardware.jpg",
+    image: "/Air-conditining.jpg",
   },
   {
     title: "Energy Management",
     description: "Energy-efficient HVAC systems and green technology",
     icon: "⚡",
     duration: "2 Months",
-    seats: "20",
     features: ["Energy Audits", "Green Technology", "Smart Systems", "Sustainability", "Cost Optimization"],
-    image: "/hardware.jpg",
+    image: "/energy-management system.jpg",
   },
   {
     title: "Commercial HVAC",
     description: "Large-scale commercial and industrial HVAC systems",
     icon: "🏢",
     duration: "4 Months",
-    seats: "15",
-    features: ["Commercial Systems", "Industrial HVAC", "Large-scale Projects", "Project Management", "Team Leadership"],
-    image: "/hardware.jpg",
+    
+    features: ["Commercial Systems", "Industrial HVAC", "Large-scale Projects", "Project Management"],
+    image: "/commercial-hvac.jpg",
   },
 ]
 
@@ -113,14 +112,13 @@ const careerOpportunities = [
 ]
 
 const industryPartners = [
-  { name: "Daikin Pakistan", logo: "/placeholder-logo.png", sector: "Air Conditioning" },
-  { name: "Carrier Pakistan", logo: "/placeholder-logo.png", sector: "HVAC Systems" },
-  { name: "LG Electronics", logo: "/placeholder-logo.png", sector: "Cooling Solutions" },
-  { name: "Samsung HVAC", logo: "/placeholder-logo.png", sector: "Smart Systems" },
-  { name: "Mitsubishi Electric", logo: "/placeholder-logo.png", sector: "Commercial HVAC" },
-  { name: "Hitachi Cooling", logo: "/placeholder-logo.png", sector: "Industrial Systems" },
+  { name: "Daikin Pakistan", logo: "/Daikin-pakistan.png", sector: "Air Conditioning" },
+  { name: "Carrier Pakistan", logo: "/Carrier-Pakistan.png", sector: "HVAC Systems" },
+  { name: "LG Electronics", logo: "/LG-Electronics.png", sector: "Cooling Solutions" },
+  { name: "Samsung HVAC", logo: "/Smsung-HVAC.jpg", sector: "Smart Systems" },
+  { name: "Mitsubishi Electric", logo: "/Mitsubashi-Electric.png", sector: "Commercial HVAC" },
+  { name: "Hitachi Cooling", logo: "/Hitachi-Cooling.jpg", sector: "Industrial Systems" },
 ]
-
 export default function HVACProgramPage() {
   return (
     <main className="pt-20">
@@ -256,11 +254,6 @@ export default function HVACProgramPage() {
                 </CardHeader>
 
                 <CardContent className="space-y-4 px-8">
-                  <div className="flex justify-between text-sm">
-                    <span className="font-semibold text-gray-900">Available Seats:</span>
-                    <span className="text-cyan-600 font-bold">{course.seats}</span>
-                  </div>
-
                   <div>
                     <span className="font-semibold text-gray-900 text-sm">Skills Covered:</span>
                     <div className="flex flex-wrap gap-1 mt-2">
@@ -271,10 +264,11 @@ export default function HVACProgramPage() {
                       ))}
                     </div>
                   </div>
-
-                  <Button className="w-full bg-gradient-to-r from-teal-500 to-blue-600 hover:from-teal-600 hover:to-blue-700">
-                    Apply Now
+                  <Link href={"/contact"}>
+                  <Button className="m-5 w-full bg-gradient-to-r from-teal-500 to-blue-600 hover:from-teal-600 hover:to-blue-700">
+                    Contact Us
                   </Button>
+                  </Link>
                 </CardContent>
               </Card>
             ))}
