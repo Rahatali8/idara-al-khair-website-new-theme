@@ -5,68 +5,89 @@ import { Heart, Stethoscope, Ambulance, Users, Pill, Phone, MapPin, Star } from 
 
 const services = [
   {
-    icon: <Stethoscope className="w-8 h-8 text-teal-600" />,
+    id: "emergency",
     title: "General & Emergency Care",
     description: "Handling regular and emergency medical cases for students, parents, and the community.",
+    image: "/Emergency-Care.jpg",
+    icon: Stethoscope,
+    color: "from-red-500 to-red-600",
+    stats: "24/7 Service",
   },
   {
-    icon: <Pill className="w-8 h-8 text-teal-600" />,
+    id: "pharmacy",
     title: "Dispensary & Pharmacy",
     description: "Well-equipped dispensary and pharmacy for immediate medical needs.",
+    image: "/Pharmacy-Services.jpg",
+    icon: Pill,
+    color: "from-blue-500 to-blue-600",
+    stats: "On-site",
   },
   {
-    icon: <Ambulance className="w-8 h-8 text-teal-600" />,
+    id: "ambulance",
     title: "Ambulance Service",
     description: "Ambulance available for urgent transport to high-tech hospitals when needed.",
+    image: "/ambulance.jpg",
+    icon: Ambulance,
+    color: "from-green-500 to-green-600",
+    stats: "Quick Response",
   },
   {
-    icon: <Users className="w-8 h-8 text-teal-600" />,
+    id: "staff",
     title: "Qualified Staff",
     description: "Experienced doctors, nurses, and support staff for compassionate care.",
+    image: "/health-care.jpg",
+    icon: Users,
+    color: "from-purple-500 to-purple-600",
+    stats: "Expert Team",
   },
   {
-    icon: <Heart className="w-8 h-8 text-teal-600" />,
+    id: "support",
     title: "Support for the Needy",
     description: "Medical support for poor and deprived families, funded by donors and philanthropists.",
+    image: "/medical-aid.jpg",
+    icon: Heart,
+    color: "from-teal-500 to-teal-600",
+    stats: "Charity Care",
   },
 ]
 
 export default function MedicalCenterPage() {
   return (
     <main className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-teal-50">
-      {/* Banner Section */}
-      <section className="relative min-h-[60vh] flex flex-col-reverse lg:flex-row items-center justify-between overflow-hidden bg-gradient-to-br from-slate-50 via-blue-50 to-teal-50 w-full mb-12">
-        {/* Text Left */}
-        <div className="relative z-10 flex-1 px-6 md:px-12 py-12 lg:py-0 flex flex-col justify-center items-start">
-          <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
-            <span className="bg-gradient-to-r from-teal-500 to-blue-600 bg-clip-text text-transparent">Al-Khair Medical Center</span>
-            <br />
-            <span className="text-2xl md:text-3xl text-gray-700 font-semibold">Accessible, Compassionate Healthcare</span>
-          </h1>
-          <p className="text-lg md:text-xl text-gray-600 mb-8 max-w-xl leading-relaxed">
-            Providing regular and emergency medical care for students, parents, and the community. Our mission is to ensure timely, quality healthcare for all, especially the underprivileged.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4">
-            <a href="/donate" className="bg-gradient-to-r from-teal-500 to-blue-600 hover:from-teal-600 hover:to-blue-700 text-white px-8 py-3 rounded-full font-semibold shadow-lg hover:shadow-xl transition-all duration-300 text-lg">Donate Now</a>
-            <a href="/contact" className="border-2 border-teal-500 text-teal-600 hover:bg-teal-50 px-8 py-3 rounded-full font-semibold transition-all duration-300 text-lg bg-transparent">Contact Us</a>
-          </div>
+      {/* Hero Banner Section */}
+      <section className="relative flex flex-col items-center justify-center min-h-[60vh] py-16 px-4 bg-gradient-to-br from-blue-50 via-teal-50 to-white text-center overflow-hidden">
+        {/* Badge */}
+        <div className="mb-6">
+          <span className="inline-flex items-center gap-2 bg-blue-100 text-blue-700 font-semibold px-5 py-2 rounded-full text-base shadow">
+            <Heart className="w-5 h-5 text-teal-500" />
+            Medical Center
+          </span>
         </div>
-        {/* Image Right */}
-        <div className="relative flex-1 w-full h-72 md:h-96 lg:h-[420px] flex items-center justify-center">
-          <Image
-            src="/hospital.png"
-            alt="Al-Khair Medical Center Banner"
-            fill
-            className="object-cover rounded-2xl shadow-2xl"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent rounded-2xl" />
+        {/* Heading */}
+        <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
+          Serving <span className="bg-gradient-to-r from-teal-500 to-blue-600 bg-clip-text text-transparent">Health</span> &amp; Hope<br />
+          Since <span className="text-blue-700">2010</span>
+        </h1>
+        {/* Description */}
+        <p className="text-lg md:text-2xl text-gray-600 mb-10 max-w-2xl mx-auto">
+          Al-Khair Medical Center is dedicated to providing accessible, compassionate healthcare for all. We serve our community with modern facilities, expert staff, and a mission to heal and uplift lives.
+        </p>
+        {/* Buttons */}
+        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="/donate" className="bg-gradient-to-r from-teal-500 to-blue-600 hover:from-teal-600 hover:to-blue-700 text-white px-8 py-3 rounded-full font-semibold shadow-lg hover:shadow-xl transition-all duration-300 text-lg flex items-center gap-2">
+            <Heart className="w-5 h-5" />
+            Support Our Mission
+          </a>
+          <a href="#our-services" className="border-2 border-teal-500 text-teal-600 hover:bg-teal-50 px-8 py-3 rounded-full font-semibold transition-all duration-300 text-lg bg-transparent flex items-center gap-2">
+            Learn More
+          </a>
         </div>
       </section>
 
       {/* About Section */}
       <section className="mb-16">
-        <h2 className="text-3xl md:text-4xl font-bold text-teal-700 mb-8 text-center">About Al-Khair Medical Center</h2>
         <div className="container mx-auto px-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-teal-700 mb-8 text-center">About Al-Khair Medical Center</h2>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center px-6 md:px-12">
             {/* Image Side */}
             <div className="relative">
@@ -120,17 +141,44 @@ export default function MedicalCenterPage() {
       <section className="mb-16">
         <h2 className="text-3xl md:text-4xl font-bold text-teal-700 mb-8 text-center">Our Services</h2>
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {services.map((service, idx) => (
-              <Card key={idx} className="bg-white shadow-xl hover:shadow-2xl transition-all duration-300 border-0">
-                <CardHeader className="flex flex-col items-center">
-                  <div className="mb-4">{service.icon}</div>
-                  <CardTitle className="text-xl text-teal-600 text-center">{service.title}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <CardDescription className="text-base text-center text-gray-600">{service.description}</CardDescription>
-                </CardContent>
-              </Card>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-6 md:px-12">
+            {services.map((service) => (
+              <div
+                key={service.id}
+                className="group relative bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden cursor-pointer"
+              >
+                {/* Image */}
+                <div className="relative h-48 overflow-hidden">
+                  <Image
+                    src={service.image}
+                    alt={service.title}
+                    fill
+                    className="object-cover transition-transform duration-300 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+                  {/* Icon */}
+                  <div
+                    className={`absolute top-4 left-4 w-12 h-12 bg-gradient-to-r ${service.color} rounded-full flex items-center justify-center shadow-lg`}
+                  >
+                    <service.icon className="w-6 h-6 text-white" />
+                  </div>
+                  {/* Stats Badge */}
+                  <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm rounded-full px-3 py-1">
+                    <span className="text-sm font-semibold text-gray-900">{service.stats}</span>
+                  </div>
+                </div>
+                {/* Content */}
+                <div className="p-6">
+                  <h3 className="text-2xl font-bold text-gray-900 mb-3 group-hover:text-teal-600 transition-colors">
+                    {service.title}
+                  </h3>
+                  <p className="text-gray-600 mb-4 leading-relaxed">{service.description}</p>
+                </div>
+                {/* Simple Hover Effect */}
+                <div
+                  className={`absolute inset-0 bg-gradient-to-r ${service.color} opacity-0 group-hover:opacity-5 transition-opacity duration-300`}
+                />
+              </div>
             ))}
           </div>
         </div>

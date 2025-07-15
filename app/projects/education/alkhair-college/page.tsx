@@ -1,9 +1,11 @@
+"use client"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { GraduationCap, Users, BookOpen, Award, MapPin, Phone, Star, Building, Globe, Clock, Users2 } from "lucide-react"
+import { GraduationCap, Users, BookOpen, Award, MapPin, Phone, Star, Building, Globe, Clock, Users2, Activity, Palette, TrendingUp, Users as UsersIcon, CheckCircle } from "lucide-react"
 import Link from "next/link"
+import { useState, useRef, useEffect } from "react"
 
 const collegeStats = [
   {
@@ -28,54 +30,54 @@ const collegeStats = [
   },
 ]
 
-const programs = [
+const academicPrograms = [
   {
-    title: "Computer Science",
-    duration: "4 Years",
-    seats: "120",
-    description: "Comprehensive program covering software development, AI, and data science",
-    features: ["Programming Languages", "Database Management", "Web Development", "Artificial Intelligence", "Project Management"],
-    image: "/Programming-language.jpg",
+    name: "Pre-Medical",
+    icon: BookOpen,
+    students: 320,
+    description: "Comprehensive preparation for medical entrance exams",
+    subjects: ["Biology", "Chemistry", "Physics", "Mathematics"],
+    highlights: [
+      { icon: UsersIcon, label: "Enrolled: 320 Students" },
+      { icon: TrendingUp, label: "Success Rate: 95%" },
+      { icon: Clock, label: "Duration: 2 Years" },
+    ],
   },
   {
-    title: "Business Administration",
-    duration: "4 Years",
-    seats: "100",
-    description: "Prepare for leadership roles in business and management",
-    features: ["Marketing", "Finance", "Human Resources", "Operations Management", "Strategic Planning"],
-    image: "/Office.jpg",
+    name: "Pre Engineering",
+    icon: Activity,
+    students: 280,
+    description: "Strong foundation in engineering and technology subjects",
+    subjects: ["Mathematics", "Physics", "Chemistry", "Computer Science"],
+    highlights: [
+      { icon: UsersIcon, label: "Enrolled: 280 Students" },
+      { icon: TrendingUp, label: "Success Rate: 92%" },
+      { icon: Clock, label: "Duration: 2 Years" },
+    ],
   },
   {
-    title: "Digital Marketing",
-    duration: "2 Years",
-    seats: "80",
-    description: "Master the art of digital marketing and online business",
-    features: ["SEO & SEM", "Social Media Marketing", "Content Creation", "Analytics", "E-commerce"],
-    image: "/Digital-marketing.jpg",
+    name: "Commerce",
+    icon: TrendingUp,
+    students: 250,
+    description: "Business, accounting, and commerce education for future leaders",
+    subjects: ["Accounting", "Business Studies", "Economics", "Mathematics"],
+    highlights: [
+      { icon: UsersIcon, label: "Enrolled: 250 Students" },
+      { icon: TrendingUp, label: "Success Rate: 90%" },
+      { icon: Clock, label: "Duration: 2 Years" },
+    ],
   },
   {
-    title: "Graphic Design",
-    duration: "2 Years",
-    seats: "60",
-    description: "Develop creative skills for visual communication",
-    features: ["Adobe Creative Suite", "Typography", "Brand Design", "UI/UX Design", "Print & Digital Media"],
-    image: "/Graphic.jpg",
-  },
-  {
-    title: "Animation & Multimedia",
-    duration: "2 Years",
-    seats: "50",
-    description: "Create stunning animations and multimedia content",
-    features: ["2D & 3D Animation", "Video Editing", "Motion Graphics", "Character Design", "Visual Effects"],
-    image: "/animation-courses.jpg",
-  },
-  {
-    title: "Hardware & Networking",
-    duration: "2 Years",
-    seats: "70",
-    description: "Build and maintain computer systems and networks",
-    features: ["Computer Hardware", "Network Administration", "Cybersecurity", "System Administration", "Cloud Computing"],
-    image: "/hardware.jpg",
+    name: "Arts & Humanities",
+    icon: Palette,
+    students: 180,
+    description: "Creative and critical thinking through arts and humanities subjects",
+    subjects: ["English", "Urdu", "Civics", "Education"],
+    highlights: [
+      { icon: UsersIcon, label: "Enrolled: 180 Students" },
+      { icon: TrendingUp, label: "Success Rate: 88%" },
+      { icon: Clock, label: "Duration: 2 Years" },
+    ],
   },
 ]
 
@@ -113,26 +115,35 @@ const facilities = [
 ]
 
 export default function AlKhairCollegePage() {
+  const [selected, setSelected] = useState(0)
+  const [fadeKey, setFadeKey] = useState(0)
+  const program = academicPrograms[selected]
+  const detailRef = useRef(null)
+
+  useEffect(() => {
+    setFadeKey((k) => k + 1)
+  }, [selected])
+
   return (
-    <main className="pt-20">
+    <main className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-teal-50 pt-20">
       {/* Hero Section */}
-      <section className="py-20 bg-gradient-to-br from-blue-50 to-indigo-100">
+      <section className="py-20">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
-            <Badge className="mb-4 bg-blue-100 text-blue-800 hover:bg-blue-200">Al-Khair College</Badge>
+            <Badge className="mb-4 bg-gradient-to-r from-teal-500 to-blue-600 text-white border-0">Al-Khair College</Badge>
             <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6">
-              <span className="text-blue-600">Al-Khair College</span> of Technology
+              <span className="bg-gradient-to-r from-teal-500 to-blue-600 bg-clip-text text-transparent">Al-Khair College</span> of Technology
             </h1>
             <p className="text-xl md:text-2xl text-gray-600 leading-relaxed mb-8">
               Empowering students with cutting-edge technology education and practical skills for the digital age.
               Established in 2010, we have been at the forefront of technical education in Pakistan.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" className="bg-blue-600 hover:bg-blue-700">
+              <Button size="lg" className="bg-gradient-to-r from-teal-500 to-blue-600 hover:from-teal-600 hover:to-blue-700 text-white">
                 <GraduationCap className="mr-2 h-5 w-5" />
                 Apply for Admission
               </Button>
-              <Button size="lg" variant="outline">
+              <Button size="lg" variant="outline" className="border-teal-500 text-teal-600 hover:bg-teal-50 bg-transparent">
                 Download Prospectus
               </Button>
             </div>
@@ -141,13 +152,13 @@ export default function AlKhairCollegePage() {
       </section>
 
       {/* College Stats */}
-      <section className="py-16 bg-white">
+      <section className="py-16">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {collegeStats.map((stat, index) => (
               <div key={index} className="text-center">
-                <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <stat.icon className="w-8 h-8 text-blue-600" />
+                <div className="w-16 h-16 bg-gradient-to-r from-teal-500 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <stat.icon className="w-8 h-8 text-white" />
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-2">{stat.title}</h3>
                 <p className="text-gray-600">{stat.description}</p>
@@ -158,10 +169,10 @@ export default function AlKhairCollegePage() {
       </section>
 
       {/* About College */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-20">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
+            <div className="px-4 md:px-8">
               <h2 className="text-4xl font-bold text-gray-900 mb-6">About Al-Khair College</h2>
               <p className="text-lg text-gray-600 mb-6">
                 Al-Khair College of Technology was established in 2010 with a vision to provide world-class technical 
@@ -175,28 +186,28 @@ export default function AlKhairCollegePage() {
               </p>
               <div className="grid grid-cols-2 gap-6">
                 <div className="flex items-center">
-                  <Clock className="w-6 h-6 text-blue-600 mr-3" />
+                  <Clock className="w-6 h-6 text-teal-600 mr-3" />
                   <div>
                     <h4 className="font-semibold text-gray-900">Established</h4>
                     <p className="text-gray-600">2010</p>
                   </div>
                 </div>
                 <div className="flex items-center">
-                  <Users2 className="w-6 h-6 text-blue-600 mr-3" />
+                  <Users2 className="w-6 h-6 text-teal-600 mr-3" />
                   <div>
                     <h4 className="font-semibold text-gray-900">Faculty</h4>
                     <p className="text-gray-600">50+ Experts</p>
                   </div>
                 </div>
                 <div className="flex items-center">
-                  <MapPin className="w-6 h-6 text-blue-600 mr-3" />
+                  <MapPin className="w-6 h-6 text-teal-600 mr-3" />
                   <div>
                     <h4 className="font-semibold text-gray-900">Location</h4>
                     <p className="text-gray-600">Karachi Central</p>
                   </div>
                 </div>
                 <div className="flex items-center">
-                  <Award className="w-6 h-6 text-blue-600 mr-3" />
+                  <Award className="w-6 h-6 text-teal-600 mr-3" />
                   <div>
                     <h4 className="font-semibold text-gray-900">Accreditation</h4>
                     <p className="text-gray-600">HEC Recognized</p>
@@ -204,9 +215,9 @@ export default function AlKhairCollegePage() {
                 </div>
               </div>
             </div>
-            <div className="relative h-96 rounded-lg overflow-hidden">
+            <div className="relative h-96 rounded-lg overflow-hidden min-w-[340px] w-full max-w-lg mx-auto">
               <Image
-                src="/placeholder.svg?height=400&width=600"
+                src="/hospital.png"
                 alt="Al-Khair College Campus"
                 fill
                 className="object-cover"
@@ -216,65 +227,68 @@ export default function AlKhairCollegePage() {
         </div>
       </section>
 
-      {/* Programs */}
-      <section className="py-20 bg-white">
+      {/* Academic Programs Section */}
+      <section className="py-20">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Our Programs</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Comprehensive technical and business programs designed to prepare students for successful careers in the digital economy.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {programs.map((program, index) => (
-              <Card key={index} className="hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
-                <div className="relative h-48 overflow-hidden rounded-t-lg">
-                  <Image
-                    src={program.image || "/placeholder.svg"}
-                    alt={program.title}
-                    fill
-                    className="object-cover transition-transform duration-300 hover:scale-105"
-                  />
-                  <div className="absolute top-4 left-4">
-                    <Badge className="bg-blue-600 text-white">{program.duration}</Badge>
+          <h2 className="text-5xl font-extrabold text-center text-blue-800 mb-2">Academic Programs</h2>
+          <p className="text-center text-xl text-gray-700 mb-12">Choose your path to success with our comprehensive intermediate programs</p>
+          <div className="flex flex-col md:flex-row gap-8 max-w-5xl mx-auto">
+            {/* Program List */}
+            <div className="flex-1 flex flex-col gap-6">
+              {academicPrograms.map((p, idx) => (
+                <button
+                  key={p.name}
+                  onClick={() => setSelected(idx)}
+                  className={`flex items-center gap-4 p-6 rounded-2xl border-2 transition-all text-left bg-white focus:outline-none font-semibold shadow-none ${selected === idx ? "border-blue-500 bg-white" : "border-gray-200 hover:border-blue-300"}`}
+                  style={{ boxShadow: "none" }}
+                >
+                  <div className={`rounded-xl p-3 border ${selected === idx ? "bg-blue-50 border-blue-500 text-blue-700" : "bg-gray-50 border-gray-200 text-gray-500"}`}><p.icon className="w-7 h-7" /></div>
+                  <div>
+                    <div className="font-bold text-lg mb-1 text-gray-900">{p.name}</div>
+                    <div className="text-gray-500 text-base font-normal">{p.students} Students</div>
+                  </div>
+                </button>
+              ))}
+            </div>
+            {/* Program Details */}
+            <div className="flex-1 min-h-[320px]">
+              <div
+                key={fadeKey}
+                ref={detailRef}
+                className="bg-white rounded-2xl border border-gray-200 p-8 flex flex-col gap-6 h-full"
+                style={{ boxShadow: "0 4px 24px rgba(34, 197, 246, 0.08)" }}
+              >
+                <div className="flex items-center gap-4 mb-2">
+                  <div className="rounded-xl p-3 bg-blue-50 border border-blue-500 text-blue-700"><program.icon className="w-7 h-7" /></div>
+                  <div>
+                    <div className="font-extrabold text-2xl text-gray-900">{program.name}</div>
+                    <div className="text-gray-600 font-medium">{program.description}</div>
                   </div>
                 </div>
-
-                <CardHeader>
-                  <CardTitle className="text-xl text-gray-900">{program.title}</CardTitle>
-                  <CardDescription>{program.description}</CardDescription>
-                </CardHeader>
-
-                <CardContent className="space-y-4 px-8">
-                  <div className="flex justify-between text-sm">
-                    <span className="font-semibold text-gray-900">Available Seats:</span>
-                    <span className="text-blue-600 font-bold">{program.seats}</span>
-                  </div>
-
-                  <div>
-                    <span className="font-semibold text-gray-900 text-sm">Key Features:</span>
-                    <div className="flex flex-wrap gap-1 mt-2">
-                      {program.features.map((feature, idx) => (
-                        <Badge key={idx} variant="secondary" className="text-xs">
-                          {feature}
-                        </Badge>
-                      ))}
-                    </div>
-                  </div>
-
-                  <Button className="w-full bg-blue-600 hover:bg-blue-700">
-                    Learn More
-                  </Button>
-                </CardContent>
-              </Card>
-            ))}
+                <div>
+                  <div className="font-bold text-gray-800 mb-2">Core Subjects</div>
+                  <ul className="flex flex-col gap-2 ml-2">
+                    {program.subjects.map((subj) => (
+                      <li key={subj} className="flex items-center gap-2 text-green-600 font-semibold text-base"><CheckCircle className="w-5 h-5" /> {subj}</li>
+                    ))}
+                  </ul>
+                </div>
+                <div>
+                  <div className="font-bold text-gray-800 mb-2">Program Highlights</div>
+                  <ul className="flex flex-col gap-2 ml-2">
+                    {program.highlights.map((h, i) => (
+                      <li key={i} className="flex items-center gap-2 text-gray-700 text-base font-medium"><h.icon className="w-5 h-5 text-blue-600" /> {h.label}</li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Facilities */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-20">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">Campus Facilities</h2>
@@ -288,7 +302,7 @@ export default function AlKhairCollegePage() {
               <Card key={index} className="hover:shadow-lg transition-shadow text-center">
                 <CardHeader>
                   <div className="text-4xl mb-4">{facility.icon}</div>
-                  <CardTitle className="text-xl text-blue-600">{facility.title}</CardTitle>
+                  <CardTitle className="text-xl text-teal-600">{facility.title}</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p className="text-gray-600">{facility.description}</p>
@@ -300,21 +314,21 @@ export default function AlKhairCollegePage() {
       </section>
 
       {/* Call to Action */}
-      <section className="py-20 bg-gradient-to-r from-blue-600 to-indigo-700 text-white">
+      <section className="py-20 bg-gradient-to-r from-teal-500 to-blue-600 text-white">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-4xl font-bold mb-4">Start Your Journey at Al-Khair College</h2>
           <p className="text-xl opacity-90 mb-8 max-w-3xl mx-auto">
             Join thousands of successful graduates who have transformed their careers through quality technical education.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="bg-white text-blue-600 hover:bg-gray-100">
+            <Button size="lg" className="bg-white text-teal-600 hover:bg-gray-100">
               Apply Now
             </Button>
             <Button
               size="lg"
               variant="outline"
               asChild
-              className="border-white text-white hover:bg-white hover:text-blue-600 bg-transparent"
+              className="border-white text-white hover:bg-white hover:text-teal-600 bg-transparent"
             >
               <Link href="/contact">Schedule a Visit</Link>
             </Button>

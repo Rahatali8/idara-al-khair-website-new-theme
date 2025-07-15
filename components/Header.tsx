@@ -169,10 +169,10 @@ export default function Header() {
                       Al-Khair Medical Center
                     </Link>
                     <Link
-                      href="/projects/medical/dialysis-center"
+                      href="/projects/medical/alkhair-hospital"
                       className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-teal-600"
                     >
-                      Al Khair Hospital
+                      Al-Khair Hospital
                     </Link>
                   </div>
                 </div>
@@ -329,14 +329,14 @@ export default function Header() {
                         className="block text-gray-600 hover:text-teal-600"
                         onClick={() => setIsMenuOpen(false)}
                       >
-                        Al-Khair Hospital
+                        Al-Khair Medical Center
                       </Link>
                       <Link
-                        href="/projects/medical/dialysis-center"
+                        href="/projects/medical/alkhair-hospital"
                         className="block text-gray-600 hover:text-teal-600"
                         onClick={() => setIsMenuOpen(false)}
                       >
-                        Al-Khair Medical Center
+                        Al-Khair Hospital
                       </Link>
                     </div>
                   </div>

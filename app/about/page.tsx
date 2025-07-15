@@ -221,9 +221,9 @@ export default function AboutPage() {
               <Image
                 src="/chairmain.jpg"
                 alt="President Mohammad Mazahir"
-                width={400}
-                height={400}
-                className="rounded-xl shadow-lg object-cover w-full h-full"
+                width={350}
+                height={300}
+                className="rounded-xl shadow-lg object-cover"
                 priority
               />
             </div>
@@ -236,9 +236,9 @@ export default function AboutPage() {
               <p className="text-lg text-gray-700 mb-4">
                 Initially, his efforts focused on providing basic necessities to displaced families and supporting widows and children. Over time, he realized that long-term change could only come through <strong>education</strong>. This led him to found Idara Al-Khair, starting with a small one-room school in Mustafa Colony, New Karachi. What began with just two students has now grown to nearly 2,500 students.
               </p>
-              <p className="text-lg text-gray-700 mb-4">
+              {/* <p className="text-lg text-gray-700 mb-4">
                 Throughout his journey, Mazahir faced several challenges: convincing families to send their children to school for free, overcoming parental dependence on child labor, recruiting and retaining teachers with limited funds, and dealing with student dropouts due to economic pressures. Despite these obstacles, his commitment and grassroots approach have transformed the lives of many underprivileged children through access to education.
-              </p>
+              </p> */}
             </div>
           </div>
         </div>
