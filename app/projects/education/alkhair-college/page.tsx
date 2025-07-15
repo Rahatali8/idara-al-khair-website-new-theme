@@ -139,13 +139,12 @@ export default function AlKhairCollegePage() {
               Established in 2010, we have been at the forefront of technical education in Pakistan.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" className="bg-gradient-to-r from-teal-500 to-blue-600 hover:from-teal-600 hover:to-blue-700 text-white">
-                <GraduationCap className="mr-2 h-5 w-5" />
-                Apply for Admission
-              </Button>
-              <Button size="lg" variant="outline" className="border-teal-500 text-teal-600 hover:bg-teal-50 bg-transparent">
-                Download Prospectus
-              </Button>
+              <a href="#join-college">
+                <Button size="lg" className="bg-gradient-to-r from-teal-500 to-blue-600 hover:from-teal-600 hover:to-blue-700 text-white">
+                  <GraduationCap className="mr-2 h-5 w-5" />
+                  Apply for Admission
+                </Button>
+              </a>
             </div>
           </div>
         </div>
@@ -289,7 +288,7 @@ export default function AlKhairCollegePage() {
 
       {/* Facilities */}
       <section className="py-20">
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto px-6 md:px-12">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">Campus Facilities</h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
@@ -312,6 +311,43 @@ export default function AlKhairCollegePage() {
           </div>
         </div>
       </section>
+      {/* Location & Contact Section */}
+      <section id="join-college" className="py-20">
+        <div className="container mx-auto px-4 max-w-2xl">
+          <h2 className="text-4xl md:text-5xl font-extrabold text-blue-800 mb-4">Ready to Join Al-Khair College?</h2>
+          <p className="text-lg text-gray-700 mb-10">Take the first step towards your bright future. Contact us for admissions and campus visits.</p>
+          <div className="flex flex-col gap-8">
+            <div className="flex items-start gap-4">
+              <MapPin className="w-7 h-7 text-blue-600 mt-1" />
+              <div>
+                <div className="font-bold text-lg text-gray-900">Campus Address</div>
+                <div className="text-gray-700">Al Khair College ,B-5/5M, North Karachi.</div>
+              </div>
+            </div>
+            <div className="flex items-start gap-4">
+              <Phone className="w-7 h-7 text-green-500 mt-1" />
+              <div>
+                <div className="font-bold text-lg text-gray-900">Admissions Office</div>
+                <div className="text-gray-700">(021) 36943503</div>
+              </div>
+            </div>
+            <div className="flex items-start gap-4">
+              <svg className="w-7 h-7 text-blue-700 mt-1" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2" /><path d="M3 7l9 6 9-6" /></svg>
+              <div>
+                <div className="font-bold text-lg text-gray-900">Email</div>
+                <div className="text-gray-700">info@idaraalkhair.com</div>
+              </div>
+            </div>
+            <div className="flex items-start gap-4">
+              <svg className="w-7 h-7 text-blue-700 mt-1" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" /><path d="M16 2v4M8 2v4M3 10h18" /></svg>
+              <div>
+                <div className="font-bold text-lg text-gray-900">Admission Season</div>
+                <div className="text-gray-700">Applications Open: March - Aprail Every Year</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* Call to Action */}
       <section className="py-20 bg-gradient-to-r from-teal-500 to-blue-600 text-white">
@@ -321,9 +357,7 @@ export default function AlKhairCollegePage() {
             Join thousands of successful graduates who have transformed their careers through quality technical education.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="bg-white text-teal-600 hover:bg-gray-100">
-              Apply Now
-            </Button>
+            
             <Button
               size="lg"
               variant="outline"
@@ -335,6 +369,8 @@ export default function AlKhairCollegePage() {
           </div>
         </div>
       </section>
+
+      
     </main>
   )
 } 
