@@ -63,7 +63,7 @@ export default function DonatePage() {
   return (
     <main className="pt-20">
       {/* Hero Section */}
-      <section className="py-20 bg-gradient-to-br from-teal-50 to-blue-50">
+      <section className="min-h-[86vh] bg-gradient-to-br from-teal-50 to-blue-50 flex items-center justify-center">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6">

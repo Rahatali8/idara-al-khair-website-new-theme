@@ -71,21 +71,21 @@ const distributionCenters = [
 
 export default function RotiBankPage() {
   return (
-    <main className="pt-20">
+    <main className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-teal-50">
       {/* Hero Section */}
-      <section className="py-20 bg-gradient-to-br from-orange-50 to-red-100">
+      <section className="relative min-h-[86vh] bg-gradient-to-br from-slate-50 via-blue-50 to-teal-50 flex items-center justify-center overflow-hidden">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
-            <Badge className="mb-4 bg-orange-100 text-orange-800 hover:bg-orange-200">Roti Bank</Badge>
+            <Badge className="mb-4 bg-teal-100 text-teal-600 hover:bg-teal-200">Roti Bank</Badge>
             <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6">
-              <span className="text-orange-600">Roti Bank</span> - Food for All
+              <span className="bg-gradient-to-r from-teal-500 to-blue-600 bg-clip-text text-transparent">Roti Bank</span>
             </h1>
             <p className="text-xl md:text-2xl text-gray-600 leading-relaxed mb-8">
               Providing daily nutritious meals and essential food support to over 200 deserving students, 
               teachers, and families. Our commitment to food security spans over 20 years of dedicated service.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" className="bg-orange-600 hover:bg-orange-700">
+              <Button size="lg" className="bg-gradient-to-r from-teal-500 to-blue-600 hover:from-teal-600 hover:to-blue-700 text-white px-8 py-4 rounded-full font-semibold shadow-lg hover:shadow-xl transition-all duration-300 text-lg">
                 <Heart className="mr-2 h-5 w-5" />
                 Support Roti Bank
               </Button>
@@ -103,8 +103,8 @@ export default function RotiBankPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {rotiBankStats.map((stat, index) => (
               <div key={index} className="text-center">
-                <div className="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <stat.icon className="w-8 h-8 text-orange-600" />
+                <div className="w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <stat.icon className="w-8 h-8 text-teal-600" />
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-2">{stat.title}</h3>
                 <p className="text-gray-600">{stat.description}</p>
@@ -117,8 +117,8 @@ export default function RotiBankPage() {
       {/* About Roti Bank */}
       <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center px-6 md:px-12">
+        <div>
               <h2 className="text-4xl font-bold text-gray-900 mb-6">About Roti Bank</h2>
               <p className="text-lg text-gray-600 mb-6">
                 Roti Bank is Idara Al-Khair's flagship food support initiative, established to ensure that no 
@@ -131,28 +131,28 @@ export default function RotiBankPage() {
               </p>
               <div className="grid grid-cols-2 gap-6">
                 <div className="flex items-center">
-                  <Clock className="w-6 h-6 text-orange-600 mr-3" />
+                  <Clock className="w-6 h-6 text-teal-600 mr-3" />
                   <div>
                     <h4 className="font-semibold text-gray-900">Established</h4>
                     <p className="text-gray-600">2003</p>
                   </div>
                 </div>
                 <div className="flex items-center">
-                  <Users className="w-6 h-6 text-orange-600 mr-3" />
+                  <Users className="w-6 h-6 text-teal-600 mr-3" />
                   <div>
                     <h4 className="font-semibold text-gray-900">Daily Recipients</h4>
                     <p className="text-gray-600">200+ Students</p>
                   </div>
                 </div>
                 <div className="flex items-center">
-                  <MapPin className="w-6 h-6 text-orange-600 mr-3" />
+                  <MapPin className="w-6 h-6 text-teal-600 mr-3" />
                   <div>
                     <h4 className="font-semibold text-gray-900">Centers</h4>
                     <p className="text-gray-600">2 Locations</p>
                   </div>
                 </div>
                 <div className="flex items-center">
-                  <Heart className="w-6 h-6 text-orange-600 mr-3" />
+                  <Heart className="w-6 h-6 text-teal-600 mr-3" />
                   <div>
                     <h4 className="font-semibold text-gray-900">Service</h4>
                     <p className="text-gray-600">100% Free</p>
@@ -177,17 +177,17 @@ export default function RotiBankPage() {
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">Our Food Programs</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl md:text-2xl text-gray-600 leading-relaxed max-w-3xl mx-auto">
               Comprehensive food support programs designed to ensure nutrition and food security for our community.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 px-6 md:px-12">
             {dailyPrograms.map((program, index) => (
               <Card key={index} className="hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
                 <CardHeader className="text-center">
                   <div className="text-4xl mb-4">{program.icon}</div>
-                  <CardTitle className="text-xl text-orange-600">{program.title}</CardTitle>
+                  <CardTitle className="text-xl text-teal-600">{program.title}</CardTitle>
                   <CardDescription className="text-base">{program.description}</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
@@ -217,12 +217,12 @@ export default function RotiBankPage() {
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">Distribution Centers</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl md:text-2xl text-gray-600 leading-relaxed max-w-3xl mx-auto">
               Visit our centers to receive food support or learn more about our programs.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 px-6 md:px-12">
             {distributionCenters.map((center, index) => (
               <Card key={index} className="hover:shadow-lg transition-shadow">
                 <CardHeader>
@@ -250,10 +250,10 @@ export default function RotiBankPage() {
                     </div>
                     <div>
                       <span className="font-semibold text-gray-900">Contact:</span>
-                      <p className="text-orange-600 font-bold">{center.contact}</p>
+                      <p className="text-teal-600 font-bold">{center.contact}</p>
                     </div>
                   </div>
-                  <Button className="w-full bg-orange-600 hover:bg-orange-700">
+                  <Button className="w-full bg-gradient-to-r from-teal-500 to-blue-600 hover:from-teal-600 hover:to-blue-700 text-white font-semibold shadow-lg hover:shadow-xl transition-all duration-300">
                     Visit Center
                   </Button>
                 </CardContent>
@@ -264,22 +264,22 @@ export default function RotiBankPage() {
       </section>
 
       {/* Call to Action */}
-      <section className="py-20 bg-gradient-to-r from-orange-600 to-red-700 text-white">
+      <section className="py-20 bg-gradient-to-r from-teal-600 to-blue-700">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-4xl font-bold mb-4">Support Our Roti Bank Mission</h2>
-          <p className="text-xl opacity-90 mb-8 max-w-3xl mx-auto">
+          <h2 className="text-4xl font-bold mb-4 text-white">Support Our Roti Bank Mission</h2>
+          <p className="text-xl md:text-2xl text-white/90 leading-relaxed mb-8">
             Help us provide nutritious meals to more children. Your support can ensure no child goes hungry 
             and every student has the energy to learn and grow.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="bg-white text-orange-600 hover:bg-gray-100">
+            <Button size="lg" className="bg-white text-teal-600 hover:bg-gray-100 px-8 py-3 rounded-full font-semibold shadow-lg hover:shadow-xl transition-all duration-300">
               Donate to Roti Bank
             </Button>
             <Button
               size="lg"
               variant="outline"
               asChild
-              className="border-white text-white hover:bg-white hover:text-orange-600 bg-transparent"
+              className="border-white text-white hover:bg-white hover:text-teal-600 bg-transparent px-8 py-3 rounded-full font-semibold transition-all duration-300"
             >
               <Link href="/contact">Become a Volunteer</Link>
             </Button>

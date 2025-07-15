@@ -1,12 +1,10 @@
-import Image from "next/image";
-import DonorsCarousel from "@/components/DonorsCarousel";
-import TestimonialsSection from "@/components/TestimonialsSection";
+import { Stethoscope, Baby, FlaskConical, HeartPulse, Pill, Eye, ActivitySquare, MapPin, Phone, Mail, HandCoins } from "lucide-react";
 
 export default function AlKhairHospital() {
   return (
     <main className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-teal-50 pb-16">
       {/* Hero/Banner Section with background image */}
-      <section className="relative w-full py-20 px-4 flex flex-col items-center justify-center text-center overflow-hidden">
+      <section className="relative min-h-[86vh] w-full px-4 flex flex-col items-center justify-center text-center overflow-hidden">
         {/* Background image and overlay only for header */}
         <div className="absolute inset-0 bg-[url('/hospital.png')] bg-cover bg-center z-0" />
         <div className="absolute inset-0 bg-gradient-to-br from-white/90 via-blue-50/80 to-teal-50/80 backdrop-blur-sm z-10" />
@@ -16,7 +14,7 @@ export default function AlKhairHospital() {
           </h1>
           <h2 className="text-2xl md:text-3xl font-semibold text-blue-700 mb-4 tracking-wide">A Welfare Hospital</h2>
           <p className="text-xl md:text-2xl text-gray-700 max-w-2xl mx-auto mb-8">
-            Al-Khair Hospital is dedicated to providing quality, affordable healthcare to all, with a special focus on serving the underprivileged and supporting community well-being.
+            Providing 24/7 compassionate, affordable, and quality healthcare for all—especially mothers, children, and the underprivileged. Modern facilities, experienced doctors, and a mission of service to humanity.
           </p>
           {/* Trust Indicators */}
           <div className="flex flex-wrap justify-center items-center gap-8 text-gray-600 mb-2">
@@ -26,7 +24,7 @@ export default function AlKhairHospital() {
             </div>
             <div className="flex items-center gap-2">
               <div className="w-3 h-3 bg-blue-500 rounded-full animate-pulse"></div>
-              <span className="font-medium">Affordable Care</span>
+              <span className="font-medium">Mother & Child Care</span>
             </div>
             <div className="flex items-center gap-2">
               <div className="w-3 h-3 bg-teal-500 rounded-full animate-pulse"></div>
@@ -36,26 +34,54 @@ export default function AlKhairHospital() {
         </div>
       </section>
 
-      {/* About/Welfare Info Section */}
-      <section className="max-w-3xl mx-auto mt-12 px-6">
-        <div className="bg-white/80 rounded-2xl shadow-lg p-8 md:p-12 border border-blue-100">
-          <h3 className="text-2xl font-bold text-blue-900 mb-4">About Al-Khair Welfare Hospital</h3>
-          <p className="text-base md:text-lg text-blue-800 mb-4">
-            Al-Khair Welfare Hospital is a non-profit healthcare institution committed to serving people from all walks of life, especially those in need. Our mission is to ensure that everyone has access to modern medical facilities, experienced doctors, and compassionate care, regardless of their financial background.
-          </p>
-          <ul className="list-disc pl-6 text-blue-800 space-y-2 mb-4">
-            <li>24/7 Emergency and trauma care</li>
-            <li>Specialist consultations and diagnostics</li>
-            <li>Inpatient and outpatient services</li>
-            <li>Pharmacy and laboratory facilities</li>
-            <li>Community health awareness programs</li>
-          </ul>
-          <p className="text-base md:text-lg text-blue-800">
-            With a focus on welfare and social responsibility, Al-Khair Hospital stands as a beacon of hope and health for the community, striving to make a positive impact every day.
-          </p>
+      {/* Services Section */}
+      <section className="py-16">
+        <div className="container mx-auto px-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-blue-800 mb-10 text-center">Our Services</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 max-w-5xl mx-auto">
+            <div className="bg-white rounded-2xl shadow-lg p-6 flex flex-col items-center text-center border-t-4 border-teal-400">
+              <Stethoscope className="w-10 h-10 text-teal-600 mb-3" />
+              <h3 className="font-bold text-lg text-blue-900 mb-1">Gynae & Obs</h3>
+              <p className="text-gray-600 text-sm">24/7 maternity, labor, recovery, and gynecology care</p>
+            </div>
+            <div className="bg-white rounded-2xl shadow-lg p-6 flex flex-col items-center text-center border-t-4 border-blue-400">
+              <Baby className="w-10 h-10 text-blue-600 mb-3" />
+              <h3 className="font-bold text-lg text-blue-900 mb-1">Paeds</h3>
+              <p className="text-gray-600 text-sm">Pediatric OPD, NICU, and child health services</p>
+            </div>
+            <div className="bg-white rounded-2xl shadow-lg p-6 flex flex-col items-center text-center border-t-4 border-green-400">
+              <FlaskConical className="w-10 h-10 text-green-600 mb-3" />
+              <h3 className="font-bold text-lg text-blue-900 mb-1">Diagnostics</h3>
+              <p className="text-gray-600 text-sm">24/7 lab, X-ray, ultrasound, and blood bank</p>
+            </div>
+            <div className="bg-white rounded-2xl shadow-lg p-6 flex flex-col items-center text-center border-t-4 border-pink-400">
+              <HeartPulse className="w-10 h-10 text-pink-600 mb-3" />
+              <h3 className="font-bold text-lg text-blue-900 mb-1">O.R & Emergency</h3>
+              <p className="text-gray-600 text-sm">Observation, emergency, and trauma care</p>
+            </div>
+            <div className="bg-white rounded-2xl shadow-lg p-6 flex flex-col items-center text-center border-t-4 border-yellow-400">
+              <Pill className="w-10 h-10 text-yellow-500 mb-3" />
+              <h3 className="font-bold text-lg text-blue-900 mb-1">Pharmacy</h3>
+              <p className="text-gray-600 text-sm">24/7 pharmacy with quality medicines</p>
+            </div>
+            <div className="bg-white rounded-2xl shadow-lg p-6 flex flex-col items-center text-center border-t-4 border-orange-400">
+              <ActivitySquare className="w-10 h-10 text-orange-500 mb-3" />
+              <h3 className="font-bold text-lg text-blue-900 mb-1">Dental</h3>
+              <p className="text-gray-600 text-sm">Dental OPD, root canal, scaling, and more</p>
+            </div>
+            <div className="bg-white rounded-2xl shadow-lg p-6 flex flex-col items-center text-center border-t-4 border-cyan-400">
+              <Eye className="w-10 h-10 text-cyan-500 mb-3" />
+              <h3 className="font-bold text-lg text-blue-900 mb-1">Eye</h3>
+              <p className="text-gray-600 text-sm">Eye testing and vision care</p>
+            </div>
+            <div className="bg-white rounded-2xl shadow-lg p-6 flex flex-col items-center text-center border-t-4 border-lime-400">
+              <ActivitySquare className="w-10 h-10 text-lime-500 mb-3" />
+              <h3 className="font-bold text-lg text-blue-900 mb-1">Rehabilitation</h3>
+              <p className="text-gray-600 text-sm">Physiotherapy and rehab services</p>
+            </div>
+          </div>
         </div>
       </section>
-      <TestimonialsSection />
     </main>
   );
 } 

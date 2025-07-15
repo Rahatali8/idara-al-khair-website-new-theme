@@ -164,7 +164,7 @@ export default function VolunteersPage() {
   return (
     <main className="pt-5 px-10">
       {/* Hero Section */}
-      <section className="py-20 bg-gradient-to-br from-slate-50 via-blue-50 to-teal-50">
+      <section className="min-h-[86vh] bg-gradient-to-br from-teal-50 to-blue-50 flex items-center justify-center">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <Badge className="mb-4 bg-teal-100 text-teal-800 hover:bg-teal-200">Volunteer Program</Badge>
