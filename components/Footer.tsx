@@ -10,24 +10,26 @@ export default function Footer() {
       </div>
 
       {/* Main Footer Content */}
-      <div className="relative container mx-auto px-4 py-12">
+      <div className="relative container mx-auto px-10 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Organization Info */}
           <div className="lg:col-span-2">
             <div className="flex items-center space-x-3 mb-4">
-              <div className="relative">
-                <div className="w-12 h-12 bg-gradient-to-br from-teal-400 via-blue-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg shadow-teal-500/25">
-                  <span className="text-white font-bold text-xl">I</span>
+              <div className="relative flex items-center space-x-3">
+                <div className="w-14 h-14 relative flex items-center justify-center">
+                  <img
+                    src="/Al Khair logo.png"
+                    alt="Idara Al-Khair Logo"
+                    className="object-contain w-full h-full rounded-xl shadow-lg"
+                    style={{ background: 'white', padding: '4px' }}
+                  />
                 </div>
-                <div className="absolute -top-1 -right-1 w-5 h-5 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center">
-                  <Heart className="w-2.5 h-2.5 text-white" />
+                <div>
+                  <h3 className="font-bold text-xl bg-gradient-to-r from-teal-400 to-blue-500 bg-clip-text text-transparent">
+                    IDARA AL-KHAIR
+                  </h3>
+                  <p className="text-gray-300 font-medium text-sm">Welfare Society</p>
                 </div>
-              </div>
-              <div>
-                <h3 className="font-bold text-xl bg-gradient-to-r from-teal-400 to-blue-500 bg-clip-text text-transparent">
-                  IDARA AL-KHAIR
-                </h3>
-                <p className="text-gray-300 font-medium text-sm">Welfare Society</p>
               </div>
             </div>
             <p className="text-gray-300 mb-4 leading-relaxed text-sm">
@@ -48,9 +50,9 @@ export default function Footer() {
                   href={social.href}
                   className="group relative w-10 h-10 bg-gradient-to-br from-gray-800 to-gray-700 rounded-lg flex items-center justify-center hover:from-teal-500 hover:to-blue-600 transition-all duration-300 transform hover:scale-110 hover:shadow-lg hover:shadow-teal-500/25"
                   aria-label={social.label}
-                >
+              >
                   <social.icon className="w-4 h-4 text-gray-300 group-hover:text-white transition-colors" />
-                </a>
+              </a>
               ))}
             </div>
 
@@ -89,8 +91,8 @@ export default function Footer() {
                   >
                     <span className="w-1.5 h-1.5 bg-teal-400 rounded-full mr-2 group-hover:scale-150 transition-transform"></span>
                     {link.label}
-                  </Link>
-                </li>
+                </Link>
+              </li>
               ))}
             </ul>
           </div>

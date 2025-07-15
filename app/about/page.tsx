@@ -13,13 +13,13 @@ const milestones = [
     icon: Building2
   },
   {
-    year: "1995",
+    year: "1988",
     title: "First School",
     description: "Opened our first educational institution to provide quality education.",
     icon: Award
   },
   {
-    year: "2005",
+    year: "2010",
     title: "Healthcare Services",
     description: "Launched comprehensive healthcare programs for communities in need.",
     icon: Heart
@@ -77,8 +77,8 @@ export default function AboutPage() {
           <div className="max-w-4xl mx-auto text-center">
             <Badge className="mb-6 bg-gradient-to-r from-teal-500 to-blue-600 text-white border-0 hover:from-teal-600 hover:to-blue-700">
               <Heart className="w-4 h-4 mr-2" />
-              About Us
-            </Badge>
+              <div id="our-journey1">About Us</div>
+            </Badge >
             <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
               Serving <span className="bg-gradient-to-r from-teal-500 to-blue-600 bg-clip-text text-transparent">Humanity</span> Since 1987
             </h1>
@@ -117,22 +117,21 @@ export default function AboutPage() {
       </section>
 
       {/* Mission & Vision */}
-      <section className="py-20 bg-white">
+      <section className="px-10 py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            <Card className="bg-white shadow-xl border-0">
+            <Card className="bg-white shadow-xl border-0 transition-transform duration-300 hover:scale-105 hover:shadow-2xl">
               <CardHeader>
                 <CardTitle className="text-3xl text-gray-900">Our Mission</CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-lg text-gray-600 leading-relaxed">
-                  To provide comprehensive social welfare services including education, healthcare, and humanitarian 
-                  assistance to underserved communities, empowering them to lead dignified and productive lives.
+                  To provide education, healthcare, and humanitarian support to underserved communities, empowering them to lead dignified and productive lives.
                 </p>
               </CardContent>
             </Card>
             
-            <Card className="bg-white shadow-xl border-0">
+            <Card className="bg-white shadow-xl border-0 transition-transform duration-300 hover:scale-105 hover:shadow-2xl">
               <CardHeader>
                 <CardTitle className="text-3xl text-gray-900">Our Vision</CardTitle>
               </CardHeader>
@@ -157,10 +156,10 @@ export default function AboutPage() {
             </p>
           </div>
 
-          <div className="max-w-4xl mx-auto">
+          <div className="max-w-4xl mx-auto ">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {milestones.map((milestone, index) => (
-                <Card key={index} className="bg-white shadow-xl hover:shadow-2xl transition-all duration-300 border-0">
+                <Card key={index} className="bg-white transition-transform duration-300 hover:scale-105 hover:shadow-2xl">
                   <CardHeader className="text-center">
                     <div className="w-16 h-16 bg-gradient-to-r from-teal-500 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
                       <milestone.icon className="w-8 h-8 text-white" strokeWidth={2.5} />
@@ -173,6 +172,73 @@ export default function AboutPage() {
                   </CardContent>
                 </Card>
               ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Our Journey Section */}
+      <section id="our-journey" className="py-20 bg-white mx-10">
+        <div className="container mx-auto px-4 ">
+          <h2 className="text-4xl font-bold text-teal-700 mb-8 text-center">History & Achievements</h2>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <p className="text-lg text-gray-700 mb-4">
+                <strong>Idara Al-Khair Welfare Society</strong> was formed and registered in 1987. After more than 38 years of constant devotion, dedication, and the kind support of several philanthropists and organizations, we have established schools, a college, basic health centers, and vocational training centers. Our journey began with a small one-room school in Mustafa Colony, New Karachi, and has grown to impact thousands of lives through education and welfare.
+              </p>
+              <p className="text-lg text-gray-700 mb-4">
+                The importance of education cannot be overstated. Our mission is to transform lives by providing access to quality education, healthcare, and social support to the underprivileged. Today, we serve nearly 2,500 students and continue to expand our reach and impact.
+              </p>
+              <ul className="list-disc pl-6 text-gray-700 mb-4">
+                <li>Established multiple campuses and a college</li>
+                <li>Launched basic health centers and vocational training</li>
+                <li>Started food support and Roti Bank programs</li>
+                <li>Planted over 1,575 trees for environmental care</li>
+                <li>Served over 850,000 people since inception</li>
+              </ul>
+            </div>
+            <div className="flex justify-center">
+              <Image
+                src="/achivements.jpg"
+                alt="Idara Al-Khair Main Campus"
+                width={400}
+                height={400}
+                className="rounded-xl shadow-lg object-cover w-full h-full "
+                priority
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Chairman & Board Section */}
+      <section id="president-message" className="py-20 bg-gradient-to-r from-teal-50 to-blue-50 mx-10">
+        <div className="container mx-auto px-4 ">
+          <h2 className="text-4xl font-bold text-teal-700 mb-8 text-center">Message from the President</h2>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center bg-white rounded-xl shadow-lg p-8">
+            {/* Image Side */}
+            <div className="flex justify-center">
+              <Image
+                src="/chairmain.jpg"
+                alt="President Mohammad Mazahir"
+                width={400}
+                height={400}
+                className="rounded-xl shadow-lg object-cover w-full h-full"
+                priority
+              />
+            </div>
+            {/* Info Side */}
+            <div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-2">Mohammad Mazahir</h3>
+              <p className="text-lg text-gray-700 mb-4">
+                Born in 1954 in District Dadu, Sindh, Mohammad Mazahir completed his Master’s in Chemistry from the University of Karachi. Coming from a middle-class background and being socially conscious from a young age, he dedicated himself to helping the poor, often using his own resources. After moving to Karachi, he became involved in social welfare, especially in underprivileged areas like Orangi Town, Landhi, and Korangi.
+              </p>
+              <p className="text-lg text-gray-700 mb-4">
+                Initially, his efforts focused on providing basic necessities to displaced families and supporting widows and children. Over time, he realized that long-term change could only come through <strong>education</strong>. This led him to found Idara Al-Khair, starting with a small one-room school in Mustafa Colony, New Karachi. What began with just two students has now grown to nearly 2,500 students.
+              </p>
+              <p className="text-lg text-gray-700 mb-4">
+                Throughout his journey, Mazahir faced several challenges: convincing families to send their children to school for free, overcoming parental dependence on child labor, recruiting and retaining teachers with limited funds, and dealing with student dropouts due to economic pressures. Despite these obstacles, his commitment and grassroots approach have transformed the lives of many underprivileged children through access to education.
+              </p>
             </div>
           </div>
         </div>

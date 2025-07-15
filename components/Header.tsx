@@ -1,24 +1,77 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect, useRef } from "react"
 import Link from "next/link"
 import { Menu, X, ChevronDown } from "lucide-react"
+import Image from "next/image"
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [isVisible, setIsVisible] = useState(true)
+  const lastScrollY = useRef(0)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY
+      if (currentScrollY < 50) {
+        setIsVisible(true)
+      } else if (currentScrollY > lastScrollY.current) {
+        // Scrolling down
+        setIsVisible(false)
+      } else {
+        // Scrolling up
+        setIsVisible(true)
+      }
+      lastScrollY.current = currentScrollY
+    }
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
+
+  useEffect(() => {
+    function handleHashLink(e: MouseEvent) {
+      const target = e.target as HTMLElement;
+      const anchor = target.closest('a[href^="/about#"]') as HTMLAnchorElement | null;
+      if (anchor) {
+        const hash = anchor.getAttribute('href')?.split('#')[1];
+        if (!hash) return;
+        const el = document.getElementById(hash);
+        if (el) {
+          e.preventDefault();
+          const y = el.getBoundingClientRect().top + window.pageYOffset - 80;
+          const startY = window.scrollY;
+          const diff = y - startY;
+          let start: number | undefined;
+          function step(timestamp: number) {
+            if (start === undefined) start = timestamp;
+            const progress = Math.min((timestamp - start) / 1500, 1);
+            window.scrollTo(0, startY + diff * progress);
+            if (progress < 1) {
+              window.requestAnimationFrame(step);
+            }
+          }
+          window.requestAnimationFrame(step);
+        }
+      }
+    }
+    document.addEventListener('click', handleHashLink);
+    return () => document.removeEventListener('click', handleHashLink);
+  }, []);
 
   return (
-    <header className="bg-white shadow-lg sticky top-0 z-50">
+    <header className={`bg-white shadow-lg sticky top-0 z-50 transition-transform duration-300 ${isVisible ? 'translate-y-0' : '-translate-y-full'}`}>
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-3">
-            <div className="w-12 h-12 bg-gradient-to-r from-teal-500 to-blue-600 rounded-full flex items-center justify-center">
-              <span className="text-white font-bold text-xl">I</span>
-            </div>
-            <div>
-              <h1 className="text-2xl font-bold text-gray-900">Idara Al-Khair</h1>
-              <p className="text-sm text-gray-600">Welfare Society</p>
+            <div className="w-14 h-14 relative flex items-center justify-center">
+              <Image
+                src="/Al Khair logo.png"
+                alt="Idara Al-Khair Logo"
+                fill
+                className="object-contain"
+                priority
+              />
             </div>
           </Link>
 
@@ -34,14 +87,14 @@ export default function Header() {
                 <ChevronDown className="ml-1 w-4 h-4" />
               </button>
               <div className="absolute top-full left-0 mt-2 w-64 bg-white rounded-lg shadow-lg border border-gray-200 py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
-                <Link href="/about/history" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-teal-600">
-                  History And Achievements
+                <Link href="/about#our-journey1" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-teal-600">
+                  Our Journey
                 </Link>
-                <Link href="/about/board-of-directors" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-teal-600">
-                  Chairman and Board
+                <Link href="/about#our-journey" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-teal-600">
+                  History and Achievements
                 </Link>
-                <Link href="/about/mission-and-values" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-teal-600">
-                  Mission And Values
+                <Link href="/about#president-message" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-teal-600">
+                  Message from the President
                 </Link>
               </div>
             </div>
@@ -61,12 +114,6 @@ export default function Header() {
                     <ChevronDown className="ml-1 w-4 h-4" />
                   </button>
                   <div className="absolute left-full top-0 ml-1 w-48 bg-white rounded-lg shadow-lg border border-gray-200 py-2 opacity-0 invisible group-hover/education:opacity-100 group-hover/education:visible transition-all duration-300">
-                    <Link
-                      href="/projects/education"
-                      className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-teal-600"
-                    >
-                      Overview
-                    </Link>
                     <Link
                       href="/projects/education/campuses"
                       className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-teal-600"
@@ -88,12 +135,6 @@ export default function Header() {
                     <ChevronDown className="ml-1 w-4 h-4" />
                   </button>
                   <div className="absolute left-full top-0 ml-1 w-48 bg-white rounded-lg shadow-lg border border-gray-200 py-2 opacity-0 invisible group-hover/food:opacity-100 group-hover/food:visible transition-all duration-300">
-                    <Link
-                      href="/projects/food-support"
-                      className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-teal-600"
-                    >
-                      Overview
-                    </Link>
                     <Link
                       href="/projects/food-support/ramzan-ration"
                       className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-teal-600"
@@ -125,13 +166,13 @@ export default function Header() {
                       href="/projects/medical"
                       className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-teal-600"
                     >
-                      Al-Khair Hospital
+                      Al-Khair Medical Center
                     </Link>
                     <Link
                       href="/projects/medical/dialysis-center"
                       className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-teal-600"
                     >
-                      Dialysis Center
+                      Al Khair Hospital
                     </Link>
                   </div>
                 </div>
@@ -224,7 +265,7 @@ export default function Header() {
                   </Link>
                   <Link href="/about/mission-and-values" className="block text-gray-600 hover:text-teal-600" onClick={() => setIsMenuOpen(false)}>
                     Mission And Values
-                  </Link>
+              </Link>
                 </div>
               </div>
 
@@ -236,13 +277,6 @@ export default function Header() {
                   <div className="space-y-2">
                     <span className="text-gray-600 font-medium">Education</span>
                     <div className="pl-4 space-y-2">
-                      <Link
-                        href="/projects/education"
-                        className="block text-gray-600 hover:text-teal-600"
-                        onClick={() => setIsMenuOpen(false)}
-                      >
-                        Overview
-                      </Link>
                       <Link
                         href="/projects/education/campuses"
                         className="block text-gray-600 hover:text-teal-600"
@@ -263,13 +297,6 @@ export default function Header() {
                   <div className="space-y-2">
                     <span className="text-gray-600 font-medium">Food Support</span>
                     <div className="pl-4 space-y-2">
-                      <Link
-                        href="/projects/food-support"
-                        className="block text-gray-600 hover:text-teal-600"
-                        onClick={() => setIsMenuOpen(false)}
-                      >
-                        Overview
-                      </Link>
                       <Link
                         href="/projects/food-support/ramzan-ration"
                         className="block text-gray-600 hover:text-teal-600"
@@ -309,7 +336,7 @@ export default function Header() {
                         className="block text-gray-600 hover:text-teal-600"
                         onClick={() => setIsMenuOpen(false)}
                       >
-                        Dialysis Center
+                        Al-Khair Medical Center
                       </Link>
                     </div>
                   </div>

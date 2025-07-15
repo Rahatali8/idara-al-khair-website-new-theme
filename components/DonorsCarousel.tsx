@@ -130,7 +130,7 @@ export default function DonorsCarousel() {
             >
               {donors.map((donor, index) => (
                 <div key={index} className="flex-shrink-0 px-4" style={{ width: `${100 / itemsPerView}%` }}>
-                  <div className="bg-white rounded-2xl p-8 px-10 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 h-full">
+                  <div className="bg-white rounded-2xl p-8 px-10 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 h-full group">
                     <div className="text-center">
                       <div className="mb-6 h-20 flex items-center justify-center">
                         <Image
@@ -138,7 +138,7 @@ export default function DonorsCarousel() {
                           alt={donor.name}
                           width={160}
                           height={80}
-                          className="max-h-20 w-auto object-contain filter grayscale hover:grayscale-0 transition-all duration-300"
+                          className="max-h-20 w-auto object-contain filter grayscale group-hover:grayscale-0 transition-all duration-300"
                         />
                       </div>
 
