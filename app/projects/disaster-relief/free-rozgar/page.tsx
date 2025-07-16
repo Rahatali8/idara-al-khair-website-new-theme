@@ -34,9 +34,8 @@ const businessCategories = [
     description: "Online businesses and digital services",
     icon: "💻",
     duration: "3 Months",
-    seats: "30",
-    features: ["E-commerce Setup", "Social Media Business", "Digital Marketing", "Online Services", "App Development"],
-    image: "/Digital-marketing.jpg",
+    features: ["E-commerce Setup", "Digital Marketing", "Online Services", "App Development"],
+    image: "/Digital-Business.jpg",
     startupCost: "PKR 10,000 - 50,000",
     potentialIncome: "PKR 30,000 - 100,000/month",
   },
@@ -45,9 +44,8 @@ const businessCategories = [
     description: "Restaurant, catering, and food delivery services",
     icon: "🍽️",
     duration: "2 Months",
-    seats: "25",
-    features: ["Restaurant Management", "Catering Services", "Food Delivery", "Menu Planning", "Kitchen Operations"],
-    image: "/food-security.jpg",
+    features: ["Restaurant Management", "Catering Services", "Food Delivery", "Kitchen Operations"],
+    image: "/Food-Catering.jpg",
     startupCost: "PKR 50,000 - 200,000",
     potentialIncome: "PKR 40,000 - 150,000/month",
   },
@@ -56,9 +54,8 @@ const businessCategories = [
     description: "Beauty salon, spa, and wellness services",
     icon: "💄",
     duration: "3 Months",
-    seats: "20",
     features: ["Beauty Salon", "Spa Services", "Makeup Artistry", "Hair Styling", "Wellness Products"],
-    image: "/placeholder.jpg",
+    image: "/Beauty-Wellness.jpg",
     startupCost: "PKR 30,000 - 100,000",
     potentialIncome: "PKR 25,000 - 80,000/month",
   },
@@ -67,9 +64,8 @@ const businessCategories = [
     description: "Car wash, repair, and maintenance services",
     icon: "🚗",
     duration: "4 Months",
-    seats: "20",
     features: ["Car Wash Service", "Auto Repair", "Detailing Services", "Parts Sales", "Mobile Services"],
-    image: "/hardware.jpg",
+    image: "/Automotive-service.jpg",
     startupCost: "PKR 100,000 - 300,000",
     potentialIncome: "PKR 50,000 - 120,000/month",
   },
@@ -80,7 +76,7 @@ const businessCategories = [
     duration: "2 Months",
     seats: "35",
     features: ["House Cleaning", "Plumbing Services", "Electrical Work", "Painting", "Gardening"],
-    image: "/Office.jpg",
+    image: "/Home-Service.jpg",
     startupCost: "PKR 20,000 - 80,000",
     potentialIncome: "PKR 20,000 - 60,000/month",
   },
@@ -89,9 +85,8 @@ const businessCategories = [
     description: "Tutoring, coaching, and skill development",
     icon: "📚",
     duration: "3 Months",
-    seats: "25",
     features: ["Private Tutoring", "Skill Training", "Online Courses", "Language Classes", "Exam Preparation"],
-    image: "/quality-education.jpg",
+    image: "/Education-training.png",
     startupCost: "PKR 15,000 - 50,000",
     potentialIncome: "PKR 25,000 - 80,000/month",
   },
@@ -295,10 +290,7 @@ export default function FreeRozgarPage() {
                 </CardHeader>
 
                 <CardContent className="space-y-4 px-8">
-                  <div className="flex justify-between text-sm">
-                    <span className="font-semibold text-gray-900">Available Seats:</span>
-                    <span className="text-blue-600 font-bold">{category.seats}</span>
-                  </div>
+    
 
                   <div className="bg-gray-50 p-3 rounded-lg">
                     <div className="flex justify-between text-sm mb-2">
@@ -321,10 +313,11 @@ export default function FreeRozgarPage() {
                       ))}
                     </div>
                   </div>
-
-                  <Button className="w-full bg-gradient-to-r from-teal-500 to-blue-600 hover:from-teal-600 hover:to-blue-700">
-                    Apply Now
+                  <Link href={"/contact"} >
+                  <Button className="w-full bg-gradient-to-r mt-5 from-teal-500 to-blue-600 hover:from-teal-600 hover:to-blue-700">
+                  Contact Us
                   </Button>
+                  </Link>
                 </CardContent>
               </Card>
             ))}
