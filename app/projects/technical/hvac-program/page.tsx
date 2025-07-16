@@ -35,7 +35,7 @@ const hvacCourses = [
     icon: "🔧",
     duration: "3 Months",
    
-    features: ["System Installation", "Ductwork", "Electrical Wiring", "Testing & Commissioning", "Safety Protocols"],
+    features: ["System Installation", "Ductwork", "Electrical Wiring", "Testing & Commissioning"],
     image: "/HVAC-installation.jpg",
   },
   {
@@ -70,7 +70,7 @@ const hvacCourses = [
     description: "Energy-efficient HVAC systems and green technology",
     icon: "⚡",
     duration: "2 Months",
-    features: ["Energy Audits", "Green Technology", "Smart Systems", "Sustainability", "Cost Optimization"],
+    features: ["Energy Audits", "Green Technology", "Smart Systems", "Sustainability"],
     image: "/energy-management system.jpg",
   },
   {
@@ -121,28 +121,29 @@ const industryPartners = [
 ]
 export default function HVACProgramPage() {
   return (
-    <main className="pt-20">
+    <main className="/">
       {/* Hero Section */}
       <section className="py-20 bg-gradient-to-br from-slate-50 via-blue-50 to-teal-50">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
-            <Badge className="mb-4 bg-cyan-100 text-cyan-800 hover:bg-cyan-200">HVAC Program</Badge>
+            <Badge className="mb-5 bg-cyan-100 text-cyan-800 hover:bg-cyan-200">HVAC Program</Badge>
             <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6">
               <span className="bg-gradient-to-r from-teal-500 to-blue-600 bg-clip-text text-transparent">HVAC</span> Training Program
             </h1>
             <p className="text-xl md:text-2xl text-gray-600 leading-relaxed mb-8">
-              Comprehensive HVAC training program preparing students for high-demand careers in heating, 
-              ventilation, air conditioning, and refrigeration systems.
+            Comprehensive HVAC training program that thoroughly prepares students for high-demand, well-paying careers in heating, ventilation, air conditioning, and refrigeration systems. Gain hands-on experience with modern tools and technology, learn from industry experts, and develop the practical skills employers are looking for. Start your journey toward a stable, rewarding career with our in-depth curriculum and dedicated job placement support.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href={"/contact"}>
-              <Button size="lg" className="bg-gradient-to-r from-teal-500 to-blue-600 hover:from-teal-600 hover:to-blue-700">
-                <GraduationCap className="mr-2 h-5 w-5" />
-                Apply for Training
+              <Button asChild size="lg" className="bg-gradient-to-r from-teal-500 to-blue-600 hover:from-teal-600 hover:to-blue-700">
+                <Link href="/contact">
+                  <GraduationCap className="mr-2 h-5 w-5" />
+                  Apply for Training
+                </Link>
               </Button>
-              </Link>
-              <Button size="lg" variant="outline">
-                View Courses
+              <Button asChild size="lg" className="bg-gradient-to-r from-teal-500 to-blue-600 hover:from-teal-600 hover:to-blue-700 text-white hover:bg-gray-50 rounded-lg text-center">
+                <Link href="/projects/technical/hvac-program#hvac-courses">
+                  View Courses
+                </Link>
               </Button>
             </div>
           </div>
@@ -169,8 +170,8 @@ export default function HVACProgramPage() {
       {/* About HVAC Program */}
       <section className="py-20 bg-gray-50 ">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
+        <div>
               <h2 className="text-4xl font-bold text-gray-900 mb-6">About HVAC Program</h2>
               <p className="text-lg text-gray-600 mb-6">
                 Our HVAC Training Program is designed to meet the growing demand for skilled professionals 
@@ -229,13 +230,13 @@ export default function HVACProgramPage() {
       <section className="py-20 bg-white ">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">HVAC Courses</h2>
+            <h2 id="hvac-courses" className="text-4xl font-bold text-gray-900 mb-4">HVAC Courses</h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
               Comprehensive training programs covering all aspects of HVAC systems and technology.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {hvacCourses.map((course, index) => (
               <Card key={index} className="hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
                 <div className="relative h-48 overflow-hidden rounded-t-lg">
@@ -267,7 +268,7 @@ export default function HVACProgramPage() {
                     </div>
                   </div>
                   <Link href={"/contact"}>
-                  <Button className="m-5 w-full bg-gradient-to-r from-teal-500 to-blue-600 hover:from-teal-600 hover:to-blue-700">
+                  <Button className="mt-5 w-full bg-gradient-to-r from-teal-500 to-blue-600 hover:from-teal-600 hover:to-blue-700">
                     Contact Us
                   </Button>
                   </Link>
@@ -288,7 +289,7 @@ export default function HVACProgramPage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
             {careerOpportunities.map((career, index) => (
               <Card key={index} className="hover:shadow-lg transition-shadow text-center">
                 <CardHeader>
@@ -317,7 +318,7 @@ export default function HVACProgramPage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 max-w-6xl mx-auto">
             {industryPartners.map((partner, index) => (
               <Card key={index} className="hover:shadow-lg transition-shadow text-center">
                 <CardContent className="p-6">

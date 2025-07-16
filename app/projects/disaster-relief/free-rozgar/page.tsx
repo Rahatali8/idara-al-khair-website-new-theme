@@ -35,8 +35,9 @@ const businessCategories = [
     description: "Online businesses and digital services",
     icon: "💻",
     duration: "3 Months",
-    features: ["E-commerce Setup", "Digital Marketing", "Online Services", "App Development"],
-    image: "/Digital-Business.jpg",
+    seats: "30",
+    features: ["E-commerce Setup", "Social Media Business", "Digital Marketing", "Online Services", "App Development"],
+    image: "/Digital-marketing.jpg",
     startupCost: "PKR 10,000 - 50,000",
     potentialIncome: "PKR 30,000 - 100,000/month",
   },
@@ -45,8 +46,9 @@ const businessCategories = [
     description: "Restaurant, catering, and food delivery services",
     icon: "🍽️",
     duration: "2 Months",
-    features: ["Restaurant Management", "Catering Services", "Food Delivery", "Kitchen Operations"],
-    image: "/Food-Catering.jpg",
+    seats: "25",
+    features: ["Restaurant Management", "Catering Services", "Food Delivery", "Menu Planning", "Kitchen Operations"],
+    image: "/food-security.jpg",
     startupCost: "PKR 50,000 - 200,000",
     potentialIncome: "PKR 40,000 - 150,000/month",
   },
@@ -55,8 +57,9 @@ const businessCategories = [
     description: "Beauty salon, spa, and wellness services",
     icon: "💄",
     duration: "3 Months",
+    seats: "20",
     features: ["Beauty Salon", "Spa Services", "Makeup Artistry", "Hair Styling", "Wellness Products"],
-    image: "/Beauty-Wellness.jpg",
+    image: "/placeholder.jpg",
     startupCost: "PKR 30,000 - 100,000",
     potentialIncome: "PKR 25,000 - 80,000/month",
   },
@@ -65,8 +68,9 @@ const businessCategories = [
     description: "Car wash, repair, and maintenance services",
     icon: "🚗",
     duration: "4 Months",
+    seats: "20",
     features: ["Car Wash Service", "Auto Repair", "Detailing Services", "Parts Sales", "Mobile Services"],
-    image: "/Automotive-service.jpg",
+    image: "/hardware.jpg",
     startupCost: "PKR 100,000 - 300,000",
     potentialIncome: "PKR 50,000 - 120,000/month",
   },
@@ -77,7 +81,7 @@ const businessCategories = [
     duration: "2 Months",
     seats: "35",
     features: ["House Cleaning", "Plumbing Services", "Electrical Work", "Painting", "Gardening"],
-    image: "/Home-Service.jpg",
+    image: "/Office.jpg",
     startupCost: "PKR 20,000 - 80,000",
     potentialIncome: "PKR 20,000 - 60,000/month",
   },
@@ -86,8 +90,9 @@ const businessCategories = [
     description: "Tutoring, coaching, and skill development",
     icon: "📚",
     duration: "3 Months",
+    seats: "25",
     features: ["Private Tutoring", "Skill Training", "Online Courses", "Language Classes", "Exam Preparation"],
-    image: "/Education-training.png",
+    image: "/quality-education.jpg",
     startupCost: "PKR 15,000 - 50,000",
     potentialIncome: "PKR 25,000 - 80,000/month",
   },
@@ -279,7 +284,10 @@ export default function FreeRozgarPage() {
                 </CardHeader>
 
                 <CardContent className="space-y-4 px-8">
-    
+                  <div className="flex justify-between text-sm">
+                    <span className="font-semibold text-gray-900">Available Seats:</span>
+                    <span className="text-blue-600 font-bold">{category.seats}</span>
+                  </div>
 
                   <div className="bg-gray-50 p-3 rounded-lg">
                     <div className="flex justify-between text-sm mb-2">
@@ -302,11 +310,10 @@ export default function FreeRozgarPage() {
                       ))}
                     </div>
                   </div>
-                  <Link href={"/contact"} >
-                  <Button className="w-full bg-gradient-to-r mt-5 from-teal-500 to-blue-600 hover:from-teal-600 hover:to-blue-700">
-                  Contact Us
+
+                  <Button className="w-full bg-gradient-to-r from-teal-500 to-blue-600 hover:from-teal-600 hover:to-blue-700">
+                    Apply Now
                   </Button>
-                  </Link>
                 </CardContent>
               </Card>
             ))}
@@ -394,14 +401,8 @@ export default function FreeRozgarPage() {
       </section>
 
       {/* Business Resources */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-50 bg-gray-50">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Business Resources</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Our partner organizations provide essential services for your business.
-            </p>
-          </div>
           <DonorsCarousel/>
         </div>
       </section>
@@ -422,8 +423,7 @@ export default function FreeRozgarPage() {
               size="lg"
               variant="outline"
               asChild
-              className="border-white text-white hover:bg-white hover:text-blue-600 bg-transparent"
-            >
+              className="border-white text-white hover:bg-white hover:text-blue-600 bg-transparent">
               <Link href="/contact">Contact Us</Link>
             </Button>
           </div>
