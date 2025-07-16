@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react"
 import Image from "next/image"
 import { ChevronLeft, ChevronRight, Heart } from "lucide-react"
+import Link from "next/link"
 const donors = [
   {
     name: "Japan Foundation",
@@ -197,12 +198,11 @@ export default function DonorsCarousel() {
             communities across Pakistan.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link href={"/contact"}>
             <button className="bg-gradient-to-r from-teal-500 to-blue-600 hover:from-teal-600 hover:to-blue-700 text-white px-8 py-3 rounded-full font-semibold shadow-lg hover:shadow-xl transition-all duration-300">
               Partner with Us
             </button>
-            <button className="border-2 border-teal-500 text-teal-600 hover:bg-teal-50 px-8 py-3 rounded-full font-semibold transition-all duration-300">
-              Corporate Sponsorship
-            </button>
+         </Link>
           </div>
         </div>
       </div>

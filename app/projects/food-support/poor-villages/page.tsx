@@ -126,13 +126,12 @@ export default function PoorVillagesPage() {
               We reach 15+ villages, supporting 500+ families with sustainable food security and development initiatives.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link href={"/contact"}>
               <Button size="lg" className="bg-gradient-to-r from-teal-500 to-blue-600 hover:from-teal-600 hover:to-blue-700 text-white px-8 py-4 rounded-full font-semibold shadow-lg hover:shadow-xl transition-all duration-300 text-lg">
                 <Heart className="mr-2 h-5 w-5" />
                 Support Village Program
               </Button>
-              <Button size="lg" variant="outline">
-                Adopt a Village
-              </Button>
+              </Link>
             </div>
           </div>
         </div>
