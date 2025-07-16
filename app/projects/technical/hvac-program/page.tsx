@@ -135,10 +135,12 @@ export default function HVACProgramPage() {
               ventilation, air conditioning, and refrigeration systems.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link href={"/contact"}>
               <Button size="lg" className="bg-gradient-to-r from-teal-500 to-blue-600 hover:from-teal-600 hover:to-blue-700">
                 <GraduationCap className="mr-2 h-5 w-5" />
                 Apply for Training
               </Button>
+              </Link>
               <Button size="lg" variant="outline">
                 View Courses
               </Button>
@@ -165,7 +167,7 @@ export default function HVACProgramPage() {
       </section>
 
       {/* About HVAC Program */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-20 bg-gray-50 ">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
@@ -224,7 +226,7 @@ export default function HVACProgramPage() {
       </section>
 
       {/* HVAC Courses */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-white ">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">HVAC Courses</h2>

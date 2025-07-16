@@ -24,7 +24,7 @@ const campuses = [
     name: "Idara Al Khair-Campus 1 (Head Campus)",
     location: "Sector 5-J, New Karachi Town, Karachi ",
     established: "1995",
-    students: "1,200+",
+    students: "3500+",
     grades: "Pre-K to Grade 12",
     image: "/al-khair.png",
     facilities: [
@@ -43,7 +43,7 @@ const campuses = [
     name: "Idara Al Khair-Campus 2",
     location: "22HG+MWC, Gadap Town, Karachi",
     established: "2003",
-    students: "800+",
+    students: "1000+",
     grades: "Pre-K to Grade 10",
     image: "/al-khair c-2.png",
     facilities: [
@@ -61,7 +61,7 @@ const campuses = [
     name: "Idara Al Khair-Campus 3",
     location: "22GP+68P, Gadap Town, Karachi",
     established: "2007",
-    students: "950+",
+    students: "1100+",
     grades: "Pre-K to Grade 12",
     image: "/al khair c-3.png",
     facilities: [
@@ -80,7 +80,7 @@ const campuses = [
     name: "Idara Al-Khair-Campus 4",
     location: "22R6+RM, Gul Mohammad Qalandrani Goth Gadap Town, Karachi",
     established: "2010",
-    students: "700+",
+    students: "2000+",
     grades: "Pre-K to Grade 8",
     image: "/campus 4.png",
     facilities: [
@@ -98,7 +98,7 @@ const campuses = [
     name: "Idara Al-khair campus 5",
     location: "Sector 5-M, North Karachi Town",
     established: "2012",
-    students: "600+",
+    students: "1200+",
     grades: "Pre-K to Grade 10",
     image: "/al-khair c-5.jpeg",
     facilities: ["Modern Labs", "IT Center", "Multipurpose Hall", "Playground"],
@@ -111,7 +111,7 @@ const campuses = [
     name: "Idara Al-khair campus 6",
     location: "235Q+RPM Yaroo goth, Sector 3 Surjani Town, Karachi",
     established: "2015",
-    students: "500+",
+    students: "2000+",
     grades: "Pre-K to Grade 12",
     image: "/al khair c-6.png",
     facilities: [
@@ -158,7 +158,7 @@ export default function CampusesPage() {
       <section className="py-20 bg-gradient-to-br from-teal-50 to-blue-100">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
-            <Badge className="mb-4 bg-teal-100 text-teal-800 hover:bg-teal-200">
+            <Badge id="Our-Campus" className="mb-4 bg-teal-100 text-teal-800 hover:bg-teal-200">
               Our Campuses
             </Badge>
             <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6">
@@ -170,13 +170,12 @@ export default function CampusesPage() {
               facilities.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
+           <Link href={"/projects/education/campuses#Our-Campuses"}>
               <Button size="lg" className="bg-teal-600 hover:bg-teal-700">
                 <GraduationCap className="mr-2 h-5 w-5" />
-                Apply for Admission
+                Learn more
               </Button>
-              <Button size="lg" variant="outline">
-                Download Prospectus
-              </Button>
+              </Link>
             </div>
           </div>
         </div>
@@ -205,7 +204,7 @@ export default function CampusesPage() {
       <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+            <h2 id = "Our-Campuses" className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
               Our Campuses
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
@@ -424,19 +423,21 @@ export default function CampusesPage() {
             transform lives and build a better future.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link href={"/donate"}>
             <Button
               size="lg"
               className="bg-white text-teal-600 hover:bg-gray-100"
             >
               Donate to Education
             </Button>
+            </Link>
             <Button
               size="lg"
               variant="outline"
               asChild
               className="border-white text-white hover:bg-white hover:text-teal-600 bg-transparent"
             >
-              <Link href="/contact">Become a Volunteer Teacher</Link>
+              <Link href="/volunteers">Become a Volunteer Teacher</Link>
             </Button>
           </div>
         </div>
