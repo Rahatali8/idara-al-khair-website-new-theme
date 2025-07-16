@@ -24,7 +24,7 @@ const campuses = [
     name: "Idara Al Khair-Campus 1 (Head Campus)",
     location: "Sector 5-J, New Karachi Town, Karachi ",
     established: "1995",
-    students: "3500+",
+    students: "1,200+",
     grades: "Pre-K to Grade 12",
     image: "/al-khair.png",
     facilities: [
@@ -43,7 +43,7 @@ const campuses = [
     name: "Idara Al Khair-Campus 2",
     location: "22HG+MWC, Gadap Town, Karachi",
     established: "2003",
-    students: "1000+",
+    students: "800+",
     grades: "Pre-K to Grade 10",
     image: "/al-khair c-2.png",
     facilities: [
@@ -61,7 +61,7 @@ const campuses = [
     name: "Idara Al Khair-Campus 3",
     location: "22GP+68P, Gadap Town, Karachi",
     established: "2007",
-    students: "1100+",
+    students: "950+",
     grades: "Pre-K to Grade 12",
     image: "/al khair c-3.png",
     facilities: [
@@ -80,7 +80,7 @@ const campuses = [
     name: "Idara Al-Khair-Campus 4",
     location: "22R6+RM, Gul Mohammad Qalandrani Goth Gadap Town, Karachi",
     established: "2010",
-    students: "2000+",
+    students: "700+",
     grades: "Pre-K to Grade 8",
     image: "/campus 4.png",
     facilities: [
@@ -98,7 +98,7 @@ const campuses = [
     name: "Idara Al-khair campus 5",
     location: "Sector 5-M, North Karachi Town",
     established: "2012",
-    students: "1200+",
+    students: "600+",
     grades: "Pre-K to Grade 10",
     image: "/al-khair c-5.jpeg",
     facilities: ["Modern Labs", "IT Center", "Multipurpose Hall", "Playground"],
@@ -111,7 +111,7 @@ const campuses = [
     name: "Idara Al-khair campus 6",
     location: "235Q+RPM Yaroo goth, Sector 3 Surjani Town, Karachi",
     established: "2015",
-    students: "2000+",
+    students: "500+",
     grades: "Pre-K to Grade 12",
     image: "/al khair c-6.png",
     facilities: [
@@ -153,29 +153,29 @@ const achievements = [
 
 export default function CampusesPage() {
   return (
-    <main className="pt-4">
+    <main className="/">
       {/* Hero Section */}
-      <section className="py-20 bg-gradient-to-br from-teal-50 to-blue-100">
+      <section className="py-10 bg-gradient-to-br from-teal-50 to-blue-100">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
-            <Badge id="Our-Campus" className="mb-4 bg-teal-100 text-teal-800 hover:bg-teal-200">
+            <Badge className="mb-12 bg-teal-100 text-teal-800 hover:bg-teal-200">
               Our Campuses
             </Badge>
             <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6">
               Our <span className="text-teal-600">Campuses</span> Across Karachi
             </h1>
             <p className="text-xl md:text-2xl text-gray-600 leading-relaxed mb-8">
-              Six strategically located campuses across Karachi, each designed
-              to serve local communities with quality education and modern
-              facilities.
+              Six strategically located campuses across Karachi, each thoughtfully designed to serve local communities with quality education and modern facilities. Our campuses offer easy access for students in all areas of the city, featuring state-of-the-art classrooms, well-equipped labs, libraries, and dedicated spaces for extracurricular activities.
+              We aim to create a supportive, inclusive environment where every student can thrive and achieve their full potential close to home.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-           <Link href={"/projects/education/campuses#Our-Campuses"}>
               <Button size="lg" className="bg-teal-600 hover:bg-teal-700">
                 <GraduationCap className="mr-2 h-5 w-5" />
-                Learn more
+                Apply for Admission
               </Button>
-              </Link>
+              <Button size="lg" variant="outline">
+                Download Prospectus
+              </Button>
             </div>
           </div>
         </div>
@@ -204,7 +204,7 @@ export default function CampusesPage() {
       <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 id = "Our-Campuses" className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
               Our Campuses
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
@@ -214,8 +214,8 @@ export default function CampusesPage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {campuses.map((campus, index) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          {campuses.map((campus, index) => (
               <Card
                 key={index}
                 className="hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2"
@@ -315,8 +315,8 @@ export default function CampusesPage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          {[
               {
                 title: "Early Childhood Education",
                 description:
@@ -423,21 +423,19 @@ export default function CampusesPage() {
             transform lives and build a better future.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href={"/donate"}>
             <Button
               size="lg"
               className="bg-white text-teal-600 hover:bg-gray-100"
             >
               Donate to Education
             </Button>
-            </Link>
             <Button
               size="lg"
               variant="outline"
               asChild
               className="border-white text-white hover:bg-white hover:text-teal-600 bg-transparent"
             >
-              <Link href="/volunteers">Become a Volunteer Teacher</Link>
+              <Link href="/contact">Become a Volunteer Teacher</Link>
             </Button>
           </div>
         </div>
