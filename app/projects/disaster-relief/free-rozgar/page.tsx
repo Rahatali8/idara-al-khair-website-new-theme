@@ -4,6 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge"
 import { ArrowLeft, Users, Calendar, MapPin, Heart, Briefcase, GraduationCap, Star, Clock, Award, Building, Globe, DollarSign, TrendingUp, Lightbulb, Target, Zap } from "lucide-react"
 import Link from "next/link"
+import DonorsCarousel from "@/components/DonorsCarousel"
 
 const rozgarStats = [
   {
@@ -151,38 +152,30 @@ const supportServices = [
   },
 ]
 
-const businessResources = [
-  { name: "Business Registration", logo: "/placeholder-logo.png", service: "Legal Support" },
-  { name: "Banking Partners", logo: "/placeholder-logo.png", service: "Financial Services" },
-  { name: "Marketing Agencies", logo: "/placeholder-logo.png", service: "Promotional Support" },
-  { name: "Equipment Suppliers", logo: "/placeholder-logo.png", service: "Business Supplies" },
-  { name: "Insurance Partners", logo: "/placeholder-logo.png", service: "Business Protection" },
-  { name: "Technology Partners", logo: "/placeholder-logo.png", service: "Digital Solutions" },
-]
+
 
 export default function FreeRozgarPage() {
   return (
-    <main className="pt-20">
+    <main className="/">
       {/* Hero Section */}
       <section className="py-20 bg-gradient-to-br from-slate-50 via-blue-50 to-teal-50">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center">
-            <Badge className="mb-4 bg-blue-100 text-blue-800 hover:bg-blue-200">Free Rozgar Program</Badge>
+          <div className="max-w-5xl mx-auto text-center">
+            <Badge className="mb-12 bg-blue-100 text-blue-800 hover:bg-blue-200">Free Rozgar Program</Badge>
             <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6">
-              <span className="bg-gradient-to-r from-teal-500 to-blue-600 bg-clip-text text-transparent">Apna Rozgar</span> Shuru Karein
+              <span className="bg-gradient-to-r from-teal-500 to-blue-600 bg-clip-text text-transparent">Start Your Business</span>
             </h1>
             <p className="text-xl md:text-2xl text-gray-600 leading-relaxed mb-8">
-              Apne sapne ko haqeeqat mein badalne ka mauka! Free Rozgar Program aapko apna business shuru karne mein 
-              madad karta hai. Training, financial support, aur mentorship ke sath apna rozgar banayein.
+            Turn your dreams into reality! The Free Employment Program helps you start your own business with training, financial support, and mentorship. Join today and build
+             a secure future for yourself and your family. Get expert guidance, practical skills, and the confidence you need to succeed! Limited slots available—apply now and take the first step toward financial independence and a brighter tomorrow!          
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" className="bg-gradient-to-r from-teal-500 to-blue-600 hover:from-teal-600 hover:to-blue-700">
-                <Briefcase className="mr-2 h-5 w-5" />
-                Business Plan Banayein
-              </Button>
-              <Button size="lg" variant="outline">
-                Training Programs Dekhein
-              </Button>
+              <a href="#business-categories">
+                <Button size="lg" className="bg-gradient-to-r from-teal-500 to-blue-600 hover:from-teal-600 hover:to-blue-700">
+                  <Briefcase className="mr-2 h-5 w-5" />
+                  Create a Business Plan
+                </Button>
+              </a>
             </div>
           </div>
         </div>
@@ -208,17 +201,14 @@ export default function FreeRozgarPage() {
       {/* About Program */}
       <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
+        <div>
               <h2 className="text-4xl font-bold text-gray-900 mb-6">Apna Business Shuru Karein</h2>
               <p className="text-lg text-gray-600 mb-6">
-                Free Rozgar Program sirf job placement nahi, balke aapko apna business shuru karne mein madad karta hai. 
-                Hum aapko training, financial support, aur mentorship provide karte hain taky aap apne sapne ko haqeeqat mein badal sakein.
+                The Free Employment Program is not just about job placement, but about helping you start your own business. We provide you with training, financial support, and mentorship so you can turn your dreams into reality.
               </p>
               <p className="text-lg text-gray-600 mb-6">
-                Humare program mein aap business planning, marketing strategies, financial management, aur practical 
-                training seekhte hain. Iske baad hum aapko micro-loans aur mentorship provide karte hain taky aap 
-                apna business successfully shuru kar sakein.
+                In our program, you will learn business planning, marketing strategies, financial management, and practical training. Afterwards, we provide you with micro-loans and mentorship so you can successfully launch your business.
               </p>
               <div className="grid grid-cols-2 gap-6">
                 <div className="flex items-center">
@@ -264,17 +254,16 @@ export default function FreeRozgarPage() {
       </section>
 
       {/* Business Categories */}
-      <section className="py-20 bg-white">
+      <section id="business-categories" className="py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">Business Categories</h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Apne interest aur skills ke hisab se business category choose karein. Har category mein 
-              comprehensive training aur support milta hai.
+              Choose a business category based on your interests and skills. Each category offers comprehensive training and support.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {businessCategories.map((category, index) => (
               <Card key={index} className="hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
                 <div className="relative h-48 overflow-hidden rounded-t-lg">
@@ -338,11 +327,11 @@ export default function FreeRozgarPage() {
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">Support Services</h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Business shuru karne ke liye comprehensive support services jo aapko successful entrepreneur banane mein madad karte hain.
+              Comprehensive support services to help you become a successful entrepreneur.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
             {supportServices.map((service, index) => (
               <Card key={index} className="hover:shadow-lg transition-shadow text-center">
                 <CardHeader>
@@ -374,11 +363,11 @@ export default function FreeRozgarPage() {
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">Success Stories</h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Hamare graduates ki success stories jo apne business shuru karke successful entrepreneurs ban gaye hain.
+              Success stories of our graduates who started their own businesses and became successful entrepreneurs.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {successStories.map((story, index) => (
               <Card key={index} className="hover:shadow-lg transition-shadow">
                 <CardHeader className="text-center">
@@ -417,44 +406,24 @@ export default function FreeRozgarPage() {
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">Business Resources</h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Hamare partner organizations jo aapke business ke liye essential services provide karte hain.
+              Our partner organizations provide essential services for your business.
             </p>
           </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8">
-            {businessResources.map((resource, index) => (
-              <Card key={index} className="hover:shadow-lg transition-shadow text-center">
-                <CardContent className="p-6">
-                  <div className="w-16 h-16 mx-auto mb-4 bg-gray-100 rounded-lg flex items-center justify-center">
-                    <Image
-                      src={resource.logo}
-                      alt={resource.name}
-                      width={40}
-                      height={40}
-                      className="object-contain"
-                    />
-                  </div>
-                  <h4 className="font-semibold text-gray-900 text-sm">{resource.name}</h4>
-                  <p className="text-xs text-gray-600">{resource.service}</p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
+          <DonorsCarousel/>
         </div>
       </section>
 
       {/* Call to Action */}
-      <section className="py-20 bg-gradient-to-r from-blue-600 to-indigo-700 text-white">
+      <section className="py-20 bg-gradient-to-r from-teal-600 to-blue-700 text-white">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-4xl font-bold mb-4">Apna Business Shuru Karein</h2>
+          <h2 className="text-4xl font-bold mb-4">Start Your Business</h2>
           <p className="text-xl opacity-90 mb-8 max-w-3xl mx-auto">
-            Abhi apply karein aur apne sapne ko haqeeqat mein badalne ka safar shuru karein. 
-            Free training, financial support, aur mentorship ke sath apna rozgar banayein.
+            Apply now and start your journey to turn your dreams into reality. Build your own business with free training, financial support, and mentorship.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button size="lg" className="bg-white text-teal-600 hover:bg-gray-100">
               <Briefcase className="mr-2 h-5 w-5" />
-              Business Plan Banayein
+              Create a Business Plan
             </Button>
             <Button
               size="lg"
