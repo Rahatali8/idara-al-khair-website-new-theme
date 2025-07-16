@@ -72,28 +72,40 @@ export default function AboutPage() {
     <main className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-teal-50">
       {/* Hero Section */}
       <section className="relative min-h-[86vh] bg-gradient-to-br from-slate-50 via-blue-50 to-teal-50 flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 bg-black/5"></div>
+        {/* Animated Gradient Background with Blobs */}
+        <div className="absolute inset-0 z-0 pointer-events-none">
+          {/* Blurred Colorful Blobs - Four Corners & Balanced Layout */}
+          <div className="absolute top-[-60px] left-[-60px] w-[220px] h-[220px] bg-teal-400 opacity-50 rounded-full filter blur-2xl animate-float" />
+          <div className="absolute top-[-60px] right-[-60px] w-[180px] h-[180px] bg-blue-400 opacity-40 rounded-full filter blur-2xl animate-float" style={{ animationDelay: '1.2s' }} />
+          <div className="absolute bottom-[-60px] left-[-60px] w-[200px] h-[200px] bg-purple-400 opacity-40 rounded-full filter blur-2xl animate-float" style={{ animationDelay: '2.1s' }} />
+          <div className="absolute bottom-[-60px] right-[-60px] w-[240px] h-[240px] bg-yellow-300 opacity-30 rounded-full filter blur-2xl animate-float" style={{ animationDelay: '2.8s' }} />
+          {/* A couple more for depth */}
+          <div className="absolute top-[20%] left-[55%] w-[120px] h-[120px] bg-pink-400 opacity-30 rounded-full filter blur-2xl animate-float" style={{ animationDelay: '1.7s' }} />
+          <div className="absolute bottom-[25%] right-[50%] w-[100px] h-[100px] bg-blue-300 opacity-30 rounded-full filter blur-2xl animate-float" style={{ animationDelay: '2.3s' }} />
+          {/* Gradient Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-br from-white/80 via-blue-100/60 to-teal-100/80 animate-fade-in" />
+        </div>
+        {/* Content */}
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
-            <Badge className="mb-6 bg-gradient-to-r from-teal-500 to-blue-600 text-white border-0 hover:from-teal-600 hover:to-blue-700">
+            <Badge className="mb-6 bg-teal-100 text-teal-800 hover:bg-teal-200">
               <Heart className="w-4 h-4 mr-2" />
               <div id="our-journey1">About Us</div>
             </Badge >
             <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
-              Serving <span className="bg-gradient-to-r from-teal-500 to-blue-600 bg-clip-text text-transparent">Humanity</span> Since 1987
+              Serving <span className="text-teal-600">Humanity</span> Since 1987
             </h1>
             <p className="text-xl md:text-2xl text-gray-600 leading-relaxed mb-8 max-w-3xl mx-auto">
               Idara Al-Khair Welfare Society is a non-profit organization dedicated to serving communities 
               through education, healthcare, and social welfare programs across Pakistan.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" className="bg-gradient-to-r from-teal-500 to-blue-600 hover:from-teal-600 hover:to-blue-700 text-white shadow-lg">
+              <Link href={"/donate"} >
+              <Button size="lg" className="rounded-full bg-gradient-to-r from-teal-500 to-blue-600 hover:from-teal-600 hover:to-blue-700 text-white shadow-lg">
                 <Heart className="mr-2 h-5 w-5" />
                 Support Our Mission
               </Button>
-              <Button size="lg" variant="outline" className="border-2 border-teal-500 text-teal-600 hover:bg-teal-50 bg-transparent">
-                Learn More
-              </Button>
+              </Link>
             </div>
           </div>
         </div>
@@ -102,10 +114,10 @@ export default function AboutPage() {
       {/* Achievements */}
       <section className="py-16 bg-gradient-to-r from-teal-50 to-blue-50">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-18">
             {achievements.map((achievement, index) => (
               <div key={index} className="text-center group">
-                <div className="w-16 h-16 bg-gradient-to-r from-teal-500 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform shadow-lg">
+                <div className="w-16 h-16 bg-gradient-to-r from-teal-500 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform shadow-lg hover:bg-blue-50">
                   <achievement.icon className="w-8 h-8 text-white" strokeWidth={2.5} />
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-2">{achievement.title}</h3>
@@ -120,7 +132,7 @@ export default function AboutPage() {
       <section className="px-10 py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            <Card className="bg-white shadow-xl border-0 transition-transform duration-300 hover:scale-105 hover:shadow-2xl">
+            <Card className="bg-white shadow-xl border-0 transition-transform duration-300 hover:scale-105 hover:shadow-2xl hover:bg-blue-50">
               <CardHeader>
                 <CardTitle className="text-3xl text-gray-900">Our Mission</CardTitle>
               </CardHeader>
@@ -131,7 +143,7 @@ export default function AboutPage() {
               </CardContent>
             </Card>
             
-            <Card className="bg-white shadow-xl border-0 transition-transform duration-300 hover:scale-105 hover:shadow-2xl">
+            <Card className="bg-white shadow-xl border-0 transition-transform duration-300 hover:scale-105 hover:shadow-2xl hover:bg-blue-50">
               <CardHeader>
                 <CardTitle className="text-3xl text-gray-900">Our Vision</CardTitle>
               </CardHeader>
@@ -157,9 +169,9 @@ export default function AboutPage() {
           </div>
 
           <div className="max-w-4xl mx-auto ">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
               {milestones.map((milestone, index) => (
-                <Card key={index} className="bg-white transition-transform duration-300 hover:scale-105 hover:shadow-2xl">
+                <Card key={index} className="bg-white transition-transform duration-300 hover:scale-105 hover:shadow-2xl hover:bg-blue-50">
                   <CardHeader className="text-center">
                     <div className="w-16 h-16 bg-gradient-to-r from-teal-500 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
                       <milestone.icon className="w-8 h-8 text-white" strokeWidth={2.5} />
@@ -215,9 +227,9 @@ export default function AboutPage() {
       <section id="president-message" className="py-20 bg-gradient-to-r from-teal-50 to-blue-50 mx-10">
         <div className="container mx-auto px-4 ">
           <h2 className="text-4xl font-bold text-teal-700 mb-8 text-center">Message from the President</h2>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center bg-white rounded-xl shadow-lg p-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 items-center bg-white rounded-xl shadow-lg p-8">
             {/* Image Side */}
-            <div className="flex justify-center">
+            <div className="flex justify-center mt-10">
               <Image
                 src="/chairmain.jpg"
                 alt="President Mohammad Mazahir"
@@ -253,15 +265,17 @@ export default function AboutPage() {
             of thousands of people across Pakistan.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="bg-white text-teal-600 hover:bg-gray-100 shadow-lg">
-              <Heart className="w-5 h-5 mr-2" />
-              Donate Now
-            </Button>
+            <Link href="/donate">
+              <Button size="lg" className="bg-white text-teal-600 hover:bg-gray-100 shadow-lg">
+                <Heart className="w-5 h-5 mr-2" />
+                Donate Now
+              </Button>
+            </Link>
             <Button
               size="lg"
               variant="outline"
               asChild
-              className="border-white text-white hover:bg-white hover:text-teal-600 bg-transparent"
+              className="border-white text-white hover:bg-white hover:text-teal-600 bg-transparent transition-colors duration-300 hover:shadow-xl hover:border-blue-700"
             >
               <Link href="/contact">Get Involved</Link>
             </Button>

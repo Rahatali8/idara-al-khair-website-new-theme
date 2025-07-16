@@ -85,7 +85,7 @@ export default function InformationSection() {
               <Button
                 asChild
                 size="lg"
-                className="bg-gradient-to-r from-teal-500 to-blue-600 hover:from-teal-600 hover:to-blue-700 text-white px-8 py-4 rounded-full font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
+                className="bg-gradient-to-r from-teal-500 to-blue-600 hover:from-teal-600 hover:to-blue-700 text-white px-8 py-4 rounded-full font-semibold shadow-lg hover:shadow-xl border-2 border-transparent hover:border-blue-700 transition-all duration-300"
               >
                 <Link href="/about">Learn More About Us</Link>
               </Button>
@@ -93,7 +93,7 @@ export default function InformationSection() {
                 asChild
                 variant="outline"
                 size="lg"
-                className="border-2 border-teal-500 text-teal-600 hover:bg-teal-50 px-8 py-4 rounded-full font-semibold transition-all duration-300"
+                className="border-2 border-teal-500 text-teal-600 hover:bg-teal-50 px-8 py-4 rounded-full font-semibold transition-all duration-300 hover:shadow-xl hover:border-blue-700"
               >
                 <Link href="/projects">View Our Projects</Link>
               </Button>
