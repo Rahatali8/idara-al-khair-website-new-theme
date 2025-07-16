@@ -143,7 +143,7 @@ export default function DisasterReliefProgramPage() {
       <section className="py-20 bg-gradient-to-br from-slate-50 via-blue-50 to-teal-50">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
-            <Badge className="mb-4 bg-teal-100 text-teal-800 hover:bg-teal-200">Disaster Relief Program</Badge>
+            <Badge className="mb-12 bg-teal-100 text-teal-800 hover:bg-teal-200">Disaster Relief Program</Badge>
             <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6">
               Emergency <span className="bg-gradient-to-r from-teal-500 to-blue-600 bg-clip-text text-transparent">Disaster Relief</span>
             </h1>
@@ -196,7 +196,7 @@ export default function DisasterReliefProgramPage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {reliefServices.map((service, index) => (
               <Card key={index} className="hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
                 <div className="relative h-48 overflow-hidden rounded-t-lg">
@@ -250,9 +250,9 @@ export default function DisasterReliefProgramPage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
             {pastOperations.map((operation, index) => (
-              <Card key={index} className="hover:shadow-lg transition-shadow">
+              <Card key={index} className="hover:shadow-lg transition-shadow w-full mx-auto">
                 <div className="relative h-64 overflow-hidden rounded-t-lg">
                   <Image
                     src={operation.image || "/placeholder.svg"}
