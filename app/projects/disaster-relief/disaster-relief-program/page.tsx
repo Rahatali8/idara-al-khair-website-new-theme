@@ -230,7 +230,7 @@ export default function DisasterReliefProgramPage() {
                   </div>
 
                   <div className="pt-4 border-t">
-                    <Button className="w-full bg-gradient-to-r from-teal-500 to-blue-600 hover:from-teal-600 hover:to-blue-700">Learn More</Button>
+                    <Link href="/donate"><Button className="w-full bg-gradient-to-r from-teal-500 to-blue-600 hover:from-teal-600 hover:to-blue-700">Donate for relief services</Button></Link>
                   </div>
                 </CardContent>
               </Card>
@@ -293,10 +293,12 @@ export default function DisasterReliefProgramPage() {
             communities across Pakistan.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link href={"/donate"}>
             <Button size="lg" className="bg-white text-teal-600 hover:bg-gray-100">
               <Heart className="mr-2 h-5 w-5" />
               Donate Now
             </Button>
+            </Link>
             <Button
               size="lg"
               variant="outline"
