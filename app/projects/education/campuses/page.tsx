@@ -155,17 +155,27 @@ export default function CampusesPage() {
   return (
     <main className="/">
       {/* Hero Section */}
-      <section className="py-10 bg-gradient-to-br from-teal-50 to-blue-100">
-        <div className="container mx-auto px-4">
+      <section className="relative min-h-[86vh] flex items-center justify-center overflow-hidden">
+        {/* Background Image */}
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/campus-page-back.png"
+            alt="campus-page-background"
+            fill
+            className="object-cover"
+            priority
+          />
+        </div>
+        
+        <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
-            <Badge className="mb-12 bg-teal-100 text-teal-800 hover:bg-teal-200">
-              Our Campuses
-            </Badge>
+            <Badge className="mb-4 bg-purple-100 text-teal-600 hover:bg-purple-200">Campusses</Badge>
             <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6">
-              Our <span className="text-teal-600">Campuses</span> Across Karachi
+              <span className="bg-gradient-to-r from-teal-500 to-blue-600 bg-clip-text text-transparent">Campuses Across Karachi
+              </span>
             </h1>
-            <p className="text-xl md:text-2xl text-gray-600 leading-relaxed mb-8">
-              Six strategically located campuses across Karachi, each thoughtfully designed to serve local communities with quality education and modern facilities. Our campuses offer easy access for students in all areas of the city, featuring state-of-the-art classrooms, well-equipped labs, libraries, and dedicated spaces for extracurricular activities.
+            <p className="text-xl md:text-2xl text-gray-800 leading-relaxed mb-8">
+            Six strategically located campuses across Karachi, each thoughtfully designed to serve local communities with quality education and modern facilities. Our campuses offer easy access for students in all areas of the city, featuring state-of-the-art classrooms, well-equipped labs, libraries, and dedicated spaces for extracurricular activities.
               We aim to create a supportive, inclusive environment where every student can thrive and achieve their full potential close to home.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -176,7 +186,6 @@ export default function CampusesPage() {
           </div>
         </div>
       </section>
-
       {/* Achievements */}
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">

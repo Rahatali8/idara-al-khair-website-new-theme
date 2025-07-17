@@ -83,8 +83,19 @@ export default function RamzanRationPage() {
   return (
     <main className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-teal-50">
       {/* Hero Section */}
-      <section className="relative min-h-[86vh] bg-gradient-to-br from-slate-50 via-blue-50 to-teal-50 flex items-center justify-center overflow-hidden">
-        <div className="container mx-auto px-4">
+      <section className="relative min-h-[86vh] flex items-center justify-center overflow-hidden">
+        {/* Background Image */}
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/ramzan-rashon-bg.png"
+            alt="Ramzan Ration Background"
+            fill
+            className="object-cover"
+            priority
+          />
+        </div>
+        
+        <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
             <Badge className="mb-4 bg-purple-100 text-teal-600 hover:bg-purple-200">Ramzan Ration</Badge>
             <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6">

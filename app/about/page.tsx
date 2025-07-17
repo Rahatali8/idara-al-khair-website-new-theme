@@ -71,33 +71,25 @@ export default function AboutPage() {
   return (
     <main className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-teal-50">
       {/* Hero Section */}
-      <section className="relative min-h-[86vh] bg-gradient-to-br from-slate-50 via-blue-50 to-teal-50 flex items-center justify-center overflow-hidden">
-        {/* Animated Gradient Background with Blobs */}
-        <div className="absolute inset-0 z-0 pointer-events-none">
-          {/* Blurred Colorful Blobs - Four Corners & Balanced Layout */}
-          <div className="absolute top-[-60px] left-[-60px] w-[220px] h-[220px] bg-teal-400 opacity-50 rounded-full filter blur-2xl animate-float" />
-          <div className="absolute top-[-60px] right-[-60px] w-[180px] h-[180px] bg-blue-400 opacity-40 rounded-full filter blur-2xl animate-float" style={{ animationDelay: '1.2s' }} />
-          <div className="absolute bottom-[-60px] left-[-60px] w-[200px] h-[200px] bg-purple-400 opacity-40 rounded-full filter blur-2xl animate-float" style={{ animationDelay: '2.1s' }} />
-          <div className="absolute bottom-[-60px] right-[-60px] w-[240px] h-[240px] bg-yellow-300 opacity-30 rounded-full filter blur-2xl animate-float" style={{ animationDelay: '2.8s' }} />
-          {/* A couple more for depth */}
-          <div className="absolute top-[20%] left-[55%] w-[120px] h-[120px] bg-pink-400 opacity-30 rounded-full filter blur-2xl animate-float" style={{ animationDelay: '1.7s' }} />
-          <div className="absolute bottom-[25%] right-[50%] w-[100px] h-[100px] bg-blue-300 opacity-30 rounded-full filter blur-2xl animate-float" style={{ animationDelay: '2.3s' }} />
-          {/* Gradient Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-br from-white/80 via-blue-100/60 to-teal-100/80 animate-fade-in" />
+      <section className="relative min-h-[86vh] flex items-center justify-center overflow-hidden">
+        {/* Background Image */}
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/about-section-back.png"
+            alt="About Section Background"
+            fill
+            className="object-cover"
+            priority
+          />
         </div>
         {/* Content */}
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
-            <Badge className="mb-6 bg-teal-100 text-teal-800 hover:bg-teal-200">
-              <Heart className="w-4 h-4 mr-2" />
-              <div id="our-journey1">About Us</div>
-            </Badge >
             <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
               Serving <span className="text-teal-600">Humanity</span> Since 1987
             </h1>
             <p className="text-xl md:text-2xl text-gray-600 leading-relaxed mb-8 max-w-3xl mx-auto">
-              Idara Al-Khair Welfare Society is a non-profit organization dedicated to serving communities 
-              through education, healthcare, and social welfare programs across Pakistan.
+            Idara Al-Khair Welfare Society is a non-profit organization committed to transforming lives across Pakistan by providing accessible education, quality healthcare services, and comprehensive social welfare programs. Through its unwavering dedication, the organization continues to uplift underprivileged communities and foster sustainable development nationwide.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href={"/donate"} >
