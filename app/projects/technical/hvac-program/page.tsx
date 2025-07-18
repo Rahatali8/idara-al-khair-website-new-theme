@@ -140,17 +140,14 @@ export default function HVACProgramPage() {
                   Apply for Training
                 </Link>
               </Button>
-<<<<<<< Updated upstream
               <Button asChild size="lg" className="bg-gradient-to-r from-teal-500 to-blue-600 hover:from-teal-600 hover:to-blue-700 text-white hover:bg-gray-50 rounded-lg text-center">
                 <Link href="/projects/technical/hvac-program#hvac-courses">
                   View Courses
                 </Link>
               </Button>
-=======
               <Link href="/projects/technical/hvac-program#hvac-courses" className="block px-4 py-2 bg-gradient-to-r from-teal-500 to-blue-600 hover:from-teal-600 hover:to-blue-700 text-white hover:bg-gray-50 rounded-lg">
                   View Courses
                 </Link>
->>>>>>> Stashed changes
             </div>
           </div>
         </div>

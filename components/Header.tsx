@@ -205,7 +205,7 @@ export default function Header() {
                   </button>
                   <div className="absolute left-full top-0 ml-1 w-48 bg-white rounded-lg shadow-lg border border-gray-200 py-2 opacity-0 invisible group-hover/technical:opacity-100 group-hover/technical:visible transition-all duration-300">
                     <Link
-                      href="/projects/technical"
+                      href="/projects/technical/test"
                       className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-teal-600"
                     >
                       Al-Khair Institute of Technology
