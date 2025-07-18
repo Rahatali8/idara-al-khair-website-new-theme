@@ -162,21 +162,33 @@ const volunteerRequirements = [
 
 export default function VolunteersPage() {
   return (
-    <main className="pt-5 px-10">
+    <main className="/">
       {/* Hero Section */}
-      <section className="min-h-[86vh] bg-gradient-to-br from-teal-50 to-blue-50 flex items-center justify-center">
-        <div className="container mx-auto px-4">
+      <section className="relative min-h-[86vh] flex items-center justify-center overflow-hidden">
+        {/* Background Image */}
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/volunteers-back.png"
+            alt="Volunteers-team-background"
+            fill
+            className="object-cover"
+            priority
+          />
+        </div>
+        
+        <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
-            <Badge className="mb-4 bg-teal-100 text-teal-800 hover:bg-teal-200">Volunteer Program</Badge>
+            <Badge className="mb-4 bg-purple-100 text-teal-600 hover:bg-purple-200">Volunteers Team</Badge>
             <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6">
-              Join Our <span className="bg-gradient-to-r from-teal-500 to-blue-600 bg-clip-text text-transparent">Volunteer</span> Family
+              <span className="bg-gradient-to-r from-teal-500 to-blue-600 bg-clip-text text-transparent"> Join Our Volunteers Family
+              </span>
             </h1>
-            <p className="text-xl md:text-2xl text-gray-600 leading-relaxed mb-8">
-              Make a difference in people's lives by joining our volunteer program. Your time and skills can 
-              transform communities and create lasting impact across Pakistan.
+            <p className="text-xl md:text-2xl text-gray-800 leading-relaxed mb-8">
+            Join our volunteer program to make a real difference!
+            Use your time and skills to uplift communities and create lasting impact across Pakistan. Help those in need, gain experience, and be part of positive change.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" variant="outline" className="border-2 border-teal-500 text-teal-600 hover:bg-teal-50" asChild>
+              <Button size="lg" variant="outline" className="border-2 border-teal-500 font-bold text-teal-600 hover:bg-teal-50" asChild>
                 <a href="#volunteer-opportunities">View Opportunities</a>
               </Button>
             </div>
@@ -268,9 +280,9 @@ export default function VolunteersPage() {
             Choose from various volunteer programs that match your skills, interests, and availability.
           </p>
         </div>
-        <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {volunteerPrograms.map((program, index) => (
-            <div key={index} className="bg-gray-50 rounded-xl p-6 shadow text-left flex flex-col gap-2">
+            <div key={index} className="bg-gray-50 rounded-xl p-6 shadow text-left flex flex-col gap-2 transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:bg-blue-50">
               <h3 className="text-2xl font-semibold text-teal-700 mb-1">{program.title}</h3>
               <p className="text-gray-700 mb-2">{program.description}</p>
               <div className="text-sm text-gray-500 mb-1"><strong>Location:</strong> {program.location}</div>
@@ -295,9 +307,9 @@ export default function VolunteersPage() {
               Volunteering with Idara Al-Khair offers numerous personal and professional benefits.
             </p>
           </div>
-          <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {volunteerBenefits.map((benefit, index) => (
-              <div key={index} className="bg-white rounded-xl p-6 shadow text-left flex flex-col gap-2 items-start">
+          <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 ">
+          {volunteerBenefits.map((benefit, index) => (
+              <div key={index} className="bg-white rounded-xl p-6 shadow text-left flex flex-col gap-2 items-start transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:bg-blue-50">
                 <benefit.icon className="w-8 h-8 text-teal-600 mb-2" strokeWidth={2.2} />
                 <h3 className="text-xl font-semibold text-teal-700 mb-1">{benefit.title}</h3>
                 <p className="text-gray-700 mb-2">{benefit.description}</p>
@@ -321,9 +333,9 @@ export default function VolunteersPage() {
               Hear from our dedicated volunteers about their experiences and the impact they've made.
             </p>
           </div>
-          <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
             {volunteerStories.map((story, index) => (
-              <div key={index} className="bg-gray-50 rounded-xl p-6 shadow text-left flex flex-col gap-2">
+              <div key={index} className="bg-gray-50 rounded-xl p-6 shadow text-left flex flex-col gap-2 transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:bg-blue-50">
                 <h3 className="text-xl font-semibold text-teal-700 mb-1">{story.name} <span className="text-sm text-gray-500 font-normal">({story.role})</span></h3>
                 <div className="text-sm text-gray-500 mb-1"><strong>Duration:</strong> {story.duration} &nbsp; <strong>Hours:</strong> {story.hours}</div>
                 <blockquote className="italic text-gray-700 border-l-4 border-teal-400 pl-4">"{story.story}"</blockquote>
@@ -342,9 +354,9 @@ export default function VolunteersPage() {
               Basic requirements to join our volunteer program and start making a difference.
             </p>
           </div>
-          <div className="max-w-3xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {volunteerRequirements.map((requirement, index) => (
-              <div key={index} className="bg-white rounded-xl p-6 shadow text-center flex flex-col items-center justify-center">
+          <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {volunteerRequirements.map((requirement, index) => (
+              <div key={index} className="bg-white rounded-xl p-6 shadow text-center flex flex-col items-center justify-center transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:bg-blue-50">
                 <Shield className="w-7 h-7 text-teal-600 mb-2" strokeWidth={2.2} />
                 <h4 className="font-semibold text-teal-700 text-lg mb-2">{requirement.name}</h4>
                 <p className="text-gray-600 text-sm">{requirement.requirement}</p>

@@ -145,9 +145,12 @@ export default function HVACProgramPage() {
                   View Courses
                 </Link>
               </Button>
+<<<<<<< HEAD
               <Link href="/projects/technical/hvac-program#hvac-courses" className="block px-4 py-2 bg-gradient-to-r from-teal-500 to-blue-600 hover:from-teal-600 hover:to-blue-700 text-white hover:bg-gray-50 rounded-lg">
                   View Courses
                 </Link>
+=======
+>>>>>>> 2a0a3bdd3d1423eacc68adfeafb40223edf7e93a
             </div>
           </div>
         </div>
