@@ -2,8 +2,8 @@
 
 import { useState, useEffect } from "react"
 import Image from "next/image"
-import { ChevronLeft, ChevronRight, Heart } from "lucide-react"
-import Link from "next/link"
+import { Heart, Star, Award } from "lucide-react"
+import { motion } from "framer-motion"
 const donors = [
   {
     name: "Japan Foundation",
@@ -97,29 +97,29 @@ export default function DonorsCarousel() {
     return () => clearInterval(timer)
   }, [itemsPerView])
 
-  const goToPrevious = () => {
-    setCurrentIndex((prevIndex) => (prevIndex === 0 ? Math.max(0, donors.length - itemsPerView) : prevIndex - 1))
-  }
 
-  const goToNext = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + itemsPerView >= donors.length ? 0 : prevIndex + 1))
-  }
-
-  const visibleDonors = donors.slice(currentIndex, currentIndex + itemsPerView)
 
   return (
     <section className="py-20 bg-gradient-to-br from-gray-50 to-blue-50">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
-          <div className="flex items-center justify-center mb-4">
-            <Heart className="w-8 h-8 text-teal-600 mr-3" />
-            <p className="text-teal-600 font-semibold uppercase tracking-wide">Our Partners</p>
+        <div className="relative mb-16">
+          <div className="flex items-center justify-center">
+            <div className="hidden lg:block flex-1 mr-8">
+              <div className="h-0.5 bg-gradient-to-l from-lightblue via-cyan-500 to-transparent"></div>
+            </div>
+            <div className="text-center px-8">
+              <div className="flex items-center justify-center mb-4">
+              </div>
+              <h2 className="text-4xl md:text-5xl font-bold text-darkblue mb-4">Generous Donors & Partners</h2>
+              <p className="text-xl text-gray max-w-3xl mx-auto">
+                We are grateful to our donors and partner organizations who make our mission possible through their generous
+                support and collaboration.
+              </p>
+            </div>
+            <div className="hidden lg:block flex-1 ml-8">
+              <div className="h-0.5 bg-gradient-to-r from-lightblue via-cyan-500 to-transparent"></div>
+            </div>
           </div>
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Generous Donors & Partners</h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            We are grateful to our donors and partner organizations who make our mission possible through their generous
-            support and collaboration.
-          </p>
         </div>
 
         <div className="relative">
@@ -130,51 +130,70 @@ export default function DonorsCarousel() {
               style={{ transform: `translateX(-${currentIndex * (100 / itemsPerView)}%)` }}
             >
               {donors.map((donor, index) => (
-                <div key={index} className="flex-shrink-0 px-4" style={{ width: `${100 / itemsPerView}%` }}>
-                  <div className="bg-white rounded-2xl p-8 px-10 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 h-full group">
-                    <div className="text-center">
+                <div key={index} className="flex-shrink-0 px-4 mt-8 mb-8" style={{ width: `${100 / itemsPerView}%` }}>
+                  <motion.div 
+                    className="relative bg-white/10 backdrop-blur-xl rounded-3xl p-8 px-10 border border-white/40 shadow-2xl hover:shadow-3xl transition-all duration-500 transform hover:-translate-y-3 h-full group overflow-hidden"
+                    whileHover={{ scale: 1.02 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    {/* Gradient Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    
+                    {/* Decorative Corner Elements */}
+                    <div className="absolute top-0 left-0 w-8 h-8 border-l-2 border-t-2 border-lightblue/50 rounded-tl-3xl"></div>
+                    <div className="absolute bottom-0 right-0 w-8 h-8 border-r-2 border-b-2 border-lightblue/50 rounded-br-3xl"></div>
+                    
+                    {/* Floating Icon */}
+                    <motion.div
+                      className="absolute -top-3 -right-3 w-12 h-12 bg-gradient-to-br from-lightblue to-cyan-500 rounded-full flex items-center justify-center shadow-lg"
+                      animate={{ rotate: 360 }}
+                      transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                    >
+                      <Award className="w-6 h-6 text-white" />
+                    </motion.div>
+
+                    <div className="relative z-10 text-center">
                       <div className="mb-6 h-20 flex items-center justify-center">
                         <Image
                           src={donor.logo || "/placeholder.svg"}
                           alt={donor.name}
                           width={160}
                           height={80}
-                          className="max-h-20 w-auto object-contain filter grayscale group-hover:grayscale-0 transition-all duration-300"
+                          className="max-h-20 w-auto object-contain filter grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-110"
                         />
                       </div>
 
-                      <h3 className="text-xl font-bold text-gray-900 mb-2">{donor.name}</h3>
+                      <h3 className="text-xl font-bold text-darkblue mb-3 group-hover:text-lightblue transition-colors duration-300">{donor.name}</h3>
 
-                      <div className="mb-3">
-                        <span className="inline-block bg-teal-100 text-teal-800 text-sm font-semibold px-3 py-1 rounded-full">
+                      <div className="mb-4">
+                        <span className="inline-block bg-gradient-to-r from-lightblue/90 to-cyan-500/90 backdrop-blur-sm text-white text-sm font-semibold px-4 py-2 rounded-full border border-white/30 shadow-lg group-hover:shadow-xl transition-all duration-300">
                           {donor.contribution}
                         </span>
                       </div>
 
-                      <p className="text-gray-600 text-sm leading-relaxed">{donor.description}</p>
+                      <p className="text-gray-700 text-sm leading-relaxed group-hover:text-gray-800 transition-colors duration-300">{donor.description}</p>
+                      
+                      {/* Rating Stars */}
+                      <div className="flex justify-center mt-4 space-x-1">
+                        {[1, 2, 3, 4, 5].map((star) => (
+                          <motion.div
+                            key={star}
+                            initial={{ scale: 0 }}
+                            animate={{ scale: 1 }}
+                            transition={{ delay: star * 0.1 }}
+                          >
+                            <Star className="w-4 h-4 text-yellow-400 fill-current" />
+                          </motion.div>
+                        ))}
+                      </div>
                     </div>
-                  </div>
+                  </motion.div>
                 </div>
               ))}
             </div>
           </div>
 
           {/* Navigation Arrows */}
-          <button
-            onClick={goToPrevious}
-            className="absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-4 bg-white hover:bg-gray-50 rounded-full p-3 shadow-lg transition-all duration-300 z-10"
-            disabled={currentIndex === 0}
-          >
-            <ChevronLeft className="w-6 h-6 text-gray-600" />
-          </button>
-
-          <button
-            onClick={goToNext}
-            className="absolute right-0 top-1/2 transform -translate-y-1/2 translate-x-4 bg-white hover:bg-gray-50 rounded-full p-3 shadow-lg transition-all duration-300 z-10"
-            disabled={currentIndex + itemsPerView >= donors.length}
-          >
-            <ChevronRight className="w-6 h-6 text-gray-600" />
-          </button>
         </div>
 
         {/* Dots Indicator */}
@@ -184,26 +203,10 @@ export default function DonorsCarousel() {
               key={index}
               onClick={() => setCurrentIndex(index * itemsPerView)}
               className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                Math.floor(currentIndex / itemsPerView) === index ? "bg-teal-500 w-8" : "bg-gray-300"
+                Math.floor(currentIndex / itemsPerView) === index ? "bg-lightblue w-8" : "bg-gray-300"
               }`}
             />
           ))}
-        </div>
-
-        {/* Call to Action */}
-        <div className="text-center mt-16">
-          <h3 className="text-2xl font-bold text-gray-900 mb-4">Become a Partner</h3>
-          <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
-            Join our network of generous donors and partners. Together, we can create lasting positive impact in
-            communities across Pakistan.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href={"/contact"}>
-            <button className="bg-gradient-to-r from-teal-500 to-blue-600 hover:from-teal-600 hover:to-blue-700 text-white px-8 py-3 rounded-full font-semibold shadow-lg hover:shadow-xl transition-all duration-300">
-              Partner with Us
-            </button>
-         </Link>
-          </div>
         </div>
       </div>
     </section>

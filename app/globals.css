@@ -1,3 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400&display=swap');
+
+p {
+  font-family: 'Montserrat', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: inherit;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -75,6 +85,10 @@
   .animate-float {
     animation: float 3s ease-in-out infinite;
   }
+
+  .animate-gradient-x {
+    animation: gradient-x 4s ease-in-out infinite;
+  }
 }
 
 @keyframes fadeIn {
@@ -109,6 +123,31 @@
   }
 }
 
+@keyframes gradient-x {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes gradient-move {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+.group-hover\:animate-gradient-move:hover .group-hover\:animate-gradient-move {
+  animation: gradient-move 0.7s linear forwards;
+  background-size: 200% 100%;
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
@@ -127,6 +166,7 @@
   background: #0f766e;
 }
 
+
 /* Smooth scroll behavior */
 html {
   scroll-behavior: smooth;
@@ -135,4 +175,50 @@ html {
 /* Focus styles for accessibility */
 .focus-visible:focus {
   @apply outline-none ring-2 ring-teal-500 ring-offset-2;
+}
+
+.learn-more-gradient-text {
+  background: linear-gradient(90deg, #3b82f6 0%, #38bdf8 50%, #0a2540 100%);
+  background-size: 200% 100%;
+  background-position: 0% 50%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+  transition: background-position 0.6s cubic-bezier(0.4,0,0.2,1);
+}
+.learn-more-gradient:hover .learn-more-gradient-text {
+  background-position: 100% 50%;
+}
+
+/* Flip Card Effect for About Page */
+.flip-card {
+  perspective: 1200px;
+}
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  min-height: 260px;
+  height: 100%;
+  transition: transform 0.7s cubic-bezier(0.4,0.2,0.2,1);
+  transform-style: preserve-3d;
+}
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+.flip-card-front, .flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  backface-visibility: hidden;
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.flip-card-back {
+  transform: rotateY(180deg);
 }

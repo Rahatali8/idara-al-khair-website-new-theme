@@ -1,9 +1,11 @@
+'use client'
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Heart, Users, Award, Clock, MapPin, Phone, Star, ArrowRight, Building2 } from "lucide-react"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Heart, Users, Award, Clock, Star, Building2 } from "lucide-react"
 import Link from "next/link"
+import { motion } from "framer-motion"
+import StatsSection from "@/components/StatsSection"
 
 const milestones = [
   {
@@ -44,29 +46,6 @@ const milestones = [
   }
 ]
 
-const achievements = [
-  {
-    icon: Users,
-    title: "850K+ Lives",
-    description: "Impacted through our programs",
-  },
-  {
-    icon: Award,
-    title: "37+ Years",
-    description: "Of dedicated service",
-  },
-  {
-    icon: Heart,
-    title: "50+ Programs",
-    description: "Comprehensive services offered",
-  },
-  {
-    icon: Building2,
-    title: "15+ Centers",
-    description: "Operating across Pakistan",
-  },
-]
-
 export default function AboutPage() {
   return (
     <main className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-teal-50">
@@ -78,19 +57,57 @@ export default function AboutPage() {
             src="/about-section-back.png"
             alt="About Section Background"
             fill
-            className="object-cover"
+            className="object-cover opacity-60 blur-sm"
             priority
           />
         </div>
         {/* Content */}
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
-              Serving <span className="text-teal-600">Humanity</span> Since 1987
-            </h1>
-            <p className="text-xl md:text-2xl text-gray-600 leading-relaxed mb-8 max-w-3xl mx-auto">
-            Idara Al-Khair Welfare Society is a non-profit organization committed to transforming lives across Pakistan by providing accessible education, quality healthcare services, and comprehensive social welfare programs. Through its unwavering dedication, the organization continues to uplift underprivileged communities and foster sustainable development nationwide.
-            </p>
+            <motion.h1
+              className="text-5xl md:text-6xl font-bold mb-6 flex flex-wrap justify-center"
+              initial="hidden"
+              animate="visible"
+              variants={{
+                visible: { transition: { staggerChildren: 0.18 } },
+                hidden: {},
+              }}
+            >
+              {["About", "Idara", "Al-Khair"].map((word, i) => (
+                <motion.span
+                  key={i}
+                  className={word === "Al-Khair" ? "text-lightblue mx-2" : "text-darkblue mx-2"}
+                  variants={{
+                    hidden: { opacity: 0, y: 40, scale: 0.8 },
+                    visible: { opacity: 1, y: 0, scale: 1, transition: { type: "spring", bounce: 0.4, duration: 0.7 } },
+                  }}
+                >
+                  {word}
+                </motion.span>
+              ))}
+            </motion.h1>
+            <motion.p
+              className="text-xl md:text-2xl text-gray-700 leading-relaxed mb-8 flex flex-wrap justify-center"
+              initial="hidden"
+              animate="visible"
+              variants={{
+                visible: { transition: { staggerChildren: 0.045 } },
+                hidden: {},
+              }}
+            >
+              {"Idara Al-Khair Welfare Society is a non-profit organization dedicated to providing quality education, accessible healthcare, and comprehensive social welfare programs for communities across Pakistan. Our mission is to uplift underprivileged families and foster sustainable development through compassion and service.".split(" ").map((word, i) => (
+                <motion.span
+                  key={i}
+                  className="inline-block mr-2"
+                  variants={{
+                    hidden: { opacity: 0, y: 20, scale: 0.8 },
+                    visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.4, type: 'spring', bounce: 0.3 } },
+                  }}
+                >
+                  {word}
+                </motion.span>
+              ))}
+            </motion.p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href={"/donate"} >
               <Button size="lg" className="rounded-full bg-gradient-to-r from-teal-500 to-blue-600 hover:from-teal-600 hover:to-blue-700 text-white shadow-lg">
@@ -104,48 +121,56 @@ export default function AboutPage() {
       </section>
 
       {/* Achievements */}
-      <section className="py-16 bg-gradient-to-r from-teal-50 to-blue-50">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-18">
-            {achievements.map((achievement, index) => (
-              <div key={index} className="text-center group">
-                <div className="w-16 h-16 bg-gradient-to-r from-teal-500 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform shadow-lg hover:bg-blue-50">
-                  <achievement.icon className="w-8 h-8 text-white" strokeWidth={2.5} />
-                </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-2">{achievement.title}</h3>
-                <p className="text-gray-600">{achievement.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <StatsSection />
 
       {/* Mission & Vision */}
       <section className="px-10 py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            <Card className="bg-white shadow-xl border-0 transition-transform duration-300 hover:scale-105 hover:shadow-2xl hover:bg-blue-50">
-              <CardHeader>
-                <CardTitle className="text-3xl text-gray-900">Our Mission</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-lg text-gray-600 leading-relaxed">
-                  To provide education, healthcare, and humanitarian support to underserved communities, empowering them to lead dignified and productive lives.
-                </p>
-              </CardContent>
-            </Card>
-            
-            <Card className="bg-white shadow-xl border-0 transition-transform duration-300 hover:scale-105 hover:shadow-2xl hover:bg-blue-50">
-              <CardHeader>
-                <CardTitle className="text-3xl text-gray-900">Our Vision</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-lg text-gray-600 leading-relaxed">
-                  To create a society where every individual has access to quality education, healthcare, and 
-                  basic necessities, fostering sustainable development and social harmony.
-                </p>
-              </CardContent>
-            </Card>
+            {/* Our Mission Flip Card */}
+            <div className="flip-card">
+              <div className="flip-card-inner">
+                {/* Front Side */}
+                <div className="flip-card-front bg-white shadow-xl border-0 rounded-2xl flex flex-col justify-center items-center p-8">
+                  <div>
+                    <CardTitle className="text-3xl text-gray-900 mb-4">Our Mission</CardTitle>
+                    <p className="text-lg text-gray-600 leading-relaxed">
+                      To provide education, healthcare, and humanitarian support to underserved communities, empowering them to lead dignified and productive lives.
+                    </p>
+                  </div>
+                </div>
+                {/* Back Side */}
+                <div className="flip-card-back bg-blue-50 shadow-xl border-0 rounded-2xl flex flex-col justify-center items-center p-0 overflow-hidden">
+                  <div className="absolute inset-0 w-full h-full">
+                    <Image src="/Education-training.png" alt="Mission" fill className="object-cover w-full h-full" />
+                    <div className="absolute inset-0 bg-black/30 rounded-2xl" />
+                  </div>
+                  <span className="relative z-10 text-2xl text-white font-semibold bg-teal-700/80 px-6 py-3 rounded-full shadow-lg">Empowering Lives</span>
+                </div>
+              </div>
+            </div>
+            {/* Our Vision Flip Card */}
+            <div className="flip-card">
+              <div className="flip-card-inner">
+                {/* Front Side */}
+                <div className="flip-card-front bg-white shadow-xl border-0 rounded-2xl flex flex-col justify-center items-center p-8">
+                  <div>
+                    <CardTitle className="text-3xl text-gray-900 mb-4">Our Vision</CardTitle>
+                    <p className="text-lg text-gray-600 leading-relaxed">
+                      To create a society where every individual has access to quality education, healthcare, and basic necessities, fostering sustainable development and social harmony.
+                    </p>
+                  </div>
+                </div>
+                {/* Back Side */}
+                <div className="flip-card-back bg-blue-50 shadow-xl border-0 rounded-2xl flex flex-col justify-center items-center p-0 overflow-hidden">
+                  <div className="absolute inset-0 w-full h-full">
+                    <Image src="/Blessed-Live.png" alt="Vision" fill className="object-cover w-full h-full" />
+                    <div className="absolute inset-0 bg-black/30 rounded-2xl" />
+                  </div>
+                  <span className="relative z-10 text-2xl text-white font-semibold bg-teal-700/80 px-6 py-3 rounded-full shadow-lg">A Brighter Future</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
