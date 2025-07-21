@@ -98,9 +98,12 @@ export default function TechnicalPage() {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          
             {technicalPrograms.map((program, index) => (
               <Card key={index} className="bg-white shadow-xl hover:shadow-2xl transition-all duration-300 border-0">
+                
                 <div className="relative h-64 overflow-hidden rounded-t-lg">
+                  
                   <Image
                     src={program.image || "/placeholder.svg"}
                     alt={program.title}
