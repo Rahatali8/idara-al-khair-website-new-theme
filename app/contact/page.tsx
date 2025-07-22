@@ -4,7 +4,7 @@ import CallToAction from "@/components/CallToAction"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
-import {MapPin, Phone, Mail, Clock, Heart, Users, Award,Send,Building2,Smartphone,Calendar,User,MessageSquare,} from "lucide-react"
+import {MapPin, Phone, Mail, Clock,Send,Building2,Smartphone,Calendar,User,MessageSquare,} from "lucide-react"
 import { motion } from "framer-motion"
 import { useState } from "react"
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
@@ -71,12 +71,7 @@ const donationMethods: DonationMethod[] = [
   }
 ]
 
-const organizationStats = [
-  { number: "1987", label: "Founded", icon: Award, description: "Year Idara Al-Khair was established." },
-  { number: "37+", label: "Years of Service", icon: Clock, description: "Serving communities for over 37 years." },
-  { number: "700+", label: "Active Volunteers", icon: Users, description: "Dedicated volunteers supporting our mission." },
-  { number: "60+", label: "Programs", icon: Heart, description: "Diverse programs for community welfare." }
-]
+
 
 
 const faqData = [
@@ -269,47 +264,7 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* Organization Stats */}
-      <section className="py-16 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="mb-16">
-            <div className="flex items-center justify-center mb-10">
-              <div className="hidden lg:block flex-1 mr-8">
-                <div className="h-0.5 bg-gradient-to-l from-lightblue via-cyan-500 to-transparent"></div>
-              </div>
-              <div className="text-center px-8">
-                <h2 className="text-4xl md:text-5xl font-bold text-darkblue mb-2">Our <span className="text-lightblue">Organization</span></h2>
-                <p className="text-xl text-gray max-w-3xl mx-auto">Key facts and achievements that define Idara Al-Khair's journey and impact.</p>
-              </div>
-              <div className="hidden lg:block flex-1 ml-8">
-                <div className="h-0.5 bg-gradient-to-r from-lightblue via-cyan-500 to-transparent"></div>
-              </div>
-            </div>
-          </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mx-auto px-8">
-            {organizationStats.map((stat, index) => (
-              <motion.div
-                key={index}
-                className="group relative overflow-hidden bg-white/20 backdrop-blur-md border border-white/30 shadow-xl rounded-2xl p-4 text-left flex flex-col gap-3 max-w-xs mx-auto"
-                whileHover={{ scale: 1.05, y: -5 }}
-                transition={{ duration: 0.3 }}
-              >
-                {/* Animated gradient overlay */}
-                <div className="absolute inset-0 z-0 bg-gradient-to-r from-lightblue via-blue-400 to-lightblue opacity-20 transition-transform duration-500 -translate-x-full group-hover:translate-x-0 rounded-2xl" />
-                {/* Card content */}
-                <div className="relative z-10">
-                  <div className="w-10 h-10 bg-lightblue/80 group-hover:bg-white transition-colors duration-500 backdrop-blur-sm rounded-full flex items-center justify-center mb-2 border border-white/20 group-hover:rotate-[360deg] transition-transform duration-700 mx-auto">
-                    <stat.icon className="w-6 h-6 text-white group-hover:text-lightblue transition-colors duration-500" strokeWidth={2.2} />
-                  </div>
-                  <h3 className="text-xl font-bold text-lightblue group-hover:text-darkblue transition-colors duration-500 mb-1 text-center">{stat.label}</h3>
-                  <div className="text-3xl font-extrabold text-darkblue mb-2 text-center">{stat.number}</div>
-                  <p className="text-gray mb-2 font-light leading-relaxed text-center">{stat.description}</p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+      
      
 
       {/* Contact Information */}
@@ -439,6 +394,126 @@ export default function ContactPage() {
         </div>
       </section>
 
+      
+
+      {/* Contact Form */}
+      <section className="py-20">
+        <div className="container mx-auto px-4">
+          <div className="mb-16">
+            <div className="flex items-center justify-center mb-10">
+              <div className="hidden lg:block flex-1 mr-8">
+                <div className="h-0.5 bg-gradient-to-l from-lightblue via-cyan-500 to-transparent"></div>
+              </div>
+              <div className="text-center px-8">
+                <h2 className="text-4xl md:text-5xl font-bold text-darkblue mb-2">Send Us a <span className="text-lightblue">Message</span></h2>
+                <p className="text-xl text-gray max-w-3xl mx-auto">Have questions or want to get involved? We'd love to hear from you.</p>
+              </div>
+              <div className="hidden lg:block flex-1 ml-8">
+                <div className="h-0.5 bg-gradient-to-r from-lightblue via-cyan-500 to-transparent"></div>
+              </div>
+            </div>
+          </div>
+          <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 items-stretch">
+            {/* Left: Contact Form */}
+            <div className="bg-white/90 shadow-2xl rounded-3xl p-10 border border-lightblue/20 h-full flex flex-col justify-center">
+              <form className="space-y-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div className="space-y-2">
+                    <Label htmlFor="name" className="text-gray-700 font-semibold">Full Name</Label>
+                      <div className="relative">
+                      <User className="absolute left-3 top-3 h-5 w-5 text-lightblue" />
+                        <Input
+                          id="name"
+                          placeholder="Enter your full name"
+                        className="pl-10 h-12 border-gray-300 focus:border-lightblue focus:ring-2 focus:ring-lightblue/40 bg-bglightblue rounded-xl text-darkblue"
+                        />
+                      </div>
+                    </div>
+                    <div className="space-y-2">
+                    <Label htmlFor="email" className="text-gray-700 font-semibold">Email Address</Label>
+                      <div className="relative">
+                      <Mail className="absolute left-3 top-3 h-5 w-5 text-lightblue" />
+                        <Input
+                          id="email"
+                          type="email"
+                          placeholder="Enter your email"
+                        className="pl-10 h-12 border-gray-300 focus:border-lightblue focus:ring-2 focus:ring-lightblue/40 bg-bglightblue rounded-xl text-darkblue"
+                        />
+                    </div>
+                  </div>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div className="space-y-2">
+                    <Label htmlFor="phone" className="text-gray-700 font-semibold">Phone Number</Label>
+                      <div className="relative">
+                      <Smartphone className="absolute left-3 top-3 h-5 w-5 text-lightblue" />
+                        <Input
+                          id="phone"
+                          placeholder="Enter your phone number"
+                        className="pl-10 h-12 border-gray-300 focus:border-lightblue focus:ring-2 focus:ring-lightblue/40 bg-bglightblue rounded-xl text-darkblue"
+                        />
+                      </div>
+                    </div>
+                    <div className="space-y-2">
+                    <Label htmlFor="date" className="text-gray-700 font-semibold">Preferred Date</Label>
+                      <div className="relative">
+                      <Calendar className="absolute left-3 top-3 h-5 w-5 text-lightblue" />
+                        <Input
+                          id="date"
+                          type="date"
+                        className="pl-10 h-12 border-gray-300 focus:border-lightblue focus:ring-2 focus:ring-lightblue/40 bg-bglightblue rounded-xl text-darkblue"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="space-y-2">
+                  <Label htmlFor="message" className="text-gray-700 font-semibold">Message</Label>
+                    <div className="relative">
+                    <MessageSquare className="absolute left-3 top-3 h-5 w-5 text-lightblue" />
+                      <Textarea
+                        id="message"
+                        placeholder="Write your message here..."
+                      className="pl-10 min-h-[120px] border-gray-300 focus:border-lightblue focus:ring-2 focus:ring-lightblue/40 bg-bglightblue rounded-xl text-darkblue resize-none"
+                      />
+                    </div>
+                  </div>
+                  <div className="flex justify-center">
+                  <Button size="lg" className="bg-gradient-to-r from-lightblue to-cyan-400 hover:from-cyan-400 hover:to-lightblue text-white px-10 py-4 shadow-xl rounded-full font-bold text-lg transition-all duration-300 flex items-center gap-2">
+                    <Send className="w-5 h-5" />
+                      Send Message
+                    </Button>
+                  </div>
+                </form>
+            </div>
+            {/* Right: Location/Map */}
+            <div className="flex flex-col justify-center bg-white/60 backdrop-blur-xl shadow-2xl rounded-3xl border border-lightblue/30 p-0 overflow-hidden h-full">
+              <div className="w-full h-64 md:h-80 relative">
+                <iframe
+                  title="Idara Al-Khair Head Office Location"
+                  src="https://www.google.com/maps?q=Sector+5-J+New+Karachi+Town,+Karachi,+Pakistan&output=embed"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0, borderRadius: '1.5rem 1.5rem 0 0' }}
+                  allowFullScreen={true}
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                ></iframe>
+              </div>
+              <div className="p-6 md:p-8 flex flex-col gap-3">
+                <div className="flex items-center gap-3 mb-2">
+                  <MapPin className="w-6 h-6 text-lightblue" />
+                  <span className="font-bold text-darkblue text-lg">Head Office</span>
+                </div>
+                <div className="text-gray-700 font-medium mb-2">Sector 5-J Sector 5 J New Karachi Town, Karachi</div>
+                <div className="flex items-center gap-2 text-gray-700"><Phone className="w-5 h-5 text-lightblue" /> +92 300 211 2609</div>
+                <div className="flex items-center gap-2 text-gray-700"><Mail className="w-5 h-5 text-lightblue" /> info@idaraalkhair.com</div>
+                <div className="mt-4 text-xs text-gray-400">Find us on Google Maps for directions and more details.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* FAQ Section */}
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
@@ -563,124 +638,6 @@ export default function ContactPage() {
                 </div>
               </Accordion>
             )}
-          </div>
-        </div>
-      </section>
-
-      {/* Contact Form */}
-      <section className="py-20">
-        <div className="container mx-auto px-4">
-          <div className="mb-16">
-            <div className="flex items-center justify-center mb-10">
-              <div className="hidden lg:block flex-1 mr-8">
-                <div className="h-0.5 bg-gradient-to-l from-lightblue via-cyan-500 to-transparent"></div>
-              </div>
-              <div className="text-center px-8">
-                <h2 className="text-4xl md:text-5xl font-bold text-darkblue mb-2">Send Us a <span className="text-lightblue">Message</span></h2>
-                <p className="text-xl text-gray max-w-3xl mx-auto">Have questions or want to get involved? We'd love to hear from you.</p>
-              </div>
-              <div className="hidden lg:block flex-1 ml-8">
-                <div className="h-0.5 bg-gradient-to-r from-lightblue via-cyan-500 to-transparent"></div>
-              </div>
-            </div>
-          </div>
-          <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 items-stretch">
-            {/* Left: Contact Form */}
-            <div className="bg-white/90 shadow-2xl rounded-3xl p-10 border border-lightblue/20 h-full flex flex-col justify-center">
-              <form className="space-y-8">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div className="space-y-2">
-                    <Label htmlFor="name" className="text-gray-700 font-semibold">Full Name</Label>
-                      <div className="relative">
-                      <User className="absolute left-3 top-3 h-5 w-5 text-lightblue" />
-                        <Input
-                          id="name"
-                          placeholder="Enter your full name"
-                        className="pl-10 h-12 border-gray-300 focus:border-lightblue focus:ring-2 focus:ring-lightblue/40 bg-bglightblue rounded-xl text-darkblue"
-                        />
-                      </div>
-                    </div>
-                    <div className="space-y-2">
-                    <Label htmlFor="email" className="text-gray-700 font-semibold">Email Address</Label>
-                      <div className="relative">
-                      <Mail className="absolute left-3 top-3 h-5 w-5 text-lightblue" />
-                        <Input
-                          id="email"
-                          type="email"
-                          placeholder="Enter your email"
-                        className="pl-10 h-12 border-gray-300 focus:border-lightblue focus:ring-2 focus:ring-lightblue/40 bg-bglightblue rounded-xl text-darkblue"
-                        />
-                    </div>
-                  </div>
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div className="space-y-2">
-                    <Label htmlFor="phone" className="text-gray-700 font-semibold">Phone Number</Label>
-                      <div className="relative">
-                      <Smartphone className="absolute left-3 top-3 h-5 w-5 text-lightblue" />
-                        <Input
-                          id="phone"
-                          placeholder="Enter your phone number"
-                        className="pl-10 h-12 border-gray-300 focus:border-lightblue focus:ring-2 focus:ring-lightblue/40 bg-bglightblue rounded-xl text-darkblue"
-                        />
-                      </div>
-                    </div>
-                    <div className="space-y-2">
-                    <Label htmlFor="date" className="text-gray-700 font-semibold">Preferred Date</Label>
-                      <div className="relative">
-                      <Calendar className="absolute left-3 top-3 h-5 w-5 text-lightblue" />
-                        <Input
-                          id="date"
-                          type="date"
-                        className="pl-10 h-12 border-gray-300 focus:border-lightblue focus:ring-2 focus:ring-lightblue/40 bg-bglightblue rounded-xl text-darkblue"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                  <div className="space-y-2">
-                  <Label htmlFor="message" className="text-gray-700 font-semibold">Message</Label>
-                    <div className="relative">
-                    <MessageSquare className="absolute left-3 top-3 h-5 w-5 text-lightblue" />
-                      <Textarea
-                        id="message"
-                        placeholder="Write your message here..."
-                      className="pl-10 min-h-[120px] border-gray-300 focus:border-lightblue focus:ring-2 focus:ring-lightblue/40 bg-bglightblue rounded-xl text-darkblue resize-none"
-                      />
-                    </div>
-                  </div>
-                  <div className="flex justify-center">
-                  <Button size="lg" className="bg-gradient-to-r from-lightblue to-cyan-400 hover:from-cyan-400 hover:to-lightblue text-white px-10 py-4 shadow-xl rounded-full font-bold text-lg transition-all duration-300 flex items-center gap-2">
-                    <Send className="w-5 h-5" />
-                      Send Message
-                    </Button>
-                  </div>
-                </form>
-            </div>
-            {/* Right: Location/Map */}
-            <div className="flex flex-col justify-center bg-white/60 backdrop-blur-xl shadow-2xl rounded-3xl border border-lightblue/30 p-0 overflow-hidden h-full">
-              <div className="w-full h-64 md:h-80 relative">
-                <iframe
-                  title="Idara Al-Khair Head Office Location"
-                  src="https://www.google.com/maps?q=Sector+5-J+New+Karachi+Town,+Karachi,+Pakistan&output=embed"
-                  width="100%"
-                  height="100%"
-                  style={{ border: 0, borderRadius: '1.5rem 1.5rem 0 0' }}
-                  allowFullScreen={true}
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                ></iframe>
-              </div>
-              <div className="p-6 md:p-8 flex flex-col gap-3">
-                <div className="flex items-center gap-3 mb-2">
-                  <MapPin className="w-6 h-6 text-lightblue" />
-                  <span className="font-bold text-darkblue text-lg">Head Office</span>
-                </div>
-                <div className="text-gray-700 font-medium mb-2">Sector 5-J Sector 5 J New Karachi Town, Karachi</div>
-                <div className="flex items-center gap-2 text-gray-700"><Phone className="w-5 h-5 text-lightblue" /> +92 300 211 2609</div>
-                <div className="flex items-center gap-2 text-gray-700"><Mail className="w-5 h-5 text-lightblue" /> info@idaraalkhair.com</div>
-                <div className="mt-4 text-xs text-gray-400">Find us on Google Maps for directions and more details.</div>
-              </div>
-            </div>
           </div>
         </div>
       </section>

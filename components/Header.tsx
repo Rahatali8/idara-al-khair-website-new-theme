@@ -59,7 +59,7 @@ export default function Header() {
   }, []);
 
   return (
-    <header className={`bg-gradient-to-r from-white via-blue-50 to-white backdrop-blur-md bg-opacity-95 shadow-xl border-b border-blue-100 sticky top-0 z-50 transition-all duration-500 ${isVisible ? 'translate-y-0' : '-translate-y-full'}`}>
+    <header className={`font-  bg-gradient-to-r from-white via-blue-50 to-white backdrop-blur-md bg-opacity-95 shadow-xl border-b border-blue-100 sticky top-0 z-50 transition-all duration-500 ${isVisible ? 'translate-y-0' : '-translate-y-full'}`}>
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-24">
           {/* Logo */}
@@ -81,38 +81,31 @@ export default function Header() {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
-            <Link href="/" className="relative group">
-              <span className="relative text-gray-700 hover:text-lightblue font-semibold transition-all duration-300 group-hover:scale-105">
-                Home
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-lightblue to-blue-500 transition-all duration-300 group-hover:w-full"></span>
-                {/* bg-lightblue text-white hover:bg-lightblue hover:text-white px-8 py-4 text-lg rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 relative group overflow-hidden */}
-              </span>
-            </Link>
             {/* About Us Dropdown (Desktop) */}
-            <div className="relative group">
-              <button className="relative group flex items-center text-gray-700 hover:text-lightblue font-semibold transition-all duration-300 group-hover:scale-105">
-                <span className="relative">
-                  About Us
-                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-lightblue to-blue-500 transition-all duration-300 group-hover:w-full"></span>
-                </span>
-                <ChevronDown className="ml-1 w-4 h-4 group-hover:rotate-180 transition-transform duration-300" />
+            <div className="relative group flex items-center">
+              <Link href="/about" className="relative text-gray-700 hover:text-lightblue font-semibold transition-all duration-300 group-hover:scale-105 px-2 py-1">
+                About Us
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-lightblue to-blue-500 transition-all duration-300 group-hover:w-full"></span>
+              </Link>
+              <button type="button" className="ml-1 flex items-center focus:outline-none" tabIndex={0}>
+                <ChevronDown className="w-4 h-4 group-hover:rotate-180 transition-transform duration-300" />
               </button>
-              <div className="absolute top-full left-0 mt-2 w-64 bg-white/95 backdrop-blur-md rounded-xl shadow-2xl border border-blue-100 py-3 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 transform origin-top scale-95 group-hover:scale-100">
-                <Link href="/about#our-journey1" className="block px-4 py-3 text-gray-700 hover:bg-gradient-to-r hover:from-blue-50 hover:to-teal-50 hover:text-lightblue group/item rounded-lg mx-2 transition-all duration-300 hover:scale-105">
+              <div className="absolute top-full left-0 mt-2 w-64 bg-white/95 backdrop-blur-md rounded-xl shadow-2xl border border-blue-100 py-3 opacity-0 invisible group-hover:opacity-100 group-hover:visible focus-within:opacity-100 focus-within:visible transition-all duration-300 z-50 transform origin-top scale-95 group-hover:scale-100">
+                <Link href="/about#president-message" className="block px-4 py-3 text-gray-700 hover:bg-gradient-to-r hover:from-blue-50 hover:to-teal-50 hover:text-lightblue group/item rounded-lg mx-2 transition-all duration-300 hover:scale-105">
                   <span className="relative font-medium">
-                    Our Journey
+                    Message from President
+                    <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-lightblue to-blue-500 transition-all duration-300 group-hover/item:w-full"></span>
+                  </span>
+                </Link>
+                <Link href="/about#mission-vision" className="block px-4 py-3 text-gray-700 hover:bg-gradient-to-r hover:from-blue-50 hover:to-teal-50 hover:text-lightblue group/item rounded-lg mx-2 transition-all duration-300 hover:scale-105">
+                  <span className="relative font-medium">
+                    Our Mission and Vision
                     <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-lightblue to-blue-500 transition-all duration-300 group-hover/item:w-full"></span>
                   </span>
                 </Link>
                 <Link href="/about#our-journey" className="block px-4 py-3 text-gray-700 hover:bg-gradient-to-r hover:from-blue-50 hover:to-teal-50 hover:text-lightblue group/item rounded-lg mx-2 transition-all duration-300 hover:scale-105">
                   <span className="relative font-medium">
-                    History and Achievements
-                    <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-lightblue to-blue-500 transition-all duration-300 group-hover/item:w-full"></span>
-                  </span>
-                </Link>
-                <Link href="/about#president-message" className="block px-4 py-3 text-gray-700 hover:bg-gradient-to-r hover:from-blue-50 hover:to-teal-50 hover:text-lightblue group/item rounded-lg mx-2 transition-all duration-300 hover:scale-105">
-                  <span className="relative font-medium">
-                    Message from the President
+                    Our Journey
                     <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-lightblue to-blue-500 transition-all duration-300 group-hover/item:w-full"></span>
                   </span>
                 </Link>

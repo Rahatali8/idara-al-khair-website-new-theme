@@ -19,7 +19,7 @@ export default function StatsSection() {
                 </div>
                 <div className="text-center px-8">
                   <h2 className="text-4xl md:text-5xl font-bold mb-4 text-darkblue">
-                    Our Impact in Numbers
+                    Our Impact <span className="text-lightblue">in Numbers</span>
                   </h2>
                   <p className="text-xl text-gray max-w-3xl mx-auto">Transforming lives across Pakistan since 1987</p>
                 </div>

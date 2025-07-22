@@ -1,25 +1,12 @@
+"use client"
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle, } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import {
-  ArrowLeft,
-  Users,
-  Calendar,
-  MapPin,
-  Heart,
-  Utensils,
-  Clock,
-  Package,
-  Truck,
-} from "lucide-react";
+import { Users, Calendar, MapPin, Heart, Utensils, Clock, Package, Truck, AlertTriangle } from "lucide-react";
 import Link from "next/link";
+import { motion } from "framer-motion";
+import CallToAction from "@/components/CallToAction";
 
 const rotiBankStats = [
   {
@@ -47,10 +34,9 @@ const rotiBankStats = [
 const dailyPrograms = [
   {
     title: "Daily Lunch Program",
-    description:
-      "Fresh, nutritious meals served to 200+ students and teachers daily",
+    description: "Fresh, nutritious meals served to 200+ students and teachers daily",
     time: "12:00 PM - 1:00 PM",
-    icon: "🍽️",
+    icon: <Utensils className="w-8 h-8 text-white" />,
     features: [
       "Balanced Nutrition",
       "Fresh Ingredients",
@@ -60,10 +46,9 @@ const dailyPrograms = [
   },
   {
     title: "Monthly Ration Support",
-    description:
-      "Essential grocery items distributed to 50+ teachers and staff monthly",
+    description: "Essential grocery items distributed to 50+ teachers and staff monthly",
     time: "1st Saturday of every month",
-    icon: "📦",
+    icon: <Package className="w-8 h-8 text-white" />,
     features: [
       "Rice & Flour",
       "Cooking Oil",
@@ -75,7 +60,7 @@ const dailyPrograms = [
     title: "Emergency Food Support",
     description: "Immediate assistance for families facing food insecurity",
     time: "Available 24/7",
-    icon: "🚨",
+    icon: <AlertTriangle className="w-8 h-8 text-white" />,
     features: [
       "Quick Response",
       "Essential Items",
@@ -106,55 +91,80 @@ const distributionCenters = [
 
 export default function RotiBankPage() {
   return (
-    <main className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-teal-50">
+    <main className="min-h-screen">
       {/* Hero Section */}
       <section className="relative min-h-[86vh] bg-gradient-to-br from-slate-50 via-blue-50 to-teal-50 flex items-center justify-center overflow-hidden">
-        <div className="container mx-auto px-4">
+        {/* Background Image */}
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/roti-bank-back.png"
+            alt="Roti Bank Background"
+            fill
+            className="object-cover opacity-60 blur-sm"
+            priority
+          />
+        </div>
+        <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
-            <Badge className="mb-4 bg-teal-100 text-teal-600 hover:bg-teal-200">
-              Roti Bank
-            </Badge>
-            <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6">
-              <span className="bg-gradient-to-r from-teal-500 to-blue-600 bg-clip-text text-transparent">
-                Roti Bank
+            <h1 className="text-5xl md:text-6xl font-bold text-darkblue mb-6">
+              <span className="text-darkblue">
+                Roti <span className="text-lightblue">Bank</span>
               </span>
             </h1>
-            <p className="text-xl md:text-2xl text-gray-600 leading-relaxed mb-8">
+            <p className="text-xm md:text-2xl text-gray leading-relaxed mb-8">
               Providing daily nutritious meals and essential food support to
               over 200 deserving students, teachers, and families. Our
               commitment to food security spans over 20 years of dedicated
               service.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button
-                size="lg"
-                className="bg-gradient-to-r from-teal-500 to-blue-600 hover:from-teal-600 hover:to-blue-700 text-white px-8 py-4 rounded-full font-semibold shadow-lg hover:shadow-xl transition-all duration-300 text-lg"
-              >
-                <Heart className="mr-2 h-5 w-5" />
-                Support Roti Bank
-              </Button>
-              <Button className="text-blue-700" size="lg" variant="outline">
-                Volunteer with Us
-              </Button>
+              <a href="/donate" className="inline-block mt-4">
+                <button className="relative px-8 py-3 font-semibold rounded-full border-2 border-lightblue text-lightblue overflow-hidden group transition-colors duration-300 bg-white">
+                  {/* Animated gradient overlay */}
+                  <span className="absolute inset-0 z-0 bg-gradient-to-r from-lightblue via-blue-400 to-lightblue opacity-20 transition-transform duration-500 -translate-x-full group-hover:translate-x-0 rounded-full" />
+                  <span className="relative z-10">Support Roti Bank</span>
+                </button>
+              </a>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Stats Section */}
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {rotiBankStats.map((stat, index) => (
-              <div key={index} className="text-center">
-                <div className="w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <stat.icon className="w-8 h-8 text-teal-600" />
-                </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-2">
-                  {stat.title}
-                </h3>
-                <p className="text-gray-600">{stat.description}</p>
+          <div className="mb-16">
+            <div className="flex items-center justify-center mb-10">
+              <div className="hidden lg:block flex-1 mr-8">
+                <div className="h-0.5 bg-gradient-to-l from-lightblue via-cyan-500 to-transparent"></div>
               </div>
+              <div className="text-center px-8">
+                <h2 className="text-4xl md:text-5xl font-bold text-darkblue mb-2">Our <span className="text-lightblue">Organization</span></h2>
+                <p className="text-xl text-gray max-w-3xl mx-auto">Key facts and achievements that define Idara Al-Khair's journey and impact.</p>
+              </div>
+              <div className="hidden lg:block flex-1 ml-8">
+                <div className="h-0.5 bg-gradient-to-r from-lightblue via-cyan-500 to-transparent"></div>
+              </div>
+            </div>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mx-auto px-8">
+            {rotiBankStats.map((stat, index) => (
+              <motion.div
+                key={index}
+                className="group relative overflow-hidden bg-white/20 backdrop-blur-md border border-white/30 shadow-xl rounded-2xl p-4 text-left flex flex-col gap-3 max-w-xs mx-auto"
+                whileHover={{ scale: 1.05, y: -5 }}
+                transition={{ duration: 0.3 }}
+              >
+                {/* Animated gradient overlay */}
+                <div className="absolute inset-0 z-0 bg-gradient-to-r from-lightblue via-blue-400 to-lightblue opacity-20 transition-transform duration-500 -translate-x-full group-hover:translate-x-0 rounded-2xl" />
+                {/* Card content */}
+                <div className="relative z-10">
+                  <div className="w-10 h-10 bg-lightblue/80 group-hover:bg-white transition-colors duration-500 backdrop-blur-sm rounded-full flex items-center justify-center mb-2 border border-white/20 group-hover:rotate-[360deg] transition-transform duration-700 mx-auto">
+                    <stat.icon className="w-6 h-6 text-white group-hover:text-lightblue transition-colors duration-500" strokeWidth={2.2} />
+                  </div>
+                  <h3 className="text-xl font-bold text-lightblue group-hover:text-darkblue transition-colors duration-500 mb-1 text-center">{stat.title}</h3>
+                  <p className="text-gray mb-2 font-light leading-relaxed text-center">{stat.description}</p>
+                </div>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -163,10 +173,22 @@ export default function RotiBankPage() {
       {/* About Roti Bank */}
       <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-4">
+          <div className="mb-12 flex items-center justify-center">
+            <div className="hidden md:block flex-1 mr-8">
+              <div className="h-0.5 bg-gradient-to-l from-lightblue via-cyan-500 to-transparent"></div>
+            </div>
+            <div className="text-center px-8">
+              <h2 className="text-4xl font-bold text-darkblue mb-2">About <span className="text-lightblue">Our Program</span></h2>
+              <p className="text-lg text-gray-600 max-w-2xl mx-auto mt-2">Roti Bank is Idara Al-Khair's flagship food support initiative, ensuring no student goes hungry and every family has access to nutritious meals.</p>
+            </div>
+            <div className="hidden md:block flex-1 ml-8">
+              <div className="h-0.5 bg-gradient-to-r from-lightblue via-cyan-500 to-transparent"></div>
+            </div>
+          </div>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center px-6 md:px-12">
             <div>
-              <h2 className="text-4xl font-bold text-gray-900 mb-6">
-                About Roti Bank
+              <h2 className="text-4xl font-bold text-darkblue mb-6">
+                Roti <span className="text-lightblue">Bank</span>
               </h2>
               <p className="text-lg text-gray-600 mb-6">
                 Roti Bank is Idara Al-Khair's flagship food support initiative,
@@ -182,32 +204,32 @@ export default function RotiBankPage() {
               </p>
               <div className="grid grid-cols-2 gap-6">
                 <div className="flex items-center">
-                  <Clock className="w-6 h-6 text-teal-600 mr-3" />
+                  <Clock className="w-6 h-6 text-lightblue mr-3" />
                   <div>
-                    <h4 className="font-semibold text-gray-900">Established</h4>
+                    <h4 className="font-semibold text-darkblue">Established</h4>
                     <p className="text-gray-600">2003</p>
                   </div>
                 </div>
                 <div className="flex items-center">
-                  <Users className="w-6 h-6 text-teal-600 mr-3" />
+                  <Users className="w-6 h-6 text-lightblue mr-3" />
                   <div>
-                    <h4 className="font-semibold text-gray-900">
+                    <h4 className="font-semibold text-darkblue">
                       Daily Recipients
                     </h4>
                     <p className="text-gray-600">200+ Students</p>
                   </div>
                 </div>
                 <div className="flex items-center">
-                  <MapPin className="w-6 h-6 text-teal-600 mr-3" />
+                  <MapPin className="w-6 h-6 text-lightblue mr-3" />
                   <div>
-                    <h4 className="font-semibold text-gray-900">Centers</h4>
+                    <h4 className="font-semibold text-darkblue">Centers</h4>
                     <p className="text-gray-600">2 Locations</p>
                   </div>
                 </div>
                 <div className="flex items-center">
-                  <Heart className="w-6 h-6 text-teal-600 mr-3" />
+                  <Heart className="w-6 h-6 text-lightblue mr-3" />
                   <div>
-                    <h4 className="font-semibold text-gray-900">Service</h4>
+                    <h4 className="font-semibold text-darkblue">Service</h4>
                     <p className="text-gray-600">100% Free</p>
                   </div>
                 </div>
@@ -228,54 +250,50 @@ export default function RotiBankPage() {
       {/* Programs */}
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">
-              Our Food Programs
-            </h2>
-            <p className="text-xl md:text-2xl text-gray-600 leading-relaxed max-w-3xl mx-auto">
-              Comprehensive food support programs designed to ensure nutrition
-              and food security for our community.
-            </p>
+          <div className="mb-12 flex items-center justify-center">
+            <div className="hidden md:block flex-1 mr-8">
+              <div className="h-0.5 bg-gradient-to-l from-lightblue via-cyan-500 to-transparent"></div>
+            </div>
+            <div className="text-center px-8">
+              <h2 className="text-4xl font-bold text-darkblue mb-2">Our <span className="text-lightblue">Food Programs</span></h2>
+              <p className="text-lg text-gray-600 max-w-2xl mx-auto mt-2">Comprehensive food support programs designed to ensure nutrition and food security for our community.</p>
+            </div>
+            <div className="hidden md:block flex-1 ml-8">
+              <div className="h-0.5 bg-gradient-to-r from-lightblue via-cyan-500 to-transparent"></div>
+            </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 px-6 md:px-12">
             {dailyPrograms.map((program, index) => (
-              <Card
+              <div
                 key={index}
-                className="hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2"
+                className="group relative overflow-hidden bg-white/30 backdrop-blur-[6px] border border-white/30 shadow-[0_8px_32px_rgba(0,60,255,0.10)] rounded-2xl p-4 text-left flex flex-col gap-3 max-w-xs mx-auto transition-transform duration-300 hover:scale-105 hover:shadow-[0_12px_48px_rgba(0,60,255,0.18)]"
               >
-                <CardHeader className="text-center">
-                  <div className="text-4xl mb-4">{program.icon}</div>
-                  <CardTitle className="text-xl text-teal-600">
-                    {program.title}
-                  </CardTitle>
-                  <CardDescription className="text-base">
-                    {program.description}
-                  </CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <div className="flex items-center justify-center text-sm text-gray-600">
+                {/* Animated gradient overlay */}
+                <div className="absolute inset-0 z-0 bg-gradient-to-r from-lightblue via-blue-400 to-lightblue opacity-20 transition-transform duration-500 -translate-x-full group-hover:translate-x-0 rounded-2xl" />
+                {/* Card content */}
+                <div className="relative z-10 flex flex-col items-center">
+                  <div className="w-10 h-10 bg-lightblue/80 group-hover:bg-lightblue transition-colors duration-500 backdrop-blur-sm rounded-full flex items-center justify-center mb-2 border border-white/20 group-hover:rotate-[360deg] transition-transform duration-700">
+                    {program.icon}
+                  </div>
+                  <h3 className="text-xl font-bold text-lightblue group-hover:text-darkblue transition-colors duration-500 mb-1 text-center">{program.title}</h3>
+                  <p className="text-gray mb-2 font-light leading-relaxed text-center">{program.description}</p>
+                  <div className="flex items-center justify-center text-sm text-gray-600 mb-2">
                     <Clock className="w-4 h-4 mr-2" />
                     {program.time}
                   </div>
                   <div>
-                    <span className="font-semibold text-gray-900 text-sm">
-                      Features:
-                    </span>
-                    <div className="flex flex-wrap gap-1 mt-2">
+                    <span className="font-semibold text-darkblue text-sm">Features:</span>
+                    <div className="flex flex-wrap gap-1 mt-2 justify-center">
                       {program.features.map((feature, idx) => (
-                        <Badge
-                          key={idx}
-                          variant="secondary"
-                          className="text-xs"
-                        >
+                        <Badge key={idx} variant="secondary" className="text-xs">
                           {feature}
                         </Badge>
                       ))}
                     </div>
                   </div>
-                </CardContent>
-              </Card>
+                </div>
+              </div>
             ))}
           </div>
         </div>
@@ -284,111 +302,73 @@ export default function RotiBankPage() {
       {/* Distribution Centers */}
       <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">
-              Distribution Centers
-            </h2>
-            <p className="text-xl md:text-2xl text-gray-600 leading-relaxed max-w-3xl mx-auto">
-              Visit our centers to receive food support or learn more about our
-              programs.
-            </p>
+          <div className="mb-12 flex items-center justify-center">
+            <div className="hidden md:block flex-1 mr-8">
+              <div className="h-0.5 bg-gradient-to-l from-lightblue via-cyan-500 to-transparent"></div>
+            </div>
+            <div className="text-center px-8">
+              <h2 className="text-4xl font-bold text-darkblue mb-2">Distribution <span className="text-lightblue">Centers</span></h2>
+              <p className="text-lg text-gray-600 max-w-2xl mx-auto mt-2">Visit our centers to receive food support or learn more about our programs.</p>
+            </div>
+            <div className="hidden md:block flex-1 ml-8">
+              <div className="h-0.5 bg-gradient-to-r from-lightblue via-cyan-500 to-transparent"></div>
+            </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 px-6 md:px-12">
             {distributionCenters.map((center, index) => (
-              <Card key={index} className="hover:shadow-lg transition-shadow">
-                <CardHeader>
-                  <CardTitle className="text-xl text-gray-900">
-                    {center.name}
-                  </CardTitle>
-                  <CardDescription className="flex items-center text-gray-600">
+              <div
+                key={index}
+                className="group relative overflow-hidden bg-white/30 backdrop-blur-[6px] border border-white/30 shadow-[0_8px_32px_rgba(0,60,255,0.10)] rounded-2xl p-4 text-left flex flex-col gap-3 w-full max-w-md mx-auto transition-transform duration-300 hover:scale-105 hover:shadow-[0_12px_48px_rgba(0,60,255,0.18)]"
+              >
+                {/* Animated gradient overlay */}
+                <div className="absolute inset-0 z-0 bg-gradient-to-r from-lightblue via-blue-400 to-lightblue opacity-10 transition-transform duration-500 -translate-x-full group-hover:translate-x-0 rounded-2xl" />
+                {/* Card content */}
+                <div className="relative z-10">
+                  <div className="text-xl text-darkblue font-bold mb-2 text-center">{center.name}</div>
+                  <div className="flex items-center justify-center text-gray-600 mb-2">
                     <MapPin className="w-4 h-4 mr-1" />
                     {center.location}
-                  </CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <div>
-                    <span className="font-semibold text-gray-900 text-sm">
-                      Services:
-                    </span>
-                    <div className="flex flex-wrap gap-1 mt-2">
-                      {center.services.map((service, idx) => (
-                        <Badge
-                          key={idx}
-                          variant="secondary"
-                          className="text-xs"
-                        >
-                          {service}
-                        </Badge>
-                      ))}
-                    </div>
                   </div>
-                  <div className="grid grid-cols-2 gap-4 text-sm">
+                  <div className="font-semibold text-darkblue text-sm mb-1">Services:</div>
+                  <div className="flex flex-wrap gap-1 mb-2 justify-center">
+                    {center.services.map((service, idx) => (
+                      <Badge key={idx} variant="secondary" className="text-xs">
+                        {service}
+                      </Badge>
+                    ))}
+                  </div>
+                  <div className="grid grid-cols-2 gap-4 text-sm mb-2">
                     <div>
-                      <span className="font-semibold text-gray-900">
-                        Hours:
-                      </span>
+                      <span className="font-semibold text-darkblue">Hours:</span>
                       <p className="text-gray-600">{center.hours}</p>
                     </div>
                     <div>
-                      <span className="font-semibold text-gray-900">
-                        Contact:
-                      </span>
-                      <p className="text-teal-600 font-bold">
-                        {center.contact}
-                      </p>
+                      <span className="font-semibold text-darkblue">Contact:</span>
+                      <p className="text-lightblue font-bold">{center.contact}</p>
                     </div>
                   </div>
+                  {/* Divider */}
+                  <div className="w-full h-0.5 bg-gradient-to-r from-lightblue via-cyan-400 to-blue-400 rounded-full my-4" />
+                  {/* Button */}
                   <Button
+                    size="lg"
+                    className="w-full border-2 border-lightblue text-lightblue bg-transparent hover:bg-lightblue/10 rounded-full font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
                     asChild
-                    className="w-full bg-gradient-to-r from-teal-500 to-blue-600 hover:from-teal-600 hover:to-blue-700 text-white font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
                   >
-                    <a
-                      href={center.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
+                    <a href={center.link} target="_blank" rel="noopener noreferrer">
                       Visit Center
                     </a>
                   </Button>
-                </CardContent>
-              </Card>
+                </div>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
       {/* Call to Action */}
-      <section className="py-20 bg-gradient-to-r from-teal-600 to-blue-700">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-4xl font-bold mb-4 text-white">
-            Support Our Roti Bank Mission
-          </h2>
-          <p className="text-xl md:text-2xl text-white/90 leading-relaxed mb-8">
-            Help us provide nutritious meals to more children. Your support can
-            ensure no child goes hungry and every student has the energy to
-            learn and grow.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href={"/donate"}>
-            <Button
-              size="lg"
-              className="bg-white text-teal-600 hover:bg-gray-100 px-8 py-3 rounded-full font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
-            >
-              Donate to Roti Bank
-            </Button>
-            </Link>
-            <Button
-              size="lg"
-              variant="outline"
-              asChild
-              className="border-white text-white hover:bg-white hover:text-teal-600 bg-transparent px-8 py-3 rounded-full font-semibold transition-all duration-300"
-            >
-              <Link href="/volunteers">Become a Volunteer</Link>
-            </Button>
-          </div>
-        </div>
-      </section>
+      <CallToAction />
     </main>
   );
 }

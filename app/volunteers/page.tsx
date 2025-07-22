@@ -219,7 +219,7 @@ export default function VolunteersPage() {
                         </a>
                       </>
                     );
-                  })()}
+               })()}
           </div>
         </div>
       </section>

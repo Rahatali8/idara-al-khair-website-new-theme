@@ -1,27 +1,16 @@
+"use client"
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import {Card,CardContent,CardDescription,CardHeader,CardTitle,} from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import {
-  GraduationCap,
-  Users,
-  BookOpen,
-  Award,
-  MapPin,
-  Phone,
-  Star,
-} from "lucide-react";
+import {GraduationCap,Users,BookOpen,Award,MapPin,Phone,Star,} from "lucide-react";
 import Link from "next/link";
+import CallToAction from "@/components/CallToAction";
+import { motion } from "framer-motion"
 
 const campuses = [
   {
-    name: "Idara Al Khair-Campus 1 (Head Campus)",
+    name: "Idara Al Khair (Head Campus)",
     location: "Sector 5-J, New Karachi Town, Karachi ",
     established: "1995",
     students: "1,200+",
@@ -54,7 +43,7 @@ const campuses = [
     ],
     contact: "+92 300 2112609",
     description:
-      "Serving the Gadap town community with quality education and modern facilities.",
+      "Serving the Gadap town community with quality education and modern facilities and education.",
     link: "https://www.google.com/maps/place/Idara+Al+Khair+Campus+2/@25.0292492,67.0272397,18z/data=!4m14!1m7!3m6!1s0x3eb34220bd3302db:0xbe0b7e820bf9a39b!2sIdara+Al+Khair+Campus+2!8m2!3d25.0291836!4d67.0272585!16s%2Fg%2F11dylxjzm4!3m5!1s0x3eb34220bd3302db:0xbe0b7e820bf9a39b!8m2!3d25.0291836!4d67.0272585!16s%2Fg%2F11dylxjzm4?entry=ttu&g_ep=EgoyMDI1MDcwOS4wIKXMDSoASAFQAw%3D%3D",
   },
   {
@@ -91,12 +80,12 @@ const campuses = [
     ],
     contact: "+92 300 2112609",
     description:
-      "Providing accessible education to underserved communities in Gul Muhammad Qalandrani Goth Gadap tpwn.",
+      "Providing accessible education to underserved communities.",
     link: "https://www.google.com/maps/place/Idara+Al-Khair+Campus+4/@25.0420818,67.00908,17z/data=!3m1!4b1!4m6!3m5!1s0x3eb343006a997a39:0xf1d2cbb353add084!8m2!3d25.042077!4d67.0116603!16s%2Fg%2F11w8s4clrw?entry=ttu&g_ep=EgoyMDI1MDcwOS4wIKXMDSoASAFQAw%3D%3D",
   },
   {
     name: "Idara Al-khair campus 5",
-    location: "Sector 5-M, North Karachi Town",
+    location: "Sector 5-M, North Karachi B-5/5M Backside of Kifayah",
     established: "2012",
     students: "600+",
     grades: "Pre-K to Grade 10",
@@ -162,43 +151,110 @@ export default function CampusesPage() {
             src="/campus-page-back.png"
             alt="campus-page-background"
             fill
-            className="object-cover"
+            className="object-cover blur-sm"
             priority
           />
         </div>
-        
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
-            <Badge className="mb-4 bg-purple-100 text-teal-600 hover:bg-purple-200">Campusses</Badge>
-            <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6">
-              <span className="bg-gradient-to-r from-teal-500 to-blue-600 bg-clip-text text-transparent">Campuses Across Karachi
-              </span>
-            </h1>
-            <p className="text-xl md:text-2xl text-gray-800 leading-relaxed mb-8">
-            Six strategically located campuses across Karachi, each thoughtfully designed to serve local communities with quality education and modern facilities. Our campuses offer easy access for students in all areas of the city, featuring state-of-the-art classrooms, well-equipped labs, libraries, and dedicated spaces for extracurricular activities.
-              We aim to create a supportive, inclusive environment where every student can thrive and achieve their full potential close to home.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="#campuses" className="bg-teal-600 hover:bg-teal-700 text-white px-4 py-2 rounded-md">
-                  Learn more about our campuses
-              </Link>
-            </div>
+            {(() => {
+              const headingWords = ["Campuses", "Across", "Karachi"];
+              const subtext = "Six strategically located campuses across Karachi, each thoughtfully designed to serve local communities with quality education and modern facilities. Our campuses offer easy access for students in all areas of the city, featuring state-of-the-art classrooms, well-equipped labs, libraries, and dedicated spaces for extracurricular activities.";
+              return (
+                <>
+                  <motion.h1
+                    className="text-5xl md:text-6xl font-bold mb-6 text-darkblue flex flex-wrap justify-center"
+                    initial="hidden"
+                    animate="visible"
+                    variants={{
+                      visible: { transition: { staggerChildren: 0.18 } },
+                      hidden: {},
+                    }}
+                  >
+                    {headingWords.map((word, i) => (
+                      <motion.span
+                        key={i}
+                        className={word === "Karachi" ? "text-lightblue mx-2" : "mx-2"}
+                        variants={{
+                          hidden: { opacity: 0, y: 40, scale: 0.8 },
+                          visible: { opacity: 1, y: 0, scale: 1, transition: { type: "spring", bounce: 0.4, duration: 0.7 } },
+                        }}
+                      >
+                        {word}
+                      </motion.span>
+                    ))}
+                  </motion.h1>
+                  <motion.p
+                    className="text-xl md:text-2xl text-gray-800 leading-relaxed mb-8 flex flex-wrap justify-center"
+                    initial="hidden"
+                    animate="visible"
+                    variants={{
+                      visible: { transition: { staggerChildren: 0.045 } },
+                      hidden: {},
+                    }}
+                  >
+                    {subtext.split(" ").map((word, i) => (
+                      <motion.span
+                        key={i}
+                        className="inline-block mr-2"
+                        variants={{
+                          hidden: { opacity: 0, y: 20, scale: 0.8 },
+                          visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.4, type: 'spring', bounce: 0.3 } },
+                        }}
+                      >
+                        {word}
+                      </motion.span>
+                    ))}
+                  </motion.p>
+                  <a href="#campuses" className="inline-block mt-4">
+                    <button className="relative px-8 py-3 font-semibold rounded-full border-2 border-lightblue text-lightblue overflow-hidden group transition-colors duration-300 bg-white">
+                      {/* Animated gradient overlay */}
+                      <span className="absolute inset-0 z-0 bg-gradient-to-r from-lightblue via-blue-400 to-lightblue opacity-20 transition-transform duration-500 -translate-x-full group-hover:translate-x-0 rounded-full" />
+                      <span className="relative z-10">Learn More</span>
+                    </button>
+                  </a>
+                </>
+              );
+            })()}
           </div>
         </div>
       </section>
       {/* Achievements */}
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="mb-12">
+            <div className="flex items-center justify-center mb-4">
+              <div className="hidden lg:block flex-1 mr-8">
+                <div className="h-0.5 bg-gradient-to-l from-lightblue via-cyan-500 to-transparent"></div>
+              </div>
+              <div className="text-center px-8">
+                <h2 className="text-4xl md:text-5xl font-bold mb-4 text-darkblue">Our <span className="text-lightblue">Achievements</span></h2>
+                <p className="text-xl text-gray-600 max-w-2xl mx-auto text-center mt-2">Celebrating our milestones and impact in education.</p>
+              </div>
+              <div className="hidden lg:block flex-1 ml-8">
+                <div className="h-0.5 bg-gradient-to-r from-lightblue via-cyan-500 to-transparent"></div>
+              </div>
+            </div>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 ml-12 mr-12">
             {achievements.map((achievement, index) => (
-              <div key={index} className="text-center">
-                <div className="w-16 h-16 bg-teal-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <achievement.icon className="w-8 h-8 text-teal-600" />
+              <div
+                key={index}
+                className="group text-center bg-white/90 border border-gray-200 shadow-xl rounded-2xl p-8 flex flex-col items-center relative overflow-hidden transition-transform duration-300 hover:scale-105 hover:shadow-2xl hover:border-lightblue"
+              >
+                {/* Animated gradient overlay */}
+                <span className="absolute inset-0 z-0 bg-gradient-to-r from-lightblue via-blue-400 to-lightblue opacity-10 transition-transform duration-500 -translate-x-full group-hover:translate-x-0 rounded-2xl" />
+                <div className="relative z-10 mb-4">
+                  <div className="w-16 h-16 rounded-full bg-gradient-to-br from-lightblue via-blue-400 to-cyan-400 flex items-center justify-center shadow-lg p-1 transition-transform duration-700 group-hover:rotate-[360deg]">
+                    <div className="w-12 h-12 rounded-full bg-white/80 flex items-center justify-center">
+                      <achievement.icon className="w-8 h-8 text-lightblue" />
+                    </div>
+                  </div>
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-2">
+                <h3 className="relative z-10 text-2xl font-bold text-darkblue mb-2">
                   {achievement.title}
                 </h3>
-                <p className="text-gray-600">{achievement.description}</p>
+                <p className="relative z-10 text-gray-600">{achievement.description}</p>
               </div>
             ))}
           </div>
@@ -206,26 +262,32 @@ export default function CampusesPage() {
       </section>
 
       {/* Campus Cards */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-20">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 id="campuses" className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-              Our Campuses
+          <div className="mb-16">
+            <div className="flex items-center justify-center mb-4">
+              <div className="hidden lg:block flex-1 mr-8">
+                <div className="h-0.5 bg-gradient-to-l from-lightblue via-cyan-500 to-transparent"></div>
+              </div>
+              <div className="text-center px-8">
+                <h2 id="campuses" className="text-5xl md:text-5xl font-bold text-darkblue mb-4">
+                  Our <span className="text-lightblue">Campuses</span>
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Six strategically located campuses across Karachi, each designed
-              to serve local communities with quality education and modern
-              facilities.
-            </p>
+                <p className="text-xl text-gray max-w-3xl mx-auto">Six strategically located campuses across Karachi, each designed to serve local communities with quality education and modern facilities.</p>
+              </div>
+              <div className="hidden lg:block flex-1 ml-8">
+                <div className="h-0.5 bg-gradient-to-r from-lightblue via-cyan-500 to-transparent"></div>
+              </div>
+            </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {campuses.map((campus, index) => (
               <Card
                 key={index}
-                className="hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2"
+    className="bg-white/90 border border-gray-200 shadow-xl rounded-2xl transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:border-lightblue flex flex-col min-h-[520px]"
               >
-                <div className="relative h-48 overflow-hidden rounded-t-lg">
+    <div className="relative h-48 overflow-hidden rounded-t-2xl">
                   <Image
                     src={campus.image || "/placeholder.svg"}
                     alt={campus.name}
@@ -233,74 +295,60 @@ export default function CampusesPage() {
                     className="object-cover transition-transform duration-300 hover:scale-105"
                   />
                   <div className="absolute top-4 left-4">
-                    <Badge className="bg-teal-600 text-white">
+        <Badge className="bg-gradient-to-br from-lightblue via-blue-400 to-cyan-400 text-white font-semibold shadow px-4 py-1 rounded-full text-xs">
                       Est. {campus.established}
                     </Badge>
                   </div>
                 </div>
-
-                <CardHeader>
-                  <CardTitle className="text-xl text-gray-900">
+    <div className="flex-1 flex flex-col justify-between">
+      <CardHeader className="pb-0">
+        <CardTitle className="text-xl text-darkblue mb-1 text-left">
                     {campus.name}
                   </CardTitle>
-                  <CardDescription className="flex items-center text-gray-600">
+        <CardDescription className="flex items-center text-gray-600 mb-3 text-left">
                     <MapPin className="w-4 h-4 mr-1" />
                     {campus.location}
                   </CardDescription>
                 </CardHeader>
-
-                <CardContent className="space-y-4 px-8">
-                  <p className="text-gray-600 text-sm">{campus.description}</p>
-
-                  <div className="grid grid-cols-2 gap-4 text-sm">
-                    <div>
-                      <span className="font-semibold text-gray-900">
-                        Students:
-                      </span>
-                      <p className="text-teal-600 font-bold">
-                        {campus.students}
-                      </p>
+      <CardContent className="px-8 flex-1 flex flex-col gap-2 text-left">
+        <p className="text-gray-700 text-sm mb-2">{campus.description}</p>
+        <div className="flex flex-col gap-1 mb-2">
+          <div className="flex items-center gap-2">
+            <span className="font-semibold text-gray-900">Students:</span>
+            <span className="text-lightblue font-bold">{campus.students}</span>
                     </div>
-                    <div>
-                      <span className="font-semibold text-gray-900">
-                        Grades:
-                      </span>
-                      <p className="text-gray-600">{campus.grades}</p>
+          <div className="flex items-center gap-2">
+            <span className="font-semibold text-gray-900">Grades:</span>
+            <span className="text-gray-600">{campus.grades}</span>
                     </div>
                   </div>
-
-                  <div>
-                    <span className="font-semibold text-gray-900 text-sm">
-                      Facilities:
-                    </span>
-                    <div className="flex flex-wrap gap-1 mt-2">
+        <div className="mb-2">
+          <span className="font-semibold text-gray-900 text-sm">Facilities:</span>
+          <div className="flex flex-wrap gap-1 mt-1">
                       {campus.facilities.map((facility, idx) => (
                         <Badge
                           key={idx}
                           variant="secondary"
-                          className="text-xs"
+                className="text-xs bg-lightblue/10 text-lightblue border border-lightblue/20"
                         >
                           {facility}
                         </Badge>
                       ))}
                     </div>
                   </div>
-
-                  <div className="flex items-center justify-between pt-4 border-t">
+        <div className="border-t border-lightblue/10 mt-4 pt-4 flex items-center justify-between">
                     <div className="flex items-center text-sm text-gray-600">
                       <Phone className="w-4 h-4 mr-1" />
                       {campus.contact}
                     </div>
-                    <a
-                      href={campus.link}
-                      target="_blank"
-                    >
-                      <Button size="sm" variant="outline">
+          <a href={campus.link} target="_blank">
+            <Button size="sm" variant="outline" className="border-lightblue text-lightblue font-semibold">
                         Visit Campus
                       </Button>
                     </a>
                   </div>
                 </CardContent>
+    </div>
               </Card>
             ))}
           </div>
@@ -310,14 +358,21 @@ export default function CampusesPage() {
       {/* Programs Offered */}
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">
-              Academic Programs
+          <div className="mb-16">
+            <div className="flex items-center justify-center mb-4">
+              <div className="hidden lg:block flex-1 mr-8">
+                <div className="h-0.5 bg-gradient-to-l from-lightblue via-cyan-500 to-transparent"></div>
+              </div>
+              <div className="text-center px-8">
+                <h2 className="text-4xl font-bold text-darkblue mb-4">
+                  Academic <span className="text-lightblue">Programs</span>
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Comprehensive educational programs designed to nurture young minds
-              and prepare them for future success.
-            </p>
+                <p className="text-xl text-gray max-w-3xl mx-auto">Comprehensive educational programs designed to nurture young minds and prepare them for future success.</p>
+              </div>
+              <div className="hidden lg:block flex-1 ml-8">
+                <div className="h-0.5 bg-gradient-to-r from-lightblue via-cyan-500 to-transparent"></div>
+              </div>
+            </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
@@ -390,15 +445,36 @@ export default function CampusesPage() {
                   "Scholarship Program",
                 ],
               },
-            ].map((program, index) => (
-              <Card key={index} className="hover:shadow-lg transition-shadow">
+            ].map((program, index) => {
+    // Choose an icon for each card (cycle through a set)
+    const icons = [GraduationCap, BookOpen, Users, Award, Star];
+    const Icon = icons[index % icons.length];
+    return (
+      <Card
+        key={index}
+        className="group bg-white/90 border border-gray-200 shadow-xl rounded-2xl transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:border-lightblue flex flex-col min-h-[420px] relative overflow-hidden"
+      >
+        {/* Animated gradient overlay on hover */}
+        <span className="absolute inset-0 z-0 bg-gradient-to-r from-lightblue via-blue-400 to-lightblue opacity-10 transition-transform duration-500 -translate-x-full group-hover:translate-x-0 rounded-2xl" />
+        <div className="flex flex-col items-center pt-8 pb-2">
+          {/* Glassy gradient ring icon */}
+          <div className="mb-2">
+            <div className="w-16 h-16 rounded-full bg-gradient-to-br from-lightblue via-blue-400 to-cyan-400 flex items-center justify-center shadow-lg p-1 transition-transform duration-700 group-hover:rotate-[360deg]">
+              <div className="w-12 h-12 rounded-full bg-white/80 flex items-center justify-center">
+                <Icon className="w-8 h-8 text-lightblue" />
+              </div>
+            </div>
+          </div>
+        </div>
                 <CardHeader>
-                  <CardTitle className="text-xl text-teal-600">
+          <CardTitle className="text-xl text-darkblue mb-1 text-center">
                     {program.title}
                   </CardTitle>
-                  <CardDescription>{program.description}</CardDescription>
+          <CardDescription className="text-gray-600 text-center mb-2">
+            {program.description}
+          </CardDescription>
                 </CardHeader>
-                <CardContent className="px-8">
+        <CardContent className="px-8 pb-6">
                   <ul className="space-y-2">
                     {program.features.map((feature, idx) => (
                       <li
@@ -412,41 +488,14 @@ export default function CampusesPage() {
                   </ul>
                 </CardContent>
               </Card>
-            ))}
+    );
+  })}
           </div>
         </div>
       </section>
 
       {/* Call to Action */}
-      <section className="py-20 bg-gradient-to-r from-teal-600 to-blue-700 text-white">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-4xl font-bold mb-4">
-            Join Our Educational Mission
-          </h2>
-          <p className="text-xl opacity-90 mb-8 max-w-3xl mx-auto">
-            Help us provide quality education to more children. Your support can
-            transform lives and build a better future.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/donate">
-              <Button
-                size="lg"
-                className="bg-white text-teal-600 hover:bg-gray-100"
-              >
-                Donate to Education
-              </Button>
-            </Link>
-            <Button
-              size="lg"
-              variant="outline"
-              asChild
-              className="border-white text-white hover:bg-white hover:text-teal-600 bg-transparent"
-            >
-              <Link href="/volunteers">Become a Volunteer Teacher</Link>
-            </Button>
-          </div>
-        </div>
-      </section>
+      <CallToAction />
     </main>
   );
 }
