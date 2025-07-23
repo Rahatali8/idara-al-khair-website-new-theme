@@ -1,9 +1,7 @@
 "use client"
 import Image from "next/image"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { ArrowLeft, Users, Calendar, MapPin, Heart, Truck, Package, Globe, Clock, Star } from "lucide-react"
+import { Users, MapPin, Heart, Truck, Package, Globe, Clock, AlertTriangle, Utensils, Book, Hospital, Briefcase } from "lucide-react"
 import Link from "next/link"
 import { motion } from "framer-motion"
 import CallToAction from "@/components/CallToAction"
@@ -36,21 +34,21 @@ const villagePrograms = [
   {
     title: "Rural Food Distribution",
     description: "Monthly food packages delivered to remote villages",
-    icon: "🏘️",
+    icon: <Package className="w-8 h-8 text-white" />,
     items: ["Rice & Flour", "Cooking Oil", "Pulses", "Sugar & Tea", "Hygiene Items"],
     frequency: "Monthly",
   },
   {
     title: "Agricultural Support",
     description: "Seeds, tools, and training for sustainable farming",
-    icon: "🌾",
+    icon: <Globe className="w-8 h-8 text-white" />,
     items: ["Seeds & Fertilizers", "Farming Tools", "Training Programs", "Water Management", "Crop Support"],
     frequency: "Seasonal",
   },
   {
     title: "Emergency Relief",
     description: "Immediate assistance during natural disasters",
-    icon: "🚨",
+    icon: <AlertTriangle className="w-8 h-8 text-white" />,
     items: ["Emergency Food", "Clean Water", "Medical Supplies", "Shelter Support", "Rehabilitation"],
     frequency: "As Needed",
   },
@@ -91,25 +89,25 @@ const impactAreas = [
   {
     title: "Food Security",
     description: "Ensuring regular access to nutritious food for rural families",
-    icon: "🍽️",
+    icon: Utensils,
     impact: "500+ families fed monthly",
   },
   {
     title: "Education Support",
     description: "Providing educational materials and support for village children",
-    icon: "📚",
+    icon: Book,
     impact: "200+ children enrolled",
   },
   {
     title: "Healthcare Access",
     description: "Regular health camps and medical assistance in villages",
-    icon: "🏥",
+    icon: Hospital,
     impact: "15+ health camps annually",
   },
   {
     title: "Economic Development",
     description: "Skill training and microfinance for sustainable livelihoods",
-    icon: "💼",
+    icon: Briefcase,
     impact: "100+ families empowered",
   },
 ]
@@ -153,27 +151,26 @@ export default function PoorVillagesPage() {
         </div>
       </section>
 
+      {/* Stats Section */}
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
-          <div className="mb-16">
-            <div className="flex items-center justify-center mb-10">
-              <div className="hidden lg:block flex-1 mr-8">
-                <div className="h-0.5 bg-gradient-to-l from-lightblue via-cyan-500 to-transparent"></div>
-              </div>
-              <div className="text-center px-8">
-                <h2 className="text-4xl md:text-5xl font-bold text-darkblue mb-2">Our <span className="text-lightblue">Organization</span></h2>
-                <p className="text-xl text-gray max-w-3xl mx-auto">Key facts and achievements that define Idara Al-Khair's journey and impact.</p>
-              </div>
-              <div className="hidden lg:block flex-1 ml-8">
-                <div className="h-0.5 bg-gradient-to-r from-lightblue via-cyan-500 to-transparent"></div>
-              </div>
+          <div className="mb-12 flex items-center justify-center">
+            <div className="hidden md:block flex-1 mr-8">
+              <div className="h-0.5 bg-gradient-to-l from-lightblue via-cyan-500 to-transparent"></div>
+            </div>
+            <div className="text-center px-8">
+              <h2 className="text-4xl font-bold text-darkblue mb-2">Our <span className="text-lightblue">Organization</span></h2>
+              <p className="text-xl text-gray max-w-3xl mx-auto">Key facts and achievements that define Idara Al-Khair's journey and impact.</p>
+            </div>
+            <div className="hidden md:block flex-1 ml-8">
+              <div className="h-0.5 bg-gradient-to-r from-lightblue via-cyan-500 to-transparent"></div>
             </div>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mx-auto px-8">
             {villageStats.map((stat, index) => (
               <motion.div
                 key={index}
-                className="group relative overflow-hidden bg-white/20 backdrop-blur-md border border-white/30 shadow-xl rounded-2xl p-4 text-left flex flex-col gap-3 max-w-xs mx-auto"
+                className="group relative overflow-hidden bg-white/20 backdrop-blur-md border border-white/30 shadow-xl rounded-2xl p-4 text-left flex flex-col gap-3 w-full max-w-sm mx-auto"
                 whileHover={{ scale: 1.05, y: -5 }}
                 transition={{ duration: 0.3 }}
               >
@@ -196,9 +193,21 @@ export default function PoorVillagesPage() {
       {/* About Village Program */}
       <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center px-6 md:px-12">
-        <div>
-              <h2 className="text-4xl font-bold text-gray-900 mb-6">Poor Villages Program</h2>
+          <div className="mb-12 flex items-center justify-center">
+            <div className="hidden md:block flex-1 mr-8">
+              <div className="h-0.5 bg-gradient-to-l from-lightblue via-cyan-500 to-transparent"></div>
+            </div>
+            <div className="text-center px-8">
+              <h2 className="text-4xl font-bold text-darkblue mb-2">About <span className="text-lightblue">Village Program</span></h2>
+              <p className="text-lg text-gray-600 max-w-2xl mx-auto mt-2">Extending food security, development, and empowerment to rural communities across Sindh.</p>
+            </div>
+            <div className="hidden md:block flex-1 ml-8">
+              <div className="h-0.5 bg-gradient-to-r from-lightblue via-cyan-500 to-transparent"></div>
+            </div>
+          </div>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center px-6 md:px-12">
+            <div>
+              <h2 className="text-4xl font-bold text-darkblue mb-6">Poor <span className="text-lightblue">Villages</span></h2>
               <p className="text-lg text-gray-600 mb-6">
                 Our Poor Villages Program extends Idara Al-Khair's mission to rural communities across Sindh. 
                 We believe that every family, regardless of their location, deserves access to food security 
@@ -211,30 +220,30 @@ export default function PoorVillagesPage() {
               </p>
               <div className="grid grid-cols-2 gap-6">
                 <div className="flex items-center">
-                  <MapPin className="w-6 h-6 text-teal-600 mr-3" />
+                  <MapPin className="w-6 h-6 text-lightblue mr-3" />
                   <div>
-                    <h4 className="font-semibold text-gray-900">Coverage</h4>
+                    <h4 className="font-semibold text-darkblue">Coverage</h4>
                     <p className="text-gray-600">15+ Villages</p>
                   </div>
                 </div>
                 <div className="flex items-center">
-                  <Users className="w-6 h-6 text-teal-600 mr-3" />
+                  <Users className="w-6 h-6 text-lightblue mr-3" />
                   <div>
-                    <h4 className="font-semibold text-gray-900">Families</h4>
+                    <h4 className="font-semibold text-darkblue">Families</h4>
                     <p className="text-gray-600">500+ Supported</p>
                   </div>
                 </div>
                 <div className="flex items-center">
-                  <Truck className="w-6 h-6 text-teal-600 mr-3" />
+                  <Truck className="w-6 h-6 text-lightblue mr-3" />
                   <div>
-                    <h4 className="font-semibold text-gray-900">Frequency</h4>
+                    <h4 className="font-semibold text-darkblue">Frequency</h4>
                     <p className="text-gray-600">Monthly Visits</p>
                   </div>
                 </div>
                 <div className="flex items-center">
-                  <Heart className="w-6 h-6 text-teal-600 mr-3" />
+                  <Heart className="w-6 h-6 text-lightblue mr-3" />
                   <div>
-                    <h4 className="font-semibold text-gray-900">Service</h4>
+                    <h4 className="font-semibold text-darkblue">Service</h4>
                     <p className="text-gray-600">100% Free</p>
                   </div>
                 </div>
@@ -255,29 +264,40 @@ export default function PoorVillagesPage() {
       {/* Programs */}
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Village Programs</h2>
-            <p className="text-xl md:text-2xl text-gray-600 leading-relaxed mb-8">
-              Comprehensive support programs designed for rural communities and sustainable development.
-            </p>
+          <div className="mb-12 flex items-center justify-center">
+            <div className="hidden md:block flex-1 mr-8">
+              <div className="h-0.5 bg-gradient-to-l from-lightblue via-cyan-500 to-transparent"></div>
+            </div>
+            <div className="text-center px-8">
+              <h2 className="text-4xl font-bold text-darkblue mb-2">Village <span className="text-lightblue">Programs</span></h2>
+              <p className="text-xl text-gray-600 max-w-2xl mx-auto mt-2">Comprehensive support programs designed for rural communities and sustainable development.</p>
+            </div>
+            <div className="hidden md:block flex-1 ml-8">
+              <div className="h-0.5 bg-gradient-to-r from-lightblue via-cyan-500 to-transparent"></div>
+            </div>
           </div>
-
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 px-6 md:px-12">
             {villagePrograms.map((program, index) => (
-              <Card key={index} className="hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
-                <CardHeader className="text-center">
-                  <div className="text-4xl mb-4">{program.icon}</div>
-                  <CardTitle className="text-xl text-teal-600">{program.title}</CardTitle>
-                  <CardDescription className="text-base">{program.description}</CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <div className="flex items-center justify-center text-sm text-gray-600">
+              <div
+                key={index}
+                className="group relative overflow-hidden bg-white/20 backdrop-blur-md border border-white/30 shadow-xl rounded-2xl p-4 text-left flex flex-col gap-3 w-full max-w-sm mx-auto transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
+              >
+                {/* Animated gradient overlay */}
+                <div className="absolute inset-0 z-0 bg-gradient-to-r from-lightblue via-blue-400 to-lightblue opacity-20 transition-transform duration-500 -translate-x-full group-hover:translate-x-0 rounded-2xl" />
+                {/* Card content */}
+                <div className="relative z-10 flex flex-col items-center">
+                  <div className="w-10 h-10 bg-lightblue/80 group-hover:bg-lightblue transition-colors duration-500 backdrop-blur-sm rounded-full flex items-center justify-center mb-2 border border-white/20 group-hover:rotate-[360deg] transition-transform duration-700">
+                    {program.icon}
+                  </div>
+                  <h3 className="text-xl font-bold text-lightblue group-hover:text-darkblue transition-colors duration-500 mb-1 text-center">{program.title}</h3>
+                  <p className="text-gray mb-2 font-light leading-relaxed text-center">{program.description}</p>
+                  <div className="flex items-center justify-center text-sm text-gray-600 mb-2">
                     <Clock className="w-4 h-4 mr-2" />
                     {program.frequency}
                   </div>
                   <div>
-                    <span className="font-semibold text-gray-900 text-sm">Services:</span>
-                    <div className="flex flex-wrap gap-1 mt-2">
+                    <span className="font-semibold text-darkblue text-sm">Services:</span>
+                    <div className="flex flex-wrap gap-1 mt-2 justify-center">
                       {program.items.map((item, idx) => (
                         <Badge key={idx} variant="secondary" className="text-xs">
                           {item}
@@ -285,8 +305,8 @@ export default function PoorVillagesPage() {
                       ))}
                     </div>
                   </div>
-                </CardContent>
-              </Card>
+                </div>
+              </div>
             ))}
           </div>
         </div>
@@ -295,31 +315,43 @@ export default function PoorVillagesPage() {
       {/* Target Villages */}
       <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Target Villages</h2>
-            <p className="text-xl md:text-2xl text-gray-600 leading-relaxed mb-8">
-              Our programs reach villages across different districts of Sindh, providing comprehensive support.
-            </p>
+          <div className="mb-12 flex items-center justify-center">
+            <div className="hidden md:block flex-1 mr-8">
+              <div className="h-0.5 bg-gradient-to-l from-lightblue via-cyan-500 to-transparent"></div>
+            </div>
+            <div className="text-center px-8">
+              <h2 className="text-4xl font-bold text-darkblue mb-2">Target <span className="text-lightblue">Villages</span></h2>
+              <p className="text-xl text-gray-600 max-w-2xl mx-auto mt-2">Our programs reach villages across different districts of Sindh, providing comprehensive support.</p>
+            </div>
+            <div className="hidden md:block flex-1 ml-8">
+              <div className="h-0.5 bg-gradient-to-r from-lightblue via-cyan-500 to-transparent"></div>
+            </div>
           </div>
-
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 px-6 md:px-12">
             {targetVillages.map((village, index) => (
-              <Card key={index} className="hover:shadow-lg transition-shadow">
-                <CardHeader>
-                  <CardTitle className="text-lg text-teal-600">{village.name}</CardTitle>
-                  <CardDescription className="flex items-center text-gray-600">
-                    <MapPin className="w-4 h-4 mr-1" />
-                    {village.location}
-                  </CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <div className="flex justify-between text-sm">
-                    <span className="font-semibold text-gray-900">Families:</span>
-                    <span className="text-teal-600 font-bold">{village.families}</span>
+              <div
+                key={index}
+                className="group relative overflow-hidden bg-white/20 backdrop-blur-md border border-white/30 shadow-xl rounded-2xl p-4 flex flex-col gap-3 w-full max-w-sm mx-auto transition-transform duration-300 hover:scale-105 hover:shadow-2xl items-center"
+              >
+                {/* Animated gradient overlay */}
+                <div className="absolute inset-0 z-0 bg-gradient-to-r from-lightblue via-blue-400 to-lightblue opacity-20 transition-transform duration-500 -translate-x-full group-hover:translate-x-0 rounded-2xl" />
+                {/* Card content */}
+                <div className="relative z-10 flex flex-col items-center w-full">
+                  <div className="w-10 h-10 bg-lightblue/80 group-hover:bg-lightblue transition-colors duration-500 backdrop-blur-sm rounded-full flex items-center justify-center mb-2 border border-white/20 group-hover:rotate-[360deg] transition-transform duration-700">
+                    <MapPin className="w-6 h-6 text-white group-hover:text-white transition-colors duration-500" />
                   </div>
-                  <div>
-                    <span className="font-semibold text-gray-900 text-sm">Programs:</span>
-                    <div className="flex flex-wrap gap-1 mt-2">
+                  <div className="text-lg text-lightblue font-bold mb-1 text-center">{village.name}</div>
+                  <div className="flex items-center justify-center text-gray mb-2">
+                    <MapPin className="w-4 h-4 mr-1 text-lightblue group-hover:text-white transition-colors duration-500" />
+                    {village.location}
+                  </div>
+                  <div className="flex justify-between text-sm w-full">
+                    <span className="font-semibold text-darkblue">Families:</span>
+                    <span className="text-lightblue font-bold">{village.families}</span>
+                  </div>
+                  <div className="w-full">
+                    <span className="font-semibold text-darkblue text-sm">Programs:</span>
+                    <div className="flex flex-wrap gap-1 mt-2 justify-center">
                       {village.programs.map((program, idx) => (
                         <Badge key={idx} variant="secondary" className="text-xs">
                           {program}
@@ -327,46 +359,68 @@ export default function PoorVillagesPage() {
                       ))}
                     </div>
                   </div>
-                  <div className="flex items-center justify-between pt-2">
+                  <div className="flex items-center justify-between pt-2 w-full">
                     <Badge className="bg-teal-100 text-teal-800">
                       {village.status}
                     </Badge>
-                    <Button size="sm" variant="outline">
-                      Learn More
-                    </Button>
+                    <a
+                      href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(village.location)}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="z-20 relative border-2 border-lightblue text-lightblue rounded-full px-4 py-1 bg-white text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-lightblue transition-all duration-200 active:scale-90 active:shadow-inner active:bg-lightblue/20 hover:scale-105 hover:shadow-lg"
+                      style={{ boxShadow: "0 2px 8px 0 rgba(0,60,255,0.04)" }}
+                    >
+                      View on Map
+                    </a>
                   </div>
-                </CardContent>
-              </Card>
+                </div>
+              </div>
             ))}
           </div>
         </div>
       </section>
-
       {/* Impact Areas */}
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Our Impact Areas</h2>
-            <p className="text-xl md:text-2xl text-gray-600 leading-relaxed mb-8">
-              Comprehensive development programs addressing multiple aspects of rural community needs.
-            </p>
+          <div className="mb-12 flex items-center justify-center">
+            <div className="hidden md:block flex-1 mr-8">
+              <div className="h-0.5 bg-gradient-to-l from-lightblue via-cyan-500 to-transparent"></div>
+            </div>
+            <div className="text-center px-8">
+              <h2 className="text-4xl font-bold text-darkblue mb-2">Our <span className="text-lightblue">Impact Areas</span></h2>
+              <p className="text-xl text-gray-600 max-w-2xl mx-auto mt-2">Comprehensive development programs addressing multiple aspects of rural community needs.</p>
+            </div>
+            <div className="hidden md:block flex-1 ml-8">
+              <div className="h-0.5 bg-gradient-to-r from-lightblue via-cyan-500 to-transparent"></div>
+            </div>
           </div>
-
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 px-6 md:px-12">
-            {impactAreas.map((area, index) => (
-              <Card key={index} className="hover:shadow-lg transition-shadow text-center">
-                <CardHeader>
-                  <div className="text-4xl mb-4">{area.icon}</div>
-                  <CardTitle className="text-xl text-teal-600">{area.title}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-gray-600 mb-4">{area.description}</p>
-                  <Badge className="bg-teal-100 text-teal-800">
-                    {area.impact}
-                  </Badge>
-                </CardContent>
-              </Card>
-            ))}
+            {impactAreas.map((area, index) => {
+              const Icon = area.icon;
+              return (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true, amount: 0.3 }}
+                  transition={{ duration: 0.3, delay: index * 0.08 }}
+                  whileHover={{ scale: 1.05, y: -16, boxShadow: "0 8px 32px rgba(0,0,0,0.10)" }}
+                  className="group relative overflow-hidden bg-white/20 backdrop-blur-md border border-white/30 shadow-xl rounded-2xl p-4 flex flex-col gap-3 w-full max-w-sm mx-auto transition-transform duration-300 hover:scale-105 hover:shadow-2xl items-center"
+                >
+                  {/* Animated gradient overlay */}
+                  <div className="absolute inset-0 z-0 bg-gradient-to-r from-lightblue via-blue-400 to-lightblue opacity-20 transition-transform duration-500 -translate-x-full group-hover:translate-x-0 rounded-2xl" />
+                  {/* Card content */}
+                  <div className="relative z-10 flex flex-col items-center w-full">
+                    <div className="w-10 h-10 bg-lightblue/80 group-hover:bg-lightblue transition-colors duration-500 backdrop-blur-sm rounded-full flex items-center justify-center mb-2 border border-white/20 group-hover:rotate-[360deg] transition-transform duration-700">
+                      <Icon className="w-6 h-6 text-white group-hover:text-white transition-colors duration-500" />
+                    </div>
+                    <div className="text-lg text-lightblue font-bold mb-1 text-center">{area.title}</div>
+                    <p className="text-gray mb-2 font-light leading-relaxed text-center">{area.description}</p>
+                    <Badge className="bg-teal-100 text-teal-800">{area.impact}</Badge>
+                  </div>
+                </motion.div>
+              )
+            })}
           </div>
         </div>
       </section>
