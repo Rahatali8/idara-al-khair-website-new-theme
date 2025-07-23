@@ -1,23 +1,13 @@
+"use client"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import {
-  Shield,
-  Truck,
-  Home,
-  Heart,
-  Users,
-  Clock,
-  AlertTriangle,
-  Package,
-  Utensils,
-  Tent,
-  Phone,
-  MapPin,
-  Calendar,
-} from "lucide-react"
+import {Shield,Truck,Home,Heart,Users,Clock,AlertTriangle,Package,Utensils,Tent,Phone,MapPin,Calendar,} from "lucide-react"
 import Link from "next/link"
+import CallToAction from "@/components/CallToAction"
+import { motion } from "framer-motion"
+import { useState } from "react";
 
 const reliefServices = [
   {
@@ -137,6 +127,7 @@ const stats = [
 ]
 
 export default function DisasterReliefProgramPage() {
+  const [headingShine, setHeadingShine] = useState(false);
   return (
     <main className="">
       {/* Hero Section */}
@@ -145,46 +136,118 @@ export default function DisasterReliefProgramPage() {
         <div className="absolute inset-0 z-0">
           <Image
             src="/disaster-back.png"
-            alt="disaster-relief-background"
+            alt="Disaster Relief Background"
             fill
-            className="object-cover"
+            className="object-cover opacity-70 blur-sm"
             priority
           />
         </div>
-        
         <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-4xl mx-auto text-center">
-            <Badge className="mb-4 bg-purple-100 text-teal-600 hover:bg-purple-200">Campusses</Badge>
-            <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6">
-              <span className="bg-gradient-to-r from-teal-500 to-blue-600 bg-clip-text text-transparent">Campuses Across Karachi
-              </span>
-            </h1>
-            <p className="text-xl md:text-2xl text-gray-800 leading-relaxed mb-8">
-            Six strategically located campuses across Karachi, each thoughtfully designed to serve local communities with quality education and modern facilities. Our campuses offer easy access for students in all areas of the city, featuring state-of-the-art classrooms, well-equipped labs, libraries, and dedicated spaces for extracurricular activities.
-              We aim to create a supportive, inclusive environment where every student can thrive and achieve their full potential close to home.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="#campuses" className="bg-teal-600 hover:bg-teal-700 text-white px-4 py-2 rounded-md">
-                  Learn more about our campuses
-              </Link>
-            </div>
-          </div>
+          {/* Animated Heading and Paragraph */}
+          {(() => {
+            const headingWords = ["Disaster", "Relief", "Program"];
+            const subtext = "Comprehensive disaster response services designed to provide immediate relief and long-term recovery support. Our team mobilizes quickly to deliver food, shelter, medical aid, and hope to families affected by floods, earthquakes, and other emergencies. Together, we help communities rebuild and recover stronger than before.";
+            return (
+              <>
+                <motion.h1
+                  className={`text-5xl md:text-6xl font-bold mb-6 text-darkblue flex flex-wrap justify-center ${headingShine ? "shimmer" : ""}`}
+                  initial="hidden"
+                  animate="visible"
+                  variants={{
+                    visible: { transition: { staggerChildren: 0.18 } },
+                    hidden: {},
+                  }}
+                  onAnimationComplete={() => setHeadingShine(true)}
+                >
+                  {headingWords.map((word, i) => (
+                    <motion.span
+                      key={i}
+                      className={word === "Relief" ? "text-lightblue mx-2" : "mx-2"}
+                      variants={{
+                        hidden: { opacity: 0, y: 40, scale: 0.8 },
+                        visible: { opacity: 1, y: 0, scale: 1, transition: { type: "spring", bounce: 0.4, duration: 0.7 } },
+                      }}
+                    >
+                      {word}
+                    </motion.span>
+                  ))}
+                </motion.h1>
+                <motion.p
+                  className="text-xl md:text-2xl text-gray leading-relaxed mb-8 flex flex-wrap justify-center"
+                  initial="hidden"
+                  animate="visible"
+                  variants={{
+                    visible: { transition: { staggerChildren: 0.045 } },
+                    hidden: {},
+                  }}
+                >
+                  {subtext.split(" ").map((word, i) => (
+                    <motion.span
+                      key={i}
+                      className="inline-block mr-2"
+                      variants={{
+                        hidden: { opacity: 0, y: 20, scale: 0.8 },
+                        visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.4, type: 'spring', bounce: 0.3 } },
+                      }}
+                    >
+                      {word}
+                    </motion.span>
+                  ))}
+                </motion.p>
+                <div className="flex justify-center">
+                  <Link href="/donate">
+                    <button className="relative px-8 py-3 font-semibold rounded-full border-2 border-lightblue text-lightblue overflow-hidden group transition-colors duration-300 bg-white">
+                      <span className="absolute inset-0 z-0 bg-gradient-to-r from-lightblue via-blue-400 to-lightblue opacity-20 transition-transform duration-500 -translate-x-full group-hover:translate-x-0 rounded-full" />
+                      <span className="relative z-10 flex items-center">
+                        <Heart className="mr-2 h-5 w-5" />
+                        Donate for Relief
+                      </span>
+                    </button>
+                  </Link>
+                </div>
+              </>
+            );
+          })()}
         </div>
       </section>
 
       {/* Stats */}
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {stats.map((stat, index) => (
-              <div key={index} className="text-center group">
-                <div className="w-16 h-16 bg-teal-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-teal-200 transition-colors">
-                  <stat.icon className="w-8 h-8 text-teal-600" />
-                </div>
-                <div className="text-3xl font-bold text-gray-900 mb-2">{stat.number}</div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-1">{stat.label}</h3>
-                <p className="text-gray-600 text-sm">{stat.description}</p>
+          <div className="mb-16">
+            <div className="flex items-center justify-center mb-10">
+              <div className="hidden lg:block flex-1 mr-8">
+                <div className="h-0.5 bg-gradient-to-l from-lightblue via-cyan-500 to-transparent"></div>
               </div>
+              <div className="text-center px-8">
+                <h2 className="text-4xl md:text-5xl font-bold text-darkblue mb-2">Our <span className="text-lightblue">Organization</span></h2>
+                <p className="text-xl text-gray max-w-3xl mx-auto">Key facts and achievements that define Idara Al-Khair's journey and impact.</p>
+              </div>
+              <div className="hidden lg:block flex-1 ml-8">
+                <div className="h-0.5 bg-gradient-to-r from-lightblue via-cyan-500 to-transparent"></div>
+              </div>
+            </div>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mx-auto px-8">
+            {stats.map((stat, index) => (
+              <motion.div
+                key={index}
+                className="group relative overflow-hidden bg-white/20 backdrop-blur-md border border-white/30 shadow-xl rounded-2xl p-4 text-left flex flex-col gap-3 max-w-xs mx-auto"
+                whileHover={{ scale: 1.05, y: -5 }}
+                transition={{ duration: 0.3 }}
+              >
+                {/* Animated gradient overlay */}
+                <div className="absolute inset-0 z-0 bg-gradient-to-r from-lightblue via-blue-400 to-lightblue opacity-20 transition-transform duration-500 -translate-x-full group-hover:translate-x-0 rounded-2xl" />
+                {/* Card content */}
+                <div className="relative z-10">
+                  <div className="w-10 h-10 bg-lightblue/80 group-hover:bg-white transition-colors duration-500 backdrop-blur-sm rounded-full flex items-center justify-center mb-2 border border-white/20 group-hover:rotate-[360deg] transition-transform duration-700 mx-auto">
+                    <stat.icon className="w-6 h-6 text-white group-hover:text-lightblue transition-colors duration-500" strokeWidth={2.2} />
+                  </div>
+                  <div className="text-3xl font-bold text-darkblue mb-2 text-center">{stat.number}</div>
+                  <h3 className="text-xl font-bold text-lightblue group-hover:text-darkblue transition-colors duration-500 mb-1 text-center">{stat.label}</h3>
+                  <p className="text-gray mb-2 font-light leading-relaxed text-center">{stat.description}</p>
+                </div>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -224,9 +287,9 @@ export default function DisasterReliefProgramPage() {
                 <CardContent className="space-y-4">
                   <div>
                     <h4 className="font-semibold text-gray-900 mb-2">Services Provided:</h4>
-                    <ul className="space-y-1">
+                    <ul className="grid grid-cols-2 gap-x-4 gap-y-1">
                       {service.services.map((item, idx) => (
-                        <li key={idx} className="flex items-center text-sm text-gray-600">
+                        <li key={idx} className="flex items-center text-sm text-gray">
                           <Shield className="w-4 h-4 mr-2 text-teal-500" />
                           {item}
                         </li>
@@ -235,7 +298,15 @@ export default function DisasterReliefProgramPage() {
                   </div>
 
                   <div className="pt-4 border-t">
-                    <Link href="/donate"><Button className="w-full bg-gradient-to-r from-teal-500 to-blue-600 hover:from-teal-600 hover:to-blue-700">Donate for relief services</Button></Link>
+                    <Link href="/donate">
+                      <button className="relative w-full px-8 py-3 font-semibold rounded-full border-2 border-lightblue text-lightblue overflow-hidden group transition-colors duration-300 bg-white">
+                        <span className="absolute inset-0 z-0 bg-gradient-to-r from-lightblue via-blue-400 to-lightblue opacity-20 transition-transform duration-500 -translate-x-full group-hover:translate-x-0 rounded-full" />
+                        <span className="relative z-10 flex items-center justify-center">
+                          <Heart className="mr-2 h-5 w-5" />
+                          Donate for relief services
+                        </span>
+                      </button>
+                    </Link>
                   </div>
                 </CardContent>
               </Card>
@@ -290,31 +361,7 @@ export default function DisasterReliefProgramPage() {
       </section>
 
       {/* Call to Action */}
-      <section className="py-20 bg-gradient-to-r from-teal-600 to-blue-700 text-white">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-4xl font-bold mb-4">Support Our Relief Efforts</h2>
-          <p className="text-xl opacity-90 mb-8 max-w-3xl mx-auto">
-            Your donation helps us provide immediate relief and long-term recovery support to disaster-affected
-            communities across Pakistan.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href={"/donate"}>
-            <Button size="lg" className="bg-white text-teal-600 hover:bg-gray-100">
-              <Heart className="mr-2 h-5 w-5" />
-              Donate Now
-            </Button>
-            </Link>
-            <Button
-              size="lg"
-              variant="outline"
-              asChild
-              className="border-white text-white hover:bg-white hover:text-teal-600 bg-transparent"
-            >
-              <Link href="/contact">Contact Us</Link>
-            </Button>
-          </div>
-        </div>
-      </section>
+      <CallToAction />
     </main>
   )
 } 

@@ -233,11 +233,11 @@ export default function Header() {
                   </button>
                   <div className="absolute left-full top-0 ml-1 w-48 bg-white/95 backdrop-blur-md rounded-xl shadow-2xl border border-blue-100 py-3 opacity-0 invisible group-hover/welfare:opacity-100 group-hover/welfare:visible transition-all duration-300 transform origin-left scale-95 group-hover/welfare:scale-100">
                     <Link
-                      href="/projects/disaster-relief/disaster-relief-program"
+                      href="/projects/disaster-relief"
                       className="block px-4 py-3 text-gray-700 hover:bg-gradient-to-r hover:from-blue-50 hover:to-teal-50 hover:text-lightblue group/item rounded-lg mx-2 transition-all duration-300 hover:scale-105"
                     >
                       <span className="relative font-medium">
-                        Disaster Relief Program
+                        Disaster Relief
                         <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-lightblue to-blue-500 transition-all duration-300 group-hover/item:w-full"></span>
                       </span>
                     </Link>
@@ -420,6 +420,13 @@ export default function Header() {
                   <div className="space-y-2">
                     <span className="text-gray-600 font-medium">Welfare Works</span>
                     <div className="pl-4 space-y-2">
+                      <Link
+                        href="/projects/disaster-relief"
+                        className="block text-gray-600 hover:text-teal-600"
+                        onClick={() => setIsMenuOpen(false)}
+                      >
+                        Disaster Relief
+                      </Link>
                       <Link
                         href="/projects/disaster-relief/disaster-relief-program"
                         className="block text-gray-600 hover:text-teal-600"
