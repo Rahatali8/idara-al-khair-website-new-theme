@@ -12,8 +12,8 @@ export default function CallToAction() {
               <div className="h-0.5 bg-gradient-to-l from-lightblue via-cyan-500 to-transparent"></div>
             </div>
             <div className="text-center px-8">
-              <h2 className="text-3xl md:text-4xl font-bold mb-3 text-darkblue">Join Our Mission</h2>
-              <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+              <h2 className="text-5xl md:text-5xl font-bold mb-3 text-darkblue">Join Our <span className="text-lightblue">Mission</span></h2>
+              <p className="text-lg text-gray max-w-3xl mx-auto">
                 Together, we can create lasting change in the lives of those who need it most. Your support makes a real
                 difference in our community.
               </p>
@@ -37,7 +37,7 @@ export default function CallToAction() {
               <Heart className="w-6 h-6 text-white" />
             </div>
             <h3 className="text-xl font-bold text-darkblue mb-3">Make a Donation</h3>
-            <p className="text-gray-700 mb-4 text-sm">
+            <p className="text-gray mb-4 text-sm">
               Your generous contribution helps us continue our vital work in education, healthcare, and community
               support.
             </p>
@@ -74,7 +74,7 @@ export default function CallToAction() {
               <Users className="w-6 h-6 text-white" />
             </div>
             <h3 className="text-xl font-bold text-darkblue mb-3">Become a Partner</h3>
-            <p className="text-gray-700 mb-4 text-sm">
+            <p className="text-gray mb-4 text-sm">
               Join our network of volunteers and partners to make a direct impact in our community programs.
             </p>
             <motion.div

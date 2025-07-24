@@ -1,7 +1,13 @@
+"use client"
 import Image from "next/image"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Heart, Stethoscope, Ambulance, Users, Pill, Phone, MapPin, Star } from "lucide-react"
+import { Heart, Stethoscope, Ambulance, Users, Pill, Phone, MapPin, Star, User } from "lucide-react"
+import CallToAction from "@/components/CallToAction"
+import { Button } from "@/components/ui/button"
+import { motion } from "framer-motion"
+import { useState, useEffect } from "react"
+
 
 const services = [
   {
@@ -49,45 +55,116 @@ const services = [
     color: "from-teal-500 to-teal-600",
     stats: "Charity Care",
   },
+  {
+    id: "fully-free",
+    title: "Support for Poors",
+    description: "Medical support for poor and deprived families, funded by donors and philanthropists.",
+    image: "/non-profit.webp",
+    icon: Heart,
+    color: "from-teal-500 to-teal-600",
+    stats: "Charity Care",
+  },
 ]
 
 export default function MedicalCenterPage() {
   return (
-    <main className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-teal-50">
+    <main className="min-h-screen">
       {/* Hero Banner Section */}
-      <section className="relative flex flex-col items-center justify-center min-h-[60vh] py-16 px-4 bg-gradient-to-br from-blue-50 via-teal-50 to-white text-center overflow-hidden">
-        {/* Badge */}
-        <div className="mb-6">
-          <span className="inline-flex items-center gap-2 bg-blue-100 text-blue-700 font-semibold px-5 py-2 rounded-full text-base shadow">
-            <Heart className="w-5 h-5 text-teal-500" />
-            Medical Center
-          </span>
+      <section className="relative flex flex-col items-center justify-center h-[85vh] py-16 px-4 text-center overflow-hidden">
+        {/* Background Image */}
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/hospital-back.png"
+            alt="Hospital Background"
+            fill
+            className="object-cover opacity-70 blur-sm"
+            priority
+          />
         </div>
-        {/* Heading */}
-        <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
-          Serving <span className="bg-gradient-to-r from-teal-500 to-blue-600 bg-clip-text text-transparent">Health</span> &amp; Hope<br />
-          Since <span className="text-blue-700">2010</span>
-        </h1>
-        {/* Description */}
-        <p className="text-lg md:text-2xl text-gray-600 mb-10 max-w-2xl mx-auto">
-          Al-Khair Medical Center is dedicated to providing accessible, compassionate healthcare for all. We serve our community with modern facilities, expert staff, and a mission to heal and uplift lives.
-        </p>
-        {/* Buttons */}
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <a href="/donate" className="bg-gradient-to-r from-teal-500 to-blue-600 hover:from-teal-600 hover:to-blue-700 text-white px-8 py-3 rounded-full font-semibold shadow-lg hover:shadow-xl transition-all duration-300 text-lg flex items-center gap-2">
-            <Heart className="w-5 h-5" />
-            Support Our Mission
-          </a>
-          <a href="#our-services" className="border-2 border-teal-500 text-teal-600 hover:bg-teal-50 px-8 py-3 rounded-full font-semibold transition-all duration-300 text-lg bg-transparent flex items-center gap-2">
-            Learn More
-          </a>
+        <div className="relative z-10 w-full flex flex-col items-center justify-center">
+          <>
+            {/* Animation logic moved outside for clarity */}
+            {/* Heading and subtext animation as before */}
+            {(() => {
+              const headingWords = ["Serving", "Health", "&", "Hope", "Since", "2010"];
+              return (
+                <motion.h1
+                  className="text-5xl md:text-5xl font-bold text-darkblue mb-6 leading-tight flex flex-wrap justify-center"
+                  initial="hidden"
+                  animate="visible"
+                  variants={{
+                    visible: { transition: { staggerChildren: 0.18 } },
+                    hidden: {},
+                  }}
+                >
+                  {headingWords.map((word, i) => (
+                    <motion.span
+                      key={i}
+                      className={word === "Health" || word === "2010" ? "text-lightblue mx-2" : "mx-2"}
+                      variants={{
+                        hidden: { opacity: 0, y: 40, scale: 0.8 },
+                        visible: { opacity: 1, y: 0, scale: 1, transition: { type: "spring", bounce: 0.4, duration: 0.7 } },
+                      }}
+                    >
+                      {word === "&" ? <span className="mx-2">&amp;</span> : word}
+                    </motion.span>
+                  ))}
+                </motion.h1>
+              );
+            })()}
+            {(() => {
+              const subtext = "Al-Khair Medical Center is dedicated to providing accessible, compassionate healthcare for all. We serve our community with modern facilities, expert staff, and a mission to heal and uplift lives.";
+              return (
+                <motion.p
+                  className="text-lg md:text-2xl text-gray mb-10 max-w-2xl mx-auto flex flex-wrap justify-center"
+                  initial="hidden"
+                  animate="visible"
+                  variants={{
+                    visible: { transition: { staggerChildren: 0.045 } },
+                    hidden: {},
+                  }}
+                >
+                  {subtext.split(" ").map((word, i) => (
+                    <motion.span
+                      key={i}
+                      className="inline-block mr-2"
+                      variants={{
+                        hidden: { opacity: 0, y: 20, scale: 0.8 },
+                        visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.4, type: 'spring', bounce: 0.3 } },
+                      }}
+                    >
+                      {word}
+                    </motion.span>
+                  ))}
+                </motion.p>
+              );
+            })()}
+            <a href="#our-services" className="inline-block mt-4">
+              <button className="relative px-8 py-3 font-semibold rounded-full border-2 border-lightblue text-lightblue overflow-hidden group transition-colors duration-300 bg-white">
+                {/* Animated gradient overlay */}
+                <span className="absolute inset-0 z-0 bg-gradient-to-r from-lightblue via-blue-400 to-lightblue opacity-20 transition-transform duration-500 -translate-x-full group-hover:translate-x-0 rounded-full" />
+                <span className="relative z-10">Learn More</span>
+              </button>
+            </a>
+          </>
         </div>
       </section>
 
       {/* About Section */}
-      <section className="mb-16">
+      <section className="mb-16 mt-20">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl md:text-4xl font-bold text-teal-700 mb-8 text-center">About Al-Khair Medical Center</h2>
+          <div className="flex items-center justify-center mb-10">
+            <div className="hidden lg:block flex-1 mr-8">
+              <div className="h-0.5 bg-gradient-to-l from-lightblue via-cyan-500 to-transparent"></div>
+            </div>
+            <div className="text-center px-8">
+              <h2 className="text-4xl md:text-5xl font-bold text-darkblue mb-2">About Al-Khair<span className="text-lightblue"> Medical Center</span></h2>
+              <p className="text-xl text-gray max-w-xl mx-auto text-center mt-2">Al-Khair Medical Center is an initiative to provide regular and emergency medical care for students, their parents, and the local community.</p>
+            </div>
+            <div className="hidden lg:block flex-1 ml-8">
+              <div className="h-0.5 bg-gradient-to-r from-lightblue via-cyan-500 to-transparent"></div>
+            </div>
+          </div>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center px-6 md:px-12">
             {/* Image Side */}
             <div className="relative">
@@ -119,6 +196,7 @@ export default function MedicalCenterPage() {
             </div>
             {/* Info Side */}
             <div>
+              <h3 className="text-2xl font-bold text-lightblue mb-4">About Medical</h3>
               <p className="text-xl md:text-2xl text-gray-600 leading-relaxed mb-8 max-w-2xl">
                 Al-Khair Medical Center is an initiative to provide regular and emergency medical care for students, their parents, and the local community. Our mission is to ensure timely, quality healthcare for those in need, especially the underprivileged, through a well-equipped medical department, dispensary, pharmacy, and ambulance service.
               </p>
@@ -138,8 +216,19 @@ export default function MedicalCenterPage() {
       </section>
 
       {/* Services Section */}
-      <section className="mb-16">
-        <h2 className="text-3xl md:text-4xl font-bold text-teal-700 mb-8 text-center">Our Services</h2>
+      <section id="our-services" className="mb-16">
+        <div className="flex items-center justify-center mb-10">
+          <div className="hidden lg:block flex-1 mr-8">
+            <div className="h-0.5 bg-gradient-to-l from-lightblue via-cyan-500 to-transparent"></div>
+          </div>
+          <div className="text-center px-8">
+            <h2 className="text-4xl md:text-5xl font-bold text-darkblue mb-2">Our <span className="text-lightblue">Services</span></h2>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto text-center mt-2">Comprehensive healthcare services for the community, including emergency care, pharmacy, ambulance, and more.</p>
+          </div>
+          <div className="hidden lg:block flex-1 ml-8">
+            <div className="h-0.5 bg-gradient-to-r from-lightblue via-cyan-500 to-transparent"></div>
+          </div>
+        </div>
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-6 md:px-12">
             {services.map((service) => (
@@ -147,6 +236,8 @@ export default function MedicalCenterPage() {
                 key={service.id}
                 className="group relative bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden cursor-pointer"
               >
+                {/* Animated gradient overlay */}
+                <div className="absolute inset-0 z-0 bg-gradient-to-r from-lightblue via-blue-400 to-lightblue opacity-20 transition-transform duration-500 -translate-x-full group-hover:translate-x-0" />
                 {/* Image */}
                 <div className="relative h-48 overflow-hidden">
                   <Image
@@ -169,10 +260,10 @@ export default function MedicalCenterPage() {
                 </div>
                 {/* Content */}
                 <div className="p-6">
-                  <h3 className="text-2xl font-bold text-gray-900 mb-3 group-hover:text-teal-600 transition-colors">
+                  <h3 className="text-2xl font-bold text-darkblue mb-3 group-hover:text-lightblue transition-colors">
                     {service.title}
                   </h3>
-                  <p className="text-gray-600 mb-4 leading-relaxed">{service.description}</p>
+                  <p className="text-gray mb-4 leading-relaxed">{service.description}</p>
                 </div>
                 {/* Simple Hover Effect */}
                 <div
@@ -186,7 +277,18 @@ export default function MedicalCenterPage() {
 
       {/* Mission Section */}
       <section className="mb-16">
-        <h2 className="text-3xl md:text-4xl font-bold text-teal-700 mb-8 text-center">Our Mission</h2>
+        <div className="flex items-center justify-center mb-10">
+          <div className="hidden lg:block flex-1 mr-8">
+            <div className="h-0.5 bg-gradient-to-l from-lightblue via-cyan-500 to-transparent"></div>
+          </div>
+          <div className="text-center px-8">
+            <h2 className="text-4xl md:text-5xl font-bold text-darkblue mb-2">Our <span className="text-lightblue">Mission</span></h2>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto text-center mt-2">Our medical support program aims to establish a self-sufficient medical department to efficiently meet all regular and emergency cases of students and their parents.</p>
+          </div>
+          <div className="hidden lg:block flex-1 ml-8">
+            <div className="h-0.5 bg-gradient-to-r from-lightblue via-cyan-500 to-transparent"></div>
+          </div>
+        </div>
         <div className="max-w-4xl mx-auto bg-white rounded-xl shadow-lg p-8">
           <p className="text-lg text-gray-700 mb-4">
             Besides providing education, Al-Khair is actively engaged in social and financial programs for the poor and deprived people of our country. Our medical support program aims to establish a self-sufficient medical department to efficiently meet all regular and emergency cases of students and their parents. We consider the health of our students and their families as a top priority and strive to provide timely treatment, even referring to high-tech hospitals when necessary.
@@ -200,43 +302,80 @@ export default function MedicalCenterPage() {
         </div>
       </section>
 
-      {/* Supporters & Testimonials Section */}
-      <section className="mb-16">
-        <h2 className="text-3xl md:text-4xl font-bold text-teal-700 mb-8 text-center">Our Kind Supporters</h2>
-        <div className="max-w-4xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="bg-teal-50 rounded-lg p-6 shadow">
-              <p className="text-gray-700 italic mb-2">"My heart is so happy, Saad. What a campus and what a technical department, and the food bank, everything is so clean, neat, and organized. I am so impressed, it was delightful, and I would want everyone to help support Idara Al-Khair..."</p>
-              <span className="font-semibold text-teal-700">Ayesha Omar, Artist</span>
-            </div>
-            <div className="bg-teal-50 rounded-lg p-6 shadow">
-              <p className="text-gray-700 italic mb-2">"I was so happy to attend the Fun Mela 2023. The children put on a fantastic tableau. Thank you for inviting us."</p>
-              <span className="font-semibold text-teal-700">Naila Naqvi, CEO Pie In The Sky</span>
-            </div>
-            <div className="bg-teal-50 rounded-lg p-6 shadow">
-              <p className="text-gray-700 italic mb-2">"This has been such an amazing event! You can see how hard the kids and faculty have worked to make this event possible! Special mention to the hosts and students who performed."</p>
-              <span className="font-semibold text-teal-700">Sitara Chawla, Senior Brand Executive Pie in the Sky</span>
-            </div>
-            <div className="bg-teal-50 rounded-lg p-6 shadow">
-              <p className="text-gray-700 italic mb-2">"Mind boggling initiative to educate ... only if we had more schools like this, the country would look a whole lot different."</p>
-              <span className="font-semibold text-teal-700">Omar Javaid, IOBM</span>
-            </div>
+      {/* Supporters & Testimonials Section - Autoplay Carousel */}
+      <section className="mb-16 py-12 rounded-2xl">
+        <div className="flex items-center justify-center mb-10">
+          <div className="hidden lg:block flex-1 mr-8">
+            <div className="h-0.5 bg-gradient-to-l from-lightblue via-cyan-500 to-transparent"></div>
           </div>
+          <div className="text-center px-8">
+            <h2 className="text-4xl md:text-5xl font-bold text-darkblue mb-2">Our <span className="text-lightblue">Kind Supporters</span></h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto text-center mt-2">Testimonials and kind words from those who have supported and witnessed our mission.</p>
+          </div>
+          <div className="hidden lg:block flex-1 ml-8">
+            <div className="h-0.5 bg-gradient-to-r from-lightblue via-cyan-500 to-transparent"></div>
+          </div>
+        </div>
+        <div className="max-w-2xl mx-auto relative">
+          {/* Autoplay carousel for testimonials */}
+          <>
+            {(() => {
+              const testimonials = [
+                {
+                  quote: '"My heart is so happy, Saad. What a campus and what a technical department, and the food bank, everything is so clean, neat, and organized. I am so impressed, it was delightful, and I would want everyone to help support Idara Al-Khair..."',
+                  name: 'Ayesha Omar, Artist',
+                },
+                {
+                  quote: '"I was so happy to attend the Fun Mela 2023. The children put on a fantastic tableau. Thank you for inviting us."',
+                  name: 'Naila Naqvi, CEO Pie In The Sky',
+                },
+                {
+                  quote: '"This has been such an amazing event! You can see how hard the kids and faculty have worked to make this event possible! Special mention to the hosts and students who performed."',
+                  name: 'Sitara Chawla, Senior Brand Executive Pie in the Sky',
+                },
+                {
+                  quote: '"Mind boggling initiative to educate ... only if we had more schools like this, the country would look a whole lot different."',
+                  name: 'Omar Javaid, IOBM',
+                },
+              ];
+              const [current, setCurrent] = useState(0);
+              useEffect(() => {
+                const interval = setInterval(() => {
+                  setCurrent((c) => (c + 1) % testimonials.length);
+                }, 4000);
+                return () => clearInterval(interval);
+              }, [testimonials.length]);
+              const prev = () => setCurrent((c) => (c - 1 + testimonials.length) % testimonials.length);
+              const next = () => setCurrent((c) => (c + 1) % testimonials.length);
+              return (
+                <div className="relative flex flex-col items-center">
+                  <div className="flex w-full justify-center items-center">
+                    <button onClick={prev} className="p-2 rounded-full bg-lightblue/10 hover:bg-lightblue/30 text-lightblue transition-colors absolute left-0 z-10"><svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-chevron-left"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
+                    <div className="w-full flex justify-center">
+                      <div className="relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 p-8 flex flex-col items-center text-center group overflow-hidden min-w-[320px] max-w-xl mx-auto">
+                        <div className="absolute -top-6 left-1/2 -translate-x-1/2 w-12 h-12 bg-gradient-to-r from-lightblue via-blue-400 to-lightblue rounded-full flex items-center justify-center shadow-lg">
+                          <svg xmlns='http://www.w3.org/2000/svg' className='w-6 h-6 text-white' fill='none' viewBox='0 0 24 24' stroke='currentColor'><path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M7 17a4 4 0 01-4-4V7a4 4 0 014-4h2a4 4 0 014 4v6a4 4 0 01-4 4zm10 0a4 4 0 01-4-4V7a4 4 0 014-4h2a4 4 0 014 4v6a4 4 0 01-4 4z' /></svg>
+                        </div>
+                        <p className="text-gray-700 italic mb-4 mt-8">{testimonials[current].quote}</p>
+                        <span className="font-semibold text-lightblue mt-4 block">{testimonials[current].name}</span>
+                      </div>
+                    </div>
+                    <button onClick={next} className="p-2 rounded-full bg-lightblue/10 hover:bg-lightblue/30 text-lightblue transition-colors absolute right-0 z-10"><svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
+                  </div>
+                  <div className="flex justify-center mt-4 gap-2">
+                    {testimonials.map((_, idx) => (
+                      <button key={idx} onClick={() => setCurrent(idx)} className={`w-3 h-3 rounded-full transition-all duration-300 ${idx === current ? 'bg-lightblue' : 'bg-gray-300'}`}></button>
+                    ))}
+                  </div>
+                </div>
+              );
+            })()}
+          </>
         </div>
       </section>
 
       {/* Call to Action Section */}
-      <section className="mb-16">
-        <h2 className="text-3xl md:text-4xl font-bold text-teal-700 mb-4 text-center">Support Our Medical Center</h2>
-        <div className="max-w-2xl mx-auto text-center">
-          <p className="text-lg text-gray-700 mb-6">
-            Help us build and sustain this essential healthcare facility. Your support can make quality healthcare accessible to more people in need. Donate or volunteer to make a difference!
-          </p>
-          <a href="/donate" className="inline-block bg-gradient-to-r from-teal-500 to-blue-600 text-white px-8 py-3 rounded-full font-semibold shadow-lg hover:from-teal-600 hover:to-blue-700 transition-all duration-300">
-            Donate Now
-          </a>
-        </div>
-      </section>
+      <CallToAction />
     </main>
   )
 }

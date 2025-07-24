@@ -241,15 +241,6 @@ export default function Header() {
                         <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-lightblue to-blue-500 transition-all duration-300 group-hover/item:w-full"></span>
                       </span>
                     </Link>
-                    <Link
-                      href="/projects/disaster-relief/free-rozgar"
-                      className="block px-4 py-3 text-gray-700 hover:bg-gradient-to-r hover:from-blue-50 hover:to-teal-50 hover:text-lightblue group/item rounded-lg mx-2 transition-all duration-300 hover:scale-105"
-                    >
-                      <span className="relative font-medium">
-                        Free Rozgar Program
-                        <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-lightblue to-blue-500 transition-all duration-300 group-hover/item:w-full"></span>
-                      </span>
-                    </Link>
                   </div>
                 </div>
                 {/* Technical Institute Dropdown */}

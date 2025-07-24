@@ -1,10 +1,8 @@
 "use client"
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle, } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Users, Calendar, MapPin, Heart, Utensils, Clock, Package, Truck, AlertTriangle } from "lucide-react";
-import Link from "next/link";
 import { motion } from "framer-motion";
 import CallToAction from "@/components/CallToAction";
 
@@ -106,26 +104,73 @@ export default function RotiBankPage() {
         </div>
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-5xl md:text-6xl font-bold text-darkblue mb-6">
-              <span className="text-darkblue">
-                Roti <span className="text-lightblue">Bank</span>
-              </span>
-            </h1>
-            <p className="text-xm md:text-2xl text-gray leading-relaxed mb-8">
-              Providing daily nutritious meals and essential food support to
-              over 200 deserving students, teachers, and families. Our
-              commitment to food security spans over 20 years of dedicated
-              service.
-            </p>
+            {/* campuses-style animation for hero section */}
+            {/* Heading */}
+            <>
+              {(() => {
+                const headingWords = ["Al-khair", "Roti", "Bank"];
+                return (
+                  <motion.h1
+                    className="text-5xl md:text-6xl font-bold text-darkblue mb-6 flex flex-wrap justify-center"
+                    initial="hidden"
+                    animate="visible"
+                    variants={{
+                      visible: { transition: { staggerChildren: 0.18 } },
+                      hidden: {},
+                    }}
+                  >
+                    {headingWords.map((word, i) => (
+                      <motion.span
+                        key={i}
+                        className={["Roti", "Bank"].includes(word.replace(/[^a-zA-Z]/g, "")) ? "text-lightblue mx-2" : "mx-2"}
+                        variants={{
+                          hidden: { opacity: 0, y: 40, scale: 0.8 },
+                          visible: { opacity: 1, y: 0, scale: 1, transition: { type: "spring", bounce: 0.4, duration: 0.7 } },
+                        }}
+                      >
+                        {word}
+                      </motion.span>
+                    ))}
+                  </motion.h1>
+                );
+              })()}
+              {(() => {
+                const subtext = "Providing daily nutritious meals and essential food support to over 200 deserving students, teachers, and families. Our commitment to food security spans over 20 years of dedicated service.";
+                return (
+                  <motion.p
+                    className="text-xm md:text-2xl text-gray leading-relaxed mb-8 flex flex-wrap justify-center"
+                    initial="hidden"
+                    animate="visible"
+                    variants={{
+                      visible: { transition: { staggerChildren: 0.045 } },
+                      hidden: {},
+                    }}
+                  >
+                    {subtext.split(" ").map((word, i) => (
+                      <motion.span
+                        key={i}
+                        className="inline-block mr-2"
+                        variants={{
+                          hidden: { opacity: 0, y: 20, scale: 0.8 },
+                          visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.4, type: 'spring', bounce: 0.3 } },
+                        }}
+                      >
+                        {word}
+                      </motion.span>
+                    ))}
+                  </motion.p>
+                );
+              })()}
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a href="/donate" className="inline-block mt-4">
                 <button className="relative px-8 py-3 font-semibold rounded-full border-2 border-lightblue text-lightblue overflow-hidden group transition-colors duration-300 bg-white">
                   {/* Animated gradient overlay */}
                   <span className="absolute inset-0 z-0 bg-gradient-to-r from-lightblue via-blue-400 to-lightblue opacity-20 transition-transform duration-500 -translate-x-full group-hover:translate-x-0 rounded-full" />
-                  <span className="relative z-10">Support Roti Bank</span>
+                    <span className="relative z-10">Support Alkhair Roti Bank</span>
                 </button>
               </a>
             </div>
+            </>
           </div>
         </div>
       </section>
