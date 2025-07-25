@@ -128,7 +128,7 @@ export default function AlKhairCollegePage() {
   }, [selected])
 
   return (
-    <main className="min-h-screen">
+    <main className="min-h-screen bg-lightblue/5">
       {/* Hero Section */}
       <section className="py-20 relative overflow-hidden">
         {/* Background Image */}
@@ -193,7 +193,7 @@ export default function AlKhairCollegePage() {
                     ))}
                   </motion.p>
                   <a href="#join-college" className="inline-block mt-4">
-                    <button className="relative px-8 py-3 font-semibold rounded-full border-2 border-lightblue text-lightblue overflow-hidden group transition-colors duration-300 bg-white">
+                    <button className="relative px-8 py-2 font-semibold rounded-full border-2 border-lightblue text-lightblue overflow-hidden group transition-colors duration-300 bg-white">
                       {/* Animated gradient overlay */}
                       <span className="absolute inset-0 z-0 bg-gradient-to-r from-lightblue via-blue-400 to-lightblue opacity-20 transition-transform duration-500 -translate-x-full group-hover:translate-x-0 rounded-full" />
                       <span className="relative z-10 flex items-center">
@@ -210,7 +210,7 @@ export default function AlKhairCollegePage() {
       </section>
 
       {/* College Stats */}
-      <section className="py-16 bg-white">
+      <section className="py-16 bg-lightblue/5">
         <div className="container mx-auto px-4">
           <div className="mb-12">
             <div className="flex items-center justify-center mb-4">
@@ -252,7 +252,7 @@ export default function AlKhairCollegePage() {
       </section>
 
       {/* About College */}
-      <section className="py-20">
+      <section className="py-20 bg-lightblue/5">
         <div className="container mx-auto px-4">
           <div className="mb-16">
             <div className="flex items-center justify-center mb-4">
@@ -325,7 +325,7 @@ export default function AlKhairCollegePage() {
       </section>
 
       {/* Academic Programs Section */}
-      <section className="py-20">
+      <section className="py-20 bg-lightblue/5">
         <div className="container mx-auto px-4">
           <div className="mb-16">
             <div className="flex items-center justify-center mb-4">
@@ -422,7 +422,7 @@ export default function AlKhairCollegePage() {
       </section>
 
       {/* Facilities */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-lightblue/5">
         <div className="container mx-auto px-6 md:px-12">
           <div className="mb-16">
             <div className="flex items-center justify-center mb-4">

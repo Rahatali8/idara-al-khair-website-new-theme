@@ -221,14 +221,15 @@ export default function HomePage() {
                       Learn More About Us
                     </Button>
                   </Link>
-                  <Link href="/projects/campuses#educational-excellence-across">
-                    <Button
-                      variant="outline"
-                      className="px-8 py-3 rounded-full border-2 border-lightblue text-lightblue hover:bg-lightblue hover:text-white transition-all duration-300 bg-transparent"
-                    >
-                      View Our Projects
-                    </Button>
-                  </Link>
+                  <a href="/projects/campuses#educational-excellence-across" target="_blank" rel="noopener noreferrer" className="inline-block">
+                    <button className="relative px-6 py-2 font-semibold rounded-full border-2 border-lightblue text-lightblue overflow-hidden group transition-colors duration-300 bg-white ">
+                      {/* Animated gradient overlay */}
+                      <span className="absolute inset-0 z-0 bg-gradient-to-r from-lightblue via-blue-400 to-lightblue opacity-20 transition-transform duration-500 -translate-x-full group-hover:translate-x-0 rounded-full" />
+                      <span className="relative z-10 inline-flex items-center">Learn More
+                        <svg className="ml-2 w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+                      </span>
+                    </button>
+                  </a>
                 </div>
             </motion.div>
             <motion.div
