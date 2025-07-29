@@ -128,9 +128,9 @@ export default function AlKhairCollegePage() {
   }, [selected])
 
   return (
-    <main className="min-h-screen bg-lightblue/5">
+    <main className="min-h-screen">
       {/* Hero Section */}
-      <section className="py-20 relative overflow-hidden">
+      <section className="relative min-h-[86vh] flex items-center justify-center overflow-hidden">
         {/* Background Image */}
         <div className="absolute inset-0 z-0">
           <Image
@@ -141,7 +141,7 @@ export default function AlKhairCollegePage() {
             priority
           />
         </div>
-        <div className="container mx-auto px-4 relative z-10">
+        <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-12 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
             {(() => {
               const headingWords = ["Al-Khair", "College", "of", "Technology"];
@@ -210,8 +210,8 @@ export default function AlKhairCollegePage() {
       </section>
 
       {/* College Stats */}
-      <section className="py-16 bg-lightblue/5">
-        <div className="container mx-auto px-4">
+      <section className="py-16">
+        <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
           <div className="mb-12">
             <div className="flex items-center justify-center mb-4">
               <div className="hidden lg:block flex-1 mr-8">
@@ -226,7 +226,7 @@ export default function AlKhairCollegePage() {
               </div>
             </div>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 ml-12 mr-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 sm:ml-0 sm:mr-0 md:ml-8 md:mr-8 lg:ml-12 lg:mr-12">
             {collegeStats.map((collegeStat, index) => (
               <div
                 key={index}
@@ -252,8 +252,8 @@ export default function AlKhairCollegePage() {
       </section>
 
       {/* About College */}
-      <section className="py-20 bg-lightblue/5">
-        <div className="container mx-auto px-4">
+      <section className="py-20">
+        <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
           <div className="mb-16">
             <div className="flex items-center justify-center mb-4">
               <div className="hidden lg:block flex-1 mr-8">
@@ -269,7 +269,7 @@ export default function AlKhairCollegePage() {
             </div>
           </div>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div className="px-4 md:px-8">
+            <div className="px-2 sm:px-4 md:px-8">
               <h2 className="text-4xl font-bold text-darkblue mb-6">About Al-Khair <span className="text-lightblue">College</span></h2>
               <p className="text-lg text-gray mb-6">
                 Al-Khair College of Technology was established in 2010 with a vision to provide world-class technical 
@@ -312,7 +312,7 @@ export default function AlKhairCollegePage() {
                 </div>
               </div>
             </div>
-            <div className="relative h-96 rounded-lg overflow-hidden min-w-[340px] w-full max-w-lg mx-auto">
+            <div className="relative h-64 sm:h-80 md:h-96 rounded-lg overflow-hidden min-w-0 w-full max-w-lg mx-auto">
               <Image
                 src="/hospital.png"
                 alt="Al-Khair College Campus"
@@ -325,8 +325,8 @@ export default function AlKhairCollegePage() {
       </section>
 
       {/* Academic Programs Section */}
-      <section className="py-20 bg-lightblue/5">
-        <div className="container mx-auto px-4">
+      <section className="py-20">
+        <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
           <div className="mb-16">
             <div className="flex items-center justify-center mb-4">
               <div className="hidden lg:block flex-1 mr-8">
@@ -360,7 +360,7 @@ export default function AlKhairCollegePage() {
               ))}
             </div>
             {/* Program Details */}
-            <div className="flex-1 min-h-[320px]">
+            <div className="flex-1 min-h-[220px] sm:min-h-[280px] md:min-h-[320px]">
               <div
                 key={fadeKey}
                 ref={detailRef}
@@ -422,8 +422,8 @@ export default function AlKhairCollegePage() {
       </section>
 
       {/* Facilities */}
-      <section className="py-20 bg-lightblue/5">
-        <div className="container mx-auto px-6 md:px-12">
+      <section className="py-20">
+        <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
           <div className="mb-16">
             <div className="flex items-center justify-center mb-4">
               <div className="hidden lg:block flex-1 mr-8">
@@ -469,7 +469,7 @@ export default function AlKhairCollegePage() {
       </section>
       {/* Location & Contact Section */}
       <section id="join-college" className="py-20">
-        <div className="container mx-auto px-4 max-w-4xl">
+        <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-12 max-w-full md:max-w-4xl">
           <div className="mb-16">
             <div className="flex items-center justify-center mb-4">
               <div className="hidden lg:block flex-1 mr-8">
@@ -484,7 +484,7 @@ export default function AlKhairCollegePage() {
               </div>
             </div>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-start">
             {/* Left: Address & Contact Info */}
             <div className="flex flex-col gap-8">
             <div className="flex items-start gap-4">
@@ -517,7 +517,7 @@ export default function AlKhairCollegePage() {
               </div>
             </div>
             {/* Right: Map */}
-            <div className="w-full h-80 rounded-2xl overflow-hidden shadow-lg border border-lightblue">
+            <div className="w-full h-64 sm:h-72 md:h-80 lg:h-80 rounded-2xl overflow-hidden shadow-lg border border-lightblue">
               <iframe
                 title="Al-Khair College Location"
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3620.073073289889!2d67.0665245!3d24.9957681!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3eb341192dcd8747%3A0xc1e63060dfca51c2!2sAl%20Khair%20College%20B-5%2F5M%2C%20North%20Karachi!5e0!3m2!1sen!2s!4v1680000000000!5m2!1sen!2s"

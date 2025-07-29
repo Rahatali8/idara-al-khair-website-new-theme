@@ -90,9 +90,6 @@ const DonatePage = () => {
   const [isRecurring, setIsRecurring] = useState(false)
   const [showSponsorModal, setShowSponsorModal] = useState(false)
   const [sponsorChildren, setSponsorChildren] = useState(1)
-  const [showReceipt, setShowReceipt] = useState(false)
-  const [selectedBank, setSelectedBank] = useState("MCB")
-  const [donationMethod, setDonationMethod] = useState("Bank Account")
   const [faqQuestions, setFaqQuestions] = useState<{ question: string; reply: string; history: { question: string; answer: string }[] }[]>(
     donateFaqs.map(() => ({ question: "", reply: "", history: [] }))
   )
@@ -151,25 +148,6 @@ const DonatePage = () => {
     setSelectedAmount(sponsorChildren * 2000)
     setShowSponsorModal(false)
   }
-
-  const handleDownloadReceipt = () => {
-    let bankInfo = "";
-    if (donationMethod === "Bank Account") {
-      bankInfo = `Bank Account: ${selectedBank === "MCB" ? "MCB - 10008429  (Branch: Karachi)" : "Meezan - 10008429  (Branch: Karachi)"}`;
-    } else {
-      bankInfo = `Payment Method: ${donationMethod}`;
-    }
-    const content = `Donation Receipt\n\nOrganization: Idara Al-Khair Welfare Society\nProgram: ${getProgramTitle()}\nAmount: PKR ${getCurrentAmount().toLocaleString()}\n${bankInfo}\n\nThank you for your donation! Your support helps us continue our mission.`;
-    const blob = new Blob([content], { type: 'text/plain' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'donation-receipt.txt';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
-  };
 
   // Helper to get program title
   const getProgramTitle = () => {
@@ -323,65 +301,6 @@ const DonatePage = () => {
                       </div>
                     </div>
 
-                    {/* Donation Method Selection */}
-                    <div className="mb-4">
-                      <label className="block text-darkblue font-semibold mb-2">Select Donation Method</label>
-                      <div className="flex gap-6">
-                        <label className="flex items-center gap-2">
-                          <input
-                            type="radio"
-                            name="donationMethod"
-                            value="Bank Account"
-                            checked={donationMethod === "Bank Account"}
-                            onChange={() => setDonationMethod("Bank Account")}
-                            className="accent-lightblue"
-                          />
-                          <span className="text-darkblue">Bank Account</span>
-                        </label>
-                        <label className="flex items-center gap-2 opacity-50 cursor-not-allowed">
-                          <input
-                            type="radio"
-                            name="donationMethod"
-                            value="Easypaisa"
-                            disabled
-                            className="accent-lightblue"
-                          />
-                          <span>Easypaisa <span className="text-xs text-gray-500">(Coming Soon)</span></span>
-                        </label>
-                        <label className="flex items-center gap-2 opacity-50 cursor-not-allowed">
-                          <input
-                            type="radio"
-                            name="donationMethod"
-                            value="JazzCash"
-                            disabled
-                            className="accent-lightblue"
-                          />
-                          <span>JazzCash <span className="text-xs text-gray-500">(Coming Soon)</span></span>
-                        </label>
-                      </div>
-                    </div>
-                    {donationMethod === "Bank Account" && (
-                      <div className="mb-4">
-                        <label className="block text-darkblue font-semibold mb-2">Select Bank Account</label>
-                        <select
-                          value={selectedBank}
-                          onChange={e => setSelectedBank(e.target.value)}
-                          className="w-full border border-lightblue rounded-lg px-4 py-2 text-darkblue focus:outline-none focus:ring-2 focus:ring-lightblue"
-                        >
-                          <option value="MCB">MCB - 10008429  (Branch: Karachi)</option>
-                          <option value="Meezan">Meezan - 0101018353 (Branch: Karachi)</option>
-                        </select>
-                        <div className="mt-2 text-xs text-gray-600">
-                          {selectedBank === "MCB"
-                            ? "Account Title: Idara Al-Khair Welfare Society | MCB Account #: 1234567890 | Branch: Karachi"
-                            : "Account Title: Idara Al-Khair Welfare Society | Meezan Account #: 9876543210 | Branch: Karachi"}
-                        </div>
-                      </div>
-                    )}
-                    {donationMethod !== "Bank Account" && (
-                      <div className="mb-4 text-lightblue font-semibold">This payment method is coming soon.</div>
-                    )}
-
                     {/* Payment Button */}
                     <div className="pt-6 border-t">
                       <div className="flex items-center justify-between mb-4">
@@ -393,10 +312,6 @@ const DonatePage = () => {
                       <Button
                         className="w-full bg-gradient-to-r from-lightblue to-blue-600 hover:from-lightblue hover:to-blue-700 text-white py-4 text-lg font-semibold"
                         disabled={getCurrentAmount() === 0}
-                        onClick={e => {
-                          e.preventDefault();
-                          setShowReceipt(true);
-                        }}
                       >
                         <CreditCard className="w-5 h-5 mr-2" />
                         Donate Now
@@ -501,38 +416,7 @@ const DonatePage = () => {
             </Tabs>
           </div>
         </div>
-        {/* Receipt Modal */}
-        {showReceipt && (
-          <Dialog open={showReceipt} onOpenChange={setShowReceipt}>
-            <div className="fixed inset-0 flex items-center justify-center z-50 bg-black/30">
-              <div className="bg-white rounded-xl p-8 max-w-lg w-full shadow-2xl border border-lightblue text-center">
-                <h3 className="text-2xl font-bold text-darkblue mb-4">Thank You for Your Donation!</h3>
-                <div className="mb-4">
-                  <div className="text-lg text-gray-700 mb-2">Organization:</div>
-                  <div className="text-xl font-semibold text-gray-500 mb-2">Idara Al-Khair Welfare Society</div>
-                  {donationMethod === "Bank Account" ? (
-                    <>
-                      <div className="text-lg text-gray-700 mb-2">Bank Account:</div>
-                      <div className="text-xl font-semibold text-gray-500 mb-2">{selectedBank === "MCB" ? "MCB - 1234567890 (Branch: Karachi)" : "Meezan - 9876543210 (Branch: Karachi)"}</div>
-                    </>
-                  ) : (
-                    <>
-                      <div className="text-lg text-gray-700 mb-2">Payment Method:</div>
-                      <div className="text-xl font-semibold text-gray-500 mb-2">{donationMethod} (Coming Soon)</div>
-                    </>
-                  )}
-                  <div className="text-lg text-gray-700 mb-2">Program:</div>
-                  <div className="text-xl font-semibold text-gray-500 mb-2">{getProgramTitle()}</div>
-                  <div className="text-lg text-gray-700 mb-2">Amount:</div>
-                  <div className="text-2xl font-bold text-darkblue">PKR {getCurrentAmount().toLocaleString()}</div>
-                </div>
-                <p className="text-gray-600 mb-6">Your support helps us continue our mission. You will receive a confirmation email shortly.</p>
-                <Button className="bg-darkblue text-white w-full mb-2" onClick={handleDownloadReceipt}>Download Receipt</Button>
-                <Button className="bg-lightblue text-white w-full" onClick={() => setShowReceipt(false)}>Close</Button>
-              </div>
-            </div>
-          </Dialog>
-        )}
+        {/* Remove Receipt Modal */}
       </section>
 
       {/* Impact Stories */}

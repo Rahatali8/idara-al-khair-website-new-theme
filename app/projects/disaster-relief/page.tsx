@@ -196,7 +196,7 @@ export default function DisasterReliefProgramPage() {
                 </motion.p>
                 <div className="flex justify-center">
                   <Link href="/donate">
-                    <button className="relative px-8 py-3 font-semibold rounded-full border-2 border-lightblue text-lightblue overflow-hidden group transition-colors duration-300 bg-white">
+                    <button className="relative px-8 py-2 font-semibold rounded-full border-2 border-lightblue text-lightblue overflow-hidden group transition-colors duration-300 bg-white">
                       <span className="absolute inset-0 z-0 bg-gradient-to-r from-lightblue via-blue-400 to-lightblue opacity-20 transition-transform duration-500 -translate-x-full group-hover:translate-x-0 rounded-full" />
                       <span className="relative z-10 flex items-center">
                         <Heart className="mr-2 h-5 w-5" />
@@ -299,7 +299,7 @@ export default function DisasterReliefProgramPage() {
 
                   <div className="pt-4 border-t">
                     <Link href="/donate">
-                      <button className="relative w-full px-8 py-3 font-semibold rounded-full border-2 border-lightblue text-lightblue overflow-hidden group transition-colors duration-300 bg-white">
+                      <button className="relative w-full px-8 py-2 font-semibold rounded-full border-2 border-lightblue text-lightblue overflow-hidden group transition-colors duration-300 bg-white">
                         <span className="absolute inset-0 z-0 bg-gradient-to-r from-lightblue via-blue-400 to-lightblue opacity-20 transition-transform duration-500 -translate-x-full group-hover:translate-x-0 rounded-full" />
                         <span className="relative z-10 flex items-center justify-center">
                           <Heart className="mr-2 h-5 w-5" />

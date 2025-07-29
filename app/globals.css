@@ -1,12 +1,25 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
 @import url('https://fonts.cdnfonts.com/css/graphik');
 
+@font-face {
+  font-family: 'TypoGraphica';
+  src: url('/fonts/TypoGraphica_demo.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 p {
   font-family: 'Montserrat', sans-serif;
+  color: #36454f;
+}
+
+.text-gray {
+  color: #36454f !important;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Graphik', 'Graphik Regular', Arial, sans-serif;
+  font-family: 'TypoGraphica', Arial, sans-serif;
   font-weight: normal;
 }
 
@@ -223,4 +236,12 @@ html {
 }
 .flip-card-back {
   transform: rotateY(180deg);
+}
+
+/* Gray text for all p tags except inside footer */
+body p, main p, section p, article p, div p {
+  color: #36454f;
+}
+footer p, footer .text-gray, footer span, footer li, footer address, footer a, footer h3 {
+  color: #fff !important;
 }

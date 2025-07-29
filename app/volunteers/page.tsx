@@ -1,6 +1,6 @@
 'use client'
 import Image from "next/image"
-import {  Users, MapPin, Heart, Building ,GraduationCap,Clock, Award,Shield, BookOpen, Stethoscope, Shield as ShieldIcon, Utensils, ClipboardList, Monitor } from "lucide-react"
+import { ArrowRight, Users, MapPin, Heart, Building ,GraduationCap,Clock, Award,Shield, BookOpen, Stethoscope, Shield as ShieldIcon, Utensils, ClipboardList, Monitor } from "lucide-react"
 import AnimatedCounter from "@/components/animated-counter"
 import FadeInSection from "@/components/fade-in-section"
 import Animated3DIcon from "@/components/animated-3d-icon"
@@ -211,10 +211,10 @@ export default function VolunteersPage() {
                         </motion.p>
                         {/* Learn More Button */}
                         <a href="#volunteer-about" className="inline-block mt-4">
-                          <button className="relative px-8 py-3 font-semibold rounded-full border-2 border-lightblue text-lightblue overflow-hidden group transition-colors duration-300 bg-white">
+                          <button className="relative px-8 py-2 font-semibold rounded-full border-2 border-lightblue text-lightblue overflow-hidden group transition-colors duration-300 bg-white">
                             {/* Animated gradient overlay */}
                             <span className="absolute inset-0 z-0 bg-gradient-to-r from-lightblue via-blue-400 to-lightblue opacity-20 transition-transform duration-500 -translate-x-full group-hover:translate-x-0 rounded-full" />
-                            <span className="relative z-10">Learn More</span>
+                            <span className="relative z-10">Learn More </span>
                           </button>
                         </a>
                       </>

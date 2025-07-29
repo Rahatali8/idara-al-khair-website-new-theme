@@ -73,13 +73,13 @@ export default function ImageCarousel() {
               className="object-cover"
               priority={index === 0}
             />
-            <div className="absolute inset-0 bg-black/40" />
+            <div className="absolute inset-0 bg-black/30" />
 
             {/* Content Overlay */}
             <div className="absolute inset-0 flex items-center justify-center">
               <div className="text-center text-white max-w-4xl px-4">
-                <h2 className="text-4xl md:text-6xl font-bold mb-4 animate-fade-in">{image.title}</h2>
-                <p className="text-xl md:text-2xl opacity-90 animate-fade-in-delay">{image.description}</p>
+                <h2 className="text-4xl md:text-6xl font-bold mb-4 animate-fade-in text-white drop-shadow-2xl">{image.title}</h2>
+                <p className="text-xl md:text-2xl text-white animate-fade-in-delay drop-shadow-xl">{image.description}</p>
               </div>
             </div>
           </div>

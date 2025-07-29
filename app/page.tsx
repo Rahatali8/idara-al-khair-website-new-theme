@@ -66,7 +66,7 @@ export default function HomePage() {
         </Suspense>
         <div className="absolute inset-0 flex items-start pt-24">
           <div className="container mx-auto px-6 z-10">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center backdrop-blur-[1px] bg-white/5 rounded-2xl p-8">
               {/* Left Side - Text Content */}
               <AnimatePresence mode="wait">
                 <motion.div
@@ -98,12 +98,14 @@ export default function HomePage() {
                     animate={{ y: 0, opacity: 1 }}
                     transition={{ delay: 0.6, duration: 0.8 }}
                   >
-                    <Button
-                      size="lg"
-                      className="bg-lightblue hover:bg-lightblue/90 text-white px-8 py-4 text-lg rounded-full transform hover:scale-105 transition-all duration-300 shadow-lg"
-                    >
-                      Donate Now
-                    </Button>
+                    <Link href="/contact#donation-details">
+                      <Button
+                        size="lg"
+                        className="bg-lightblue hover:bg-lightblue/90 text-white px-8 py-4 text-lg rounded-full transform hover:scale-105 transition-all duration-300 shadow-lg"
+                      >
+                        Donate Now
+                      </Button>
+                    </Link>
                   </motion.div>
                 </motion.div>
               </AnimatePresence>

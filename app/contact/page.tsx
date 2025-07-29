@@ -310,7 +310,7 @@ export default function ContactPage() {
       </section>
 
       {/* Donation Information */}
-      <section className="py-20 bg-white">
+      <section  id="donation-details" className="py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="mb-16">
             <div className="flex items-center justify-center mb-10">

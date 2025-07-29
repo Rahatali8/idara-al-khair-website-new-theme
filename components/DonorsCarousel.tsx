@@ -110,7 +110,7 @@ export default function DonorsCarousel() {
             <div className="text-center px-8">
               <div className="flex items-center justify-center mb-4">
               </div>
-              <h2 className="text-4xl md:text-5xl font-bold text-darkblue mb-4">Generous Donors & Partners</h2>
+              <h2 className="text-4xl md:text-5xl font-bold text-darkblue mb-4">Generous Donors <span className="text-lightblue">And Partners</span></h2>
               <p className="text-xl text-gray max-w-3xl mx-auto">
                 We are grateful to our donors and partner organizations who make our mission possible through their generous
                 support and collaboration.

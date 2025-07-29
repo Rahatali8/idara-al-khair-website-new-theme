@@ -197,7 +197,7 @@ import Hero3D from "./hero-3d"
 
 export default function HeroSection() {
   return (
-    <section className="relative h-[60vh] overflow-hidden flex items-start pt-6">
+    <section className="relative h-[40vh] sm:h-[50vh] md:h-[60vh] overflow-hidden flex items-start pt-2 sm:pt-4 md:pt-6">
       <Hero3D />
     </section>
   )

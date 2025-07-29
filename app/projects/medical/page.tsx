@@ -1,10 +1,7 @@
 "use client"
 import Image from "next/image"
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
 import { Heart, Stethoscope, Ambulance, Users, Pill, Phone, MapPin, Star, User } from "lucide-react"
 import CallToAction from "@/components/CallToAction"
-import { Button } from "@/components/ui/button"
 import { motion } from "framer-motion"
 import { useState, useEffect } from "react"
 
@@ -86,7 +83,7 @@ export default function MedicalCenterPage() {
             {/* Animation logic moved outside for clarity */}
             {/* Heading and subtext animation as before */}
             {(() => {
-              const headingWords = ["Serving", "Health", "&", "Hope", "Since", "2010"];
+              const headingWords = ["Serving", "Health", "Hope", "Since", "2010"];
               return (
                 <motion.h1
                   className="text-5xl md:text-5xl font-bold text-darkblue mb-6 leading-tight flex flex-wrap justify-center"
@@ -106,7 +103,7 @@ export default function MedicalCenterPage() {
                         visible: { opacity: 1, y: 0, scale: 1, transition: { type: "spring", bounce: 0.4, duration: 0.7 } },
                       }}
                     >
-                      {word === "&" ? <span className="mx-2">&amp;</span> : word}
+                      {word === "" ? "" : word}
                     </motion.span>
                   ))}
                 </motion.h1>
@@ -140,7 +137,7 @@ export default function MedicalCenterPage() {
               );
             })()}
             <a href="#our-services" className="inline-block mt-4">
-              <button className="relative px-8 py-3 font-semibold rounded-full border-2 border-lightblue text-lightblue overflow-hidden group transition-colors duration-300 bg-white">
+              <button className="relative px-8 py-2 font-semibold rounded-full border-2 border-lightblue text-lightblue overflow-hidden group transition-colors duration-300 bg-white">
                 {/* Animated gradient overlay */}
                 <span className="absolute inset-0 z-0 bg-gradient-to-r from-lightblue via-blue-400 to-lightblue opacity-20 transition-transform duration-500 -translate-x-full group-hover:translate-x-0 rounded-full" />
                 <span className="relative z-10">Learn More</span>

@@ -74,7 +74,7 @@ export default function ProjectCards() {
               <div className="h-0.5 bg-gradient-to-l from-lightblue via-lightblue to-transparent"></div>
             </div>
             <div className="text-center px-8">
-              <h2 className="text-4xl md:text-5xl font-bold text-darkblue mb-4">Our Valuable Projects</h2>
+              <h2 className="text-4xl md:text-5xl font-bold text-darkblue mb-4">Our Valuable <span className="text-lightblue">Projects</span></h2>
               <p className="text-xl text-gray max-w-3xl mx-auto">
                 Comprehensive programs addressing the core needs of underserved communities
               </p>

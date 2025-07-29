@@ -60,11 +60,11 @@ export default function Header() {
 
   return (
     <header className={`font-  bg-gradient-to-r from-white via-blue-50 to-white backdrop-blur-md bg-opacity-95 shadow-xl border-b border-blue-100 sticky top-0 z-50 transition-all duration-500 ${isVisible ? 'translate-y-0' : '-translate-y-full'}`}>
-      <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-24">
+      <div className="container mx-auto px-2 sm:px-4 md:px-6">
+        <div className="flex items-center justify-between h-16 sm:h-20 md:h-24">
           {/* Logo */}
-          <Link href="/" className="flex items-center space-x-3 group">
-            <div className="w-16 h-16 relative flex items-center justify-center bg-gradient-to-br from-blue-50 to-white rounded-2xl shadow-lg group-hover:shadow-xl transition-all duration-300 group-hover:scale-105">
+          <Link href="/" className="flex items-center space-x-2 sm:space-x-3 group">
+            <div className="w-10 h-10 sm:w-14 sm:h-14 md:w-16 md:h-16 relative flex items-center justify-center bg-gradient-to-br from-blue-50 to-white rounded-2xl shadow-lg group-hover:shadow-xl transition-all duration-300 group-hover:scale-105">
               <Image
                 src="/alkhairlogo.png"
                 alt="Idara Al-Khair Logo"
@@ -74,7 +74,7 @@ export default function Header() {
               />
             </div>
             <div className="hidden sm:block">
-              <h1 className="text-xl font-bold bg-gradient-to-r from-darkblue to-lightblue bg-clip-text text-transparent">Idara Al-Khair</h1>
+              <h1 className="text-base sm:text-xl font-bold bg-gradient-to-r from-darkblue to-lightblue bg-clip-text text-transparent">Idara Al-Khair</h1>
               <p className="text-xs text-gray-600">Serving Humanity</p>
             </div>
           </Link>

@@ -4,7 +4,7 @@ import { motion } from "framer-motion"
 
 export default function CallToAction() {
   return (
-    <section className="py-12 bg-lightblue/5 shadow-lg">
+    <section className="py-12 shadow-lg">
       <div className="container mx-auto px-4">
         <div className="relative mb-8">
           <div className="flex items-center justify-center">
