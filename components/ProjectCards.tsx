@@ -94,7 +94,7 @@ export default function ProjectCards() {
                 onMouseLeave={() => setHoveredCard(null)}
               >
                 {/* Animated gradient overlay */}
-                <div className="absolute inset-0 z-0 bg-gradient-to-r from-lightblue via-blue-400 to-lightblue opacity-20 transition-transform duration-500 -translate-x-full group-hover:translate-x-0" />
+                <div className="absolute inset-0 z-0 bg-gradient-to-r from-lightblue via-blue-400 to-lightblue opacity-10 transition-transform duration-500 -translate-x-full group-hover:translate-x-0" />
                 <div className="relative z-10">
                 {/* Image */}
                 <div className="relative h-48 overflow-hidden">

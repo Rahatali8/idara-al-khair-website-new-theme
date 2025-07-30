@@ -64,9 +64,9 @@ export default function HomePage() {
         >
           {mounted && <Hero3D />}
         </Suspense>
-        <div className="absolute inset-0 flex items-start pt-24">
+        <div className="absolute inset-0 flex items-start pt-10">
           <div className="container mx-auto px-6 z-10">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center backdrop-blur-[1px] bg-white/5 rounded-2xl p-8">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center bg-white/5 rounded-2xl p-8">
               {/* Left Side - Text Content */}
               <AnimatePresence mode="wait">
                 <motion.div
