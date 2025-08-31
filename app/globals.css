@@ -3,6 +3,7 @@
 
 @font-face {
   font-family: 'TypoGraphica';
+  /* Use the bundled OTF (only available font file in public/fonts) to avoid 404s. */
   src: url('/fonts/TypoGraphica_demo.otf') format('opentype');
   font-weight: normal;
   font-style: normal;
@@ -19,8 +20,28 @@ p {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'TypoGraphica', Arial, sans-serif;
-  font-weight: normal;
+  /* Use Montserrat for headings for reliable cross-browser metrics */
+  font-family: 'Montserrat', 'Graphik', Arial, Helvetica, sans-serif;
+  font-weight: 700;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Normalize heading spacing to avoid browser-specific metric differences */
+h1, h2 {
+  letter-spacing: -0.02em; /* tight heading tracking like the design */
+  line-height: 1.05;
+}
+
+h3, h4 {
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+}
+
+/* If the custom font fails to load, use Montserrat as a close fallback for headings */
+:root.font-fallback h1, :root.font-fallback h2, :root.font-fallback h3, :root.font-fallback h4, :root.font-fallback h5, :root.font-fallback h6 {
+  font-family: 'Montserrat', Arial, Helvetica, sans-serif;
 }
 
 @tailwind base;

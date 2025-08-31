@@ -28,17 +28,17 @@ const FloatingElements = dynamic(() => import("@/components/floating-elements"),
 const heroSlides = [
   {
     title: "Hospital Ward",
-    description: "Access to basic healthcare remains a distant hope for many.",
+    description: "Access to basic healthcare remains a distant hope for many, yet it is one of the most essential needs for human survival and dignity. Healthcare not only saves lives but also empowers individuals to live productively, free from the burden of preventable diseases. By ensuring affordable and quality healthcare for all, we protect the vulnerable, reduce suffering, and promote social and economic stability. When communities are healthy, they become stronger, more resilient, and better equipped to contribute positively to the growth and well-being of society.",
     image: "/al-khair.png?height=500&width=600",
   },
   {
     title: "Education Support",
-    description: "Empowering communities through quality education and learning opportunities.",
+    description: "Empowering communities through quality education and learning opportunities is the key to building a brighter and more inclusive future. Education not only equips individuals with knowledge and skills but also fosters confidence, critical thinking, and innovation. By ensuring access to quality learning for all, we break the cycle of poverty, reduce inequality, and create pathways to sustainable progress. When communities are educated, they become stronger, healthier, and more resilient—capable of shaping their own destinies and contributing positively to society.",
     image: "/al khair c-6.png?height=500&width=600",
   },
   {
     title: "Emergency Relief",
-    description: "Providing immediate assistance during times of crisis and natural disasters.",
+    description: "Providing immediate assistance during times of crisis and natural disasters is vital to saving lives and restoring hope when communities are at their most vulnerable. Quick and effective response not only delivers essential relief such as food, shelter, and medical care but also helps reduce suffering and prevent further loss. By ensuring timely support, we give people the strength to recover, rebuild, and move forward with dignity. Communities that receive prompt assistance become more resilient, better prepared, and stronger in facing future challenges.",
     image: "/campus 4.png?height=500&width=600",
   },
 ]
@@ -66,7 +66,7 @@ export default function HomePage() {
         </Suspense>
         <div className="absolute inset-0 flex items-start pt-10">
           <div className="container mx-auto px-6 z-10">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center bg-white/5 rounded-2xl p-8">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center bg-white/10 backdrop-blur-sm rounded-2xl p-8">
               {/* Left Side - Text Content */}
               <AnimatePresence mode="wait">
                 <motion.div
@@ -81,7 +81,7 @@ export default function HomePage() {
                     initial={{ y: 50, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
                     transition={{ delay: 0.2, duration: 0.8 }}
-                    className="text-4xl md:text-6xl lg:text-7xl font-bold text-darkblue drop-shadow-lg"
+                    className="text-4xl md:text-6xl lg:text-7xl font-bold text-darkblue drop-shadow-lg tracking-tight leading-tight"
                   >
                     {heroSlides[currentSlide].title}
                   </motion.h1>
@@ -125,7 +125,7 @@ export default function HomePage() {
                       <img
                         src={heroSlides[currentSlide].image || "/placeholder.svg"}
                         alt={heroSlides[currentSlide].title}
-                        className="w-full h-[300px] md:h-[350px] object-cover"
+                        className="w-full h-[400px] md:h-[450px] object-cover"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-darkblue/20 to-transparent" />
                     </div>
@@ -187,8 +187,7 @@ export default function HomePage() {
                   ABOUT OUR MISSION
                 </div>
                 <h2 className="ml-8 text-4xl lg:text-5xl font-bold text-darkblue mb-6">
-                  Empowering Communities Through
-                  <span className="ml-8 text-lightblue"> Education & Care</span>
+                  Empowering Communities Through<span className="ml-8 text-lightblue">Education & Care</span>
                 </h2>
 
               <p className="ml-8 text-xl text-gray mb-8 leading-relaxed">
