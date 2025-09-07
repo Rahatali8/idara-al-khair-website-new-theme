@@ -28,17 +28,17 @@ const FloatingElements = dynamic(() => import("@/components/floating-elements"),
 const heroSlides = [
   {
     title: "Hospital Ward",
-    description: "Access to basic healthcare remains a distant hope for many, yet it is one of the most essential needs for human survival and dignity. Healthcare not only saves lives but also empowers individuals to live productively, free from the burden of preventable diseases. By ensuring affordable and quality healthcare for all, we protect the vulnerable, reduce suffering, and promote social and economic stability. When communities are healthy, they become stronger, more resilient, and better equipped to contribute positively to the growth and well-being of society.",
+    description: "Quality, affordable healthcare for underserved communities — accessible, compassionate, and reliable.",
     image: "/al-khair.png?height=500&width=600",
   },
   {
     title: "Education Support",
-    description: "Empowering communities through quality education and learning opportunities is the key to building a brighter and more inclusive future. Education not only equips individuals with knowledge and skills but also fosters confidence, critical thinking, and innovation. By ensuring access to quality learning for all, we break the cycle of poverty, reduce inequality, and create pathways to sustainable progress. When communities are educated, they become stronger, healthier, and more resilient—capable of shaping their own destinies and contributing positively to society.",
+    description: "Skill-focused education and vocational training that opens pathways to sustainable livelihoods.",
     image: "/al khair c-6.png?height=500&width=600",
   },
   {
     title: "Emergency Relief",
-    description: "Providing immediate assistance during times of crisis and natural disasters is vital to saving lives and restoring hope when communities are at their most vulnerable. Quick and effective response not only delivers essential relief such as food, shelter, and medical care but also helps reduce suffering and prevent further loss. By ensuring timely support, we give people the strength to recover, rebuild, and move forward with dignity. Communities that receive prompt assistance become more resilient, better prepared, and stronger in facing future challenges.",
+    description: "Rapid-response relief providing food, shelter, and medical aid when communities need it most.",
     image: "/campus 4.png?height=500&width=600",
   },
 ]
@@ -64,9 +64,9 @@ export default function HomePage() {
         >
           {mounted && <Hero3D />}
         </Suspense>
-        <div className="absolute inset-0 flex items-start pt-10">
-          <div className="container mx-auto px-6 z-10">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center bg-white/10 backdrop-blur-sm rounded-2xl p-8">
+        <div className="absolute inset-0 flex items-start pt-8">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 z-10">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 items-center bg-white/10 backdrop-blur-sm rounded-2xl p-6 sm:p-8">
               {/* Left Side - Text Content */}
               <AnimatePresence mode="wait">
                 <motion.div
@@ -81,37 +81,75 @@ export default function HomePage() {
                     initial={{ y: 50, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
                     transition={{ delay: 0.2, duration: 0.8 }}
-                    className="text-4xl md:text-6xl lg:text-7xl font-bold text-darkblue drop-shadow-lg tracking-tight leading-tight"
+                    className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold text-darkblue drop-shadow-lg tracking-tight leading-tight"
                   >
                     {heroSlides[currentSlide].title}
                   </motion.h1>
+                  {/* Short summary on small screens, full copy on md+ */}
                   <motion.p
                     initial={{ y: 30, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
                     transition={{ delay: 0.4, duration: 0.8 }}
-                    className="text-lg md:text-xl text-webblack leading-relaxed drop-shadow-md"
+                    className="block md:hidden text-base text-webblack leading-relaxed drop-shadow-md max-w-full"
+                  >
+                    {heroSlides[currentSlide].description.split('.')[0] + '.'}
+                  </motion.p>
+
+                  <motion.p
+                    initial={{ y: 30, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ delay: 0.45, duration: 0.8 }}
+                    className="hidden md:block text-lg md:text-xl text-webblack leading-relaxed drop-shadow-md max-w-xl"
                   >
                     {heroSlides[currentSlide].description}
                   </motion.p>
+
+                  {/* Small stats row */}
+                  <motion.div
+                    initial={{ y: 20, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ delay: 0.55, duration: 0.6 }}
+                    className="flex flex-wrap items-center gap-3 mt-4"
+                  >
+                    <div className="flex items-center gap-3 bg-white/20 backdrop-blur-xs rounded-full px-3 py-2">
+                      <div className="text-xl font-bold text-lightblue">12+</div>
+                      <div className="text-sm text-webblack">Healthcare Centers</div>
+                    </div>
+                    <div className="flex items-center gap-3 bg-white/20 backdrop-blur-xs rounded-full px-3 py-2">
+                      <div className="text-xl font-bold text-lightblue">150+</div>
+                      <div className="text-sm text-webblack">Communities Served</div>
+                    </div>
+                    <div className="flex items-center gap-3 bg-white/20 backdrop-blur-xs rounded-full px-3 py-2">
+                      <div className="text-xl font-bold text-lightblue">25+</div>
+                      <div className="text-sm text-webblack">Awards</div>
+                    </div>
+                  </motion.div>
                   <motion.div
                     initial={{ y: 30, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
                     transition={{ delay: 0.6, duration: 0.8 }}
+                    className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 mt-4"
                   >
-                    <Link href="/contact#donation-details">
+                    <Link href="/contact#donation-details" className="w-full sm:w-auto">
                       <Button
                         size="lg"
-                        className="bg-lightblue hover:bg-lightblue/90 text-white px-8 py-4 text-lg rounded-full transform hover:scale-105 transition-all duration-300 shadow-lg"
+                        className="w-full sm:w-auto bg-lightblue hover:bg-lightblue/90 text-white px-8 py-4 text-lg rounded-full transform hover:scale-105 transition-all duration-300 shadow-lg text-center"
                       >
                         Donate Now
                       </Button>
+                    </Link>
+
+                    <Link href="/about#explore-our-organization" className="w-full sm:w-auto">
+                      <button className="w-full sm:w-auto px-6 py-3 rounded-full border-2 border-lightblue text-lightblue font-semibold bg-white/70 hover:bg-white transition">
+                        Learn More
+                      </button>
                     </Link>
                   </motion.div>
                 </motion.div>
               </AnimatePresence>
 
               {/* Right Side - Image Content */}
-              <div className="relative">
+              <div className="relative hidden lg:block">
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={`image-${currentSlide}`}
@@ -121,7 +159,7 @@ export default function HomePage() {
                     transition={{ duration: 0.8 }}
                     className="relative"
                   >
-                    <div className="relative overflow-hidden rounded-2xl shadow-2xl">
+                    <div className="relative overflow-hidden rounded-2xl shadow-2xl ring-1 ring-white/10 bg-gradient-to-b from-white/5 to-white/0">
                       <img
                         src={heroSlides[currentSlide].image || "/placeholder.svg"}
                         alt={heroSlides[currentSlide].title}

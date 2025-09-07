@@ -9,17 +9,38 @@ export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isVisible, setIsVisible] = useState(true)
   const lastScrollY = useRef(0)
+  // mobile submenu state
+  const [projectsOpen, setProjectsOpen] = useState(false)
+  const [educationOpen, setEducationOpen] = useState(false)
+  const [foodOpen, setFoodOpen] = useState(false)
+  const [healthOpen, setHealthOpen] = useState(false)
+  const [welfareOpen, setWelfareOpen] = useState(false)
+  const [technicalOpen, setTechnicalOpen] = useState(false)
+  const isMenuOpenRef = useRef(isMenuOpen)
 
   useEffect(() => {
-    const handleScroll = () => {
+    // keep a ref of isMenuOpen so the scroll handler can read latest value
+    isMenuOpenRef.current = isMenuOpen
+  const handleScroll = () => {
+      // On small screens (mobile) do not auto-hide header; rely on the menu button only
+      if (typeof window !== 'undefined' && window.innerWidth < 768) return
       const currentScrollY = window.scrollY
+      // if mobile menu is open, keep header visible and don't auto-toggle
+      if (isMenuOpenRef.current) {
+        setIsVisible(true)
+        lastScrollY.current = currentScrollY
+        return
+      }
+
+      // small scrolls should not aggressively hide/show the header
+      const delta = Math.abs(currentScrollY - lastScrollY.current)
       if (currentScrollY < 50) {
         setIsVisible(true)
-      } else if (currentScrollY > lastScrollY.current) {
-        // Scrolling down
+      } else if (delta > 10 && currentScrollY > lastScrollY.current) {
+        // Scrolling down with some threshold
         setIsVisible(false)
-      } else {
-        // Scrolling up
+      } else if (delta > 10 && currentScrollY < lastScrollY.current) {
+        // Scrolling up with threshold
         setIsVisible(true)
       }
       lastScrollY.current = currentScrollY
@@ -27,6 +48,11 @@ export default function Header() {
     window.addEventListener("scroll", handleScroll)
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
+
+  // keep the ref in sync when menu state changes
+  useEffect(() => {
+    isMenuOpenRef.current = isMenuOpen
+  }, [isMenuOpen])
 
   useEffect(() => {
     function handleHashLink(e: MouseEvent) {
@@ -313,172 +339,86 @@ export default function Header() {
         {isMenuOpen && (
           <div className="md:hidden py-4 border-t border-gray-200">
             <div className="flex flex-col space-y-4">
-              <Link
-                href="/"
-                className="text-gray-700 hover:text-teal-600 font-medium"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Home
-              </Link>
-              {/* About Us Dropdown (Mobile) */}
-              <div className="space-y-2">
-                <span className="text-gray-700 font-medium">About Us</span>
-                <div className="pl-4 space-y-2">
-                  <Link href="/about/history" className="block text-gray-600 hover:text-teal-600" onClick={() => setIsMenuOpen(false)}>
-                    History And Achievements
-                  </Link>
-                  <Link href="/about/board-of-directors" className="block text-gray-600 hover:text-teal-600" onClick={() => setIsMenuOpen(false)}>
-                    Chairman and Board
-                  </Link>
-                  <Link href="/about/mission-and-values" className="block text-gray-600 hover:text-teal-600" onClick={() => setIsMenuOpen(false)}>
-                    Mission And Values
-              </Link>
-                </div>
-              </div>
+              <Link href="/" className="text-gray-700 hover:text-teal-600 font-medium" onClick={() => setIsMenuOpen(false)}>Home</Link>
 
-              {/* Mobile Projects */}
+              {/* About Us - simple link on mobile */}
+              <Link href="/about" className="text-gray-700 hover:text-teal-600 font-medium" onClick={() => setIsMenuOpen(false)}>About Us</Link>
+
+              {/* Projects - collapsible with nested sections */}
               <div className="space-y-2">
-                <span className="text-gray-700 font-medium">Projects</span>
-                <div className="pl-4 space-y-2">
-                  {/* Mobile Education Dropdown */}
-                  <div className="space-y-2">
-                    <span className="text-gray-600 font-medium">Education</span>
-                    <div className="pl-4 space-y-2">
-                      <Link
-                        href="/projects/education/campuses"
-                        className="block text-gray-600 hover:text-teal-600"
-                        onClick={() => setIsMenuOpen(false)}
-                      >
-                        Our Campuses
-                      </Link>
-                      <Link
-                        href="/projects/education/alkhair-college"
-                        className="block text-gray-600 hover:text-teal-600"
-                        onClick={() => setIsMenuOpen(false)}
-                      >
-                        Al-Khair College
-                      </Link>
+                <button type="button" className="w-full flex items-center justify-between text-gray-700 font-medium" onClick={() => setProjectsOpen(s => !s)} aria-expanded={projectsOpen}>
+                  <span>Projects</span>
+                  <ChevronDown className={`w-4 h-4 transform transition-transform duration-200 ${projectsOpen ? 'rotate-180' : ''}`} />
+                </button>
+                <div className={`pl-4 overflow-hidden transition-[max-height] duration-300 ${projectsOpen ? 'max-h-[80vh]' : 'max-h-0'}`}>
+                  {/* Education */}
+                  <div className="space-y-1">
+                    <button type="button" className="w-full flex items-center justify-between text-gray-600 font-medium py-1" onClick={() => setEducationOpen(s => !s)} aria-expanded={educationOpen}>
+                      <span>Education</span>
+                      <ChevronDown className={`w-4 h-4 transform transition-transform duration-200 ${educationOpen ? 'rotate-180' : ''}`} />
+                    </button>
+                    <div className={`pl-4 overflow-hidden transition-[max-height] duration-300 ${educationOpen ? 'max-h-40' : 'max-h-0'}`}>
+                      <Link href="/projects/education/campuses" className="block text-gray-600 hover:text-teal-600 py-1" onClick={() => setIsMenuOpen(false)}>Our Campuses</Link>
+                      <Link href="/projects/education/alkhair-college" className="block text-gray-600 hover:text-teal-600 py-1" onClick={() => setIsMenuOpen(false)}>Al-Khair College</Link>
                     </div>
                   </div>
-                  {/* Mobile Food Support Dropdown */}
-                  <div className="space-y-2">
-                    <span className="text-gray-600 font-medium">Food Support</span>
-                    <div className="pl-4 space-y-2">
-                      <Link
-                        href="/projects/food-support/ramzan-ration"
-                        className="block text-gray-600 hover:text-teal-600"
-                        onClick={() => setIsMenuOpen(false)}
-                      >
-                        Ramzan Ration
-                      </Link>
-                      <Link
-                        href="/projects/food-support/roti-bank"
-                        className="block text-gray-600 hover:text-teal-600"
-                        onClick={() => setIsMenuOpen(false)}
-                      >
-                        Roti Bank
-                      </Link>
-                      <Link
-                        href="/projects/food-support/poor-villages"
-                        className="block text-gray-600 hover:text-teal-600"
-                        onClick={() => setIsMenuOpen(false)}
-                      >
-                        Poor Villages Program
-                      </Link>
+
+                  {/* Food Support */}
+                  <div className="space-y-1 mt-2">
+                    <button type="button" className="w-full flex items-center justify-between text-gray-600 font-medium py-1" onClick={() => setFoodOpen(s => !s)} aria-expanded={foodOpen}>
+                      <span>Food Support</span>
+                      <ChevronDown className={`w-4 h-4 transform transition-transform duration-200 ${foodOpen ? 'rotate-180' : ''}`} />
+                    </button>
+                    <div className={`pl-4 overflow-hidden transition-[max-height] duration-300 ${foodOpen ? 'max-h-40' : 'max-h-0'}`}>
+                      <Link href="/projects/food-support/ramzan-ration" className="block text-gray-600 hover:text-teal-600 py-1" onClick={() => setIsMenuOpen(false)}>Ramzan Ration</Link>
+                      <Link href="/projects/food-support/roti-bank" className="block text-gray-600 hover:text-teal-600 py-1" onClick={() => setIsMenuOpen(false)}>Roti Bank</Link>
+                      <Link href="/projects/food-support/poor-villages" className="block text-gray-600 hover:text-teal-600 py-1" onClick={() => setIsMenuOpen(false)}>Poor Villages Program</Link>
                     </div>
                   </div>
-                  {/* Mobile Health Programs Dropdown */}
-                  <div className="space-y-2">
-                    <span className="text-gray-600 font-medium">Health Programs</span>
-                    <div className="pl-4 space-y-2">
-                      <Link
-                        href="/projects/medical"
-                        className="block text-gray-600 hover:text-teal-600"
-                        onClick={() => setIsMenuOpen(false)}
-                      >
-                        Al-Khair Medical Center
-                      </Link>
-                      <Link
-                        href="/projects/medical/alkhair-hospital"
-                        className="block text-gray-600 hover:text-teal-600"
-                        onClick={() => setIsMenuOpen(false)}
-                      >
-                        Al-Khair Hospital
-                      </Link>
+
+                  {/* Health Programs */}
+                  <div className="space-y-1 mt-2">
+                    <button type="button" className="w-full flex items-center justify-between text-gray-600 font-medium py-1" onClick={() => setHealthOpen(s => !s)} aria-expanded={healthOpen}>
+                      <span>Health Programs</span>
+                      <ChevronDown className={`w-4 h-4 transform transition-transform duration-200 ${healthOpen ? 'rotate-180' : ''}`} />
+                    </button>
+                    <div className={`pl-4 overflow-hidden transition-[max-height] duration-300 ${healthOpen ? 'max-h-40' : 'max-h-0'}`}>
+                      <Link href="/projects/medical" className="block text-gray-600 hover:text-teal-600 py-1" onClick={() => setIsMenuOpen(false)}>Al-Khair Medical Center</Link>
+                      <Link href="/projects/medical/alkhair-hospital" className="block text-gray-600 hover:text-teal-600 py-1" onClick={() => setIsMenuOpen(false)}>Al-Khair Hospital</Link>
                     </div>
                   </div>
-                  {/* Mobile Welfare Works Dropdown */}
-                  <div className="space-y-2">
-                    <span className="text-gray-600 font-medium">Welfare Works</span>
-                    <div className="pl-4 space-y-2">
-                      <Link
-                        href="/projects/disaster-relief"
-                        className="block text-gray-600 hover:text-teal-600"
-                        onClick={() => setIsMenuOpen(false)}
-                      >
-                        Disaster Relief
-                      </Link>
-                      <Link
-                        href="/projects/disaster-relief/disaster-relief-program"
-                        className="block text-gray-600 hover:text-teal-600"
-                        onClick={() => setIsMenuOpen(false)}
-                      >
-                        Disaster Relief Program
-                      </Link>
-                      <Link
-                        href="/projects/disaster-relief/free-rozgar"
-                        className="block text-gray-600 hover:text-teal-600"
-                        onClick={() => setIsMenuOpen(false)}
-                      >
-                        Free Rozgar Program
-                      </Link>
+
+                  {/* Welfare Works */}
+                  <div className="space-y-1 mt-2">
+                    <button type="button" className="w-full flex items-center justify-between text-gray-600 font-medium py-1" onClick={() => setWelfareOpen(s => !s)} aria-expanded={welfareOpen}>
+                      <span>Welfare Works</span>
+                      <ChevronDown className={`w-4 h-4 transform transition-transform duration-200 ${welfareOpen ? 'rotate-180' : ''}`} />
+                    </button>
+                    <div className={`pl-4 overflow-hidden transition-[max-height] duration-300 ${welfareOpen ? 'max-h-40' : 'max-h-0'}`}>
+                      <Link href="/projects/disaster-relief" className="block text-gray-600 hover:text-teal-600 py-1" onClick={() => setIsMenuOpen(false)}>Disaster Relief</Link>
+                      <Link href="/projects/disaster-relief/disaster-relief-program" className="block text-gray-600 hover:text-teal-600 py-1" onClick={() => setIsMenuOpen(false)}>Disaster Relief Program</Link>
+                      <Link href="/projects/disaster-relief/free-rozgar" className="block text-gray-600 hover:text-teal-600 py-1" onClick={() => setIsMenuOpen(false)}>Free Rozgar Program</Link>
                     </div>
                   </div>
-                  {/* Mobile Technical Institute Dropdown */}
-                  <div className="space-y-2">
-                    <span className="text-gray-600 font-medium">Technical Institute</span>
-                    <div className="pl-4 space-y-2">
-                      <Link
-                        href="/projects/technical"
-                        className="block text-gray-600 hover:text-teal-600"
-                        onClick={() => setIsMenuOpen(false)}
-                      >
-                        Al-Khair Institute of Technology
-                      </Link>
-                      <Link
-                        href="/projects/technical/hvac-program"
-                        className="block text-gray-600 hover:text-teal-600"
-                        onClick={() => setIsMenuOpen(false)}
-                      >
-                        HVAC Program
-                      </Link>
+
+                  {/* Technical Institute */}
+                  <div className="space-y-1 mt-2">
+                    <button type="button" className="w-full flex items-center justify-between text-gray-600 font-medium py-1" onClick={() => setTechnicalOpen(s => !s)} aria-expanded={technicalOpen}>
+                      <span>Technical Institute</span>
+                      <ChevronDown className={`w-4 h-4 transform transition-transform duration-200 ${technicalOpen ? 'rotate-180' : ''}`} />
+                    </button>
+                    <div className={`pl-4 overflow-hidden transition-[max-height] duration-300 ${technicalOpen ? 'max-h-40' : 'max-h-0'}`}>
+                      <Link href="/projects/technical" className="block text-gray-600 hover:text-teal-600 py-1" onClick={() => setIsMenuOpen(false)}>Al-Khair Institute of Technology</Link>
+                      <Link href="/projects/technical/hvac-program" className="block text-gray-600 hover:text-teal-600 py-1" onClick={() => setIsMenuOpen(false)}>HVAC Program</Link>
                     </div>
                   </div>
                 </div>
               </div>
 
-              <Link
-                href="/volunteers"
-                className="text-gray-700 hover:text-teal-600 font-medium"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Volunteers
-              </Link>
-              <Link
-                href="/contact"
-                className="text-gray-700 hover:text-teal-600 font-medium"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Contact Us
-              </Link>
+              <Link href="/volunteers" className="text-gray-700 hover:text-teal-600 font-medium" onClick={() => setIsMenuOpen(false)}>Volunteers</Link>
+              <Link href="/contact" className="text-gray-700 hover:text-teal-600 font-medium" onClick={() => setIsMenuOpen(false)}>Contact Us</Link>
 
-              <Link
-                href="/donate"
-                className="bg-gradient-to-r from-teal-500 to-blue-600 text-white px-6 py-2 rounded-full font-semibold text-center"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Donate Now
-              </Link>
+              <Link href="/donate" className="bg-gradient-to-r from-teal-500 to-blue-600 text-white px-6 py-2 rounded-full font-semibold text-center" onClick={() => setIsMenuOpen(false)}>Donate Now</Link>
             </div>
           </div>
         )}
