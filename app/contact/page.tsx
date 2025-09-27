@@ -112,6 +112,13 @@ export default function ContactPage() {
   const [faqAnswerIndexes, setFaqAnswerIndexes] = useState<number[]>(faqData.map(() => 0));
   const faqInputRefs = useRef<(HTMLTextAreaElement | null)[]>([]);
 
+  // Contact form state
+  const [form, setForm] = useState({ name: "", email: "", phone: "", date: "", message: "" });
+  const [sending, setSending] = useState(false);
+  const [sendSuccess, setSendSuccess] = useState<string | null>(null);
+  const [sendError, setSendError] = useState<string | null>(null);
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+
   const faqHardcodedAnswers = [
     [
       "You can donate to Idara Al-Khair through multiple convenient methods. We accept donations via direct bank transfer to our official accounts (details are provided above), in-person contributions at our head office, and through secure online payment gateways. Every contribution, no matter the size, helps us continue our mission to serve those in need.",
@@ -179,6 +186,36 @@ export default function ContactPage() {
           : val
       ));
     }, 1200);
+  };
+
+  // Submit contact form
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setSending(true);
+    setSendError(null);
+    setSendSuccess(null);
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        setSendError(data?.error || 'Failed to send message');
+        // expose any details for debugging
+        if (data?.details) setSendError(prev => prev + `: ${data.details}`);
+      } else {
+        setPreviewUrl(data?.preview || null);
+        setSendSuccess(data?.preview ? 'Message sent (preview available).' : 'Message sent successfully!');
+        // Clear form
+        setForm({ name: '', email: '', phone: '', date: '', message: '' });
+      }
+    } catch (err: any) {
+      setSendError(err?.message || String(err));
+    } finally {
+      setSending(false);
+    }
   };
   return (
     <main className="min-h-screen bg-white">
@@ -415,8 +452,8 @@ export default function ContactPage() {
           </div>
           <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 items-stretch">
             {/* Left: Contact Form */}
-            <div className="bg-white/90 shadow-2xl rounded-3xl p-10 border border-lightblue/20 h-full flex flex-col justify-center">
-              <form className="space-y-8">
+              <div className="bg-white/90 shadow-2xl rounded-3xl p-10 border border-lightblue/20 h-full flex flex-col justify-center">
+              <form className="space-y-8" onSubmit={handleSubmit}>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div className="space-y-2">
                     <Label htmlFor="name" className="text-gray-700 font-semibold">Full Name</Label>
@@ -425,6 +462,8 @@ export default function ContactPage() {
                         <Input
                           id="name"
                           placeholder="Enter your full name"
+                          value={form.name}
+                          onChange={e => setForm(prev => ({ ...prev, name: e.target.value }))}
                         className="pl-10 h-12 border-gray-300 focus:border-lightblue focus:ring-2 focus:ring-lightblue/40 bg-bglightblue rounded-xl text-darkblue"
                         />
                       </div>
@@ -437,6 +476,8 @@ export default function ContactPage() {
                           id="email"
                           type="email"
                           placeholder="Enter your email"
+                          value={form.email}
+                          onChange={e => setForm(prev => ({ ...prev, email: e.target.value }))}
                         className="pl-10 h-12 border-gray-300 focus:border-lightblue focus:ring-2 focus:ring-lightblue/40 bg-bglightblue rounded-xl text-darkblue"
                         />
                     </div>
@@ -450,6 +491,8 @@ export default function ContactPage() {
                         <Input
                           id="phone"
                           placeholder="Enter your phone number"
+                          value={form.phone}
+                          onChange={e => setForm(prev => ({ ...prev, phone: e.target.value }))}
                         className="pl-10 h-12 border-gray-300 focus:border-lightblue focus:ring-2 focus:ring-lightblue/40 bg-bglightblue rounded-xl text-darkblue"
                         />
                       </div>
@@ -462,6 +505,9 @@ export default function ContactPage() {
                           id="date"
                           type="date"
                         className="pl-10 h-12 border-gray-300 focus:border-lightblue focus:ring-2 focus:ring-lightblue/40 bg-bglightblue rounded-xl text-darkblue"
+                          value={form.date}
+                          onChange={e => setForm(prev => ({ ...prev, date: e.target.value }))}
+                        
                         />
                       </div>
                     </div>
@@ -473,15 +519,21 @@ export default function ContactPage() {
                       <Textarea
                         id="message"
                         placeholder="Write your message here..."
+                        value={form.message}
+                        onChange={e => setForm(prev => ({ ...prev, message: e.target.value }))}
                       className="pl-10 min-h-[120px] border-gray-300 focus:border-lightblue focus:ring-2 focus:ring-lightblue/40 bg-bglightblue rounded-xl text-darkblue resize-none"
                       />
                     </div>
                   </div>
                   <div className="flex justify-center">
-                  <Button size="lg" className="bg-gradient-to-r from-lightblue to-cyan-400 hover:from-cyan-400 hover:to-lightblue text-white px-10 py-4 shadow-xl rounded-full font-bold text-lg transition-all duration-300 flex items-center gap-2">
-                    <Send className="w-5 h-5" />
-                      Send Message
+                  <div className="flex flex-col items-center gap-3">
+                    <Button type="submit" size="lg" disabled={sending} className="bg-gradient-to-r from-lightblue to-cyan-400 hover:from-cyan-400 hover:to-lightblue text-white px-10 py-4 shadow-xl rounded-full font-bold text-lg transition-all duration-300 flex items-center gap-2">
+                      <Send className="w-5 h-5" />
+                        {sending ? 'Sending...' : 'Send Message'}
                     </Button>
+                    {sendSuccess && <div className="text-green-600 font-semibold">{sendSuccess}</div>}
+                    {sendError && <div className="text-red-600 font-semibold">{sendError}</div>}
+                  </div>
                   </div>
                 </form>
             </div>
