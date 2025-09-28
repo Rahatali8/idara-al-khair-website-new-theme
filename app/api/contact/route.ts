@@ -95,7 +95,14 @@ export async function POST(req: NextRequest) {
           <p><strong>Message:</strong><br/>${message.replace(/\n/g, '<br/>')}</p>`,
       });
       console.log('[api/contact] Resend result:', sendResult);
-      return new Response(JSON.stringify({ ok: true, resendId: (sendResult as any)?.id || null }), { status: 200 });
+      // Save a copy locally for admin viewing / audit
+      try {
+        const saved = await saveFallback({ name, email, phone, date, message, resendId: (sendResult as any)?.id || null });
+        return new Response(JSON.stringify({ ok: true, resendId: (sendResult as any)?.id || null, savedTo: saved }), { status: 200 });
+      } catch (saveErr) {
+        console.error('[api/contact] failed to save fallback after Resend success', saveErr);
+        return new Response(JSON.stringify({ ok: true, resendId: (sendResult as any)?.id || null, warning: 'Resend succeeded but saving fallback failed.' }), { status: 200 });
+      }
     } catch (resendErr) {
       console.error('[api/contact] Resend send failed', resendErr);
       try {
@@ -123,6 +130,29 @@ export async function POST(req: NextRequest) {
         <p><strong>Message:</strong><br/>${message.replace(/\n/g, '<br/>')}</p>`,
     });
     console.log('[api/contact] sendMail info:', info);
+    // Save a copy locally for admin viewing / audit
+    try {
+      const saved = await saveFallback({ name, email, phone, date, message });
+      // If ethereal preview exists, include it as well
+      let previewUrl: string | undefined;
+      try {
+        // @ts-ignore
+        previewUrl = nodemailer.getTestMessageUrl(info) || undefined;
+      } catch (e) {
+        previewUrl = undefined;
+      }
+      return new Response(JSON.stringify({ ok: true, preview: previewUrl || null, savedTo: saved }), { status: 200 });
+    } catch (saveErr) {
+      console.error('[api/contact] failed to save fallback after sendMail success', saveErr);
+      try {
+        // still try to return preview if available
+        // @ts-ignore
+        const previewUrl = nodemailer.getTestMessageUrl(info) || undefined;
+        return new Response(JSON.stringify({ ok: true, preview: previewUrl || null, warning: 'Message sent but saving fallback failed.' }), { status: 200 });
+      } catch (_) {
+        return new Response(JSON.stringify({ ok: true, warning: 'Message sent but saving fallback failed.' }), { status: 200 });
+      }
+    }
   } catch (sendErr) {
     console.error('[api/contact] sendMail failed', sendErr);
     try {
