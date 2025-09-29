@@ -1,25 +1,23 @@
 import fs from 'fs/promises';
 import path from 'path';
 import type { NextRequest } from 'next/server';
+import { getSessionCookieName, verifySessionToken } from '@/lib/auth';
 
 // Simple admin messages endpoint. Protects with a single password checked
 // against process.env.ADMIN_PASSWORD (fallback: 'admin123').
 export async function GET(req: NextRequest) {
   try {
-    const url = new URL(req.url);
-    const passwordHeader = req.headers.get('x-admin-password') || '';
-    const passwordQuery = url.searchParams.get('password') || '';
-    const password = passwordHeader || passwordQuery;
-    const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'IAKNGO12@#';
-
-    if (password !== ADMIN_PASSWORD) {
+    const cookie = (req.headers.get('cookie') || '').split('; ').find((c) => c.startsWith(getSessionCookieName() + '='));
+    const token = cookie ? decodeURIComponent(cookie.split('=')[1]) : '';
+    const session = token ? await verifySessionToken(token) : null;
+    if (!session || session.role !== 'ADMIN') {
       return new Response(JSON.stringify({ error: 'Unauthorized' }), { status: 401 });
     }
 
     const dir = path.join(process.cwd(), '.debug-mails');
     const files = await fs.readdir(dir).catch((e) => {
       // If directory doesn't exist, return empty list
-      if ((e as any)?.code === 'ENOENT') return [] as string[];
+      if ((e as any)?.code === 'ENOENT') return [] as string[];``
       throw e;
     });
 

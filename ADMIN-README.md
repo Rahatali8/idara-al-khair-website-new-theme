@@ -1,10 +1,21 @@
-Admin access and viewing contact messages
+Admin access and viewing contact messages (DB-backed auth)
 
 - Admin page: /admin
-- Simple password protection: set environment variable ADMIN_PASSWORD. Default (development) password: admin123
-- The contact form API saves every submission into `.debug-mails/contact-<timestamp>.json` for audit and to ensure messages are not lost.
-- The admin UI calls `/api/admin/messages` with the password sent in `x-admin-password` header to retrieve saved messages.
+- Admin logs in using email/password via `/api/auth/login`. A secure HTTP-only cookie is set.
+- Messages endpoint `/api/admin/messages` now requires a valid admin session (no header password).
+- Contact messages are still saved to `.debug-mails/contact-<timestamp>.json`.
 
-Notes:
-- This is a lightweight admin implementation for local/dev use. For production, replace the single-password mechanism with a proper auth system (OAuth, NextAuth, or server-side sessions) and secure storage (database).
-- To test locally, submit the contact form; check the `.debug-mails` folder for saved JSON files. Then visit /admin and login with your ADMIN_PASSWORD.
+Local setup
+
+- Create `.env` with `DATABASE_URL`, `JWT_SECRET`, and optionally `ADMIN_EMAIL`, `ADMIN_PASSWORD` for seeding.
+- Run:
+  - `npx prisma migrate dev`
+  - `npx prisma generate`
+  - `npm run seed` (or `pnpm seed`) to create an admin user
+
+Jobs API
+
+- Public list: `GET /api/jobs`
+- Admin create: `POST /api/jobs` with `{ title, description, location, jobType }` where `jobType` in `FULL_TIME|PART_TIME|INTERNSHIP|CONTRACT`
+- Apply to job: `POST /api/jobs/[id]/apply` with `{ applicantName, applicantEmail, applicantPhone?, coverLetter?, resumeUrl? }`
+- Admin view applications: `GET /api/admin/job-applications`

@@ -321,6 +321,14 @@ export default function Header() {
                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-lightblue to-blue-500 transition-all duration-300 group-hover:w-full"></span>
               </span>
             </Link>
+            <Link href="/jobs" className="relative group">
+              <span className="relative text-gray-700 hover:text-lightblue font-semibold transition-all duration-300 group-hover:scale-105">
+                Jobs
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-lightblue to-blue-500 transition-all duration-300 group-hover:w-full"></span>
+              </span>
+            </Link>
+
+
 
             <Link href="/donate" className="relative group bg-gradient-to-r from-darkblue to-lightblue text-white font-bold px-8 py-3 rounded-full text-md transition-all duration-300 shadow-lg hover:shadow-2xl hover:scale-105 flex items-center space-x-2 overflow-hidden">
               <span className="relative text-white font-semibold transition-all duration-300 group-hover:scale-105">
