@@ -19,6 +19,7 @@ export default function AdminPage() {
   const [error, setError] = useState<string | null>(null);
   const [messages, setMessages] = useState<any[]>([]);
   const [activeTab, setActiveTab] = useState("emails");
+  const [jobs, setJobs] = useState<any[]>([]);
 
   // Job form state
   const [jobTitle, setJobTitle] = useState("");
@@ -98,6 +99,20 @@ export default function AdminPage() {
     }
   };
 
+  const loadJobs = async () => {
+    try {
+      const res = await fetch("/api/jobs");
+      const data = await res.json();
+      if (!res.ok) {
+        setError(data?.error || "Failed to load jobs");
+        return;
+      }
+      setJobs(data.jobs || []);
+    } catch (err: any) {
+      setError(String(err));
+    }
+  };
+
   const handleAddJob = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
@@ -150,6 +165,8 @@ export default function AdminPage() {
       setResponsibilities("");
       setQualifications("");
       alert("✅ Job created successfully");
+      await loadJobs();
+      setActiveTab("jobpost");
     } catch (err: any) {
       setError(String(err));
     } finally {
@@ -275,80 +292,42 @@ export default function AdminPage() {
 
           {/* Add Job */}
           {activeTab === "addjob" && (
-            <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 p-4">
-              <div className="w-full max-w-3xl">
+            <div className="flex justify-center items-start bg-gradient-to-br from-gray-50 to-gray-100 p-4 py-6">
+              <div className="w-full max-w-6xl">
                 <h2 className="text-3xl font-bold mb-6 text-gray-800 flex items-center gap-2">
-                  <span className="text-indigo-600">➕</span> Add New Job
+                  <span className="text-lightblue">➕</span> Add New Job
                 </h2>
 
                 <form
                   onSubmit={handleAddJob}
-                  className="bg-white/95 backdrop-blur-xl p-8 rounded-2xl shadow-xl space-y-6 border border-gray-200 hover:shadow-2xl transition-shadow"
+                  className="bg-white/95 backdrop-blur-xl p-6 rounded-2xl shadow-xl space-y-4 border border-gray-200 hover:shadow-2xl transition-shadow"
                 >
-                  {/* Job Title */}
-                  <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-1">
-                      Job Title
-                    </label>
-                    <input
-                      type="text"
-                      value={jobTitle}
-                      onChange={(e) => setJobTitle(e.target.value)}
-                      required
-                      placeholder="Enter job title"
-                      className="w-full rounded-xl border border-gray-300 px-4 py-3 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition"
-                    />
-                  </div>
-
-                  {/* Description */}
-                  <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-1">
-                      Description
-                    </label>
-                    <textarea
-                      value={jobDesc}
-                      onChange={(e) => setJobDesc(e.target.value)}
-                      required
-                      rows={4}
-                      placeholder="Write job description..."
-                      className="w-full rounded-xl border border-gray-300 px-4 py-3 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition"
-                    />
-                  </div>
-
-                  {/* Location */}
-                  <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-1">
-                      Location
-                    </label>
-                    <input
-                      type="text"
-                      value={jobLocation}
-                      onChange={(e) => setJobLocation(e.target.value)}
-                      required
-                      placeholder="Enter job location"
-                      className="w-full rounded-xl border border-gray-300 px-4 py-3 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition"
-                    />
-                  </div>
-
-                  {/* Job Type */}
-                  <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-1">
-                      Job Type
-                    </label>
-                    <select
-                      value={jobType}
-                      onChange={(e) => setJobType(e.target.value)}
-                      className="w-full rounded-xl border border-gray-300 px-4 py-3 bg-white focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition"
-                    >
-                      <option>Full-Time</option>
-                      <option>Part-Time</option>
-                      <option>Internship</option>
-                      <option>Contract</option>
-                    </select>
-                  </div>
-
-                  {/* Flexible Fields */}
+                  {/* Compact layout: 2-col basic + 5-col details + 3-col textareas */}
                   <div className="grid md:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-sm font-semibold text-gray-700 mb-1">Job Title</label>
+                      <input type="text" value={jobTitle} onChange={(e) => setJobTitle(e.target.value)} required placeholder="Enter job title" className="w-full rounded-xl border border-gray-300 px-4 py-3 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition" />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-semibold text-gray-700 mb-1">Location</label>
+                      <input type="text" value={jobLocation} onChange={(e) => setJobLocation(e.target.value)} required placeholder="Enter job location" className="w-full rounded-xl border border-gray-300 px-4 py-3 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition" />
+                    </div>
+                    <div className="md:col-span-2">
+                      <label className="block text-sm font-semibold text-gray-700 mb-1">Description</label>
+                      <textarea value={jobDesc} onChange={(e) => setJobDesc(e.target.value)} required rows={3} placeholder="Write job description..." className="w-full rounded-xl border border-gray-300 px-4 py-3 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition" />
+                    </div>
+                  </div>
+
+                  <div className="grid md:grid-cols-5 gap-4">
+                    <div>
+                      <label className="block text-sm font-semibold text-gray-700 mb-1">Job Type</label>
+                      <select value={jobType} onChange={(e) => setJobType(e.target.value)} className="w-full rounded-xl border border-gray-300 px-4 py-3 bg-white focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition">
+                        <option>Full-Time</option>
+                        <option>Part-Time</option>
+                        <option>Internship</option>
+                        <option>Contract</option>
+                      </select>
+                    </div>
                     <div>
                       <label className="block text-sm font-semibold text-gray-700 mb-1">Category</label>
                       <input value={category} onChange={(e) => setCategory(e.target.value)} className="w-full rounded-xl border border-gray-300 px-4 py-3" />
@@ -367,17 +346,19 @@ export default function AdminPage() {
                     </div>
                   </div>
 
-                  <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-1">Requirements</label>
-                    <textarea value={requirements} onChange={(e) => setRequirements(e.target.value)} rows={3} className="w-full rounded-xl border border-gray-300 px-4 py-3" />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-1">Responsibilities</label>
-                    <textarea value={responsibilities} onChange={(e) => setResponsibilities(e.target.value)} rows={3} className="w-full rounded-xl border border-gray-300 px-4 py-3" />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-1">Qualifications</label>
-                    <textarea value={qualifications} onChange={(e) => setQualifications(e.target.value)} rows={3} className="w-full rounded-xl border border-gray-300 px-4 py-3" />
+                  <div className="grid md:grid-cols-3 gap-4">
+                    <div>
+                      <label className="block text-sm font-semibold text-gray-700 mb-1">Requirements</label>
+                      <textarea value={requirements} onChange={(e) => setRequirements(e.target.value)} rows={3} className="w-full rounded-xl border border-gray-300 px-4 py-3" />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-semibold text-gray-700 mb-1">Responsibilities</label>
+                      <textarea value={responsibilities} onChange={(e) => setResponsibilities(e.target.value)} rows={3} className="w-full rounded-xl border border-gray-300 px-4 py-3" />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-semibold text-gray-700 mb-1">Qualifications</label>
+                      <textarea value={qualifications} onChange={(e) => setQualifications(e.target.value)} rows={3} className="w-full rounded-xl border border-gray-300 px-4 py-3" />
+                    </div>
                   </div>
                   
 
@@ -401,7 +382,33 @@ export default function AdminPage() {
           {activeTab === "jobpost" && (
             <div>
               <h2 className="text-2xl font-semibold mb-4">💼 Job Posts</h2>
-              <p>Yahan job posts ka data show hoga (API se ya static).</p>
+              <div className="mb-4 flex items-center gap-2">
+                <button
+                  onClick={loadJobs}
+                  className="px-3 py-1.5 text-sm rounded-lg bg-indigo-600 text-white hover:bg-indigo-700"
+                >
+                  Refresh Jobs
+                </button>
+              </div>
+              {jobs.length === 0 ? (
+                <p className="text-gray-500 italic">No jobs found.</p>
+              ) : (
+                <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+                  {jobs.map((job) => (
+                    <div key={job.id} className="bg-white border rounded-xl p-4 shadow">
+                      <h3 className="font-semibold text-gray-800">{job.title}</h3>
+                      <div className="text-xs text-gray-500 mt-1">
+                        <span className="mr-3">📍 {job.location}</span>
+                        <span>🕒 {job.jobType?.replace("_", " ")}</span>
+                      </div>
+                      <p className="text-sm text-gray-700 mt-2 line-clamp-3">{job.description}</p>
+                      <div className="text-[11px] text-gray-400 mt-3">
+                        Posted {job.createdAt ? new Date(job.createdAt).toLocaleDateString() : ""}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           )}
 

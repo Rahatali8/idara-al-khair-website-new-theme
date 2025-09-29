@@ -73,6 +73,9 @@ model JobApplication {
   applicantPhone String?
   coverLetter    String?
   resumeUrl      String?
+  yearsOfExperience Int?
+  highestEducation  String?
+  city              String?
   createdAt      DateTime  @default(now())
 
   job        JobPost  @relation(fields: [jobId], references: [id])

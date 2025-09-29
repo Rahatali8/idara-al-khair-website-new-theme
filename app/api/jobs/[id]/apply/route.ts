@@ -9,7 +9,8 @@ export async function POST(req: Request, ctx: Params) {
     const jobId = Number(ctx.params.id);
     if (!Number.isFinite(jobId)) return NextResponse.json({ error: 'Invalid job id' }, { status: 400 });
 
-    const { applicantName, applicantEmail, applicantPhone, coverLetter, resumeUrl } = await req.json();
+    const { applicantName, applicantEmail, applicantPhone, coverLetter,
+      yearsOfExperience, highestEducation, city, resumeUrl } = await req.json();
     if (!applicantName || !applicantEmail) {
       return NextResponse.json({ error: 'Name and email required' }, { status: 400 });
     }
@@ -25,7 +26,10 @@ export async function POST(req: Request, ctx: Params) {
         applicantEmail,
         applicantPhone,
         coverLetter,
-        resumeUrl,
+        resumeUrl: resumeUrl || null,
+        yearsOfExperience: typeof yearsOfExperience === 'number' ? yearsOfExperience : null,
+        highestEducation: highestEducation || null,
+        city: city || null,
         appliedById: session?.userId || null,
       },
     });

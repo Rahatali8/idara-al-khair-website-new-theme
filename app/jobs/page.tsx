@@ -1,68 +1,124 @@
 "use client";
-import { LogOut, Mail } from "lucide-react";
-import React from "react";
-
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 
 type Job = {
   id: number;
   title: string;
-  desc: string;
+  description: string;
   location: string;
-  type: string;
-  description?: string;
-  postedAt?: string;
-  requirements?: string[];
-  salary?: number;
+  jobType: string;
+  createdAt?: string;
+  requirements?: string;
+  responsibilities?: string;
+  qualifications?: string;
+  deadlineAt?: string;
 };
 
 export default function JobPage() {
-  const [jobs] = useState<Job[]>([
-    {
-      id: 1,
-      title: "Frontend Developer",
-      desc: "React/Next.js developer required with Tailwind CSS experience.",
-      location: "Karachi, PK",
-      type: "Full-Time",
-      description: "We are looking for a skilled frontend developer with React/Next.js experience.",
-      postedAt: "2025-09-28",
-      requirements: [
-        "2+ years experience with React/Next.js",
-        "Strong knowledge of JavaScript & Tailwind CSS",
-        "Experience with REST APIs"
-      ],
-      salary: 1200
-    },
-    {
-      id: 2,
-      title: "Backend Developer",
-      desc: "Node.js + Prisma developer needed for API development.",
-      location: "Lahore, PK",
-      type: "Contract",
-      description: "Strong backend developer needed with Node.js and Prisma.",
-      postedAt: "2025-09-20",
-      requirements: ["3+ years Node.js", "Prisma + PostgreSQL knowledge"],
-      salary: 1500
-    },
-  ]);
+  const [jobs, setJobs] = useState<Job[]>([]);
+  const [error, setError] = useState<string | null>(null);
+  const [open, setOpen] = useState(false);
+  const [selectedJob, setSelectedJob] = useState<Job | null>(null);
+  const [applyOpen, setApplyOpen] = useState(false);
 
-  const [expandedJob, setExpandedJob] = useState<number | null>(null);
-
+  // Apply form state
+  const [applying, setApplying] = useState(false);
   const [appName, setAppName] = useState("");
   const [appEmail, setAppEmail] = useState("");
-  const [appMessage, setAppMessage] = useState("");
-  const [cvFile, setCvFile] = useState<File | null>(null);
+  const [appPhone, setAppPhone] = useState("");
+  const [coverLetter, setCoverLetter] = useState("");
+  const [resumeUrl, setResumeUrl] = useState("");
+  const [yearsExp, setYearsExp] = useState<string>("");
+  const [highestEducation, setHighestEducation] = useState("");
+  const [city, setCity] = useState("");
+  const [uploading, setUploading] = useState(false);
 
-  const handleCvChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0] ?? null;
-    setCvFile(file);
+  useEffect(() => {
+    const load = async () => {
+      try {
+        const res = await fetch("/api/jobs");
+        const data = await res.json();
+        if (!res.ok) {
+          setError(data?.error || "Failed to load jobs");
+          return;
+        }
+        setJobs(data.jobs || []);
+      } catch (e: any) {
+        setError(String(e));
+      }
+    };
+    load();
+  }, []);
+
+  const prettyType = (t?: string) => (t ? t.replace("_", " ") : "");
+
+  const openApplyModal = () => {
+    if (!selectedJob) return;
+    setOpen(false);
+    setApplyOpen(true);
   };
 
-  const handleSubmit = (e: React.FormEvent, job: Job) => {
+  const handleApplySubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Applying for:", job);
-    console.log({ appName, appEmail, appMessage, cvFile });
-    alert(`Application submitted for ${job.title}`);
+    if (!selectedJob) return;
+    setApplying(true);
+    try {
+      const res = await fetch(`/api/jobs/${selectedJob.id}/apply`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          applicantName: appName,
+          applicantEmail: appEmail,
+          applicantPhone: appPhone || undefined,
+          coverLetter: coverLetter || undefined,
+          resumeUrl: resumeUrl || undefined,
+          yearsOfExperience: yearsExp ? Number(yearsExp) : undefined,
+          highestEducation: highestEducation || undefined,
+          city: city || undefined,
+        }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        alert(data?.error || "Failed to apply");
+        return;
+      }
+      alert("Application submitted successfully");
+      setAppName("");
+      setAppEmail("");
+      setAppPhone("");
+      setCoverLetter("");
+      setResumeUrl("");
+      setYearsExp("");
+      setHighestEducation("");
+      setCity("");
+      setApplyOpen(false);
+    } catch (err: any) {
+      alert(String(err));
+    } finally {
+      setApplying(false);
+    }
+  };
+
+  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setUploading(true);
+    try {
+      const fd = new FormData();
+      fd.append('file', file);
+      const res = await fetch('/api/uploads', { method: 'POST', body: fd });
+      const data = await res.json();
+      if (!res.ok) {
+        alert(data?.error || 'Upload failed');
+        return;
+      }
+      setResumeUrl(data.url);
+    } catch (err: any) {
+      alert(String(err));
+    } finally {
+      setUploading(false);
+    }
   };
 
   return (
@@ -70,157 +126,174 @@ export default function JobPage() {
       <div className="max-w-5xl mx-auto">
         <h1 className="text-3xl font-bold text-indigo-600 mb-6">Job Openings</h1>
 
-        <section className="grid gap-6">
+        {error && <p className="mb-4 text-sm text-red-600">{error}</p>}
+
+        {/* Compact list view */}
+        <ul className="bg-white rounded-xl border divide-y">
           {jobs.map((job) => (
-            <article
-              key={job.id}
-              className="bg-white border border-gray-200 rounded-xl shadow hover:shadow-lg transition p-5"
-            >
-
-              {/* Job Summary */}
-              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
-                <div>
-                  <h2 className="text-xl font-semibold bg-gradient-to-r from-indigo-500 to-purple-500 bg-clip-text text-transparent">
-                    {job.title}
-                  </h2>
-
-                  <p className="text-gray-700 mt-2 text-sm">{job.desc}</p>
-                  <div className="mt-2 text-xs text-gray-500">
+            <li key={job.id} className="p-4 flex items-start justify-between gap-4">
+              <div className="min-w-0">
+                <h3 className="font-semibold text-gray-900 truncate">{job.title}</h3>
+                <p className="text-sm text-gray-600 mt-1 line-clamp-2">{job.description}</p>
+                <div className="text-xs text-gray-500 mt-2">
                     <span className="mr-3">📍 {job.location}</span>
-                    <span>🕒 {job.type}</span>
-                  </div>
+                  <span>🕒 {prettyType(job.jobType)}</span>
+                  {job.createdAt && (
+                    <span className="ml-3">📅 {new Date(job.createdAt).toLocaleDateString()}</span>
+                  )}
                 </div>
-
-                <button
-                  onClick={() =>
-                    setExpandedJob(expandedJob === job.id ? null : job.id)
-                  }
-                  className="mt-4 sm:mt-0 px-5 py-2 rounded-lg text-white font-medium 
-             bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 
-             hover:from-indigo-600 hover:via-purple-600 hover:to-pink-600 
-             shadow-md transition"
-                >
-                  {expandedJob === job.id ? "Close" : "View & Apply"}
-                </button>
-
               </div>
-
-              {/* Expanded View */}
-              {expandedJob === job.id && (
-                <div className="mt-6 border-t pt-6 space-y-5">
-                  {/* Job Details */}
-                  <div>
-                    <h4 className="font-semibold">Description</h4>
-                    <p className="text-gray-600 text-sm mt-1">
-                      {job.description}
-                    </p>
-                  </div>
-
-                  <div>
-                    <h4 className="font-semibold">Requirements</h4>
-                    <ul className="list-disc list-inside text-gray-600 text-sm mt-1 space-y-1">
-                      {job.requirements?.map((req, idx) => (
-                        <li key={idx}>{req}</li>
+              <div className="shrink-0">
+                <button
+                  onClick={() => {
+                    setSelectedJob(job);
+                    setOpen(true);
+                  }}
+                  className="px-4 py-2 rounded-lg bg-indigo-600 text-white text-sm font-medium hover:bg-indigo-700 shadow"
+                >
+                  View details
+                </button>
+              </div>
+            </li>
                       ))}
                     </ul>
                   </div>
 
-                  <div>
-                    <h4 className="font-semibold">Salary</h4>
-                    <p className="text-gray-600 text-sm mt-1">
-                      {job.salary ? `$${job.salary}/month` : "Not specified"}
-                    </p>
-                  </div>
+      {/* Details + Apply dialog */}
+      <Dialog open={open} onOpenChange={setOpen}>
+        <DialogContent className="w-[96vw] sm:max-w-3xl md:max-w-4xl">
+          <DialogHeader>
+            <DialogTitle>{selectedJob?.title}</DialogTitle>
+            <DialogDescription>
+              {selectedJob ? (
+                <span className="text-xs text-gray-500">
+                  📍 {selectedJob.location} • {prettyType(selectedJob.jobType)}
+                  {selectedJob.createdAt && (
+                    <> • {new Date(selectedJob.createdAt).toLocaleDateString()}</>
+                  )}
+                </span>
+              ) : null}
+            </DialogDescription>
+          </DialogHeader>
 
-                  <div>
-                    <h4 className="font-semibold">Posted on</h4>
-                    <p className="text-gray-600 text-sm mt-1">
-                      {job.postedAt
-                        ? new Date(job.postedAt).toLocaleDateString()
-                        : "Invalid date"}
-                    </p>
-                  </div>
+          <div className="space-y-4 max-h-[75vh] overflow-y-auto pr-1">
+            <section>
+              <h4 className="font-semibold text-gray-800">Description</h4>
+              <p className="text-sm text-gray-700 mt-1 whitespace-pre-line">
+                {selectedJob?.description}
+              </p>
+            </section>
 
-                  {/* Apply Form */}
-                  <form
-                    onSubmit={(e) => handleSubmit(e, job)}
-                    className="space-y-4"
-                  >
-                    <h4 className="font-semibold">Apply Now</h4>
+            {selectedJob?.requirements && (
+              <section>
+                <h4 className="font-semibold text-gray-800">Requirements</h4>
+                <p className="text-sm text-gray-700 mt-1 whitespace-pre-line">{selectedJob.requirements}</p>
+              </section>
+            )}
 
-                    <div>
-                      <label className="block text-sm font-medium">
-                        Full name
-                      </label>
-                      <input
-                        required
-                        value={appName}
-                        onChange={(e) => setAppName(e.target.value)}
-                        className="mt-1 w-full border rounded-lg px-3 py-2"
-                        placeholder="Your full name"
-                      />
-                    </div>
+            {selectedJob?.responsibilities && (
+              <section>
+                <h4 className="font-semibold text-gray-800">Responsibilities</h4>
+                <p className="text-sm text-gray-700 mt-1 whitespace-pre-line">{selectedJob.responsibilities}</p>
+              </section>
+            )}
 
-                    <div>
-                      <label className="block text-sm font-medium">Email</label>
-                      <input
-                        type="email"
-                        required
-                        value={appEmail}
-                        onChange={(e) => setAppEmail(e.target.value)}
-                        className="mt-1 w-full border rounded-lg px-3 py-2"
-                        placeholder="you@example.com"
-                      />
-                    </div>
+            {selectedJob?.qualifications && (
+              <section>
+                <h4 className="font-semibold text-gray-800">Qualifications</h4>
+                <p className="text-sm text-gray-700 mt-1 whitespace-pre-line">{selectedJob.qualifications}</p>
+              </section>
+            )}
 
-                    <div>
-                      <label className="block text-sm font-medium">
-                        Message / Cover letter
-                      </label>
-                      <textarea
-                        value={appMessage}
-                        onChange={(e) => setAppMessage(e.target.value)}
-                        rows={3}
-                        className="mt-1 w-full border rounded-lg px-3 py-2"
-                        placeholder="Why are you a good fit?"
-                      />
-                    </div>
+            {selectedJob?.deadlineAt && (
+              <section>
+                <h4 className="font-semibold text-gray-800">Deadline</h4>
+                <p className="text-sm text-gray-700 mt-1">{new Date(selectedJob.deadlineAt).toLocaleDateString()}</p>
+              </section>
+            )}
 
-                    <div>
-                      <label className="block text-sm font-medium">
-                        Upload CV
-                      </label>
-                      <input
-                        type="file"
-                        accept=".pdf,.doc,.docx"
-                        onChange={handleCvChange}
-                        className="mt-1"
-                      />
-                      {cvFile && (
-                        <p className="mt-2 text-xs text-gray-600">
-                          Selected:{" "}
-                          <span className="font-medium">{cvFile.name}</span>
-                        </p>
-                      )}
-                    </div>
-
-                    <button
-                      type="submit"
-                      className="px-5 py-2 rounded-lg text-white font-medium 
-             bg-gradient-to-r from-green-500 via-emerald-500 to-teal-500 
-             hover:from-green-600 hover:via-emerald-600 hover:to-teal-600 
-             shadow-md transition"
-                    >
-                      Submit Application
+            <DialogFooter>
+              <button onClick={openApplyModal} className="px-4 py-2 rounded-lg bg-indigo-600 text-white text-sm font-medium hover:bg-indigo-700">
+                Apply Now
                     </button>
-
-                  </form>
+            </DialogFooter>
                 </div>
-              )}
-            </article>
-          ))}
-        </section>
-      </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* Apply Modal */}
+      <Dialog open={applyOpen} onOpenChange={setApplyOpen}>
+        <DialogContent className="w-[96vw] sm:max-w-3xl md:max-w-4xl">
+          <DialogHeader>
+            <DialogTitle>Apply for this job</DialogTitle>
+            <DialogDescription>
+              Please fill the form below. Job info is prefilled.
+            </DialogDescription>
+          </DialogHeader>
+
+          <form onSubmit={handleApplySubmit} className="space-y-4 max-h-[75vh] overflow-y-auto pr-1">
+            <div>
+              <label className="block text-xs font-medium text-gray-700">Job Title</label>
+              <input value={selectedJob?.title || ""} readOnly className="mt-1 w-full border rounded-lg px-3 py-2 bg-gray-50" />
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-gray-700">Job Description</label>
+              <textarea value={selectedJob?.description || ""} readOnly rows={3} className="mt-1 w-full border rounded-lg px-3 py-2 bg-gray-50" />
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-3">
+              <div>
+                <label className="block text-xs font-medium text-gray-700">Full name</label>
+                <input required value={appName} onChange={(e) => setAppName(e.target.value)} className="mt-1 w-full border rounded-lg px-3 py-2" placeholder="Your full name" />
+              </div>
+              <div>
+                <label className="block text-xs font-medium text-gray-700">Email</label>
+                <input type="email" required value={appEmail} onChange={(e) => setAppEmail(e.target.value)} className="mt-1 w-full border rounded-lg px-3 py-2" placeholder="you@example.com" />
+              </div>
+              <div>
+                <label className="block text-xs font-medium text-gray-700">Phone (optional)</label>
+                <input value={appPhone} onChange={(e) => setAppPhone(e.target.value)} className="mt-1 w-full border rounded-lg px-3 py-2" placeholder="03xx-xxxxxxx" />
+              </div>
+              <div>
+                <label className="block text-xs font-medium text-gray-700">City</label>
+                <input value={city} onChange={(e) => setCity(e.target.value)} className="mt-1 w-full border rounded-lg px-3 py-2" placeholder="Your city" />
+              </div>
+              <div>
+                <label className="block text-xs font-medium text-gray-700">Resume (PDF/DOC/DOCX)</label>
+                <div className="mt-1 flex items-center gap-2">
+                  <input type="file" accept=".pdf,.doc,.docx" onChange={handleFileUpload} />
+                  {uploading && <span className="text-xs text-gray-500">Uploading...</span>}
+                </div>
+                {resumeUrl && (
+                  <p className="text-xs text-green-600 mt-1">Uploaded: {resumeUrl}</p>
+                )}
+              </div>
+            </div>
+            <div className="grid md:grid-cols-2 gap-3">
+              <div>
+                <label className="block text-xs font-medium text-gray-700">Years of Experience</label>
+                <input type="number" min={0} value={yearsExp} onChange={(e) => setYearsExp(e.target.value)} className="mt-1 w-full border rounded-lg px-3 py-2" placeholder="e.g., 3" />
+              </div>
+              <div>
+                <label className="block text-xs font-medium text-gray-700">Highest Education</label>
+                <input value={highestEducation} onChange={(e) => setHighestEducation(e.target.value)} className="mt-1 w-full border rounded-lg px-3 py-2" placeholder="BSc/BS/Intermediate" />
+              </div>
+            </div>
+
+              
+              <div>
+                <label className="block text-xs font-medium text-gray-700">Cover letter</label>
+                <textarea value={coverLetter} onChange={(e) => setCoverLetter(e.target.value)} rows={3} className="mt-1 w-full border rounded-lg px-3 py-2" placeholder="Why are you a good fit?" />
+              </div>
+
+            <DialogFooter>
+              <button type="submit" disabled={applying} className="px-4 py-2 rounded-lg bg-indigo-600 text-white text-sm font-medium hover:bg-indigo-700 disabled:opacity-60">
+                {applying ? "Submitting..." : "Submit Application"}
+              </button>
+            </DialogFooter>
+          </form>
+        </DialogContent>
+      </Dialog>
     </main>
   );
 }

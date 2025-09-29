@@ -429,6 +429,13 @@ export default function Header() {
                   </div>
                 </div>
               </div>
+              <Link href="/jobs" className="relative group">
+              <span className="relative text-gray-700 hover:text-lightblue font-semibold transition-all duration-300 group-hover:scale-105">
+                Jobs
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-lightblue to-blue-500 transition-all duration-300 group-hover:w-full"></span>
+              </span>
+            </Link>
+
 
               <Link href="/volunteers" className="text-gray-700 hover:text-teal-600 font-medium" onClick={() => setIsMenuOpen(false)}>Volunteers</Link>
               <Link href="/admin" className="text-gray-700 hover:text-teal-600 font-medium" onClick={() => setIsMenuOpen(false)}>Admin</Link>
