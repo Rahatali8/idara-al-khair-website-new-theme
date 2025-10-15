@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react"
 import Link from "next/link"
-import { Menu, X, ChevronDown } from "lucide-react"
+import { Menu, X, ChevronDown, Home , BookOpen,FolderKanban , Briefcase,  Users, KeyRound, Phone} from "lucide-react"
 import Image from "next/image"
 
 export default function Header() {
@@ -86,27 +86,30 @@ export default function Header() {
 
   return (
     <header className={`font-  bg-gradient-to-r from-white via-blue-50 to-white backdrop-blur-md bg-opacity-95 shadow-xl border-b border-blue-100 sticky top-0 z-50 transition-all duration-500 ${isVisible ? 'translate-y-0' : '-translate-y-full'}`}>
-      <div className="container mx-auto px-2 sm:px-4 md:px-6">
+      <div className="container max-w-7xl mx-auto px-2 sm:px-4 md:px-6">
         <div className="flex items-center justify-between h-16 sm:h-20 md:h-24">
           {/* Logo */}
-          <Link href="/" className="flex items-center space-x-2 sm:space-x-3 group">
-            <div className="w-10 h-10 sm:w-14 sm:h-14 md:w-16 md:h-16 relative flex items-center justify-center bg-gradient-to-br from-blue-50 to-white rounded-2xl shadow-lg group-hover:shadow-xl transition-all duration-300 group-hover:scale-105">
-              <Image
-                src="/alkhairlogo.png"
-                alt="Idara Al-Khair Logo"
-                fill
-                className="object-contain p-2"
-                priority
-              />
-            </div>
-            <div className="hidden sm:block">
-              <h1 className="text-base sm:text-xl font-bold bg-gradient-to-r from-darkblue to-lightblue bg-clip-text text-transparent">Idara Al-Khair</h1>
-              <p className="text-xs text-gray-600">Serving Humanity</p>
-            </div>
-          </Link>
+         <Link href="/" className="flex items-center space-x-2 sm:space-x-3 group">
+<div className="w-16 h-14 sm:w-24 sm:h-24 md:w-24 md:h-24 relative flex items-center justify-center ...">
+
+    <Image
+      src="/alkhairlogo.png"
+      alt="Idara Al-Khair Logo"
+      fill
+      className="object-contain p-2  sm:30 sm:h-30"
+      priority
+    />
+  </div>
+  <div className="">
+    <h1 className=  "  text-base sm: font-bold bg-gradient-to-r from-darkblue to-lightblue bg-clip-text text-transparent">
+      Idara Al-Khair
+    </h1>
+    <p className="text-xs text-gray-600">Serving Humanity</p>
+  </div>
+</Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
+          <nav className="hidden lg:flex items-center space-x-8">
             {/* About Us Dropdown (Desktop) */}
             <div className="relative group flex items-center">
               <Link href="/about" className="relative text-gray-700 hover:text-lightblue font-semibold transition-all duration-300 group-hover:scale-105 px-2 py-1">
@@ -344,24 +347,37 @@ export default function Header() {
             </Link>
           </nav>
 
-          {/* Mobile Menu Button */}
-          <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="md:hidden p-2 rounded-lg hover:bg-gray-100">
-            {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
+        {/* Toggle Button (Visible below lg i.e. mobile + tablet) */}
+        <button
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          className="lg:hidden p-2 rounded-md hover:bg-gray-100 transition"
+        >
+          {isMenuOpen ? <X className="w-7 h-7 text-teal-600" /> : <Menu className="w-7 h-7 text-lightblue-600" />}
+        </button>
         </div>
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="md:hidden py-4 border-t border-gray-200">
+          <div className="lg:hidden py-4 border-t border-gray-200">
             <div className="flex flex-col space-y-4">
-              <Link href="/" className="text-gray-700 hover:text-teal-600 font-medium" onClick={() => setIsMenuOpen(false)}>Home</Link>
+            
+                <Link href="/" className=" flex  space-x-2 text-gray-700   hover:text-teal-600 font-medium" onClick={() => setIsMenuOpen(false)}>
+             <Home />
+              <span>Home</span>
+              
+              </Link>
+           
 
               {/* About Us - simple link on mobile */}
-              <Link href="/about" className="text-gray-700 hover:text-teal-600 font-medium" onClick={() => setIsMenuOpen(false)}>About Us</Link>
+              <Link href="/about" className=" flex  space-x-2 text-gray-700 hover:text-teal-600 font-medium" onClick={() => setIsMenuOpen(false)}>
+            <BookOpen />
+              <span>About</span>
+              </Link>
 
               {/* Projects - collapsible with nested sections */}
               <div className="space-y-2">
-                <button type="button" className="w-full flex items-center justify-between text-gray-700 font-medium" onClick={() => setProjectsOpen(s => !s)} aria-expanded={projectsOpen}>
+                <button type="button" className=" space-x-2 flex items-center justify-between text-gray-700 font-medium" onClick={() => setProjectsOpen(s => !s)} aria-expanded={projectsOpen}>
+                  <FolderKanban/>
                   <span>Projects</span>
                   <ChevronDown className={`w-4 h-4 transform transition-transform duration-200 ${projectsOpen ? 'rotate-180' : ''}`} />
                 </button>
@@ -429,23 +445,39 @@ export default function Header() {
                   </div>
                 </div>
               </div>
-              <Link href="/jobs" className="relative group">
+              <Link href="/jobs" className=" flex space-x-2 relative group">
+                 <Briefcase />
               <span className="relative text-gray-700 hover:text-lightblue font-semibold transition-all duration-300 group-hover:scale-105">
+
                 Jobs
                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-lightblue to-blue-500 transition-all duration-300 group-hover:w-full"></span>
               </span>
             </Link>
 
 
-              <Link href="/volunteers" className="text-gray-700 hover:text-teal-600 font-medium" onClick={() => setIsMenuOpen(false)}>Volunteers</Link>
-              <Link href="/admin" className="text-gray-700 hover:text-teal-600 font-medium" onClick={() => setIsMenuOpen(false)}>Admin</Link>
-              <Link href="/contact" className="text-gray-700 hover:text-teal-600 font-medium" onClick={() => setIsMenuOpen(false)}>Contact Us</Link>
+              <Link href="/volunteers" className=" flex space-x-2 text-gray-700 hover:text-teal-600 font-medium" onClick={() => setIsMenuOpen(false)}>
+              <Users />
+       <span>       Volunteers</span>
+              </Link>
+              <Link href="/admin" className=" flex space-x-2 text-gray-700 hover:text-teal-600 font-medium" onClick={() => setIsMenuOpen(false)}>
+              <KeyRound />
+              <span>Admin</span>
+              </Link>
+              <Link href="/contact" className="flex  space-x-2 text-gray-700 hover:text-teal-600 font-medium" onClick={() => setIsMenuOpen(false)}>
+              <Phone />
+              <span> Contact Us</span>
+             </Link>
+<div className="border-t-white-500 border-t">
 
-              <Link href="/donate" className="bg-gradient-to-r from-teal-500 to-blue-600 text-white px-6 py-2 rounded-full font-semibold text-center" onClick={() => setIsMenuOpen(false)}>Donate Now</Link>
+</div>
+              <Link href="/donate" className="bg-gradient-to-r w-40 from-teal-500 to-blue-600 text-white px-6 py-2 rounded-full font-semibold text-center" onClick={() => setIsMenuOpen(false)}>Donate Now</Link>
             </div>
           </div>
         )}
+
+        
       </div>
     </header>
   )
 }
+

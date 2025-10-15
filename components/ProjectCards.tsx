@@ -1,9 +1,11 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import Link from "next/link"
-import Image from "next/image"
-import { ArrowRight, BookOpen, Utensils, Stethoscope, Laptop, Shield} from "lucide-react"
+import { useState, useEffect } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import AOS from "aos";
+import "aos/dist/aos.css";
+import { ArrowRight, BookOpen, Utensils, Stethoscope, Laptop, Shield } from "lucide-react";
 
 const projects = [
   {
@@ -13,7 +15,7 @@ const projects = [
     image: "/quality-education.jpg",
     icon: BookOpen,
     stats: "6000+ Students",
-    link: "/projects/education"
+    link: "/projects/education",
   },
   {
     id: "food-support",
@@ -22,7 +24,7 @@ const projects = [
     image: "/food-security.jpg",
     icon: Utensils,
     stats: "50,000+ Meals",
-    link: "/projects/food-support"
+    link: "/projects/food-support",
   },
   {
     id: "medical",
@@ -31,7 +33,7 @@ const projects = [
     image: "/health-care.jpg",
     icon: Stethoscope,
     stats: "25,000+ Patients",
-    link: "/projects/medical"
+    link: "/projects/medical",
   },
   {
     id: "technical",
@@ -40,7 +42,7 @@ const projects = [
     image: "/skill-devp.jpg",
     icon: Laptop,
     stats: "2000+ Got Skills",
-    link: "/projects/technical"
+    link: "/projects/technical",
   },
   {
     id: "disaster-relief",
@@ -49,7 +51,7 @@ const projects = [
     image: "/disaster.jpeg",
     icon: Shield,
     stats: "100+ Operations",
-    link: "/projects/disaster-relief"
+    link: "/projects/disaster-relief",
   },
   {
     id: "environment",
@@ -58,83 +60,91 @@ const projects = [
     image: "/environment.jpg",
     icon: Shield,
     stats: "10000+ Plants Planted",
-    link: "/projects/environment"
-  }
-]
+    link: "/projects/environment",
+  },
+];
 
 export default function ProjectCards() {
-  const [hoveredCard, setHoveredCard] = useState<string | null>(null)
+  const [hoveredCard, setHoveredCard] = useState<string | null>(null);
+
+  useEffect(() => {
+    AOS.init({
+      duration: 900,
+      easing: "ease-in-out",
+      once: true,
+    });
+  }, []);
 
   return (
     <section className="py-20 bg-white">
       <div className="container mx-auto px-4">
-        <div className="relative mb-16">
-          <div className="flex items-center justify-center">
-            <div className="hidden lg:block flex-1 mr-8">
-              <div className="h-0.5 bg-gradient-to-l from-lightblue via-lightblue to-transparent"></div>
-            </div>
-            <div className="text-center px-8">
-              <h2 className="text-4xl md:text-5xl font-bold text-darkblue mb-4">Our Valuable <span className="text-lightblue">Projects</span></h2>
-              <p className="text-xl text-gray max-w-3xl mx-auto">
-                Comprehensive programs addressing the core needs of underserved communities
-              </p>
-            </div>
-            <div className="hidden lg:block flex-1 ml-8">
-              <div className="h-0.5 bg-gradient-to-r from-lightblue via-cyan-500 to-transparent"></div>
-            </div>
-          </div>
+        {/* Heading */}
+        <div className="text-center mb-16">
+          <h2 className="text-4xl md:text-5xl font-bold text-darkblue mb-2">
+            Our Valuable <span className="text-lightblue">Projects</span>
+          </h2>
+          <p className="text-lg text-gray max-w-2xl mx-auto">
+            Comprehensive programs addressing the core needs of underserved communities
+          </p>
         </div>
 
+        {/* Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-6 md:px-12">
-          {projects.map((project) => (
+          {projects.map((project, index) => (
             <Link href={project.link} key={project.id}>
               <div
+                data-aos={
+                  index % 3 === 0
+                    ? "fade-right"
+                    : index % 3 === 1
+                    ? "fade-up"
+                    : "fade-left"
+                }
+                data-aos-delay={index * 100}
                 className="group relative overflow-hidden bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer"
                 onMouseEnter={() => setHoveredCard(project.id)}
                 onMouseLeave={() => setHoveredCard(null)}
               >
-                {/* Animated gradient overlay */}
+                {/* Gradient Overlay */}
                 <div className="absolute inset-0 z-0 bg-gradient-to-r from-lightblue via-blue-400 to-lightblue opacity-10 transition-transform duration-500 -translate-x-full group-hover:translate-x-0" />
+
                 <div className="relative z-10">
-                {/* Image */}
-                <div className="relative h-48 overflow-hidden">
-                  <Image
-                    src={project.image || "/placeholder.svg"}
-                    alt={project.title}
-                    fill
-                    className="object-cover transition-transform duration-300 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 to-transparent" />
-
-                  {/* Icon */}
-                  <div
-                    className={`absolute top-4 left-4 w-12 h-12 bg-lightblue rounded-full flex items-center justify-center shadow-lg`}
-                  >
-                    <project.icon className="w-6 h-6 text-white" />
-                  </div>
-
-                  {/* Stats Badge */}
-                  <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm rounded-full px-3 py-1">
-                    <span className="text-sm font-semibold text-gray">{project.stats}</span>
-                  </div>
-                </div>
-
-                {/* Content */}
-                <div className="p-6">
-                  <h3 className="text-2xl font-bold text-darkblue mb-3 group-hover:text-lightblue transition-colors">
-                    {project.title}
-                  </h3>
-                  <p className="text-gray mb-4 leading-relaxed">{project.description}</p>
-
-                  <div className="inline-flex items-center text-lightblue hover:text-lightblue font-semibold transition-colors group">
-                    Learn More
-                    <ArrowRight
-                      className={`ml-2 w-4 h-4 transition-transform duration-300 ${
-                        hoveredCard === project.id ? "translate-x-1" : ""
-                      }`}
+                  {/* Image */}
+                  <div className="relative h-48 overflow-hidden">
+                    <Image
+                      src={project.image}
+                      alt={project.title}
+                      fill
+                      className="object-cover transition-transform duration-300 group-hover:scale-105"
                     />
+
+                    {/* Icon */}
+                    <div className="absolute top-4 left-4 w-12 h-12 bg-lightblue rounded-full flex items-center justify-center shadow-lg">
+                      <project.icon className="w-6 h-6 text-white" />
+                    </div>
+
+                    {/* Stats Badge */}
+                    <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm rounded-full px-3 py-1">
+                      <span className="text-sm font-semibold text-gray">{project.stats}</span>
+                    </div>
                   </div>
-                </div>
+
+                  {/* Content */}
+                  <div className="p-6">
+                    <h3 className="text-2xl font-bold text-darkblue mb-3 group-hover:text-lightblue transition-colors">
+                      {project.title}
+                    </h3>
+                    <p className="text-gray mb-4 leading-relaxed">{project.description}</p>
+
+                    <div className="inline-flex items-center text-lightblue font-semibold group">
+                      Learn More
+                      <ArrowRight
+                        className={`ml-2 w-4 h-4 transition-transform duration-300 ${
+                          hoveredCard === project.id ? "translate-x-1" : ""
+                        }`}
+                      />
+                    </div>
+                  </div>
                 </div>
               </div>
             </Link>
@@ -142,6 +152,5 @@ export default function ProjectCards() {
         </div>
       </div>
     </section>
-  )
+  );
 }
-

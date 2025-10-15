@@ -130,84 +130,97 @@ export default function AlKhairCollegePage() {
   return (
     <main className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative min-h-[86vh] flex items-center justify-center overflow-hidden">
-        {/* Background Image */}
-        <div className="absolute inset-0 z-0">
-          <Image
-            src="/campus-page-back.png"
-            alt="Campus Background"
-            fill
-            className="object-cover blur-sm"
-            priority
-          />
-        </div>
-        <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-12 relative z-10">
-          <div className="max-w-4xl mx-auto text-center">
-            {(() => {
-              const headingWords = ["Al-Khair", "College", "of", "Technology"];
-              const subtext = "Empowering students with cutting-edge technology education and practical skills for the digital age. Established in 2010, we have been at the forefront of technical education in Pakistan.";
-              return (
-                <>
-                  <motion.h1
-                    className="text-5xl md:text-6xl font-bold text-darkblue mb-6 flex flex-wrap justify-center"
-                    initial="hidden"
-                    animate="visible"
-                    variants={{
-                      visible: { transition: { staggerChildren: 0.18 } },
-                      hidden: {},
-                    }}
-                  >
-                    {headingWords.map((word, i) => (
-                      <motion.span
-                        key={i}
-                        className={word === "Technology" ? "text-lightblue mx-2" : "mx-2"}
-                        variants={{
-                          hidden: { opacity: 0, y: 40, scale: 0.8 },
-                          visible: { opacity: 1, y: 0, scale: 1, transition: { type: "spring", bounce: 0.4, duration: 0.7 } },
-                        }}
-                      >
-                        {word}
-                      </motion.span>
-                    ))}
-                  </motion.h1>
-                  <motion.p
-                    className="text-xl md:text-2xl text-gray leading-relaxed mb-8 flex flex-wrap justify-center"
-                    initial="hidden"
-                    animate="visible"
-                    variants={{
-                      visible: { transition: { staggerChildren: 0.045 } },
-                      hidden: {},
-                    }}
-                  >
-                    {subtext.split(" ").map((word, i) => (
-                      <motion.span
-                        key={i}
-                        className="inline-block mr-2"
-                        variants={{
-                          hidden: { opacity: 0, y: 20, scale: 0.8 },
-                          visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.4, type: 'spring', bounce: 0.3 } },
-                        }}
-                      >
-                        {word}
-                      </motion.span>
-                    ))}
-                  </motion.p>
-                  <a href="#join-college" className="inline-block mt-4">
-                    <button className="relative px-8 py-2 font-semibold rounded-full border-2 border-lightblue text-lightblue overflow-hidden group transition-colors duration-300 bg-white">
-                      {/* Animated gradient overlay */}
-                      <span className="absolute inset-0 z-0 bg-gradient-to-r from-lightblue via-blue-400 to-lightblue opacity-20 transition-transform duration-500 -translate-x-full group-hover:translate-x-0 rounded-full" />
-                      <span className="relative z-10 flex items-center">
+     <section className="relative min-h-[86vh] flex items-center justify-center overflow-hidden">
+  {/* Background Image */}
+  <div className="absolute inset-0 z-0">
+    <Image
+      src="/campus-page-back.png"
+      alt="Campus Background"
+      fill
+      className="object-cover blur-sm"
+      priority
+    />
+  </div>
+
+  <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-12 relative z-10">
+    <div className="max-w-4xl mx-auto text-center">
+      {(() => {
+        const headingWords = ["Al-Khair", "College", "of", "Technology"];
+        const subtext =
+          "Empowering students with cutting-edge technology education and practical skills for the digital age. Established in 2010, we have been at the forefront of technical education in Pakistan.";
+
+        return (
+          <>
+            {/* Heading */}
+            <motion.h1
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-darkblue mb-6 flex flex-wrap justify-center"
+              initial="hidden"
+              animate="visible"
+              variants={{
+                visible: { transition: { staggerChildren: 0.18 } },
+                hidden: {},
+              }}
+            >
+              {headingWords.map((word, i) => (
+                <motion.span
+                  key={i}
+                  className={word === "Technology" ? "text-lightblue mx-1 sm:mx-2" : "mx-1 sm:mx-2"}
+                  variants={{
+                    hidden: { opacity: 0, y: 40, scale: 0.8 },
+                    visible: {
+                      opacity: 1,
+                      y: 0,
+                      scale: 1,
+                      transition: { type: "spring", bounce: 0.4, duration: 0.7 },
+                    },
+                  }}
+                >
+                  {word}
+                </motion.span>
+              ))}
+            </motion.h1>
+
+            {/* Subtext */}
+            <motion.p
+              className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-800 leading-relaxed mb-8 flex flex-wrap justify-center"
+              initial="hidden"
+              animate="visible"
+              variants={{
+                visible: { transition: { staggerChildren: 0.045 } },
+                hidden: {},
+              }}
+            >
+              {subtext.split(" ").map((word, i) => (
+                <motion.span
+                  key={i}
+                  className="inline-block mr-1 sm:mr-2"
+                  variants={{
+                    hidden: { opacity: 0, y: 20, scale: 0.8 },
+                    visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.4, type: "spring", bounce: 0.3 } },
+                  }}
+                >
+                  {word}
+                </motion.span>
+              ))}
+            </motion.p>
+
+            {/* Button */}
+            <a href="#join-college" className="inline-block mt-4">
+              <button className="relative px-6 sm:px-8 py-2 sm:py-3 font-semibold rounded-full border-2 border-lightblue text-lightblue overflow-hidden group transition-colors duration-300 bg-white">
+                <span className="absolute inset-0 z-0 bg-gradient-to-r from-lightblue via-blue-400 to-lightblue opacity-20 transition-transform duration-500 -translate-x-full group-hover:translate-x-0 rounded-full" />
+                <span className="relative z-10 flex items-center justify-center">
                   <GraduationCap className="mr-2 h-5 w-5" />
                   Apply for Admission
-                      </span>
-                    </button>
-              </a>
-                </>
-              );
-            })()}
-          </div>
-        </div>
-      </section>
+                </span>
+              </button>
+            </a>
+          </>
+        );
+      })()}
+    </div>
+  </div>
+</section>
+
 
       {/* College Stats */}
       <section className="py-16">
@@ -217,10 +230,15 @@ export default function AlKhairCollegePage() {
               <div className="hidden lg:block flex-1 mr-8">
                 <div className="h-0.5 bg-gradient-to-l from-lightblue via-cyan-500 to-transparent"></div>
               </div>
-              <div className="text-center px-8">
-                <h2 className="text-4xl md:text-5xl font-bold mb-4 text-darkblue">Our <span className="text-lightblue">Achievements</span></h2>
-                <p className="text-xl text-gray-600 max-w-2xl mx-auto text-center mt-2">Celebrating our milestones and impact in education.</p>
-              </div>
+            <div className="text-center px-4 sm:px-6 lg:px-0">
+  <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-darkblue">
+    Our <span className="text-lightblue">Achievements</span>
+  </h2>
+  <p className="text-base sm:text-lg md:text-xl text-gray-600 max-w-full sm:max-w-xl lg:max-w-2xl mx-auto mt-2">
+    Celebrating our milestones and impact in education.
+  </p>
+</div>
+
               <div className="hidden lg:block flex-1 ml-8">
                 <div className="h-0.5 bg-gradient-to-r from-lightblue via-cyan-500 to-transparent"></div>
               </div>
@@ -259,10 +277,15 @@ export default function AlKhairCollegePage() {
               <div className="hidden lg:block flex-1 mr-8">
                 <div className="h-0.5 bg-gradient-to-l from-lightblue via-cyan-500 to-transparent"></div>
               </div>
-              <div className="text-center px-8">
-                <h2 className="text-4xl md:text-5xl font-bold mb-4 text-darkblue">About <span className="text-lightblue">Us</span></h2>
-                <p className="text-xl text-gray-600 max-w-2xl mx-auto text-center mt-2">Learn more about our vision, mission, and educational philosophy.</p>
-              </div>
+           <div className="text-center px-4 sm:px-6 lg:px-0">
+  <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-darkblue">
+    About <span className="text-lightblue">Us</span>
+  </h2>
+  <p className="text-base sm:text-lg md:text-xl text-gray-600 max-w-full sm:max-w-xl lg:max-w-2xl mx-auto mt-2">
+    Learn more about our vision, mission, and educational philosophy.
+  </p>
+</div>
+
               <div className="hidden lg:block flex-1 ml-8">
                 <div className="h-0.5 bg-gradient-to-r from-lightblue via-cyan-500 to-transparent"></div>
               </div>
@@ -332,10 +355,15 @@ export default function AlKhairCollegePage() {
               <div className="hidden lg:block flex-1 mr-8">
                 <div className="h-0.5 bg-gradient-to-l from-lightblue via-cyan-500 to-transparent"></div>
               </div>
-              <div className="text-center px-8">
-                <h2 className="text-5xl font-extrabold text-center text-darkblue mb-2">Academic <span className="text-lightblue">Programs</span></h2>
-                <p className="text-center text-xl text-gray mb-12">Choose your path to success with our comprehensive intermediate programs</p>
-              </div>
+            <div className="text-center px-4 sm:px-6 lg:px-0">
+  <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-extrabold text-darkblue mb-2">
+    Academic <span className="text-lightblue">Programs</span>
+  </h2>
+  <p className="text-base sm:text-lg md:text-xl text-gray-600 mb-12 max-w-full sm:max-w-2xl lg:max-w-3xl mx-auto">
+    Choose your path to success with our comprehensive intermediate programs.
+  </p>
+</div>
+
               <div className="hidden lg:block flex-1 ml-8">
                 <div className="h-0.5 bg-gradient-to-r from-lightblue via-cyan-500 to-transparent"></div>
               </div>
@@ -429,12 +457,15 @@ export default function AlKhairCollegePage() {
               <div className="hidden lg:block flex-1 mr-8">
                 <div className="h-0.5 bg-gradient-to-l from-lightblue via-cyan-500 to-transparent"></div>
               </div>
-              <div className="text-center px-8">
-                <h2 className="text-5xl font-bold text-darkblue mb-4">Campus <span className="text-lightblue">Facilities</span></h2>
-                <p className="text-xl text-gray max-w-3xl mx-auto">
-                  Modern facilities designed to enhance learning experience and provide students with the best resources.
-                </p>
-              </div>
+             <div className="text-center px-4 sm:px-6 lg:px-0">
+  <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-bold text-darkblue mb-4">
+    Campus <span className="text-lightblue">Facilities</span>
+  </h2>
+  <p className="text-base sm:text-lg md:text-xl text-gray-600 max-w-full sm:max-w-2xl lg:max-w-3xl mx-auto">
+    Modern facilities designed to enhance learning experience and provide students with the best resources.
+  </p>
+</div>
+
               <div className="hidden lg:block flex-1 ml-8">
                 <div className="h-0.5 bg-gradient-to-r from-lightblue via-cyan-500 to-transparent"></div>
               </div>
@@ -475,10 +506,15 @@ export default function AlKhairCollegePage() {
               <div className="hidden lg:block flex-1 mr-8">
                 <div className="h-0.5 bg-gradient-to-l from-lightblue via-cyan-500 to-transparent"></div>
               </div>
-              <div className="text-center px-8">
-                <h2 className="text-4xl md:text-5xl font-extrabold text-darkblue mb-4"> Join <span className="text-lightblue">Al-Khair College ?</span></h2>
-                <p className="text-lg text-gray mb-10">Take the first step towards your bright future. Contact us for admissions and campus visits.</p>
-              </div>
+             <div className="text-center px-4 sm:px-6 lg:px-0">
+  <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-extrabold text-darkblue mb-4">
+    Join <span className="text-lightblue">Al-Khair College?</span>
+  </h2>
+  <p className="text-base sm:text-lg md:text-xl text-gray-600 mb-10 max-w-full sm:max-w-2xl lg:max-w-3xl mx-auto">
+    Take the first step towards your bright future. Contact us for admissions and campus visits.
+  </p>
+</div>
+
               <div className="hidden lg:block flex-1 ml-8">
                 <div className="h-0.5 bg-gradient-to-r from-lightblue via-cyan-500 to-transparent"></div>
               </div>

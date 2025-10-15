@@ -1,6 +1,9 @@
 "use client";
+
 import React, { useEffect, useState } from "react";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import ReCAPTCHA from "react-google-recaptcha";
+
 
 type Job = {
   id: number;
@@ -34,6 +37,17 @@ export default function JobPage() {
   const [city, setCity] = useState("");
   const [uploading, setUploading] = useState(false);
 
+  // reCAPTCHA token store karne ke liye ek state
+  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
+
+  // reCAPTCHA ke response ko handle karne wala function
+  const onchange = (value: string | null) => {
+    console.log("ReCAPTCHA response:", value);
+    setCaptchaToken(value);
+  };
+
+
+
   useEffect(() => {
     const load = async () => {
       try {
@@ -62,6 +76,13 @@ export default function JobPage() {
   const handleApplySubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!selectedJob) return;
+
+    // reCAPTCHA token check
+    if (!captchaToken) {
+      alert("Please complete the reCAPTCHA");
+      return;
+    }
+
     setApplying(true);
     try {
       const res = await fetch(`/api/jobs/${selectedJob.id}/apply`, {
@@ -76,6 +97,7 @@ export default function JobPage() {
           yearsOfExperience: yearsExp ? Number(yearsExp) : undefined,
           highestEducation: highestEducation || undefined,
           city: city || undefined,
+          recaptchaToken: captchaToken, // backend me verify karne ke liye token bheje
         }),
       });
       const data = await res.json();
@@ -84,6 +106,7 @@ export default function JobPage() {
         return;
       }
       alert("Application submitted successfully");
+      // Form reset
       setAppName("");
       setAppEmail("");
       setAppPhone("");
@@ -92,6 +115,7 @@ export default function JobPage() {
       setYearsExp("");
       setHighestEducation("");
       setCity("");
+      setCaptchaToken(null); // token reset
       setApplyOpen(false);
     } catch (err: any) {
       alert(String(err));
@@ -128,7 +152,7 @@ export default function JobPage() {
 
         {error && <p className="mb-4 text-sm text-red-600">{error}</p>}
 
-        {/* Compact list view */}
+        {/* Job list */}
         <ul className="bg-white rounded-xl border divide-y">
           {jobs.map((job) => (
             <li key={job.id} className="p-4 flex items-start justify-between gap-4">
@@ -136,7 +160,7 @@ export default function JobPage() {
                 <h3 className="font-semibold text-gray-900 truncate">{job.title}</h3>
                 <p className="text-sm text-gray-600 mt-1 line-clamp-2">{job.description}</p>
                 <div className="text-xs text-gray-500 mt-2">
-                    <span className="mr-3">📍 {job.location}</span>
+                  <span className="mr-3">📍 {job.location}</span>
                   <span>🕒 {prettyType(job.jobType)}</span>
                   {job.createdAt && (
                     <span className="ml-3">📅 {new Date(job.createdAt).toLocaleDateString()}</span>
@@ -155,11 +179,11 @@ export default function JobPage() {
                 </button>
               </div>
             </li>
-                      ))}
-                    </ul>
-                  </div>
+          ))}
+        </ul>
+      </div>
 
-      {/* Details + Apply dialog */}
+      {/* Job details dialog */}
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent className="w-[96vw] sm:max-w-3xl md:max-w-4xl">
           <DialogHeader>
@@ -215,15 +239,15 @@ export default function JobPage() {
             <DialogFooter>
               <button onClick={openApplyModal} className="px-4 py-2 rounded-lg bg-indigo-600 text-white text-sm font-medium hover:bg-indigo-700">
                 Apply Now
-                    </button>
+              </button>
             </DialogFooter>
-                </div>
+          </div>
         </DialogContent>
       </Dialog>
 
-      {/* Apply Modal */}
+      {/* Apply modal */}
       <Dialog open={applyOpen} onOpenChange={setApplyOpen}>
-        <DialogContent className="w-[96vw] sm:max-w-3xl md:max-w-4xl">
+        <DialogContent className="w-[96vw] sm:max-w-3xl md:max-w-4xl  " >
           <DialogHeader>
             <DialogTitle>Apply for this job</DialogTitle>
             <DialogDescription>
@@ -231,7 +255,8 @@ export default function JobPage() {
             </DialogDescription>
           </DialogHeader>
 
-          <form onSubmit={handleApplySubmit} className="space-y-4 max-h-[75vh] overflow-y-auto pr-1">
+          <form onSubmit={handleApplySubmit} className="space-y-4 max-h-[75vh] overflow-y-auto pr-1    relative z-[99999] ">
+            {/* Job info (read-only) */}
             <div>
               <label className="block text-xs font-medium text-gray-700">Job Title</label>
               <input value={selectedJob?.title || ""} readOnly className="mt-1 w-full border rounded-lg px-3 py-2 bg-gray-50" />
@@ -241,7 +266,8 @@ export default function JobPage() {
               <textarea value={selectedJob?.description || ""} readOnly rows={3} className="mt-1 w-full border rounded-lg px-3 py-2 bg-gray-50" />
             </div>
 
-            <div className="grid md:grid-cols-2 gap-3">
+            {/* Applicant info */}
+            <div className="grid md:grid-cols-2 gap-3 ">
               <div>
                 <label className="block text-xs font-medium text-gray-700">Full name</label>
                 <input required value={appName} onChange={(e) => setAppName(e.target.value)} className="mt-1 w-full border rounded-lg px-3 py-2" placeholder="Your full name" />
@@ -269,6 +295,8 @@ export default function JobPage() {
                 )}
               </div>
             </div>
+
+            {/* Experience & Education */}
             <div className="grid md:grid-cols-2 gap-3">
               <div>
                 <label className="block text-xs font-medium text-gray-700">Years of Experience</label>
@@ -280,14 +308,28 @@ export default function JobPage() {
               </div>
             </div>
 
-              
-              <div>
-                <label className="block text-xs font-medium text-gray-700">Cover letter</label>
-                <textarea value={coverLetter} onChange={(e) => setCoverLetter(e.target.value)} rows={3} className="mt-1 w-full border rounded-lg px-3 py-2" placeholder="Why are you a good fit?" />
-              </div>
+            {/* Cover letter */}
+            <div>
+              <label className="block text-xs font-medium text-gray-700">Cover letter</label>
+              <textarea value={coverLetter} onChange={(e) => setCoverLetter(e.target.value)} rows={3} className="mt-1 w-full border rounded-lg px-3 py-2" placeholder="Why are you a good fit?" />
+            </div>
 
+            {/* reCAPTCHA */}
+            <div className="mt-4  relative z-[99999]"> {/* Ek wrapper div use karein */}
+              <ReCAPTCHA
+                sitekey="6LeeF90rAAAAANYOXyCXWH69iyOsX8eWt03msPvy"
+                onChange={onchange}
+          
+              />
+            </div>
+
+            {/* Submit button */}
             <DialogFooter>
-              <button type="submit" disabled={applying} className="px-4 py-2 rounded-lg bg-indigo-600 text-white text-sm font-medium hover:bg-indigo-700 disabled:opacity-60">
+              <button
+                type="submit"
+                disabled={applying}
+                className="px-4 py-2 rounded-lg bg-indigo-600 text-white text-sm font-medium hover:bg-indigo-700 disabled:opacity-60"
+              >
                 {applying ? "Submitting..." : "Submit Application"}
               </button>
             </DialogFooter>

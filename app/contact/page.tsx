@@ -221,217 +221,244 @@ export default function ContactPage() {
     <main className="min-h-screen bg-white">
       {/* Hero Section */}
       <section className="relative min-h-[86vh] flex items-center justify-center overflow-hidden">
-        {/* Background Image */}
-        <div className="absolute inset-0 z-0">
-          <img
-            src="/contect-back.jpg"
-            alt="Contact background"
-            className="object-cover w-full h-full blur-sm"
-            style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }}
-          />
-        </div>
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-4xl mx-auto text-center">
-            {(() => {
-              const headingWords = ["Contact", "Idara", "Al-Khair"];
-              const subtext = "Ready to make a difference? Reach out to us and discover how you can contribute to our mission of serving humanity.";
-              return (
-                <>
-                  <motion.h1
-                    className={`text-5xl md:text-6xl font-bold mb-6 text-darkblue flex flex-wrap justify-center ${headingShine ? "shimmer" : ""}`}
-                    initial="hidden"
-                    animate="visible"
-                    variants={{
-                      visible: { transition: { staggerChildren: 0.18 } },
-                      hidden: {},
-                    }}
-                    onAnimationComplete={() => setHeadingShine(true)}
-                  >
-                    {headingWords.map((word, i) => (
-                      <motion.span
-                        key={i}
-                        className={word === "Al-Khair" ? "text-lightblue mx-2" : "mx-2"}
-                        variants={{
-                          hidden: { opacity: 0, y: 40, scale: 0.8 },
-                          visible: { opacity: 1, y: 0, scale: 1, transition: { type: "spring", bounce: 0.4, duration: 0.7 } },
-                        }}
-                      >
-                        {word}
-                      </motion.span>
-                    ))}
-                  </motion.h1>
-                  <motion.p
-                    className="text-xl md:text-2xl text-gray-700 leading-relaxed mb-8 flex flex-wrap justify-center"
-                    initial="hidden"
-                    animate="visible"
-                    variants={{
-                      visible: { transition: { staggerChildren: 0.045 } },
-                      hidden: {},
-                    }}
-                  >
-                    {subtext.split(" ").map((word, i) => (
-                      <motion.span
-                        key={i}
-                        className="inline-block mr-2"
-                        variants={{
-                          hidden: { opacity: 0, y: 20, scale: 0.8 },
-                          visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.4, type: 'spring', bounce: 0.3 } },
-                        }}
-                      >
-                        {word}
-                      </motion.span>
-                    ))}
-                  </motion.p>
-                  <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                    <Button size="lg" className="bg-gradient-to-r from-lightblue to-cyan-400 hover:from-cyan-400 hover:to-lightblue text-white shadow-lg font-bold text-lg px-8 py-4 rounded-full transition-all duration-300 transform hover:scale-105">
-                      <Phone className="w-5 h-5 mr-2" />
-                      Call Now
-                    </Button>
-                    <a href="mailto:info@idaraalkhair.com">
-                      <Button size="lg" variant="outline" className="border-2 border-lightblue text-lightblue hover:bg-lightblue/10 bg-transparent font-bold text-lg px-8 py-4 rounded-full transition-all duration-300 transform hover:scale-105">
-                        <Mail className="w-5 h-5 mr-2" />
-                        Send Email
-                      </Button>
-                    </a>
-                  </div>
-                </>
-              );
-            })()}
-          </div>
-        </div>
-      </section>
+  {/* Background Image */}
+  <div className="absolute inset-0 z-0">
+    <img
+      src="/contect-back.jpg"
+      alt="Contact background"
+      className="object-cover w-full h-full blur-sm"
+      style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }}
+    />
+  </div>
+
+  <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-12 relative z-10">
+    <div className="max-w-4xl mx-auto text-center">
+      {(() => {
+        const headingWords = ["Contact", "Idara", "Al-Khair"];
+        const subtext =
+          "Ready to make a difference? Reach out to us and discover how you can contribute to our mission of serving humanity.";
+
+        return (
+          <>
+            {/* Heading */}
+            <motion.h1
+              className={`text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-darkblue flex flex-wrap justify-center`}
+              initial="hidden"
+              animate="visible"
+              variants={{
+                visible: { transition: { staggerChildren: 0.18 } },
+                hidden: {},
+              }}
+            >
+              {headingWords.map((word, i) => (
+                <motion.span
+                  key={i}
+                  className={word === "Al-Khair" ? "text-lightblue mx-1 sm:mx-2" : "mx-1 sm:mx-2"}
+                  variants={{
+                    hidden: { opacity: 0, y: 40, scale: 0.8 },
+                    visible: { opacity: 1, y: 0, scale: 1, transition: { type: "spring", bounce: 0.4, duration: 0.7 } },
+                  }}
+                >
+                  {word}
+                </motion.span>
+              ))}
+            </motion.h1>
+
+            {/* Subtext */}
+            <motion.p
+              className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-700 leading-relaxed mb-8 flex flex-wrap justify-center"
+              initial="hidden"
+              animate="visible"
+              variants={{
+                visible: { transition: { staggerChildren: 0.045 } },
+                hidden: {},
+              }}
+            >
+              {subtext.split(" ").map((word, i) => (
+                <motion.span
+                  key={i}
+                  className="inline-block mr-1 sm:mr-2"
+                  variants={{
+                    hidden: { opacity: 0, y: 20, scale: 0.8 },
+                    visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.4, type: 'spring', bounce: 0.3 } },
+                  }}
+                >
+                  {word}
+                </motion.span>
+              ))}
+            </motion.p>
+
+            {/* Buttons */}
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button
+                size="lg"
+                className="bg-gradient-to-r from-lightblue to-cyan-400 hover:from-cyan-400 hover:to-lightblue text-white shadow-lg font-bold text-lg px-8 py-4 rounded-full transition-all duration-300 transform hover:scale-105 flex items-center justify-center"
+              >
+                <Phone className="w-5 h-5 mr-2" />
+                Call Now
+              </Button>
+              <a href="mailto:info@idaraalkhair.com">
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="border-2 border-lightblue text-lightblue hover:bg-lightblue/10 bg-transparent font-bold text-lg px-8 py-4 rounded-full transition-all duration-300 transform hover:scale-105 flex items-center justify-center"
+                >
+                  <Mail className="w-5 h-5 mr-2" />
+                  Send Email
+                </Button>
+              </a>
+            </div>
+          </>
+        );
+      })()}
+    </div>
+  </div>
+</section>
 
       
      
 
-      {/* Contact Information */}
-      <section className="py-20">
-        <div className="container mx-full">
-          <div className="mb-16">
-            <div className="flex items-center justify-center mb-10">
-              <div className="hidden lg:block flex-1">
-                <div className="h-0.5 bg-gradient-to-l from-lightblue via-cyan-500 to-transparent"></div>
-              </div>
-              <div className="text-center px-8">
-                <h2 className="text-4xl md:text-5xl font-bold text-darkblue mb-2">Get In <span className="text-lightblue">Touch</span></h2>
-                <p className="text-xl text-gray max-w-3xl mx-auto">Connect with us through multiple channels. Our dedicated team is ready to assist you with any inquiries.</p>
-              </div>
-              <div className="hidden lg:block flex-1 ml-8">
-                <div className="h-0.5 bg-gradient-to-r from-lightblue via-cyan-500 to-transparent"></div>
-              </div>
-            </div>
-          </div>
-          <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {contactInfo.map((info, index) => (
-              <motion.div
-                key={index}
-                className="group relative overflow-hidden bg-white/20 backdrop-blur-md border border-white/30 shadow-xl rounded-2xl p-4 text-left flex flex-col gap-3 min-w-[280px] max-w-[280px] w-full h-[200px] mx-auto"
-                whileHover={{ scale: 1.05, y: -5 }}
-                transition={{ duration: 0.3 }}
-              >
-                {/* Animated gradient overlay */}
-                <div className="absolute inset-0 z-0 bg-gradient-to-r from-lightblue via-blue-400 to-lightblue opacity-20 transition-transform duration-500 -translate-x-full group-hover:translate-x-0 rounded-2xl" />
-                {/* Card content */}
-                <div className="relative z-10 flex flex-col items-center">
-                  <div className="w-10 h-10 bg-lightblue/80 group-hover:bg-white transition-colors duration-500 backdrop-blur-sm rounded-full flex items-center justify-center mb-2 border border-white/20 group-hover:rotate-[360deg] transition-transform duration-700">
-                    <info.icon className="w-6 h-6 text-white  group-hover:text-lightblue transition-colors duration-500" strokeWidth={2.2} />
-                  </div>
-                  <h3 className="text-xl font-bold text-lightblue group-hover:text-darkblue transition-colors duration-500 mb-1 text-center">{info.title}</h3>
-                  <p className="text-gray mb-2 text-center font-light leading-relaxed">{info.details}</p>
-                  <p className="text-gray text-sm text-center">{info.description}</p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+    {/* Contact Information */}
+<section className="py-20 bg-white">
+  <div className="container mx-auto px-4">
+    {/* Heading */}
+    <div className="mb-16">
+      <div className="flex items-center justify-center mb-10">
+        <div className="hidden lg:block flex-1">
+          <div className="h-0.5 bg-gradient-to-l from-lightblue via-cyan-500 to-transparent"></div>
         </div>
-      </section>
+        <div className="text-center px-4 sm:px-8">
+          <h2 className="text-4xl md:text-5xl font-bold text-darkblue mb-2">
+            Get In <span className="text-lightblue">Touch</span>
+          </h2>
+          <p className="text-xl text-gray max-w-3xl mx-auto">
+            Connect with us through multiple channels. Our dedicated team is ready to assist you with any inquiries.
+          </p>
+        </div>
+        <div className="hidden lg:block flex-1">
+          <div className="h-0.5 bg-gradient-to-r from-lightblue via-cyan-500 to-transparent"></div>
+        </div>
+      </div>
+    </div>
+
+    {/* Contact Cards */}
+    <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      {contactInfo.map((info, index) => (
+        <motion.div
+          key={index}
+          className="group relative overflow-hidden bg-white/20 backdrop-blur-md border border-white/30 shadow-xl rounded-2xl p-6 flex flex-col items-center justify-center min-h-[220px]"
+          whileHover={{ scale: 1.05, y: -5 }}
+          transition={{ duration: 0.3 }}
+        >
+          {/* Gradient Overlay */}
+          <div className="absolute inset-0 z-0 bg-gradient-to-r from-lightblue via-blue-400 to-lightblue opacity-20 transition-transform duration-500 -translate-x-full group-hover:translate-x-0 rounded-2xl" />
+
+          {/* Card Content */}
+          <div className="relative z-10 flex flex-col items-center text-center">
+            <div className="w-12 h-12 bg-lightblue/80 group-hover:bg-white transition-colors duration-500 backdrop-blur-sm rounded-full flex items-center justify-center mb-4 border border-white/20 group-hover:rotate-[360deg] transition-transform duration-700">
+              <info.icon className="w-6 h-6 text-white group-hover:text-lightblue transition-colors duration-500" strokeWidth={2.2} />
+            </div>
+            <h3 className="text-xl font-bold text-lightblue group-hover:text-darkblue transition-colors duration-500 mb-2">
+              {info.title}
+            </h3>
+            <p className="text-gray font-light leading-relaxed">{info.details}</p>
+            {info.description && <p className="text-gray text-sm mt-1">{info.description}</p>}
+          </div>
+        </motion.div>
+      ))}
+    </div>
+  </div>
+</section>
+
 
       {/* Donation Information */}
-      <section  id="donation-details" className="py-20 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="mb-16">
-            <div className="flex items-center justify-center mb-10">
-              <div className="hidden lg:block flex-1 mr-8">
-                <div className="h-0.5 bg-gradient-to-l from-lightblue via-cyan-500 to-transparent"></div>
+<section id="donation-details" className="py-20 bg-white">
+  <div className="container mx-auto px-4">
+    {/* Heading */}
+    <div className="mb-16">
+      <div className="flex items-center justify-center mb-10">
+        <div className="hidden lg:block flex-1 mr-8">
+          <div className="h-0.5 bg-gradient-to-l from-lightblue via-cyan-500 to-transparent"></div>
+        </div>
+        <div className="text-center px-4 sm:px-8">
+          <h2 className="text-4xl md:text-5xl font-bold text-darkblue mb-2">
+            Donation <span className="text-lightblue">Details</span>
+          </h2>
+          <p className="text-xl text-gray max-w-3xl mx-auto">
+            Your generous donations help us continue our mission. Choose from our secure banking options below.
+          </p>
+        </div>
+        <div className="hidden lg:block flex-1 ml-8">
+          <div className="h-0.5 bg-gradient-to-r from-lightblue via-cyan-500 to-transparent"></div>
+        </div>
+      </div>
+    </div>
+
+    {/* Donation Cards */}
+    <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8">
+      {donationMethods.map((method, index) => {
+        const colorTheme = index === 0
+          ? { main: 'from-lightblue to-cyan-500', heading: 'bg-lightblue text-white', block: 'bg-lightblue/10' }
+          : { main: 'from-darkblue to-gray', heading: 'bg-darkblue text-white', block: 'bg-lightblue/10' };
+
+        return (
+          <div key={index} className="relative rounded-3xl overflow-hidden shadow-2xl flex flex-col min-h-[480px]">
+            {/* Image */}
+            <div className="w-full h-48 md:h-56 overflow-hidden rounded-t-3xl">
+              <img
+                src={method.image}
+                alt={`${method.title} image`}
+                className="object-cover w-full h-full"
+              />
+            </div>
+
+            {/* Card Content */}
+            <div className="flex-1 flex flex-col justify-start">
+              {/* Heading and Target */}
+              <div className={`px-8 pt-6 pb-4 ${colorTheme.heading} rounded-b-3xl`}>
+                <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2">
+                  <div>
+                    <div className="text-lg font-bold uppercase tracking-wider text-gray-200">{method.title}</div>
+                    <div className="text-2xl font-extrabold">{method.accountName}</div>
+                  </div>
+                  <div className="text-center md:text-right mt-2 md:mt-0">
+                    <div className="text-xs font-semibold text-gray-200 uppercase">Help us reach our target</div>
+                    <div className="text-2xl font-extrabold">PKR 1,000,000</div>
+                  </div>
+                </div>
               </div>
-              <div className="text-center px-8">
-                <h2 className="text-4xl md:text-5xl font-bold text-darkblue mb-2">Donation <span className="text-lightblue">Details</span></h2>
-                <p className="text-xl text-gray max-w-3xl mx-auto">Your generous donations help us continue our mission. Choose from our secure banking options below.</p>
-              </div>
-              <div className="hidden lg:block flex-1 ml-8">
-                <div className="h-0.5 bg-gradient-to-r from-lightblue via-cyan-500 to-transparent"></div>
+
+              {/* Account Info */}
+              <div className={`px-8 py-4 flex flex-col gap-2 ${colorTheme.block}`}>
+                <div className="flex justify-between border-b pb-1">
+                  <span className="font-medium text-gray-600">Account Title:</span>
+                  <span className="font-semibold text-gray-900">{method.accountName}</span>
+                </div>
+                <div className="flex justify-between border-b pb-1">
+                  <span className="font-medium text-gray-600">Account Number:</span>
+                  <span className="font-semibold text-gray-900">{method.accountNumber}</span>
+                </div>
+                <div className="flex justify-between border-b pb-1">
+                  <span className="font-medium text-gray-600">Branch Code:</span>
+                  <span className="font-semibold text-gray-900">{method.branchCode}</span>
+                </div>
+                <div className="flex justify-between border-b pb-1">
+                  <span className="font-medium text-gray-600">Swift Code:</span>
+                  <span className="font-semibold text-gray-900">{method.swiftCode}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="font-medium text-gray-600">IBAN:</span>
+                  <span className="font-semibold text-gray-900 text-sm">{method.iban}</span>
+                </div>
               </div>
             </div>
           </div>
-          <div className="max-w-4xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {donationMethods.map((method, index) => {
-              // Website theme color for each card
-              const colorTheme = index === 0
-                ? {
-                    main: 'from-lightblue to-cyan-500',
-                    accent: 'bg-lightblue',
-                    heading: 'bg-lightblue text-white',
-                    block: 'bg-lightblue/10',
-                  }
-                : {
-                    main: 'from-darkblue to-gray',
-                    accent: 'bg-darkblue',
-                    heading: 'bg-darkblue text-white',
-                    block: 'bg-lightblue/10',
-                  };
-              return (
-                <div key={index} className="relative rounded-3xl overflow-hidden shadow-2xl flex flex-col min-h-[420px]">
-                  {/* Diagonal bands and image */}
-                  <div className="w-full h-40 md:h-56 overflow-hidden rounded-t-3xl">
-                    <img src={method.image} alt={method.title + ' image'} className="object-cover w-full h-full" />
-                  </div>
-                  {/* Card content blocks */}
-                  <div className="flex-1 flex flex-col justify-start p-0">
-                    {/* Heading and target */}
-                    <div className={`px-8 pt-6 pb-3 ${colorTheme.heading} rounded-b-3xl`}> 
-                      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2">
-                        <div>
-                          <div className="text-lg font-bold uppercase tracking-wider text-gray-500">{method.title}</div>
-                          <div className={`text-2xl font-extrabold ${colorTheme.heading}`}>{method.accountName}</div>
-                        </div>
-                        <div className="text-center md:text-right mt-2 md:mt-0">
-                          <div className="text-xs font-semibold text-gray-500 uppercase">Help us to reach our target</div>
-                          <div className={`text-2xl font-extrabold ${colorTheme.heading}`}>PKR 1,000,000</div>
-                        </div>
-                      </div>
-                    </div>
-                    {/* Account info */}
-                    <div className={`px-8 py-3 flex flex-col gap-1 ${colorTheme.block}`}> 
-                      <div className="flex justify-between border-b pb-1">
-                        <span className="font-medium text-gray-600">Account Title:</span>
-                        <span className="font-semibold text-gray-900">{method.accountName}</span>
-                      </div>
-                      <div className="flex justify-between border-b pb-1">
-                      <span className="font-medium text-gray-600">Account Number:</span>
-                      <span className="font-semibold text-gray-900">{method.accountNumber}</span>
-                    </div>
-                      <div className="flex justify-between border-b pb-1">
-                      <span className="font-medium text-gray-600">Branch Code:</span>
-                      <span className="font-semibold text-gray-900">{method.branchCode}</span>
-                    </div>
-                      <div className="flex justify-between border-b pb-1">
-                      <span className="font-medium text-gray-600">Swift Code:</span>
-                      <span className="font-semibold text-gray-900">{method.swiftCode}</span>
-                    </div>
-                      <div className="flex justify-between">
-                        <span className="font-medium text-gray-600">IBAN:</span>
-                        <span className="font-semibold text-gray-900 text-sm">{method.iban}</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
+        );
+      })}
+    </div>
+  </div>
+</section>
 
-      
 
       {/* Contact Form */}
       <section className="py-20">
@@ -441,16 +468,21 @@ export default function ContactPage() {
               <div className="hidden lg:block flex-1 mr-8">
                 <div className="h-0.5 bg-gradient-to-l from-lightblue via-cyan-500 to-transparent"></div>
               </div>
-              <div className="text-center px-8">
-                <h2 className="text-4xl md:text-5xl font-bold text-darkblue mb-2">Send Us a <span className="text-lightblue">Message</span></h2>
-                <p className="text-xl text-gray max-w-3xl mx-auto">Have questions or want to get involved? We'd love to hear from you.</p>
-              </div>
+          <div className="text-center px-4 sm:px-8">
+  <h2 className="text-4xl md:text-5xl font-bold text-darkblue mb-4">
+    Send Us a <span className="text-lightblue">Message</span>
+  </h2>
+  <p className="text-lg md:text-xl text-gray max-w-3xl mx-auto">
+    Have questions or want to get involved? We'd love to hear from you.
+  </p>
+</div>
+
               <div className="hidden lg:block flex-1 ml-8">
                 <div className="h-0.5 bg-gradient-to-r from-lightblue via-cyan-500 to-transparent"></div>
               </div>
             </div>
           </div>
-          <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 items-stretch">
+          <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-1 gap-10 items-stretch">
             {/* Left: Contact Form */}
               <div className="bg-white/90 shadow-2xl rounded-3xl p-10 border border-lightblue/20 h-full flex flex-col justify-center">
               <form className="space-y-8" onSubmit={handleSubmit}>
@@ -574,10 +606,15 @@ export default function ContactPage() {
               <div className="hidden lg:block flex-1 mr-8">
                 <div className="h-0.5 bg-gradient-to-l from-lightblue via-cyan-500 to-transparent"></div>
               </div>
-              <div className="text-center px-8">
-                <h2 className="text-4xl md:text-5xl font-bold text-darkblue mb-2">Frequently Asked <span className="text-lightblue">Questions</span></h2>
-                <p className="text-xl text-gray max-w-3xl mx-auto">Find answers to common questions about our organization and how you can get involved.</p>
-              </div>
+            <div className="text-center px-4 sm:px-8">
+  <h2 className="text-4xl md:text-5xl font-bold text-darkblue mb-4">
+    Frequently Asked <span className="text-lightblue">Questions</span>
+  </h2>
+  <p className="text-lg md:text-xl text-gray max-w-3xl mx-auto">
+    Find answers to common questions about our organization and how you can get involved.
+  </p>
+</div>
+
               <div className="hidden lg:block flex-1 ml-8">
                 <div className="h-0.5 bg-gradient-to-r from-lightblue via-cyan-500 to-transparent"></div>
               </div>

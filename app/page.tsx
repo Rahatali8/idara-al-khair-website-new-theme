@@ -2,7 +2,7 @@
 
 import { useState, useEffect, Suspense } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import {Heart, Building, Award, Globe, Lightbulb } from "lucide-react"
+import { Heart, Building, Award, Globe, Lightbulb } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import ImageCarousel from "@/components/ImageCarousel"
 import StatsSection from "@/components/StatsSection"
@@ -133,14 +133,14 @@ export default function HomePage() {
                     <Link href="/contact#donation-details" className="w-full sm:w-auto">
                       <Button
                         size="lg"
-                        className="w-full sm:w-auto bg-lightblue hover:bg-lightblue/90 text-white px-8 py-4 text-lg rounded-full transform hover:scale-105 transition-all duration-300 shadow-lg text-center"
+                        className=" sm:w-auto bg-lightblue hover:bg-lightblue/90 text-white px-8 py-4 text-lg rounded-full transform hover:scale-105 transition-all duration-300 shadow-lg text-center"
                       >
                         Donate Now
                       </Button>
                     </Link>
 
                     <Link href="/about#explore-our-organization" className="w-full sm:w-auto">
-                      <button className="w-full sm:w-auto px-6 py-3 rounded-full border-2 border-lightblue text-lightblue font-semibold bg-white/70 hover:bg-white transition">
+                      <button className="sm:w-auto px-9 py-2 rounded-full border-2 border-lightblue text-lightblue font-semibold bg-white/70 hover:bg-white transition">
                         Learn More
                       </button>
                     </Link>
@@ -197,80 +197,104 @@ export default function HomePage() {
             <button
               key={index}
               onClick={() => setCurrentSlide(index)}
-              className={`transition-all duration-300 ${
-                index === currentSlide
+              className={`transition-all duration-300 ${index === currentSlide
                   ? "w-8 h-3 bg-lightblue rounded-full"
                   : "w-3 h-3 bg-white/70 rounded-full hover:bg-white/90"
-              }`}
+                }`}
             />
           ))}
         </div>
         {/* Removed Slide Counter */}
       </section>
-
       {/* About Section */}
       <section className="py-20 bg-white relative overflow-hidden">
         <Suspense fallback={null}>{mounted && <FloatingElements />}</Suspense>
-        <div className="container mx-auto px-6 relative z-10">
+
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 items-center gap-12">
+
+            {/* Left Content */}
             <motion.div
               initial={{ x: -50, opacity: 0 }}
               whileInView={{ x: 0, opacity: 1 }}
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
-              className="space-y-6"
+              className="space-y-6 text-center sm:text-left"
             >
-              <div className="ml-10 text-lightblue font-semibold mb-3 flex items-center gap-2">
-                  <Heart className="w-5 h-4" />
-                  ABOUT OUR MISSION
-                </div>
-                <h2 className="ml-8 text-4xl lg:text-5xl font-bold text-darkblue mb-6">
-                  Empowering Communities Through<span className="ml-8 text-lightblue">Education & Care</span>
-                </h2>
+              <div className="inline-flex items-center justify-center sm:justify-start gap-2 text-lightblue font-semibold mb-3">
+                <Heart className="w-5 h-4" />
+                ABOUT OUR MISSION
+              </div>
 
-              <p className="ml-8 text-xl text-gray mb-8 leading-relaxed">
-                  Since 1987, Idara Al-Khair has been at the forefront of social transformation in Pakistan. Through
-                  unwavering dedication and community support, we've built a network of educational institutions,
-                  healthcare centers, and vocational training facilities that continue to change lives every day.
-                </p>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-darkblue mb-6">
+                Empowering Communities Through
+                <span className="block sm:inline sm:ml-2 text-lightblue">Education & Care</span>
+              </h2>
 
-                <div className="grid grid-cols-2 gap-6 mb-8">
-                  {[
-                    { icon: Building, label: "Healthcare Centers", count: "12+", color: "text-lightblue" },
-                    { icon: Award, label: "Awards Received", count: "25+", color: "text-lightblue" },
-                    { icon: Globe, label: "Communities Served", count: "150+", color: "text-lightblue" },
-                    { icon: Lightbulb, label: "Innovation Projects", count: "8+", color: "text-lightblue" },
-                  ].map((item, index) => (
-                    <div key={index} className="flex items-center gap-3">
-                      <div className="ml-5 w-12 h-12 bg-light-gray dark:bg-black rounded-xl flex items-center justify-center">
-                        <item.icon className={`w-6 h-6 ${item.color}`} />
-                      </div>
-                      <div>
-                        <div className="font-bold text-dark-gray dark:text-white">{item.count}</div>
-                        <div className="text-sm text-dark-gray dark:text-gray-300">{item.label}</div>
-                      </div>
+              <p className="text-base sm:text-lg text-gray mb-8 leading-relaxed">
+                Since 1987, Idara Al-Khair has been at the forefront of social transformation in Pakistan.
+                Through unwavering dedication and community support, we've built a network of educational
+                institutions, healthcare centers, and vocational training facilities that continue to change
+                lives every day.
+              </p>
+
+              {/* Stats */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
+                {[
+                  { icon: Building, label: "Healthcare Centers", count: "12+", color: "text-lightblue" },
+                  { icon: Award, label: "Awards Received", count: "25+", color: "text-lightblue" },
+                  { icon: Globe, label: "Communities Served", count: "150+", color: "text-lightblue" },
+                  { icon: Lightbulb, label: "Innovation Projects", count: "8+", color: "text-lightblue" },
+                ].map((item, index) => (
+                  <div key={index} className="flex items-center gap-3">
+                    <div className="w-12 h-12 bg-light-gray dark:bg-black rounded-xl flex items-center justify-center">
+                      <item.icon className={`w-6 h-6 ${item.color}`} />
                     </div>
-                  ))}
-                </div>
+                    <div>
+                      <div className="font-bold text-dark-gray dark:text-white">{item.count}</div>
+                      <div className="text-sm text-dark-gray dark:text-gray-300">{item.label}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
 
-                <div className="flex flex-col sm:flex-row gap-4 ml-6">
-                  <Link href="/about#explore-our-organization">
-                    <Button className="bg-lightblue hover:bg-lightblue/90 text-white px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 group">
-                      <Heart className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" />
-                      Learn More About Us
-                    </Button>
-                  </Link>
-                  <a href="/projects/campuses#educational-excellence-across" target="_blank" rel="noopener noreferrer" className="inline-block">
-                    <button className="relative px-6 py-2 font-semibold rounded-full border-2 border-lightblue text-lightblue overflow-hidden group transition-colors duration-300 bg-white ">
-                      {/* Animated gradient overlay */}
-                      <span className="absolute inset-0 z-0 bg-gradient-to-r from-lightblue via-blue-400 to-lightblue opacity-20 transition-transform duration-500 -translate-x-full group-hover:translate-x-0 rounded-full" />
-                      <span className="relative z-10 inline-flex items-center">Learn More
-                        <svg className="ml-2 w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
-                      </span>
-                    </button>
-                  </a>
-                </div>
+              {/* Buttons Section */}
+              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mt-8">
+                {/* Button 1 */}
+                <Link href="/about#explore-our-organization">
+                  <Button className="bg-lightblue hover:bg-lightblue/90 text-white px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center">
+                    <Heart className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" />
+                    Learn More About Us
+                  </Button>
+                </Link>
+
+                {/* Button 2 */}
+                <a
+                  href="/projects/campuses#educational-excellence-across"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <button className="relative px-8 py-2 font-semibold rounded-full border-2 border-lightblue text-lightblue overflow-hidden group transition-colors duration-300 bg-white shadow-md hover:shadow-lg flex items-center justify-center">
+                    <span className="absolute inset-0 z-0 bg-gradient-to-r from-lightblue via-blue-400 to-lightblue opacity-20 transition-transform duration-500 -translate-x-full group-hover:translate-x-0 rounded-full" />
+                    <span className="relative z-10 inline-flex items-center">
+                      Learn More
+                      <svg
+                        className="ml-2 w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        viewBox="0 0 24 24"
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                      </svg>
+                    </span>
+                  </button>
+                </a>
+              </div>
+
             </motion.div>
+
+            {/* Right Image */}
             <motion.div
               initial={{ x: 50, opacity: 0 }}
               whileInView={{ x: 0, opacity: 1 }}
@@ -278,24 +302,26 @@ export default function HomePage() {
               viewport={{ once: true }}
               className="relative"
             >
-              <div className="relative p-2 rounded-2xl max-w-lg mx-auto overflow-hidden">
+              <div className="relative p-2 rounded-2xl max-w-full mx-auto overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-r from-darkblue via-lightblue to-darkblue bg-[length:200%_100%] animate-gradient-x"></div>
                 <div className="relative rounded-xl p-1">
                   <img
-                    src="/al-khair.png?height=500&width=600"
+                    src="/al-khair.png"
                     alt="Al-Khair"
-                    className="w-full h-[500px] object-cover rounded-lg"
+                    className="w-full h-[300px] sm:h-[400px] lg:h-[500px] object-cover rounded-lg"
                   />
                 </div>
               </div>
             </motion.div>
+
           </div>
         </div>
       </section>
-         {/* Image Carousel Section */}
-         <ImageCarousel />
 
-         {/* Stats Section */}
+      {/* Image Carousel Section */}
+      <ImageCarousel />
+
+      {/* Stats Section */}
       <StatsSection />
 
       {/* {/* Project Cards Section */}
@@ -307,9 +333,9 @@ export default function HomePage() {
       {/* Testimonials Section */}
       <TestimonialsSection />
 
-      {/* {/* Contact Us Section */} 
+      {/* {/* Contact Us Section */}
       <CallToAction />
 
-    </div> 
+    </div>
   )
 }

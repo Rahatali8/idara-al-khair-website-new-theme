@@ -65,7 +65,7 @@ const donors = [
     contribution: "Medical Partner",
     description: "Healthcare service collaboration",
   },
-  
+
 ]
 
 export default function DonorsCarousel() {
@@ -107,15 +107,19 @@ export default function DonorsCarousel() {
             <div className="hidden lg:block flex-1 mr-8">
               <div className="h-0.5 bg-gradient-to-l from-lightblue via-cyan-500 to-transparent"></div>
             </div>
-            <div className="text-center px-8">
-              <div className="flex items-center justify-center mb-4">
+            <div className="px-4 sm:px-8 lg:px-0 text-left sm:text-left">
+              <div className="flex items-center mb-4">
+                {/* You can add decorative elements here if needed */}
               </div>
-              <h2 className="text-4xl md:text-5xl font-bold text-darkblue mb-4">Generous Donors <span className="text-lightblue">And Partners</span></h2>
-              <p className="text-xl text-gray max-w-3xl mx-auto">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-darkblue mb-4">
+                Generous Donors <span className="text-lightblue">And Partners</span>
+              </h2>
+              <p className="text-base sm:text-lg md:text-xl text-gray max-w-full sm:max-w-2xl lg:max-w-3xl">
                 We are grateful to our donors and partner organizations who make our mission possible through their generous
                 support and collaboration.
               </p>
             </div>
+
             <div className="hidden lg:block flex-1 ml-8">
               <div className="h-0.5 bg-gradient-to-r from-lightblue via-cyan-500 to-transparent"></div>
             </div>
@@ -131,18 +135,18 @@ export default function DonorsCarousel() {
             >
               {donors.map((donor, index) => (
                 <div key={index} className="flex-shrink-0 px-4 mt-8 mb-8" style={{ width: `${100 / itemsPerView}%` }}>
-                  <motion.div 
+                  <motion.div
                     className="relative bg-white/10 backdrop-blur-xl rounded-3xl p-8 px-10 border border-white/40 shadow-2xl hover:shadow-3xl transition-all duration-500 transform hover:-translate-y-3 h-full group overflow-hidden"
                     whileHover={{ scale: 1.02 }}
                     transition={{ duration: 0.3 }}
                   >
                     {/* Gradient Overlay */}
                     <div className="absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                    
+
                     {/* Decorative Corner Elements */}
                     <div className="absolute top-0 left-0 w-8 h-8 border-l-2 border-t-2 border-lightblue/50 rounded-tl-3xl"></div>
                     <div className="absolute bottom-0 right-0 w-8 h-8 border-r-2 border-b-2 border-lightblue/50 rounded-br-3xl"></div>
-                    
+
                     {/* Floating Icon */}
                     <motion.div
                       className="absolute -top-3 -right-3 w-12 h-12 bg-gradient-to-br from-lightblue to-cyan-500 rounded-full flex items-center justify-center shadow-lg"
@@ -172,7 +176,7 @@ export default function DonorsCarousel() {
                       </div>
 
                       <p className="text-gray-700 text-sm leading-relaxed group-hover:text-gray-800 transition-colors duration-300">{donor.description}</p>
-                      
+
                       {/* Rating Stars */}
                       <div className="flex justify-center mt-4 space-x-1">
                         {[1, 2, 3, 4, 5].map((star) => (
@@ -202,9 +206,8 @@ export default function DonorsCarousel() {
             <button
               key={index}
               onClick={() => setCurrentIndex(index * itemsPerView)}
-              className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                Math.floor(currentIndex / itemsPerView) === index ? "bg-lightblue w-8" : "bg-gray-300"
-              }`}
+              className={`w-3 h-3 rounded-full transition-all duration-300 ${Math.floor(currentIndex / itemsPerView) === index ? "bg-lightblue w-8" : "bg-gray-300"
+                }`}
             />
           ))}
         </div>

@@ -158,43 +158,43 @@ const DonatePage = () => {
   return (
     <main className="/">
       {/* Hero Section */}
-      <section className="min-h-[86vh] bg-gradient-to-br from-teal-50 to-blue-50 flex items-center justify-center relative overflow-hidden">
-        {/* Background Image */}
-        <div className="absolute inset-0 z-0">
-          <img
-            src="/donation-back.png"
-            alt="Donation Background"
-            className="object-cover w-full h-full opacity-60 blur-sm"
-            style={{ objectFit: 'cover' }}
-          />
+ <section className="min-h-[86vh] bg-gradient-to-br from-teal-50 to-blue-50 flex items-center justify-center relative overflow-hidden">
+  {/* Background Image */}
+  <div className="absolute inset-0 z-0">
+    <img
+      src="/donation-back.png"
+      alt="Donation Background"
+      className="object-cover w-full h-full opacity-60 blur-sm"
+    />
+  </div>
+
+  {/* Content */}
+  <div className="container mx-auto px-4 relative z-10">
+    <div className="max-w-4xl mx-auto text-center">
+      <h1 className="text-5xl md:text-6xl font-bold text-darkblue mb-6">
+        Make a <span className="text-lightblue">Difference</span>
+      </h1>
+      <p className="text-lg md:text-xl text-gray-700 leading-relaxed mb-8">
+        Your generous donation helps us continue our mission of empowering communities through education,
+        healthcare, and welfare programs.
+      </p>
+      <div className="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-8 text-gray-600">
+        <div className="flex items-center gap-2">
+          <Shield className="w-6 h-6 text-green-600" />
+          <span>Secure Payments</span>
         </div>
-        {/* Content */}
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-5xl md:text-6xl font-bold text-darkblue mb-6">
-              Make a <span className="text-lightblue">Difference</span>
-            </h1>
-            <p className="text-xl md:text-2xl text-gray leading-relaxed mb-8">
-              Your generous donation helps us continue our mission of empowering communities through education,
-              healthcare, and welfare programs.
-            </p>
-            <div className="flex items-center justify-center space-x-8 text-gray-600">
-              <div className="flex items-center">
-                <Shield className="w-6 h-6 mr-2 text-green-600" />
-                <span>Secure Payments</span>
-              </div>
-              <div className="flex items-center">
-                <Heart className="w-6 h-6 mr-2 text-red-600" />
-                <span>100% Transparent</span>
-              </div>
-              <div className="flex items-center">
-                <Users className="w-6 h-6 mr-2 text-blue-600" />
-                <span>Direct Impact</span>
-              </div>
-            </div>
-          </div>
+        <div className="flex items-center gap-2">
+          <Heart className="w-6 h-6 text-red-600" />
+          <span>100% Transparent</span>
         </div>
-      </section>
+        <div className="flex items-center gap-2">
+          <Users className="w-6 h-6 text-blue-600" />
+          <span>Direct Impact</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
       {/* Donation Form */}
       <section className="py-20">

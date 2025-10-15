@@ -116,150 +116,239 @@ export default function PoorVillagesPage() {
   return (
     <main className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative min-h-[86vh] flex items-center justify-center overflow-hidden">
-        {/* Background Image */}
-        <div className="absolute inset-0 z-0">
-          <Image
-            src="/roti-bank-back.png"
-            alt="Poor Villages Background"
-            fill
-            className="object-cover opacity-70 blur-sm"
-            priority
-          />
-        </div>
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-5xl md:text-6xl font-bold text-darkblue mb-6">
-            Poor Villages<span className="text-lightblue"> Food Support</span>
-            </h1>
-            <p className="text-xl md:text-2xl text-gray leading-relaxed mb-8">
-              Extending our food support and development programs to rural communities across Sindh. 
-              We reach 15+ villages, supporting 500+ families with sustainable food security and development initiatives.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href={"/contact"}>
-                <button className="relative px-8 py-2 font-semibold rounded-full border-2 border-lightblue text-lightblue overflow-hidden group transition-all duration-200 bg-white active:scale-90 active:shadow-inner active:bg-lightblue/20 focus:outline-none focus:ring-2 focus:ring-lightblue">
-                  <span className="absolute inset-0 z-0 bg-gradient-to-r from-lightblue via-blue-400 to-lightblue opacity-20 transition-transform duration-500 -translate-x-full group-hover:translate-x-0 rounded-full" />
-                  <span className="relative z-10 flex items-center">
-                    <Heart className="mr-2 h-5 w-5" />
-                    Support Village Program
-                  </span>
-                </button>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
+      <section className="relative min-h-[80vh] sm:min-h-[86vh] flex items-center justify-center overflow-hidden px-4 sm:px-8">
+      {/* Background Image */}
+      <div className="absolute inset-0 z-0">
+        <Image
+          src="/roti-bank-back.png"
+          alt="Poor Villages Background"
+          fill
+          className="object-cover opacity-70 blur-sm"
+          priority
+        />
+      </div>
+
+      {/* Content */}
+      <div className="relative z-10 text-center max-w-4xl mx-auto">
+        {/* Animated Heading */}
+        <motion.h1
+          className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 flex flex-wrap justify-center leading-tight"
+          initial="hidden"
+          animate="visible"
+          variants={{
+            visible: { transition: { staggerChildren: 0.18 } },
+            hidden: {},
+          }}
+        >
+          {["Poor", "Villages", "Food", "Support"].map((word, i) => (
+            <motion.span
+              key={i}
+              className={`mx-2 ${
+                word === "Support" ? "text-lightblue" : "text-darkblue"
+              }`}
+              variants={{
+                hidden: { opacity: 0, y: 40, scale: 0.8 },
+                visible: {
+                  opacity: 1,
+                  y: 0,
+                  scale: 1,
+                  transition: { type: "spring", bounce: 0.4, duration: 0.7 },
+                },
+              }}
+            >
+              {word}
+            </motion.span>
+          ))}
+        </motion.h1>
+
+        {/* Animated Paragraph */}
+        <motion.p
+          className="text-sm sm:text-base md:text-lg lg:text-2xl text-gray leading-relaxed mb-8 px-2 sm:px-6"
+          initial="hidden"
+          animate="visible"
+          variants={{
+            visible: { transition: { staggerChildren: 0.045 } },
+            hidden: {},
+          }}
+        >
+          {"Extending our food support and development programs to rural communities across Sindh. We reach 15+ villages, supporting 500+ families with sustainable food security and development initiatives."
+            .split(" ")
+            .map((word, i) => (
+              <motion.span
+                key={i}
+                className="inline-block mr-2"
+                variants={{
+                  hidden: { opacity: 0, y: 20, scale: 0.8 },
+                  visible: {
+                    opacity: 1,
+                    y: 0,
+                    scale: 1,
+                    transition: { duration: 0.9, type: "spring", bounce: 0.3 },
+                  },
+                }}
+              >
+                {word}
+              </motion.span>
+            ))}
+        </motion.p>
+
+        {/* Animated Button */}
+        <motion.div
+          className="flex flex-col sm:flex-row gap-4 justify-center"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 1 }}
+        >
+          <Link href="/contact">
+            <button
+              className="relative  sm:w-auto px-5 sm:px-8 md:px-10 py-2 sm:py-3 md:py-3.5
+                         text-sm sm:text-base md:text-lg font-semibold rounded-full
+                         border-2 border-lightblue text-lightblue bg-white
+                         overflow-hidden group transition duration-300
+                         hover:bg-lightblue hover:text-white"
+            >
+              <span className="absolute inset-0 z-0 bg-gradient-to-r from-lightblue via-blue-400 to-lightblue opacity-20 transition-transform duration-500 -translate-x-full group-hover:translate-x-0 rounded-full" />
+              <span className="relative z-10 flex items-center justify-center gap-2">
+                <Heart className="h-4 w-4 sm:h-5 sm:w-5" />
+                <span>Support Village Program</span>
+              </span>
+            </button>
+          </Link>
+        </motion.div>
+      </div>
+    </section>
 
       {/* Stats Section */}
-      <section className="py-16 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="mb-12 flex items-center justify-center">
-            <div className="hidden md:block flex-1 mr-8">
-              <div className="h-0.5 bg-gradient-to-l from-lightblue via-cyan-500 to-transparent"></div>
-            </div>
-            <div className="text-center px-8">
-              <h2 className="text-4xl font-bold text-darkblue mb-2">Our <span className="text-lightblue">Organization</span></h2>
-              <p className="text-xl text-gray max-w-3xl mx-auto">Key facts and achievements that define Idara Al-Khair's journey and impact.</p>
-            </div>
-            <div className="hidden md:block flex-1 ml-8">
-              <div className="h-0.5 bg-gradient-to-r from-lightblue via-cyan-500 to-transparent"></div>
-            </div>
+       <section className="py-12 sm:py-16 md:py-20 bg-white">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-10">
+        {/* Section Heading */}
+        <motion.div
+          className="mb-10 sm:mb-14 flex flex-col md:flex-row items-center justify-center text-center"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+        >
+          <div className="hidden md:block flex-1 mr-8">
+            <div className="h-0.5 bg-gradient-to-l from-lightblue via-cyan-500 to-transparent"></div>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mx-auto px-8">
-            {villageStats.map((stat, index) => (
-              <motion.div
-                key={index}
-                className="group relative overflow-hidden bg-white/20 backdrop-blur-md border border-white/30 shadow-xl rounded-2xl p-4 text-left flex flex-col gap-3 w-full max-w-sm mx-auto"
-                whileHover={{ scale: 1.05, y: -5 }}
-                transition={{ duration: 0.3 }}
-              >
-                {/* Animated gradient overlay */}
-                <div className="absolute inset-0 z-0 bg-gradient-to-r from-lightblue via-blue-400 to-lightblue opacity-20 transition-transform duration-500 -translate-x-full group-hover:translate-x-0 rounded-2xl" />
-                {/* Card content */}
-                <div className="relative z-10">
-                  <div className="w-10 h-10 bg-lightblue/80 group-hover:bg-white transition-colors duration-500 backdrop-blur-sm rounded-full flex items-center justify-center mb-2 border border-white/20 group-hover:rotate-[360deg] transition-transform duration-700 mx-auto">
-                    <stat.icon className="w-6 h-6 text-white group-hover:text-lightblue transition-colors duration-500" strokeWidth={2.2} />
-                  </div>
-                  <h3 className="text-xl font-bold text-lightblue group-hover:text-darkblue transition-colors duration-500 mb-1 text-center">{stat.title}</h3>
-                  <p className="text-gray mb-2 font-light leading-relaxed text-center">{stat.description}</p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
 
-      {/* About Village Program */}
-      <section className="py-20 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <div className="mb-12 flex items-center justify-center">
-            <div className="hidden md:block flex-1 mr-8">
-              <div className="h-0.5 bg-gradient-to-l from-lightblue via-cyan-500 to-transparent"></div>
-            </div>
-            <div className="text-center px-8">
-              <h2 className="text-4xl font-bold text-darkblue mb-2">About <span className="text-lightblue">Village Program</span></h2>
-              <p className="text-lg text-gray-600 max-w-2xl mx-auto mt-2">Extending food security, development, and empowerment to rural communities across Sindh.</p>
-            </div>
-            <div className="hidden md:block flex-1 ml-8">
-              <div className="h-0.5 bg-gradient-to-r from-lightblue via-cyan-500 to-transparent"></div>
-            </div>
+          <div className="px-4 sm:px-6">
+            <h2 className="text-2xl sm:text-4xl md:text-5xl font-bold text-darkblue mb-3">
+              Our <span className="text-lightblue">Organization</span>
+            </h2>
+            <p className="text-sm sm:text-lg md:text-xl text-gray max-w-2xl mx-auto">
+              Key facts and achievements that define Idara Al-Khair's journey and impact.
+            </p>
           </div>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center px-6 md:px-12">
-            <div>
-              <h2 className="text-4xl font-bold text-darkblue mb-6">Poor <span className="text-lightblue">Villages</span></h2>
-              <p className="text-lg text-gray-600 mb-6">
-                Our Poor Villages Program extends Idara Al-Khair's mission to rural communities across Sindh. 
-                We believe that every family, regardless of their location, deserves access to food security 
-                and basic necessities.
-              </p>
-              <p className="text-lg text-gray-600 mb-6">
-                Through regular visits, we provide monthly food packages, agricultural support, and development 
-                programs to 15+ villages. Our approach focuses on sustainable development, empowering communities 
-                to become self-reliant while ensuring immediate food security.
-              </p>
-              <div className="grid grid-cols-2 gap-6">
-                <div className="flex items-center">
-                  <MapPin className="w-6 h-6 text-lightblue mr-3" />
-                  <div>
-                    <h4 className="font-semibold text-darkblue">Coverage</h4>
-                    <p className="text-gray-600">15+ Villages</p>
-                  </div>
+
+          <div className="hidden md:block flex-1 ml-8">
+            <div className="h-0.5 bg-gradient-to-r from-lightblue via-cyan-500 to-transparent"></div>
+          </div>
+        </motion.div>
+
+        {/* Stats Cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 mx-auto">
+          {villageStats.map((stat, index) => (
+            <motion.div
+              key={index}
+              className="group relative overflow-hidden bg-white/20 backdrop-blur-md border border-white/30 shadow-xl rounded-2xl p-6 sm:p-8 flex flex-col items-center text-center transition-all duration-300"
+              initial={{ opacity: 0, y: 50, scale: 0.9 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ duration: 0.8, delay: index * 0.15 }}
+              viewport={{ once: true }}
+              whileHover={{ scale: 1.05, y: -5 }}
+            >
+              {/* Animated gradient overlay */}
+              <div className="absolute inset-0 z-0 bg-gradient-to-r from-lightblue via-blue-400 to-lightblue opacity-20 transition-transform duration-500 -translate-x-full group-hover:translate-x-0 rounded-2xl" />
+
+              {/* Card Content */}
+              <div className="relative z-10 flex flex-col items-center">
+                <div className="w-12 h-12 sm:w-14 sm:h-14 bg-lightblue/80 group-hover:bg-white transition-colors duration-500 backdrop-blur-sm rounded-full flex items-center justify-center mb-4 border border-white/20 group-hover:rotate-[360deg] transition-transform duration-700">
+                  <stat.icon className="w-6 h-6 sm:w-7 sm:h-7 text-white group-hover:text-lightblue transition-colors duration-500" strokeWidth={2.2} />
                 </div>
-                <div className="flex items-center">
-                  <Users className="w-6 h-6 text-lightblue mr-3" />
-                  <div>
-                    <h4 className="font-semibold text-darkblue">Families</h4>
-                    <p className="text-gray-600">500+ Supported</p>
-                  </div>
-                </div>
-                <div className="flex items-center">
-                  <Truck className="w-6 h-6 text-lightblue mr-3" />
-                  <div>
-                    <h4 className="font-semibold text-darkblue">Frequency</h4>
-                    <p className="text-gray-600">Monthly Visits</p>
-                  </div>
-                </div>
-                <div className="flex items-center">
-                  <Heart className="w-6 h-6 text-lightblue mr-3" />
-                  <div>
-                    <h4 className="font-semibold text-darkblue">Service</h4>
-                    <p className="text-gray-600">100% Free</p>
-                  </div>
-                </div>
+                <h3 className="text-base sm:text-lg md:text-xl font-bold text-lightblue group-hover:text-darkblue transition-colors duration-500 mb-1">
+                  {stat.title}
+                </h3>
+                <p className="text-gray text-xs sm:text-sm md:text-base font-light leading-relaxed">
+                  {stat.description}
+                </p>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+{/* About Village Program */}
+<section className="py-16 sm:py-20 bg-gray-50">
+  <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+    {/* Section Heading */}
+    <div className="mb-10 sm:mb-14 flex flex-col md:flex-row items-center justify-center text-center">
+      <div className="hidden md:block flex-1 mr-6">
+        <div className="h-0.5 bg-gradient-to-l from-lightblue via-cyan-500 to-transparent"></div>
+      </div>
+      <div className="px-4">
+        <h2 className="text-3xl sm:text-4xl font-bold text-darkblue mb-3">
+          About <span className="text-lightblue">Village Program</span>
+        </h2>
+        <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto">
+          Extending food security, development, and empowerment to rural communities across Sindh.
+        </p>
+      </div>
+      <div className="hidden md:block flex-1 ml-6">
+        <div className="h-0.5 bg-gradient-to-r from-lightblue via-cyan-500 to-transparent"></div>
+      </div>
+    </div>
+
+    {/* Content Grid */}
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+      {/* Left Content */}
+      <div>
+        <h2 className="text-3xl sm:text-4xl text-center font-bold text-darkblue mb-5">
+          Poor <span className="text-lightblue">Villages</span>
+        </h2>
+        <p className="text-base sm:text-lg text-gray-600 mb-5 leading-relaxed">
+          Our Poor Villages Program extends Idara Al-Khair's mission to rural communities across Sindh. 
+          We believe that every family, regardless of their location, deserves access to food security 
+          and basic necessities.
+        </p>
+        <p className="text-base sm:text-lg text-gray-600 mb-8 leading-relaxed">
+          Through regular visits, we provide monthly food packages, agricultural support, and development 
+          programs to 15+ villages. Our approach focuses on sustainable development, empowering communities 
+          to become self-reliant while ensuring immediate food security.
+        </p>
+
+        {/* Info Grid (Responsive 2 per row on mobile) */}
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 gap-6 sm:gap-8">
+          {[
+            { icon: MapPin, title: "Coverage", desc: "15+ Villages" },
+            { icon: Users, title: "Families", desc: "500+ Supported" },
+            { icon: Truck, title: "Frequency", desc: "Monthly Visits" },
+            { icon: Heart, title: "Service", desc: "100% Free" },
+          ].map((item, i) => (
+            <div key={i} className="flex items-start sm:items-center">
+              <item.icon className="w-6 h-6 sm:w-7 sm:h-7 text-lightblue mr-3 mt-1 sm:mt-0" />
+              <div>
+                <h4 className="font-semibold text-darkblue text-sm sm:text-base">{item.title}</h4>
+                <p className="text-gray-600 text-sm sm:text-base">{item.desc}</p>
               </div>
             </div>
-            <div className="relative h-96 rounded-lg overflow-hidden">
-              <Image
-                src="/sindh.jpg"
-                alt="Rural village development program"
-                fill
-                className="object-cover"
-              />
-            </div>
-          </div>
+          ))}
         </div>
-      </section>
+      </div>
+
+      {/* Right Image */}
+      <div className="relative h-64 sm:h-80 md:h-96 lg:h-[420px] rounded-lg overflow-hidden shadow-md">
+        <Image
+          src="/sindh.jpg"
+          alt="Rural village development program"
+          fill
+          className="object-cover"
+        />
+      </div>
+    </div>
+  </div>
+</section>
 
       {/* Programs */}
       <section className="py-20 bg-white">
@@ -268,10 +357,15 @@ export default function PoorVillagesPage() {
             <div className="hidden md:block flex-1 mr-8">
               <div className="h-0.5 bg-gradient-to-l from-lightblue via-cyan-500 to-transparent"></div>
             </div>
-            <div className="text-center px-8">
-              <h2 className="text-4xl font-bold text-darkblue mb-2">Village <span className="text-lightblue">Programs</span></h2>
-              <p className="text-xl text-gray-600 max-w-2xl mx-auto mt-2">Comprehensive support programs designed for rural communities and sustainable development.</p>
-            </div>
+          <div className="text-center px-4 sm:px-6 md:px-8">
+  <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-darkblue mb-2 sm:mb-3">
+    Village <span className="text-lightblue">Programs</span>
+  </h2>
+  <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-600 max-w-2xl mx-auto mt-2 sm:mt-3 leading-relaxed">
+    Comprehensive support programs designed for rural communities and sustainable development.
+  </p>
+</div>
+
             <div className="hidden md:block flex-1 ml-8">
               <div className="h-0.5 bg-gradient-to-r from-lightblue via-cyan-500 to-transparent"></div>
             </div>
@@ -319,13 +413,14 @@ export default function PoorVillagesPage() {
             <div className="hidden md:block flex-1 mr-8">
               <div className="h-0.5 bg-gradient-to-l from-lightblue via-cyan-500 to-transparent"></div>
             </div>
-            <div className="text-center px-8">
-              <h2 className="text-4xl font-bold text-darkblue mb-2">Target <span className="text-lightblue">Villages</span></h2>
-              <p className="text-xl text-gray-600 max-w-2xl mx-auto mt-2">Our programs reach villages across different districts of Sindh, providing comprehensive support.</p>
+            <div className="text-center px-4 sm:px-6 md:px-8">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-darkblue mb-2 sm:mb-32">Target <span className="text-lightblue">Villages</span></h2>
+              <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-600 max-w-2xl mx-auto mt-2 sm:mt-3 leading-relaxed">Our programs reach villages across different districts of Sindh, providing comprehensive support.</p>
             </div>
-            <div className="hidden md:block flex-1 ml-8">
-              <div className="h-0.5 bg-gradient-to-r from-lightblue via-cyan-500 to-transparent"></div>
-            </div>
+          <div className="flex-1 ml-0 sm:ml-2 md:ml-8">
+  <div className="h-0.5 bg-gradient-to-r from-lightblue via-cyan-500 to-transparent w-full"></div>
+</div>
+
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 px-6 md:px-12">
             {targetVillages.map((village, index) => (
@@ -386,9 +481,9 @@ export default function PoorVillagesPage() {
             <div className="hidden md:block flex-1 mr-8">
               <div className="h-0.5 bg-gradient-to-l from-lightblue via-cyan-500 to-transparent"></div>
             </div>
-            <div className="text-center px-8">
-              <h2 className="text-4xl font-bold text-darkblue mb-2">Our <span className="text-lightblue">Impact Areas</span></h2>
-              <p className="text-xl text-gray-600 max-w-2xl mx-auto mt-2">Comprehensive development programs addressing multiple aspects of rural community needs.</p>
+            <div className="text-center px-4 sm:px-6 md:px-8">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-darkblue mb-2 sm:mb-32">Our <span className="text-lightblue">Impact Areas</span></h2>
+              <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-600 max-w-2xl mx-auto mt-2 sm:mt-3 leading-relaxed">Comprehensive development programs addressing multiple aspects of rural community needs.</p>
             </div>
             <div className="hidden md:block flex-1 ml-8">
               <div className="h-0.5 bg-gradient-to-r from-lightblue via-cyan-500 to-transparent"></div>

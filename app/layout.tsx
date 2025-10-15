@@ -5,6 +5,8 @@ import "./globals.css"
 import Header from "@/components/Header"
 import Footer from "@/components/Footer"
 import FontFallback from "@/components/FontFallback"
+import "aos/dist/aos.css"
+// import CustomCursor from "@/components/CustomCursor"
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" })
 const poppins = Poppins({
@@ -34,6 +36,7 @@ export default function RootLayout({
       <body className={`${inter.variable} ${poppins.variable} font-sans antialiased overflow-x-hidden`}>
         <FontFallback />
         <Header />
+        {/* < CustomCursor/> */}
         {children}
         <Footer />
       </body>

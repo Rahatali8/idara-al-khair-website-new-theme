@@ -43,118 +43,165 @@ export default function TechnicalPage() {
   return (
     <main className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative py-20 min-h-[60vh] flex items-center justify-center overflow-hidden">
-        {/* Blurred Campus Background */}
-        <div className="absolute inset-0 z-0">
-          <Image
-            src="/campus-page-back.png"
-            alt="AIT Campus Background"
-            fill
-            className="object-cover"
-            priority
-          />
-          <div className="absolute inset-0 backdrop-blur-[2px] z-10" />
-        </div>
-        <motion.div
-          className="relative z-20 text-center max-w-3xl mx-auto"
-          initial="hidden"
-          animate="visible">
-          <motion.h1
-            className="text-5xl md:text-6xl font-bold text-darkblue mb-6 leading-tight flex flex-wrap justify-center"
-            variants={{
-              visible: { transition: { staggerChildren: 0.18 } },
-              hidden: {},
-            }}
-            initial="hidden"
-            animate="visible"
-          >
-            {['Empowering', 'Futures', 'with', 'AI', '&', 'Technical', 'Skills'].map((word, i) => (
-              <motion.span
-                key={i}
-                className={['AI','&', 'Technical', 'Skills'].includes(word) ? 'text-lightblue mx-2' : 'text-darkblue mx-2'}
-                variants={{
-                  hidden: { opacity: 0, y: 40, scale: 0.8 },
-                  visible: { opacity: 1, y: 0, scale: 1, transition: { type: 'spring', bounce: 0.4, duration: 0.7 } },
-                }}
-              >
-                {word}
-              </motion.span>
-            ))}
-          </motion.h1>
-          <motion.p
-            className="text-xl md:text-2xl text-gray-700 leading-relaxed mb-8 max-w-2xl mx-auto flex flex-wrap justify-center"
-            variants={{
-              visible: { transition: { staggerChildren: 0.045 } },
-              hidden: {},
-            }}
-            initial="hidden"
-            animate="visible"
-          >
-            {"AIT is dedicated to providing world-class technical and vocational education, integrating cutting-edge AI technologies to prepare students for the future of work.".split(" ").map((word, i) => (
-              <motion.span
-                key={i}
-                className="inline-block mr-2"
-                variants={{
-                  hidden: { opacity: 0, y: 20, scale: 0.8 },
-                  visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.4, type: 'spring', bounce: 0.3 } },
-                }}
-              >
-                {word}
-              </motion.span>
-            ))}
-          </motion.p>
-          <motion.div
-            className="flex flex-col sm:flex-row gap-4 justify-center"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5, duration: 0.7 }}
-          >
-            <a href="https://ait.iak.ngo/" className="inline-block mt-2" target="_blank" rel="noopener noreferrer">
-              <button className="relative px-6 py-2 font-semibold rounded-full border-2 border-lightblue text-lightblue overflow-hidden group transition-colors duration-300 bg-white">
-                <span className="absolute inset-0 z-0 bg-gradient-to-r from-lightblue via-blue-400 to-lightblue opacity-20 transition-transform duration-500 -translate-x-full group-hover:translate-x-0 rounded-full" />
-                <span className="relative z-10 inline-flex items-center">Learn More
-                  <ArrowRight className="ml-2 w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
-                </span>
-              </button>
-            </a>
-          </motion.div>
-        </motion.div>
-      </section>
+   <section className="relative py-16 sm:py-20 min-h-[50vh] md:min-h-[60vh] flex items-center justify-center overflow-hidden">
+  {/* Blurred Campus Background */}
+  <div className="absolute inset-0 z-0">
+    <Image
+      src="/campus-page-back.png"
+      alt="AIT Campus Background"
+      fill
+      className="object-cover"
+      priority
+    />
+    <div className="absolute inset-0 backdrop-blur-[2px] bg-black/10 z-10" />
+  </div>
 
-      {/* About AIT */}
-      <section className="py-16">
-        <div className="container mx-auto px-4 max-w-5xl">
-          <div className="flex items-center justify-center mb-10">
-            <div className="hidden lg:block flex-1 mr-8">
-              <div className="h-0.5 bg-gradient-to-l from-lightblue via-cyan-500 to-transparent"></div>
-            </div>
-            <div className="text-center px-8">
-              <h2 className="text-5xl font-bold text-darkblue mb-2">About <span className="text-lightblue">Alkhair (AIT)</span></h2>
-              <p className="text-xl text-gray max-w-3xl mx-auto md:mx-0">
-                Al-Khair Institute of Technology (AIT) is a leader in technical education, offering hands-on training, industry partnerships.
-              </p>
-            </div>
-            <div className="hidden lg:block flex-1 ml-8">
-              <div className="h-0.5 bg-gradient-to-r from-lightblue via-cyan-500 to-transparent"></div>
-            </div>
-          </div>
-          <div className="flex flex-col md:flex-row items-center gap-12">
-            {/* Image */}
-            <div className="w-full md:w-1/2 flex justify-center mb-8 md:mb-0">
-              <div className="rounded-2xl overflow-hidden shadow-xl w-full max-w-md">
-                <Image src="/ait.jpg" alt="AIT Campus" width={500} height={350} className="object-cover w-full h-64 md:h-80" />
-              </div>
-            </div>
-            {/* Text */}
-            <div className="w-full md:w-1/2">
-              <h3 className="text-3xl font-bold text-darkblue mb-4">Idara Alkhair Institute <span className="text-lightblue">of Technology</span></h3>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto md:mx-0">
-                Al-Khair Institute of Technology (AIT) is a leader in technical education, offering hands-on training, industry partnerships, and innovative AI-powered learning tools. Our mission is to bridge the skills gap and empower youth for success in the digital economy.
-              </p>
-            </div>
-          </div>
+  <motion.div
+    className="relative z-20 text-center max-w-3xl px-4 sm:px-6 md:px-8 mx-auto"
+    initial="hidden"
+    animate="visible"
+  >
+    {/* Heading */}
+    <motion.h1
+      className="text-3xl sm:text-4xl md:text-6xl font-bold text-darkblue mb-4 sm:mb-6 leading-snug flex flex-wrap justify-center"
+      variants={{
+        visible: { transition: { staggerChildren: 0.18 } },
+        hidden: {},
+      }}
+      initial="hidden"
+      animate="visible"
+    >
+      {['Empowering', 'Futures', 'with', 'AI', '&', 'Technical', 'Skills'].map((word, i) => (
+        <motion.span
+          key={i}
+          className={`mx-1 sm:mx-2 ${
+            ['AI', '&', 'Technical', 'Skills'].includes(word)
+              ? 'text-lightblue'
+              : 'text-darkblue'
+          }`}
+          variants={{
+            hidden: { opacity: 0, y: 40, scale: 0.8 },
+            visible: {
+              opacity: 1,
+              y: 0,
+              scale: 1,
+              transition: { type: 'spring', bounce: 0.4, duration: 0.7 },
+            },
+          }}
+        >
+          {word}
+        </motion.span>
+      ))}
+    </motion.h1>
+
+    {/* Paragraph */}
+    <motion.p
+      className="text-base sm:text-lg md:text-xl text-gray-700 leading-relaxed mb-6 sm:mb-8 max-w-2xl mx-auto flex flex-wrap justify-center"
+      variants={{
+        visible: { transition: { staggerChildren: 0.045 } },
+        hidden: {},
+      }}
+      initial="hidden"
+      animate="visible"
+    >
+      {"AIT is dedicated to providing world-class technical and vocational education, integrating cutting-edge AI technologies to prepare students for the future of work."
+        .split(" ")
+        .map((word, i) => (
+          <motion.span
+            key={i}
+            className="inline-block mr-1 sm:mr-2"
+            variants={{
+              hidden: { opacity: 0, y: 20, scale: 0.8 },
+              visible: {
+                opacity: 1,
+                y: 0,
+                scale: 1,
+                transition: { duration: 0.4, type: 'spring', bounce: 0.3 },
+              },
+            }}
+          >
+            {word}
+          </motion.span>
+        ))}
+    </motion.p>
+
+    {/* Button */}
+    <motion.div
+      className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: 0.5, duration: 0.7 }}
+    >
+      <a
+        href="https://ait.iak.ngo/"
+        className="inline-block mt-2"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <button className="relative px-5 sm:px-6 py-2 sm:py-3 font-semibold rounded-full border-2 border-lightblue text-lightblue overflow-hidden group transition-colors duration-300 bg-white">
+          <span className="absolute inset-0 z-0 bg-gradient-to-r from-lightblue via-blue-400 to-lightblue opacity-20 transition-transform duration-500 -translate-x-full group-hover:translate-x-0 rounded-full" />
+          <span className="relative z-10 inline-flex items-center text-sm sm:text-base">
+            Learn More
+            <ArrowRight className="ml-2 w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+          </span>
+        </button>
+      </a>
+    </motion.div>
+  </motion.div>
+</section>
+
+
+     {/* About AIT */}
+<section className="py-12 sm:py-16 bg-white">
+  <div className="container mx-auto px-4 max-w-6xl">
+    {/* Section Header */}
+    <div className="flex flex-col lg:flex-row items-center justify-center mb-10 text-center">
+      <div className="hidden lg:block flex-1 mr-8">
+        <div className="h-0.5 bg-gradient-to-l from-lightblue via-cyan-500 to-transparent"></div>
+      </div>
+
+      <div className="px-4 sm:px-8">
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-darkblue mb-3">
+          About <span className="text-lightblue">Alkhair (AIT)</span>
+        </h2>
+        <p className="text-base sm:text-lg md:text-xl text-gray-600 max-w-2xl mx-auto">
+          Al-Khair Institute of Technology (AIT) is a leader in technical education, offering hands-on training and industry partnerships.
+        </p>
+      </div>
+
+      <div className="hidden lg:block flex-1 ml-8">
+        <div className="h-0.5 bg-gradient-to-r from-lightblue via-cyan-500 to-transparent"></div>
+      </div>
+    </div>
+
+    {/* Image + Text Section */}
+    <div className="flex flex-col md:flex-row items-center gap-10 md:gap-12">
+      {/* Image */}
+      <div className="w-full md:w-1/2 flex justify-center md:justify-end">
+        <div className="rounded-2xl overflow-hidden shadow-xl w-full max-w-md sm:max-w-lg">
+          <Image
+            src="/ait.jpg"
+            alt="AIT Campus"
+            width={500}
+            height={350}
+            className="object-cover w-full h-56 sm:h-64 md:h-80"
+          />
         </div>
-      </section>
+      </div>
+
+      {/* Text */}
+      <div className="w-full md:w-1/2 text-center md:text-left px-2 sm:px-4">
+        <h3 className="text-2xl sm:text-3xl font-bold text-darkblue mb-4">
+          Idara Alkhair Institute <span className="text-lightblue">of Technology</span>
+        </h3>
+        <p className="text-base sm:text-lg md:text-xl text-gray-600 leading-relaxed">
+          Al-Khair Institute of Technology (AIT) is a leader in technical education, offering hands-on training, industry partnerships, and innovative AI-powered learning tools. 
+          Our mission is to bridge the skills gap and empower youth for success in the digital economy.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
 
       {/* Programs Offered */}
       <section className="py-16 bg-gradient-to-br from-blue-50 via-white to-teal-50">
@@ -163,12 +210,16 @@ export default function TechnicalPage() {
             <div className="hidden lg:block flex-1 mr-8">
               <div className="h-0.5 bg-gradient-to-l from-lightblue via-cyan-500 to-transparent"></div>
             </div>
-            <div className="text-center px-8">
-              <h2 className="text-5xl font-bold text-darkblue mb-2">Our <span className="text-lightblue">Programs</span></h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                AIT offers a range of technical and vocational programs designed to equip students with practical, job-ready skills in high-demand fields.
-              </p>
-            </div>
+           <div className="text-center px-4 sm:px-6 md:px-8">
+  <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-darkblue mb-3 leading-tight">
+    Our <span className="text-lightblue">Programs</span>
+  </h2>
+  <p className="text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
+    AIT offers a range of technical and vocational programs designed to equip
+    students with practical, job-ready skills in high-demand fields.
+  </p>
+</div>
+
             <div className="hidden lg:block flex-1 ml-8">
               <div className="h-0.5 bg-gradient-to-r from-lightblue via-cyan-500 to-transparent"></div>
             </div>
@@ -257,12 +308,16 @@ export default function TechnicalPage() {
             <div className="hidden lg:block flex-1 mr-8">
               <div className="h-0.5 bg-gradient-to-l from-lightblue via-cyan-500 to-transparent"></div>
             </div>
-            <div className="text-center px-8">
-              <h2 className="text-5xl font-bold text-darkblue mb-2">AI <span className="text-lightblue">Technologies</span> at AIT</h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                AIT integrates advanced AI tools to enhance learning, assessment, and student support. Explore our suite of intelligent technologies powering the future of education.
-              </p>
-            </div>
+        <div className="text-center px-4 sm:px-6 md:px-8">
+  <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-darkblue mb-3 leading-tight">
+    AI <span className="text-lightblue">Technologies</span> at AIT
+  </h2>
+  <p className="text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
+    AIT integrates advanced AI tools to enhance learning, assessment, and student support.
+    Explore our suite of intelligent technologies powering the future of education.
+  </p>
+</div>
+
             <div className="hidden lg:block flex-1 ml-8">
               <div className="h-0.5 bg-gradient-to-r from-lightblue via-cyan-500 to-transparent"></div>
             </div>
@@ -291,12 +346,16 @@ export default function TechnicalPage() {
             <div className="hidden lg:block flex-1 mr-8">
               <div className="h-0.5 bg-gradient-to-l from-lightblue via-cyan-500 to-transparent"></div>
             </div>
-            <div className="text-center px-8">
-              <h2 className="text-5xl font-bold text-darkblue mb-2">Our <span className="text-lightblue">Achievements</span></h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                AIT is proud of its impact—hundreds of students trained, high job placement rates, and strong industry partnerships.
-              </p>
-            </div>
+           <div className="text-center px-4 sm:px-6 md:px-8">
+  <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-darkblue mb-3 leading-tight">
+    Our <span className="text-lightblue">Achievements</span>
+  </h2>
+  <p className="text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
+    AIT is proud of its impact—hundreds of students trained, high job placement rates,
+    and strong industry partnerships.
+  </p>
+</div>
+
             <div className="hidden lg:block flex-1 ml-8">
               <div className="h-0.5 bg-gradient-to-r from-lightblue via-cyan-500 to-transparent"></div>
             </div>

@@ -9,98 +9,129 @@ import CallToAction from "@/components/CallToAction";
 export default function AlKhairHospital() {
   return (
     <main className="min-h-screen pb-16">
-      {/* Hero/Banner Section without background image */}
-      <section className="relative min-h-[86vh] w-full px-4 flex flex-col items-center justify-center text-center overflow-hidden">
-        {/* Background Image */}
-        <div className="absolute inset-0 z-0">
-          <img
-            src="/hospital-back.png"
-            alt="Hospital Background"
-            className="object-cover blur-[2px] w-full h-full"
-            style={{ objectFit: 'cover' }}
-          />
+     {/* Hero / Banner Section */}
+<section className="relative min-h-[85vh] w-full px-4 sm:px-6 md:px-10 flex flex-col items-center justify-center text-center overflow-hidden">
+  {/* Background Image */}
+  <div className="absolute inset-0 z-0">
+    <img
+      src="/hospital-back.png"
+      alt="Hospital Background"
+      className="object-cover w-full h-full blur-[2px]"
+      style={{ objectFit: "cover" }}
+    />
+  </div>
+
+  {/* Gradient Overlay */}
+  <div className="absolute inset-0 bg-gradient-to-br from-white/70 via-blue-50/50 to-teal-50/40 backdrop-blur-[2px] z-10" />
+
+  {/* Content */}
+  <div className="relative z-20 max-w-5xl mx-auto px-2 sm:px-4">
+    {/* Animated Heading */}
+    {(() => {
+      const headingWords = ["Al-Khair", "Welfare", "Hospital"];
+      const subtext =
+        "Providing 24/7 compassionate, affordable, and quality healthcare for all — especially mothers, children, and the underprivileged. Modern facilities, experienced doctors, and a mission of service to humanity.";
+
+      return (
+        <>
+          <motion.h1
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold mb-4 leading-tight flex flex-wrap justify-center"
+            initial="hidden"
+            animate="visible"
+            variants={{
+              visible: { transition: { staggerChildren: 0.18 } },
+              hidden: {},
+            }}
+          >
+            {headingWords.map((word, i) => (
+              <motion.span
+                key={i}
+                className={`mx-2 ${
+                  ["Welfare", "Hospital"].includes(word)
+                    ? "text-lightblue"
+                    : "text-darkblue"
+                }`}
+                variants={{
+                  hidden: { opacity: 0, y: 40, scale: 0.8 },
+                  visible: {
+                    opacity: 1,
+                    y: 0,
+                    scale: 1,
+                    transition: {
+                      type: "spring",
+                      bounce: 0.4,
+                      duration: 0.7,
+                    },
+                  },
+                }}
+              >
+                {word}
+              </motion.span>
+            ))}
+          </motion.h1>
+
+          {/* Subtext */}
+          <motion.p
+            className="text-sm sm:text-base md:text-lg lg:text-xl text-gray leading-relaxed max-w-3xl mx-auto mb-8 px-2"
+            initial="hidden"
+            animate="visible"
+            variants={{
+              visible: { transition: { staggerChildren: 0.045 } },
+              hidden: {},
+            }}
+          >
+            {subtext.split(" ").map((word, i) => (
+              <motion.span
+                key={i}
+                className="inline-block mr-1 sm:mr-2"
+                variants={{
+                  hidden: { opacity: 0, y: 20, scale: 0.8 },
+                  visible: {
+                    opacity: 1,
+                    y: 0,
+                    scale: 1,
+                    transition: { duration: 0.4, type: "spring", bounce: 0.3 },
+                  },
+                }}
+              >
+                {word}
+              </motion.span>
+            ))}
+          </motion.p>
+        </>
+      );
+    })()}
+
+    {/* Trust Indicators */}
+    <div className="flex flex-wrap justify-center items-center gap-4 sm:gap-6 md:gap-8 text-gray-700 mb-4 sm:mb-2">
+      {[
+        { color: "bg-green-500", text: "24/7 Emergency" },
+        { color: "bg-blue-500", text: "Mother & Child Care" },
+        { color: "bg-teal-500", text: "Community Focus" },
+      ].map((item, i) => (
+        <div key={i} className="flex items-center gap-2 text-sm sm:text-base">
+          <div className={`w-3 h-3 ${item.color} rounded-full animate-pulse`} />
+          <span className="font-medium">{item.text}</span>
         </div>
-        <div className="absolute inset-0 bg-gradient-to-br from-white/60 via-blue-50/40 to-teal-50/40 backdrop-blur-[2px] z-10" />
-        <div className="relative z-20">
-          {/* campuses-style animation for hero section with 'Al-Khair Welfare Hospital' heading */}
-          {(() => {
-            const headingWords = ["Al-Khair", "Welfare", "Hospital"];
-            const subtext = "Providing 24/7 compassionate, affordable, and quality healthcare for all—especially mothers, children, and the underprivileged. Modern facilities, experienced doctors, and a mission of service to humanity.";
-            return (
-              <>
-                <motion.h1
-                  className="text-5xl md:text-6xl font-extrabold mb-4 leading-tight flex flex-wrap justify-center"
-                  initial="hidden"
-                  animate="visible"
-                  variants={{
-                    visible: { transition: { staggerChildren: 0.18 } },
-                    hidden: {},
-                  }}
-                >
-                  {headingWords.map((word, i) => (
-                    <motion.span
-                      key={i}
-                      className={["Welfare", "Hospital"].includes(word) ? "text-lightblue mx-2" : "text-darkblue mx-2"}
-                      variants={{
-                        hidden: { opacity: 0, y: 40, scale: 0.8 },
-                        visible: { opacity: 1, y: 0, scale: 1, transition: { type: "spring", bounce: 0.4, duration: 0.7 } },
-                      }}
-                    >
-                      {word}
-                    </motion.span>
-                  ))}
-                </motion.h1>
-                <motion.p
-                  className="text-xl md:text-2xl text-gray leading-relaxed max-w-2xl mx-auto mb-8 flex flex-wrap justify-center"
-                  initial="hidden"
-                  animate="visible"
-                  variants={{
-                    visible: { transition: { staggerChildren: 0.045 } },
-                    hidden: {},
-                  }}
-                >
-                  {subtext.split(" ").map((word, i) => (
-                    <motion.span
-                      key={i}
-                      className="inline-block mr-2"
-                      variants={{
-                        hidden: { opacity: 0, y: 20, scale: 0.8 },
-                        visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.4, type: 'spring', bounce: 0.3 } },
-                      }}
-                    >
-                      {word}
-                    </motion.span>
-                  ))}
-                </motion.p>
-              </>
-            );
-          })()}
-          {/* Trust Indicators */}
-          <div className="flex flex-wrap justify-center items-center gap-8 text-gray-600 mb-2">
-            <div className="flex items-center gap-2">
-              <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
-              <span className="font-medium">24/7 Emergency</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-3 h-3 bg-blue-500 rounded-full animate-pulse"></div>
-              <span className="font-medium">Mother & Child Care</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-3 h-3 bg-teal-500 rounded-full animate-pulse"></div>
-              <span className="font-medium">Community Focus</span>
-            </div>
-          </div>
-          {/* Visit our website button */}
-            
-            <a href="https://hospital.idaraalkhair.com/" className="inline-block mt-4">
-              <button className="relative px-8 py-2 font-semibold rounded-full border-2 border-lightblue text-lightblue overflow-hidden group transition-colors duration-300 bg-white">
-                {/* Animated gradient overlay */}
-                <span className="absolute inset-0 z-0 bg-gradient-to-r from-lightblue via-blue-400 to-lightblue opacity-20 transition-transform duration-500 -translate-x-full group-hover:translate-x-0 rounded-full" />
-                <span className="relative z-10">Learn More Information</span>
-              </button>
-            </a>
-        </div>
-      </section>
+      ))}
+    </div>
+
+    {/* Call-to-Action Button */}
+    <a
+      href="https://hospital.idaraalkhair.com/"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="inline-block mt-5"
+    >
+      <button className="relative px-6 sm:px-8 py-2.5 sm:py-3 font-semibold rounded-full border-2 border-lightblue text-lightblue overflow-hidden group transition-all duration-300 bg-white text-sm sm:text-base">
+        {/* Gradient Overlay Animation */}
+        <span className="absolute inset-0 z-0 bg-gradient-to-r from-lightblue via-blue-400 to-lightblue opacity-20 transition-transform duration-500 -translate-x-full group-hover:translate-x-0 rounded-full" />
+        <span className="relative z-10">Learn More Information</span>
+      </button>
+    </a>
+  </div>
+</section>
+
 
       {/* Services Section */}
       <section className="py-20 bg-white">
@@ -374,83 +405,81 @@ export default function AlKhairHospital() {
         </div>
       </section>
 
-      {/* Our Charity Initiatives Section */}
-      <section className="py-16">
-        <div className="container mx-auto px-4 max-w-5xl">
-          <div className="flex items-center justify-center mb-8">
-            <div className="hidden lg:block flex-1 mr-8">
-              <div className="h-0.5 bg-gradient-to-l from-lightblue via-cyan-500 to-transparent"></div>
-            </div>
-            <div className="text-center px-8">
-              <h2 className="text-3xl md:text-4xl font-bold text-darkblue mb-2">Our Charity<span className="text-lightblue"> Initiatives</span></h2>
-            </div>
-            <div className="hidden lg:block flex-1 ml-8">
-              <div className="h-0.5 bg-gradient-to-r from-lightblue via-cyan-500 to-transparent"></div>
-            </div>
-          </div>
-          <p className="text-xl text-gray max-w-3xl mx-auto mb-10 text-center">
-            Through our charity initiatives, we strive to provide free and subsidized healthcare to those in need. Our programs include free medical camps, support for surgeries, provision of medicines, and community outreach to ensure no one is left behind in receiving quality healthcare.
-          </p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-            {/* Card 1: Free Medical Camps */}
-            <div className="bg-white/40 rounded-2xl shadow-2xl p-6 flex flex-col items-center text-center border border-blue-100 hover:shadow-2xl transition-all duration-300 group backdrop-blur-md relative overflow-hidden">
-              {/* Animated gradient overlay */}
-              <div className="absolute inset-0 z-0 bg-gradient-to-r from-lightblue via-blue-400 to-lightblue opacity-20 transition-transform duration-500 -translate-x-full group-hover:translate-x-0 rounded-2xl" />
-              <div className='relative z-10 w-12 h-12 bg-lightblue rounded-full flex items-center justify-center shadow-lg transition-transform duration-700 group-hover:rotate-[360deg] mb-3'>
-                <HandCoins className="w-6 h-6 text-white" />
-              </div>
-              <h3 className="text-lg font-bold text-darkblue mb-1 group-hover:text-lightblue transition-colors">Free Medical Camps</h3>
-              <p className="text-gray-600 text-sm">Organizing free medical camps in underserved areas, providing consultations, medicines, and referrals for specialized care.</p>
-            </div>
-            {/* Card 2: Surgery & Treatment Support */}
-            <div className="bg-white/40 rounded-2xl shadow-2xl p-6 flex flex-col items-center text-center border border-blue-100 hover:shadow-2xl transition-all duration-300 group backdrop-blur-md relative overflow-hidden">
-              <div className="absolute inset-0 z-0 bg-gradient-to-r from-lightblue via-blue-400 to-lightblue opacity-20 transition-transform duration-500 -translate-x-full group-hover:translate-x-0 rounded-2xl" />
-              <div className='relative z-10 w-12 h-12 bg-lightblue rounded-full flex items-center justify-center shadow-lg transition-transform duration-700 group-hover:rotate-[360deg] mb-3'>
-                <HeartPulse className="w-6 h-6 text-white" />
-              </div>
-              <h3 className="text-lg font-bold text-darkblue mb-1 group-hover:text-lightblue transition-colors">Surgery & Treatment Support</h3>
-              <p className="text-gray-600 text-sm">Financial assistance for life-saving surgeries and treatments for patients who cannot afford medical expenses.</p>
-            </div>
-            {/* Card 3: Medicines & Pharmacy Aid */}
-            <div className="bg-white/40 rounded-2xl shadow-2xl p-6 flex flex-col items-center text-center border border-blue-100 hover:shadow-2xl transition-all duration-300 group backdrop-blur-md relative overflow-hidden">
-              <div className="absolute inset-0 z-0 bg-gradient-to-r from-lightblue via-blue-400 to-lightblue opacity-20 transition-transform duration-500 -translate-x-full group-hover:translate-x-0 rounded-2xl" />
-              <div className='relative z-10 w-12 h-12 bg-lightblue rounded-full flex items-center justify-center shadow-lg transition-transform duration-700 group-hover:rotate-[360deg] mb-3'>
-                <Pill className="w-6 h-6 text-white" />
-              </div>
-              <h3 className="text-lg font-bold text-darkblue mb-1 group-hover:text-lightblue transition-colors">Medicines & Pharmacy Aid</h3>
-              <p className="text-gray-600 text-sm">Provision of free or subsidized medicines to patients in need, ensuring access to essential drugs.</p>
-            </div>
-            {/* Card 4: Community Outreach */}
-            <div className="bg-white/40 rounded-2xl shadow-2xl p-6 flex flex-col items-center text-center border border-blue-100 hover:shadow-2xl transition-all duration-300 group backdrop-blur-md relative overflow-hidden">
-              <div className="absolute inset-0 z-0 bg-gradient-to-r from-lightblue via-blue-400 to-lightblue opacity-20 transition-transform duration-500 -translate-x-full group-hover:translate-x-0 rounded-2xl" />
-              <div className='relative z-10 w-12 h-12 bg-lightblue rounded-full flex items-center justify-center shadow-lg transition-transform duration-700 group-hover:rotate-[360deg] mb-3'>
-                <MapPin className="w-6 h-6 text-white" />
-              </div>
-              <h3 className="text-lg font-bold text-darkblue mb-1 group-hover:text-lightblue transition-colors">Community Outreach</h3>
-              <p className="text-gray-600 text-sm">Health awareness, preventive care, and outreach programs to educate and support the local community.</p>
-            </div>
-            {/* Card 5: Zakat & Donation Fund */}
-            <div className="bg-white/40 rounded-2xl shadow-2xl p-6 flex flex-col items-center text-center border border-blue-100 hover:shadow-2xl transition-all duration-300 group backdrop-blur-md relative overflow-hidden">
-              <div className="absolute inset-0 z-0 bg-gradient-to-r from-lightblue via-blue-400 to-lightblue opacity-20 transition-transform duration-500 -translate-x-full group-hover:translate-x-0 rounded-2xl" />
-              <div className='relative z-10 w-12 h-12 bg-lightblue rounded-full flex items-center justify-center shadow-lg transition-transform duration-700 group-hover:rotate-[360deg] mb-3'>
-                <HandCoins className="w-6 h-6 text-white" />
-              </div>
-              <h3 className="text-lg font-bold text-darkblue mb-1 group-hover:text-lightblue transition-colors">Zakat & Donation Fund</h3>
-              <p className="text-gray-600 text-sm">Transparent collection and distribution of Zakat and donations, directly benefiting patient care and hospital services.</p>
-            </div>
-            {/* Card 6: Volunteer Engagement */}
-            <div className="bg-white/40 rounded-2xl shadow-2xl p-6 flex flex-col items-center text-center border border-blue-100 hover:shadow-2xl transition-all duration-300 group backdrop-blur-md relative overflow-hidden">
-              <div className="absolute inset-0 z-0 bg-gradient-to-r from-lightblue via-blue-400 to-lightblue opacity-20 transition-transform duration-500 -translate-x-full group-hover:translate-x-0 rounded-2xl" />
-              <div className='relative z-10 w-12 h-12 bg-lightblue rounded-full flex items-center justify-center shadow-lg transition-transform duration-700 group-hover:rotate-[360deg] mb-3'>
-                <ActivitySquare className="w-6 h-6 text-white" />
-              </div>
-              <h3 className="text-lg font-bold text-darkblue mb-1 group-hover:text-lightblue transition-colors">Volunteer Engagement</h3>
-              <p className="text-gray-600 text-sm">Engaging volunteers in hospital activities, medical camps, and community programs to maximize impact.</p>
-            </div>
-          </div>
+ {/* Our Charity Initiatives Section */}
+<section className="py-16 bg-gradient-to-br from-blue-50 via-white to-teal-50">
+  <div className="container mx-auto px-4 max-w-6xl">
+    {/* Section Heading */}
+    <div className="flex flex-col items-center mb-10 text-center">
+      <div className="flex items-center justify-center w-full mb-4">
+        <div className="hidden lg:block flex-1 mr-8">
+          <div className="h-0.5 bg-gradient-to-l from-lightblue via-cyan-500 to-transparent"></div>
         </div>
-      </section>
-      <CallToAction />
+        <h2 className="text-3xl md:text-4xl font-extrabold text-darkblue">
+          Our Charity <span className="text-lightblue">Initiatives</span>
+        </h2>
+        <div className="hidden lg:block flex-1 ml-8">
+          <div className="h-0.5 bg-gradient-to-r from-lightblue via-cyan-500 to-transparent"></div>
+        </div>
+      </div>
+      <p className="text-base md:text-lg text-gray-600 max-w-3xl">
+        Through our charity initiatives, we strive to provide free and subsidized healthcare to those in need. Our programs include free medical camps, support for surgeries, provision of medicines, and community outreach to ensure no one is left behind in receiving quality healthcare.
+      </p>
+    </div>
+
+    {/* Card Grid */}
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+      {/* Card Template */}
+      {[
+        {
+          icon: <HandCoins className="w-6 h-6 text-white" />,
+          title: "Free Medical Camps",
+          desc: "Organizing free medical camps in underserved areas, providing consultations, medicines, and referrals for specialized care."
+        },
+        {
+          icon: <HeartPulse className="w-6 h-6 text-white" />,
+          title: "Surgery & Treatment Support",
+          desc: "Financial assistance for life-saving surgeries and treatments for patients who cannot afford medical expenses."
+        },
+        {
+          icon: <Pill className="w-6 h-6 text-white" />,
+          title: "Medicines & Pharmacy Aid",
+          desc: "Provision of free or subsidized medicines to patients in need, ensuring access to essential drugs."
+        },
+        {
+          icon: <MapPin className="w-6 h-6 text-white" />,
+          title: "Community Outreach",
+          desc: "Health awareness, preventive care, and outreach programs to educate and support the local community."
+        },
+        {
+          icon: <HandCoins className="w-6 h-6 text-white" />,
+          title: "Zakat & Donation Fund",
+          desc: "Transparent collection and distribution of Zakat and donations, directly benefiting patient care and hospital services."
+        },
+        {
+          icon: <ActivitySquare className="w-6 h-6 text-white" />,
+          title: "Volunteer Engagement",
+          desc: "Engaging volunteers in hospital activities, medical camps, and community programs to maximize impact."
+        },
+      ].map((card, index) => (
+        <div
+          key={index}
+          className="bg-white/60 rounded-2xl shadow-lg p-6 flex flex-col items-center text-center border border-blue-100 hover:shadow-2xl transition-all duration-300 group backdrop-blur-md relative overflow-hidden"
+        >
+          {/* Gradient overlay */}
+          <div className="absolute inset-0 z-0 bg-gradient-to-r from-lightblue via-blue-400 to-lightblue opacity-20 transition-transform duration-500 -translate-x-full group-hover:translate-x-0 rounded-2xl" />
+          <div className="relative z-10 w-12 h-12 bg-lightblue rounded-full flex items-center justify-center shadow-md transition-transform duration-700 group-hover:rotate-[360deg] mb-3">
+            {card.icon}
+          </div>
+          <h3 className="text-lg md:text-xl font-bold text-darkblue mb-1 group-hover:text-lightblue transition-colors">
+            {card.title}
+          </h3>
+          <p className="text-gray-600 text-sm md:text-base">{card.desc}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+    <CallToAction />
     </main>
   );
 } 

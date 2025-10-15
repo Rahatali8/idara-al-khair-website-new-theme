@@ -44,6 +44,8 @@ h3, h4 {
   font-family: 'Montserrat', Arial, Helvetica, sans-serif;
 }
 
+
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

@@ -25,7 +25,7 @@ export default function GlassmorphismCard({ children, className = "", delay = 0 
         delay,
         ease: "easeOut",
       }}
-      className={`backdrop-blur-lg bg-white/10 dark:bg-white/5 border border-white/20 dark:border-white/10 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 ${className}`}
+      className={`flex flex-col items-center justify-center text-center backdrop-blur-lg bg-white/10 dark:bg-white/5 border border-white/20 dark:border-white/10 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 ${className}`}
     >
       {children}
     </motion.div>

@@ -48,9 +48,10 @@ export default function Animated3DIcon({ Icon, color = "text-orange-500", size =
 
         {/* 3D Shadow */}
         <div
-          className="absolute inset-0 bg-gradient-to-br from-black/10 to-black/20 rounded-2xl blur-sm"
+          className=" absolute inset-0 bg-gradient-to-br from-black/10 to-black/20 rounded-2xl blur-sm "
           style={{
             transform: "translateZ(-10px) translateY(5px)",
+         
           }}
         />
       </motion.div>

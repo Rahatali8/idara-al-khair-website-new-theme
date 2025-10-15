@@ -65,10 +65,15 @@ export default function TestimonialsCarousel() {
             <div className="hidden lg:block flex-1 mr-8">
               <div className="h-0.5 bg-gradient-to-l from-lightblue via-cyan-500 to-transparent"></div>
             </div>
-            <div className="text-center px-8">
-              <h2 className="text-4xl md:text-5xl font-bold mb-4 text-darkblue">Stories of Impact</h2>
-              <p className="text-xl text-gray max-w-3xl mx-auto">Hear from those whose lives have been transformed</p>
-            </div>
+           <div className="text-center px-4 sm:px-6 lg:px-0">
+  <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-bold text-darkblue mb-4">
+    Stories of Impact
+  </h2>
+  <p className="text-base sm:text-lg md:text-xl text-gray-600 max-w-full sm:max-w-2xl lg:max-w-3xl mx-auto">
+    Hear from those whose lives have been transformed
+  </p>
+</div>
+
             <div className="hidden lg:block flex-1 ml-8">
               <div className="h-0.5 bg-gradient-to-r from-lightblue via-cyan-500 to-transparent"></div>
             </div>

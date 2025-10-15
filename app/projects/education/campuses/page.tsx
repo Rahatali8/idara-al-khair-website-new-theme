@@ -144,122 +144,142 @@ export default function CampusesPage() {
   return (
     <main className="/">
       {/* Hero Section */}
-      <section className="relative min-h-[86vh] flex items-center justify-center overflow-hidden">
-        {/* Background Image */}
-        <div className="absolute inset-0 z-0">
-          <Image
-            src="/campus-page-back.png"
-            alt="campus-page-background"
-            fill
-            className="object-cover blur-sm"
-            priority
-          />
+   <section className="relative min-h-[86vh] flex items-center justify-center overflow-hidden">
+  {/* Background Image */}
+  <div className="absolute inset-0 z-0">
+    <Image
+      src="/campus-page-back.png"
+      alt="campus-page-background"
+      fill
+      className="object-cover blur-sm"
+      priority
+    />
+  </div>
+
+  <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <div className="max-w-4xl mx-auto text-center">
+      {(() => {
+        const headingWords = ["Campuses", "Across", "Karachi"];
+        const subtext =
+          "Six strategically located campuses across Karachi, each thoughtfully designed to serve local communities with quality education and modern facilities. Our campuses offer easy access for students in all areas of the city, featuring state-of-the-art classrooms, well-equipped labs, libraries, and dedicated spaces for extracurricular activities.";
+        return (
+          <>
+            {/* Heading */}
+            <motion.h1
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 flex flex-wrap justify-center text-darkblue"
+              initial="hidden"
+              animate="visible"
+              variants={{
+                visible: { transition: { staggerChildren: 0.18 } },
+                hidden: {},
+              }}
+            >
+              {headingWords.map((word, i) => (
+                <motion.span
+                  key={i}
+                  className={word === "Karachi" ? "text-lightblue mx-1 sm:mx-2" : "mx-1 sm:mx-2"}
+                  variants={{
+                    hidden: { opacity: 0, y: 40, scale: 0.8 },
+                    visible: { opacity: 1, y: 0, scale: 1, transition: { type: "spring", bounce: 0.4, duration: 0.7 } },
+                  }}
+                >
+                  {word}
+                </motion.span>
+              ))}
+            </motion.h1>
+
+            {/* Subtext */}
+            <motion.p
+              className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-800 leading-relaxed mb-8 flex flex-wrap justify-center"
+              initial="hidden"
+              animate="visible"
+              variants={{
+                visible: { transition: { staggerChildren: 0.045 } },
+                hidden: {},
+              }}
+            >
+              {subtext.split(" ").map((word, i) => (
+                <motion.span
+                  key={i}
+                  className="inline-block mr-1 sm:mr-2"
+                  variants={{
+                    hidden: { opacity: 0, y: 20, scale: 0.8 },
+                    visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.4, type: "spring", bounce: 0.3 } },
+                  }}
+                >
+                  {word}
+                </motion.span>
+              ))}
+            </motion.p>
+
+            {/* Button */}
+            <a href="#campuses" className="inline-block mt-4">
+              <button className="relative px-6 sm:px-8 py-2 sm:py-3 font-semibold rounded-full border-2 border-lightblue text-lightblue overflow-hidden group transition-colors duration-300 bg-white">
+                <span className="absolute inset-0 z-0 bg-gradient-to-r from-lightblue via-blue-400 to-lightblue opacity-20 transition-transform duration-500 -translate-x-full group-hover:translate-x-0 rounded-full" />
+                <span className="relative z-10">Learn More</span>
+              </button>
+            </a>
+          </>
+        );
+      })()}
+    </div>
+  </div>
+</section>
+{/* Achievements */}
+<section className="py-16 bg-white">
+  <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+    {/* Section Header */}
+    <div className="mb-12">
+      <div className="flex items-center justify-center mb-4 flex-wrap">
+        <div className="hidden lg:block flex-1 mr-4 lg:mr-8">
+          <div className="h-0.5 bg-gradient-to-l from-lightblue via-cyan-500 to-transparent"></div>
         </div>
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-4xl mx-auto text-center">
-            {(() => {
-              const headingWords = ["Campuses", "Across", "Karachi"];
-              const subtext = "Six strategically located campuses across Karachi, each thoughtfully designed to serve local communities with quality education and modern facilities. Our campuses offer easy access for students in all areas of the city, featuring state-of-the-art classrooms, well-equipped labs, libraries, and dedicated spaces for extracurricular activities.";
-              return (
-                <>
-                  <motion.h1
-                    className="text-5xl md:text-6xl font-bold mb-6 text-darkblue flex flex-wrap justify-center"
-                    initial="hidden"
-                    animate="visible"
-                    variants={{
-                      visible: { transition: { staggerChildren: 0.18 } },
-                      hidden: {},
-                    }}
-                  >
-                    {headingWords.map((word, i) => (
-                      <motion.span
-                        key={i}
-                        className={word === "Karachi" ? "text-lightblue mx-2" : "mx-2"}
-                        variants={{
-                          hidden: { opacity: 0, y: 40, scale: 0.8 },
-                          visible: { opacity: 1, y: 0, scale: 1, transition: { type: "spring", bounce: 0.4, duration: 0.7 } },
-                        }}
-                      >
-                        {word}
-                      </motion.span>
-                    ))}
-                  </motion.h1>
-                  <motion.p
-                    className="text-xl md:text-2xl text-gray-800 leading-relaxed mb-8 flex flex-wrap justify-center"
-                    initial="hidden"
-                    animate="visible"
-                    variants={{
-                      visible: { transition: { staggerChildren: 0.045 } },
-                      hidden: {},
-                    }}
-                  >
-                    {subtext.split(" ").map((word, i) => (
-                      <motion.span
-                        key={i}
-                        className="inline-block mr-2"
-                        variants={{
-                          hidden: { opacity: 0, y: 20, scale: 0.8 },
-                          visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.4, type: 'spring', bounce: 0.3 } },
-                        }}
-                      >
-                        {word}
-                      </motion.span>
-                    ))}
-                  </motion.p>
-                  <a href="#campuses" className="inline-block mt-4">
-                    <button className="relative px-8 py-2 font-semibold rounded-full border-2 border-lightblue text-lightblue overflow-hidden group transition-colors duration-300 bg-white">
-                      {/* Animated gradient overlay */}
-                      <span className="absolute inset-0 z-0 bg-gradient-to-r from-lightblue via-blue-400 to-lightblue opacity-20 transition-transform duration-500 -translate-x-full group-hover:translate-x-0 rounded-full" />
-                      <span className="relative z-10">Learn More</span>
-                    </button>
-                  </a>
-                </>
-              );
-            })()}
-          </div>
+
+        <div className="text-center px-4 sm:px-8">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-darkblue">
+            Our <span className="text-lightblue">Achievements</span>
+          </h2>
+          <p className="text-base sm:text-lg md:text-xl text-gray-600 max-w-full sm:max-w-xl lg:max-w-2xl mx-auto mt-2">
+            Celebrating our milestones and impact in education.
+          </p>
         </div>
-      </section>
-      {/* Achievements */}
-      <section className="py-16 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="mb-12">
-            <div className="flex items-center justify-center mb-4">
-              <div className="hidden lg:block flex-1 mr-8">
-                <div className="h-0.5 bg-gradient-to-l from-lightblue via-cyan-500 to-transparent"></div>
-              </div>
-              <div className="text-center px-8">
-                <h2 className="text-4xl md:text-5xl font-bold mb-4 text-darkblue">Our <span className="text-lightblue">Achievements</span></h2>
-                <p className="text-xl text-gray-600 max-w-2xl mx-auto text-center mt-2">Celebrating our milestones and impact in education.</p>
-              </div>
-              <div className="hidden lg:block flex-1 ml-8">
-                <div className="h-0.5 bg-gradient-to-r from-lightblue via-cyan-500 to-transparent"></div>
+
+        <div className="hidden lg:block flex-1 ml-4 lg:ml-8">
+          <div className="h-0.5 bg-gradient-to-r from-lightblue via-cyan-500 to-transparent"></div>
+        </div>
+      </div>
+    </div>
+
+    {/* Achievements Grid */}
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+      {achievements.map((achievement, index) => (
+        <div
+          key={index}
+          className="group text-center bg-white/90 border border-gray-200 shadow-xl rounded-2xl p-6 sm:p-8 flex flex-col items-center relative overflow-hidden transition-transform duration-300 hover:scale-105 hover:shadow-2xl hover:border-lightblue"
+        >
+          {/* Animated gradient overlay */}
+          <span className="absolute inset-0 z-0 bg-gradient-to-r from-lightblue via-blue-400 to-lightblue opacity-10 transition-transform duration-500 -translate-x-full group-hover:translate-x-0 rounded-2xl" />
+
+          {/* Icon */}
+          <div className="relative z-10 mb-4">
+            <div className="w-16 h-16 rounded-full bg-gradient-to-br from-lightblue via-blue-400 to-cyan-400 flex items-center justify-center shadow-lg p-1 transition-transform duration-700 group-hover:rotate-[360deg]">
+              <div className="w-12 h-12 rounded-full bg-white/80 flex items-center justify-center">
+                <achievement.icon className="w-8 h-8 text-lightblue" />
               </div>
             </div>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 ml-12 mr-12">
-            {achievements.map((achievement, index) => (
-              <div
-                key={index}
-                className="group text-center bg-white/90 border border-gray-200 shadow-xl rounded-2xl p-8 flex flex-col items-center relative overflow-hidden transition-transform duration-300 hover:scale-105 hover:shadow-2xl hover:border-lightblue"
-              >
-                {/* Animated gradient overlay */}
-                <span className="absolute inset-0 z-0 bg-gradient-to-r from-lightblue via-blue-400 to-lightblue opacity-10 transition-transform duration-500 -translate-x-full group-hover:translate-x-0 rounded-2xl" />
-                <div className="relative z-10 mb-4">
-                  <div className="w-16 h-16 rounded-full bg-gradient-to-br from-lightblue via-blue-400 to-cyan-400 flex items-center justify-center shadow-lg p-1 transition-transform duration-700 group-hover:rotate-[360deg]">
-                    <div className="w-12 h-12 rounded-full bg-white/80 flex items-center justify-center">
-                      <achievement.icon className="w-8 h-8 text-lightblue" />
-                    </div>
-                  </div>
-                </div>
-                <h3 className="relative z-10 text-2xl font-bold text-darkblue mb-2">
-                  {achievement.title}
-                </h3>
-                <p className="relative z-10 text-gray-600">{achievement.description}</p>
-              </div>
-            ))}
-          </div>
+
+          {/* Text */}
+          <h3 className="relative z-10 text-2xl font-bold text-darkblue mb-2">
+            {achievement.title}
+          </h3>
+          <p className="relative z-10 text-gray-600">{achievement.description}</p>
         </div>
-      </section>
+      ))}
+    </div>
+  </div>
+</section>
+
 
       {/* Campus Cards */}
       <section className="py-20">
@@ -269,12 +289,15 @@ export default function CampusesPage() {
               <div className="hidden lg:block flex-1 mr-8">
                 <div className="h-0.5 bg-gradient-to-l from-lightblue via-cyan-500 to-transparent"></div>
               </div>
-              <div className="text-center px-8">
-                <h2 id="campuses" className="text-5xl md:text-5xl font-bold text-darkblue mb-4">
-                  Our <span className="text-lightblue">Campuses</span>
-            </h2>
-                <p className="text-xl text-gray max-w-3xl mx-auto">Six strategically located campuses across Karachi, each designed to serve local communities with quality education and modern facilities.</p>
-              </div>
+              <div className="text-center px-4 sm:px-8 lg:px-0">
+  <h2 id="campuses" className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-bold text-darkblue mb-4">
+    Our <span className="text-lightblue">Campuses</span>
+  </h2>
+  <p className="text-base sm:text-lg md:text-xl text-gray max-w-full sm:max-w-2xl lg:max-w-3xl mx-auto">
+    Six strategically located campuses across Karachi, each designed to serve local communities with quality education and modern facilities.
+  </p>
+</div>
+
               <div className="hidden lg:block flex-1 ml-8">
                 <div className="h-0.5 bg-gradient-to-r from-lightblue via-cyan-500 to-transparent"></div>
               </div>
@@ -363,12 +386,15 @@ export default function CampusesPage() {
               <div className="hidden lg:block flex-1 mr-8">
                 <div className="h-0.5 bg-gradient-to-l from-lightblue via-cyan-500 to-transparent"></div>
               </div>
-              <div className="text-center px-8">
-                <h2 className="text-4xl font-bold text-darkblue mb-4">
-                  Academic <span className="text-lightblue">Programs</span>
-            </h2>
-                <p className="text-xl text-gray max-w-3xl mx-auto">Comprehensive educational programs designed to nurture young minds and prepare them for future success.</p>
-              </div>
+<div className="text-center px-4 sm:px-8 lg:px-0">
+  <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-darkblue mb-4">
+    Academic <span className="text-lightblue">Programs</span>
+  </h2>
+  <p className="text-base sm:text-lg md:text-xl text-gray max-w-full sm:max-w-2xl lg:max-w-3xl mx-auto">
+    Comprehensive educational programs designed to nurture young minds and prepare them for future success.
+  </p>
+</div>
+
               <div className="hidden lg:block flex-1 ml-8">
                 <div className="h-0.5 bg-gradient-to-r from-lightblue via-cyan-500 to-transparent"></div>
               </div>

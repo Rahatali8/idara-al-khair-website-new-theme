@@ -145,379 +145,379 @@ export default function VolunteersPage() {
   return (
     <main className="/">
       {/* Hero Section */}
-      <section className="relative min-h-[86vh] flex items-center justify-center overflow-hidden">
-        {/* Background Image */}
-        <div className="absolute inset-0 z-0">
-          <Image
-            src="/volunteers-back.png"
-            alt="Volunteers-team-background"
-            fill
-            className="object-cover blur-sm"
-            priority
-          />
-        </div>
-        
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-4xl mx-auto text-center">
-                  {(() => {
-                    const headingWords = ["Join", "Our", "Volunteers", "Family"];
-                    const subtext = "Join our volunteer program to make a real difference in countless lives across Pakistan. Our volunteers are the backbone of our mission, reaching out to communities in need and spreading hope where it matters most. Every hour you give helps us build a brighter, more compassionate future.";
-                    return (
-                      <>
-                        <motion.h1
-                          className={`text-5xl md:text-6xl font-bold mb-6 text-darkblue flex flex-wrap justify-center ${headingShine ? "shimmer" : ""}`}
-                          initial="hidden"
-                          animate="visible"
-                          variants={{
-                            visible: { transition: { staggerChildren: 0.18 } },
-                            hidden: {},
-                          }}
-                          onAnimationComplete={() => setHeadingShine(true)}
-                        >
-                          {headingWords.map((word, i) => (
-                            <motion.span
-                              key={i}
-                              className={word === "Volunteers" ? "text-lightblue mx-2" : "mx-2"}
-                              variants={{
-                                hidden: { opacity: 0, y: 40, scale: 0.8 },
-                                visible: { opacity: 1, y: 0, scale: 1, transition: { type: "spring", bounce: 0.4, duration: 0.7 } },
-                              }}
-                            >
-                              {word}
-                            </motion.span>
-                          ))}
-                        </motion.h1>
-                        <motion.p
-                          className="text-xl md:text-2xl text-gray leading-relaxed mb-8 flex flex-wrap justify-center"
-                          initial="hidden"
-                          animate="visible"
-                          variants={{
-                            visible: { transition: { staggerChildren: 0.045 } },
-                            hidden: {},
-                          }}
-                        >
-                          {subtext.split(" ").map((word, i) => (
-                            <motion.span
-                              key={i}
-                              className="inline-block mr-2"
-                              variants={{
-                                hidden: { opacity: 0, y: 20, scale: 0.8 },
-                                visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.4, type: 'spring', bounce: 0.3 } },
-                              }}
-                            >
-                              {word}
-                            </motion.span>
-                          ))}
-                        </motion.p>
-                        {/* Learn More Button */}
-                        <a href="#volunteer-about" className="inline-block mt-4">
-                          <button className="relative px-8 py-2 font-semibold rounded-full border-2 border-lightblue text-lightblue overflow-hidden group transition-colors duration-300 bg-white">
-                            {/* Animated gradient overlay */}
-                            <span className="absolute inset-0 z-0 bg-gradient-to-r from-lightblue via-blue-400 to-lightblue opacity-20 transition-transform duration-500 -translate-x-full group-hover:translate-x-0 rounded-full" />
-                            <span className="relative z-10">Learn More </span>
-                          </button>
-                        </a>
-                      </>
-                    );
-               })()}
-          </div>
-        </div>
-      </section>
+    <section className="relative min-h-[80vh] md:min-h-[86vh] flex items-center justify-center overflow-hidden">
+  {/* Background Image */}
+  <div className="absolute inset-0 z-0">
+    <Image
+      src="/volunteers-back.png"
+      alt="Volunteers-team-background"
+      fill
+      className="object-cover blur-sm"
+      priority
+    />
+  </div>
 
-      {/* Stats */}
-      <section className="ml-7 mr-7 py-20 bg-light-gray">
-        <div className="container mx-auto px-4">
-          <FadeInSection>
-            <div className="relative mb-16">
-              <div className="flex items-center justify-center">
-                <div className="hidden lg:block flex-1 mr-8">
-                  <div className="h-0.5 bg-gradient-to-l from-lightblue via-cyan-500 to-transparent"></div>
-                </div>
-                <div className="text-center px-8">
-                  <h2 className="text-4xl md:text-5xl font-bold mb-4 text-darkblue">
-                    Our Impact in Numbers
-                  </h2>
-                  <p className="text-xl text-gray max-w-3xl mx-auto">Transforming lives across Pakistan since 1987</p>
-                </div>
-                <div className="hidden lg:block flex-1 ml-8">
-                  <div className="h-0.5 bg-gradient-to-r from-lightblue via-cyan-500 to-transparent"></div>
-                </div>
-              </div>
-            </div>
-          </FadeInSection>
+  <div className="container mx-auto px-4 relative z-10">
+    <div className="max-w-4xl mx-auto text-center">
+      {(() => {
+        const headingWords = ["Join", "Our", "Volunteers", "Family"];
+        const subtext =
+          "Join our volunteer program to make a real difference in countless lives across Pakistan. Our volunteers are the backbone of our mission, reaching out to communities in need and spreading hope where it matters most. Every hour you give helps us build a brighter, more compassionate future.";
 
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            <FadeInSection delay={0.1}>
-              <div className="group relative overflow-hidden p-8 text-center bg-white/10 rounded-2xl shadow-xl">
-                {/* Animated gradient overlay */}
-                <div className="absolute inset-0 z-0 bg-gradient-to-r from-lightblue via-blue-400 to-lightblue opacity-20 transition-transform duration-500 -translate-x-full group-hover:translate-x-0" />
-                {/* Card content */}
-                <div className="relative z-10">
-                <Animated3DIcon Icon={Users} color="text-lightblue" delay={0.2} />
-                  <h3 className="text-4xl font-bold text-darkblue group-hover:text-darkblue transition-colors duration-500 mt-2 mb-2">
-                    <AnimatedCounter end={600} />+
-                </h3>
-                  <p className="text-gray text-md">Active Volunteers are here to help</p>
-                </div>
-              </div>
-            </FadeInSection>
-
-            <FadeInSection delay={0.2}>
-              <div className="group relative overflow-hidden p-8 text-center bg-white/10 rounded-2xl shadow-xl">
-                <div className="absolute inset-0 z-0 bg-gradient-to-r from-lightblue via-blue-400 to-lightblue opacity-20 transition-transform duration-500 -translate-x-full group-hover:translate-x-0" />
-                <div className="relative z-10">
-                <Animated3DIcon Icon={GraduationCap} color="text-lightblue" delay={0.3} />
-                  <h3 className="text-4xl font-bold text-darkblue group-hover:text-darkblue transition-colors duration-500 mt-2 mb-2">
-                    <AnimatedCounter end={60}/>+
-                </h3>
-                <p className="text-gray text-md">Programs Volunteer opportunities available</p>
-                </div>
-              </div>
-            </FadeInSection>
-
-            <FadeInSection delay={0.3}>
-              <div className="group relative overflow-hidden p-8 text-center bg-white/10 rounded-2xl shadow-xl">
-                <div className="absolute inset-0 z-0 bg-gradient-to-r from-lightblue via-blue-400 to-lightblue opacity-20 transition-transform duration-500 -translate-x-full group-hover:translate-x-0" />
-                <div className="relative z-10">
-                <Animated3DIcon Icon={Heart} color="text-lightblue" delay={0.4} />
-                  <h3 className="text-4xl font-bold text-darkblue group-hover:text-darkblue transition-colors duration-500 mt-2 mb-2">
-                    <AnimatedCounter end={24} />/7 hours
-                </h3>
-                <p className="text-gray text-md">Support Round-the-clock volunteer coordination</p>
-                </div>
-              </div>
-            </FadeInSection>
-
-            <FadeInSection delay={0.4}>
-              <div className="group relative overflow-hidden p-8 text-center bg-white/10 rounded-2xl shadow-xl">
-                <div className="absolute inset-0 z-0 bg-gradient-to-r from-lightblue via-blue-400 to-lightblue opacity-20 transition-transform duration-500 -translate-x-full group-hover:translate-x-0" />
-                <div className="relative z-10">
-                <Animated3DIcon Icon={Building} color="text-lightblue" delay={0.5} />
-                  <h3 className="text-4xl font-bold text-darkblue group-hover:text-darkblue transition-colors duration-500 mt-2 mb-2">
-                    <AnimatedCounter end={100} />%
-                </h3>
-                <p className="text-gray text-md">Direct community impact through volunteers</p>
-                </div>
-              </div>
-            </FadeInSection>
-          </div>
-        </div>
-      </section>
-
-      {/* About Volunteering */}
-      <section id="volunteer-about" className="py-20 bg-white relative overflow-hidden">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-7 items-center">
-            <div className="px-8 md:px-16">
-              <div className="text-lightblue font-semibold mb-3 flex items-center gap-2">
-                <Heart className="w-5 h-4" />
-                VOLUNTEER WITH US
-              </div>
-              <h2 className="text-4xl lg:text-5xl font-bold text-darkblue mb-6">
-                Why Volunteer With <span className="text-lightblue">Us?</span>
-              </h2>
-              <p className="text-lg text-gray mb-6">
-                Idara Al-Khair's volunteer program offers meaningful opportunities to serve communities in need. 
-                Our volunteers are the backbone of our operations, helping us reach more people and create greater impact.
-              </p>
-              <p className="text-lg text-gray mb-6">
-                Whether you're passionate about education, healthcare, disaster relief, or community service, 
-                we have a place for you. Join our diverse team of dedicated volunteers and make a real difference.
-              </p>
-              <div className="grid grid-cols-2 gap-6">
-                <div className="flex items-center group">
-                  <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mr-4 group-hover:scale-110 transition-transform duration-300">
-                    <Clock className="w-6 h-6 text-lightblue" strokeWidth={2.2} />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-gray">Flexible Hours</h4>
-                    <p className="text-gray font-light">Choose your schedule</p>
-                  </div>
-                </div>
-                <div className="flex items-center group">
-                  <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mr-4 group-hover:scale-110 transition-transform duration-300">
-                    <Users className="w-6 h-6 text-lightblue" strokeWidth={2.2} />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-gray">500+ Volunteers</h4>
-                    <p className="text-gray font-light">Active community</p>
-                  </div>
-                </div>
-                <div className="flex items-center group">
-                  <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mr-4 group-hover:scale-110 transition-transform duration-300">
-                    <MapPin className="w-6 h-6 text-lightblue" strokeWidth={2.2} />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-gray">Multiple Locations</h4>
-                    <p className="text-g font-light">Across Pakistan</p>
-                  </div>
-                </div>
-                <div className="flex items-center group">
-                  <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mr-4 group-hover:scale-110 transition-transform duration-300">
-                    <Award className="w-6 h-6 text-lightblue" strokeWidth={2.2} />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-gray">Recognition</h4>
-                    <p className="text-gray font-light">Certificates & awards</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="relative h-[400px] md:h-[500px] rounded-2xl overflow-hidden shadow-xl border-4 border-white mt-6 mr-8">
-              <Image
-                src="/volunteers.jpg"
-                alt="Idara Al-Khair Volunteers Group Photo"
-                fill
-                className="object-cover object-center blur-[0.5px]"
-                priority
-              />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Volunteer Programs */}
-      <section id="volunteer-opportunities" className="py-20 bg-white">
-        <div className="mb-16">
-          <div className="flex items-center justify-center mb-10">
-            <div className="hidden lg:block flex-1 mr-8">
-              <div className="h-0.5 bg-gradient-to-l from-lightblue via-cyan-500 to-transparent"></div>
-            </div>
-            <div className="text-center px-8">
-              <h2 className="text-4xl lg:text-5xl font-bold text-darkblue mb-2">Volunteer <span className="text-lightblue">Opportunities</span></h2>
-              <p className="text-xl text-gray max-w-3xl mx-auto">Choose from various volunteer programs that match your skills, interests, and availability.</p>
-            </div>
-            <div className="hidden lg:block flex-1 ml-8">
-              <div className="h-0.5 bg-gradient-to-r from-lightblue via-cyan-500 to-transparent"></div>
-            </div>
-          </div>
-        </div>
-        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {volunteerPrograms.map((program, index) => (
-            <motion.div
-              key={index}
-              className="group relative overflow-hidden bg-white/20 backdrop-blur-md border border-white/30 shadow-xl rounded-2xl p-4 text-left flex flex-col gap-3 max-w-xs mx-auto"
-              whileHover={{ scale: 1.05, y: -5 }}
-              transition={{ duration: 0.3 }}
+        return (
+          <>
+            {/* Animated Heading */}
+            <motion.h1
+              className={`text-4xl sm:text-5xl md:text-6xl font-bold mb-6 text-darkblue flex flex-wrap justify-center ${headingShine ? "shimmer" : ""}`}
+              initial="hidden"
+              animate="visible"
+              variants={{
+                visible: { transition: { staggerChildren: 0.18 } },
+                hidden: {},
+              }}
+              onAnimationComplete={() => setHeadingShine(true)}
             >
-                {/* Animated gradient overlay */}
-                <div className="absolute inset-0 z-0 bg-gradient-to-r from-lightblue via-blue-400 to-lightblue opacity-20 transition-transform duration-500 -translate-x-full group-hover:translate-x-0" />
-                {/* Card content */}
-                <div className="relative z-10">
-                  <div
-                    className="w-10 h-10 bg-lightblue/80 group-hover:bg-white transition-colors duration-500 backdrop-blur-sm rounded-full flex items-center justify-center mb-2 border border-white/20 group-hover:rotate-[360deg] transition-transform duration-700"
-                  >
-                    <program.icon className="w-6 h-6 text-white group-hover:text-lightblue transition-colors duration-500" strokeWidth={2.2} />
-                  </div>
-                  <h3 className="text-xl font-bold text-lightblue group-hover:text-darkblue transition-colors duration-500 mb-1">{program.title}</h3>
-                  <p className="text-gray mb-2 font-light leading-relaxed">{program.description}</p>
-                  <div className="space-y-1 text-sm">
-                <div className="flex justify-between">
-                  <span className="text-gray-500 font-medium">Location:</span>
-                  <span className="text-gray font-semibold">{program.location}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-500 font-medium">Impact:</span>
-                  <span className="text-lightblue font-semibold">{program.impact}</span>
-                </div>
-              </div>
-                  <ul className="list-disc list-inside text-gray text-sm mt-2 space-y-1">
-                    {program.features.slice(0,2).map((feature, idx) => (
-                  <li key={idx} className="font-light">{feature}</li>
-                ))}
-              </ul>
+              {headingWords.map((word, i) => (
+                <motion.span
+                  key={i}
+                  className={word === "Volunteers" ? "text-lightblue mx-1 sm:mx-2" : "mx-1 sm:mx-2"}
+                  variants={{
+                    hidden: { opacity: 0, y: 40, scale: 0.8 },
+                    visible: { opacity: 1, y: 0, scale: 1, transition: { type: "spring", bounce: 0.4, duration: 0.7 } },
+                  }}
+                >
+                  {word}
+                </motion.span>
+              ))}
+            </motion.h1>
+
+            {/* Animated Subtext */}
+            <motion.p
+              className="text-base sm:text-lg md:text-xl text-gray leading-relaxed mb-8 flex flex-wrap justify-center"
+              initial="hidden"
+              animate="visible"
+              variants={{
+                visible: { transition: { staggerChildren: 0.045 } },
+                hidden: {},
+              }}
+            >
+              {subtext.split(" ").map((word, i) => (
+                <motion.span
+                  key={i}
+                  className="inline-block mr-1 sm:mr-2 mb-1"
+                  variants={{
+                    hidden: { opacity: 0, y: 20, scale: 0.8 },
+                    visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.4, type: "spring", bounce: 0.3 } },
+                  }}
+                >
+                  {word}
+                </motion.span>
+              ))}
+            </motion.p>
+
+            {/* Learn More Button */}
+            <a href="#volunteer-about" className="inline-block mt-4">
+              <button className="relative px-6 sm:px-8 py-2 sm:py-3 font-semibold rounded-full border-2 border-lightblue text-lightblue overflow-hidden group transition-colors duration-300 bg-white">
+                <span className="absolute inset-0 z-0 bg-gradient-to-r from-lightblue via-blue-400 to-lightblue opacity-20 transition-transform duration-500 -translate-x-full group-hover:translate-x-0 rounded-full" />
+                <span className="relative z-10 text-sm sm:text-base">Learn More</span>
+              </button>
+            </a>
+          </>
+        );
+      })()}
+    </div>
+  </div>
+</section>
+
+
+    <section className="py-16 md:py-20 bg-light-gray px-4 sm:px-6 lg:px-8">
+  <div className="container mx-auto">
+    {/* Heading */}
+    <FadeInSection>
+      <div className="relative mb-12">
+        <div className="flex flex-col lg:flex-row items-center justify-center">
+          <div className="hidden lg:block flex-1 mr-6">
+            <div className="h-0.5 bg-gradient-to-l from-lightblue via-cyan-500 to-transparent"></div>
+          </div>
+          <div className="text-center px-4 sm:px-6">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-darkblue">
+              Our Impact in Numbers
+            </h2>
+            <p className="text-base sm:text-lg md:text-xl text-gray max-w-3xl mx-auto">
+              Transforming lives across Pakistan since 1987
+            </p>
+          </div>
+          <div className="hidden lg:block flex-1 ml-6">
+            <div className="h-0.5 bg-gradient-to-r from-lightblue via-cyan-500 to-transparent"></div>
+          </div>
+        </div>
+      </div>
+    </FadeInSection>
+
+    {/* Stats Cards */}
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 auto-rows-fr">
+      {[
+        { Icon: Users, end: 600, label: "Active Volunteers are here to help", delay: 0.2 },
+        { Icon: GraduationCap, end: 60, label: "Programs Volunteer opportunities available", delay: 0.3 },
+        { Icon: Heart, end: 24, label: "Support Round-the-clock volunteer coordination", delay: 0.4 },
+        { Icon: Building, end: 100, label: "Direct community impact through volunteers", delay: 0.5 },
+      ].map((stat, index) => (
+        <FadeInSection key={index} delay={0.1 * (index + 1)}>
+          <div className="group relative overflow-hidden p-6 sm:p-8 text-center bg-white/10 rounded-2xl shadow-xl flex flex-col items-center h-full">
+            {/* Gradient Overlay */}
+            <div className="absolute inset-0 z-0 bg-gradient-to-r from-lightblue via-blue-400 to-lightblue opacity-20 transition-transform duration-500 -translate-x-full group-hover:translate-x-0 rounded-2xl" />
+
+            {/* Icon */}
+            <div className="relative z-10 mb-4">
+              <Animated3DIcon Icon={stat.Icon} color="text-lightblue" delay={stat.delay} />
             </div>
-            </motion.div>
+
+            {/* Counter & Label */}
+            <div className="relative z-10 flex flex-col flex-1 justify-between h-full">
+              <h3 className="text-3xl sm:text-4xl md:text-4xl font-bold text-darkblue group-hover:text-darkblue transition-colors duration-500 mb-4">
+                <AnimatedCounter end={stat.end} />
+                {stat.end === 24 ? "/7 hours" : stat.end === 100 ? "%" : "+"}
+              </h3>
+              <p className="text-sm sm:text-base text-gray mt-auto">{stat.label}</p>
+            </div>
+          </div>
+        </FadeInSection>
+      ))}
+    </div>
+  </div>
+</section>
+
+
+{/* About Volunteering */}
+<section id="volunteer-about" className="py-20 bg-white relative overflow-hidden">
+  <div className="container mx-auto px-4">
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+      
+      {/* Text Content */}
+      <div className="px-4 sm:px-8 lg:px-0">
+        <div className="text-lightblue font-semibold mb-3 flex items-center gap-2">
+          <Heart className="w-5 h-5" strokeWidth={2} />
+          VOLUNTEER WITH US
+        </div>
+        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-darkblue mb-6">
+          Why Volunteer With <span className="text-lightblue">Us?</span>
+        </h2>
+        <p className="text-lg text-gray mb-6">
+          Idara Al-Khair's volunteer program offers meaningful opportunities to serve communities in need. 
+          Our volunteers are the backbone of our operations, helping us reach more people and create greater impact.
+        </p>
+        <p className="text-lg text-gray mb-6">
+          Whether you're passionate about education, healthcare, disaster relief, or community service, 
+          we have a place for you. Join our diverse team of dedicated volunteers and make a real difference.
+        </p>
+
+        {/* Features Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-6">
+          {[
+            { icon: Clock, title: "Flexible Hours", desc: "Choose your schedule" },
+            { icon: Users, title: "500+ Volunteers", desc: "Active community" },
+            { icon: MapPin, title: "Multiple Locations", desc: "Across Pakistan" },
+            { icon: Award, title: "Recognition", desc: "Certificates & awards" },
+          ].map((feature, i) => (
+            <div key={i} className="flex items-center group">
+              <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mr-4 group-hover:scale-110 transition-transform duration-300">
+                <feature.icon className="w-6 h-6 text-lightblue" strokeWidth={2} />
+              </div>
+              <div>
+                <h4 className="font-semibold text-gray">{feature.title}</h4>
+                <p className="text-gray font-light text-sm">{feature.desc}</p>
+              </div>
+            </div>
           ))}
         </div>
-      </section>
+      </div>
 
-      {/* Volunteer Benefits */}
-      <section className="my-10 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="mb-16">
-            <div className="flex items-center justify-center mb-10">
-              <div className="hidden lg:block flex-1 mr-8">
-                <div className="h-0.5 bg-gradient-to-l from-lightblue via-cyan-500 to-transparent"></div>
-              </div>
-              <div className="text-center px-8">
-                <h2 className="text-4xl lg:text-5xl font-bold text-darkblue mb-2">Benefits of <span className="text-lightblue">Volunteering</span></h2>
-                <p className="text-xl text-gray max-w-3xl mx-auto">Volunteering with Idara Al-Khair offers numerous personal and professional benefits.</p>
-              </div>
-              <div className="hidden lg:block flex-1 ml-8">
-                <div className="h-0.5 bg-gradient-to-r from-lightblue via-cyan-500 to-transparent"></div>
-              </div>
+      {/* Image */}
+      <div className="relative h-64 sm:h-80 md:h-[500px] lg:h-[500px] rounded-2xl overflow-hidden shadow-xl border-4 border-white mt-6 lg:mt-0">
+        <Image
+          src="/volunteers.jpg"
+          alt="Idara Al-Khair Volunteers Group Photo"
+          fill
+          className="object-cover object-center blur-[0.5px]"
+          priority
+        />
+      </div>
+    </div>
+  </div>
+</section>
+
+{/* Volunteer Programs */}
+<section id="volunteer-opportunities" className="py-20 bg-white px-4 sm:px-6 lg:px-8">
+  <div className="mb-16">
+    <div className="flex items-center justify-center mb-10">
+      <div className="hidden lg:block flex-1 mr-8">
+        <div className="h-0.5 bg-gradient-to-l from-lightblue via-cyan-500 to-transparent"></div>
+      </div>
+      <div className="text-center px-4 sm:px-8">
+        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-darkblue mb-2">
+          Volunteer <span className="text-lightblue">Opportunities</span>
+        </h2>
+        <p className="text-lg sm:text-xl text-gray max-w-3xl mx-auto">
+          Choose from various volunteer programs that match your skills, interests, and availability.
+        </p>
+      </div>
+      <div className="hidden lg:block flex-1 ml-8">
+        <div className="h-0.5 bg-gradient-to-r from-lightblue via-cyan-500 to-transparent"></div>
+      </div>
+    </div>
+  </div>
+
+  <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+    {volunteerPrograms.map((program, index) => (
+      <motion.div
+        key={index}
+        className="group relative overflow-hidden bg-white/20 backdrop-blur-md border border-white/30 shadow-xl rounded-2xl p-6 flex flex-col gap-4 w-full h-full"
+        whileHover={{ scale: 1.05, y: -5 }}
+        transition={{ duration: 0.3 }}
+      >
+        {/* Gradient Overlay */}
+        <div className="absolute inset-0 z-0 bg-gradient-to-r from-lightblue via-blue-400 to-lightblue opacity-20 transition-transform duration-500 -translate-x-full group-hover:translate-x-0 rounded-2xl" />
+
+        {/* Card content */}
+        <div className="relative z-10 flex flex-col flex-1">
+          <div className="w-12 h-12 bg-lightblue/80 group-hover:bg-white transition-colors duration-500 backdrop-blur-sm rounded-full flex items-center justify-center mb-4 border border-white/20 group-hover:rotate-[360deg] transition-transform duration-700">
+            <program.icon className="w-6 h-6 text-white group-hover:text-lightblue transition-colors duration-500" strokeWidth={2.2} />
+          </div>
+          <h3 className="text-xl font-bold text-lightblue group-hover:text-darkblue transition-colors duration-500 mb-2">{program.title}</h3>
+          <p className="text-gray font-light leading-relaxed mb-4 flex-1">{program.description}</p>
+
+          <div className="space-y-1 text-sm mb-4">
+            <div className="flex justify-between">
+              <span className="text-gray-500 font-medium">Location:</span>
+              <span className="text-gray font-semibold">{program.location}</span>
+            </div>
+            <div className="flex justify-between">
+              <span className="text-gray-500 font-medium">Impact:</span>
+              <span className="text-lightblue font-semibold">{program.impact}</span>
             </div>
           </div>
-          <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 ">
-          {volunteerBenefits.map((benefit, index) => (
-              <motion.div
-                key={index}
-                className="group relative overflow-hidden bg-white/20 backdrop-blur-md border border-white/30 shadow-xl rounded-2xl p-6 text-left flex flex-col gap-3 items-start"
-                whileHover={{ scale: 1.05, y: -5 }}
-                transition={{ duration: 0.3 }}
-              >
-                {/* Animated gradient overlay */}
-                <div className="absolute inset-0 z-0 bg-gradient-to-r from-lightblue via-blue-400 to-lightblue opacity-20 transition-transform duration-500 -translate-x-full group-hover:translate-x-0" />
-                {/* Card content */}
-                <div className="relative z-10 w-full">
-                  <div
-                    className="w-12 h-12 bg-lightblue/80 backdrop-blur-sm rounded-full flex items-center justify-center mb-4 border border-white/20 group-hover:rotate-[360deg] transition-transform duration-700"
-                  >
-                  <benefit.icon className="w-6 h-6 text-white" strokeWidth={2.2} />
-                </div>
-                  <h3 className="text-xl font-bold text-lightblue group-hover:text-darkblue transition-colors duration-500 mb-1">{benefit.title}</h3>
-                  <p className="text-gray mb-2 font-light">{benefit.description}</p>
-                  <ul className="list-disc list-inside text-gray text-sm mt-2 space-y-1">
-                  {benefit.features.map((feature, idx) => (
-                    <li key={idx} className="font-light">{feature}</li>
-                  ))}
-                </ul>
-              </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
 
-      {/* Volunteer Stories */}
-      <section className="py-20">
-        <div className="container mx-auto px-4">
-          <div className="mb-16">
-            <div className="flex items-center justify-center mb-10">
-              <div className="hidden lg:block flex-1 mr-8">
-                <div className="h-0.5 bg-gradient-to-l from-lightblue via-cyan-500 to-transparent"></div>
-              </div>
-              <div className="text-center px-8">
-                <h2 className="text-4xl lg:text-5xl font-bold text-darkblue mb-2">Volunteer <span className="text-lightblue">Stories</span></h2>
-                <p className="text-xl text-gray max-w-3xl mx-auto">Hear from our dedicated volunteers about their experiences and the impact they've made.</p>
-              </div>
-              <div className="hidden lg:block flex-1 ml-8">
-                <div className="h-0.5 bg-gradient-to-r from-lightblue via-cyan-500 to-transparent"></div>
-              </div>
-            </div>
-          </div>
-          <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
-            {volunteerStories.map((story, index) => (
-              <motion.div
-                key={index}
-                className="group relative overflow-hidden bg-white/20 backdrop-blur-md border border-white/30 shadow-xl rounded-2xl p-6 text-left flex flex-col gap-2"
-                whileHover={{ scale: 1.05, y: -5 }}
-                transition={{ duration: 0.3 }}
-              >
-                {/* Animated gradient overlay */}
-                <div className="absolute inset-0 z-0 bg-gradient-to-r from-lightblue via-blue-400 to-lightblue opacity-20 transition-transform duration-500 -translate-x-full group-hover:translate-x-0" />
-                {/* Card content */}
-                <div className="relative z-10">
-                  <h3 className="text-xl font-semibold text-lightblue mb-1">{story.name} <span className="text-sm text-darkblue font-normal">({story.role})</span></h3>
-                  <div className="text-sm text-darkblue mb-1"><strong>Duration:</strong> {story.duration} &nbsp; <strong>Hours:</strong> {story.hours}</div>
-                  <blockquote className="italic text-gray border-l-4 border-lightblue pl-4">"{story.story}"</blockquote>
-              </div>
-              </motion.div>
+          <ul className="list-disc list-inside text-gray text-sm space-y-1 mt-auto">
+            {program.features.slice(0, 2).map((feature, idx) => (
+              <li key={idx} className="font-light">{feature}</li>
             ))}
-          </div>
+          </ul>
         </div>
-      </section>
+      </motion.div>
+    ))}
+  </div>
+</section>
+
+
+  {/* Volunteer Benefits */}
+<section className="my-10 bg-white px-4 sm:px-6 lg:px-8">
+  <div className="container mx-auto">
+    {/* Heading */}
+    <div className="mb-16">
+      <div className="flex items-center justify-center mb-10">
+        <div className="hidden lg:block flex-1 mr-8">
+          <div className="h-0.5 bg-gradient-to-l from-lightblue via-cyan-500 to-transparent"></div>
+        </div>
+        <div className="text-center px-4 sm:px-8">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-darkblue mb-2">
+            Benefits of <span className="text-lightblue">Volunteering</span>
+          </h2>
+          <p className="text-lg sm:text-xl text-gray max-w-3xl mx-auto">
+            Volunteering with Idara Al-Khair offers numerous personal and professional benefits.
+          </p>
+        </div>
+        <div className="hidden lg:block flex-1 ml-8">
+          <div className="h-0.5 bg-gradient-to-r from-lightblue via-cyan-500 to-transparent"></div>
+        </div>
+      </div>
+    </div>
+
+    {/* Cards */}
+    <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      {volunteerBenefits.map((benefit, index) => (
+        <motion.div
+          key={index}
+          className="group relative overflow-hidden bg-white/20 backdrop-blur-md border border-white/30 shadow-xl rounded-2xl p-6 flex flex-col gap-4 h-full"
+          whileHover={{ scale: 1.05, y: -5 }}
+          transition={{ duration: 0.3 }}
+        >
+          {/* Animated gradient overlay */}
+          <div className="absolute inset-0 z-0 bg-gradient-to-r from-lightblue via-blue-400 to-lightblue opacity-20 transition-transform duration-500 -translate-x-full group-hover:translate-x-0 rounded-2xl" />
+
+          {/* Card content */}
+          <div className="relative z-10 flex flex-col flex-1">
+            <div className="w-12 h-12 bg-lightblue/80 backdrop-blur-sm rounded-full flex items-center justify-center mb-4 border border-white/20 group-hover:rotate-[360deg] transition-transform duration-700">
+              <benefit.icon className="w-6 h-6 text-white" strokeWidth={2.2} />
+            </div>
+            <h3 className="text-xl font-bold text-lightblue group-hover:text-darkblue transition-colors duration-500 mb-2">
+              {benefit.title}
+            </h3>
+            <p className="text-gray font-light mb-4 flex-1">{benefit.description}</p>
+            <ul className="list-disc list-inside text-gray text-sm space-y-1 mt-auto">
+              {benefit.features.map((feature, idx) => (
+                <li key={idx} className="font-light">{feature}</li>
+              ))}
+            </ul>
+          </div>
+        </motion.div>
+      ))}
+    </div>
+  </div>
+</section>
+
+{/* Volunteer Stories */}
+<section className="py-20">
+  <div className="container mx-auto px-4">
+    {/* Heading */}
+    <div className="mb-16">
+      <div className="flex items-center justify-center mb-10">
+        <div className="hidden lg:block flex-1 mr-8">
+          <div className="h-0.5 bg-gradient-to-l from-lightblue via-cyan-500 to-transparent"></div>
+        </div>
+        <div className="text-center px-8">
+          <h2 className="text-4xl lg:text-5xl font-bold text-darkblue mb-2">
+            Volunteer <span className="text-lightblue">Stories</span>
+          </h2>
+          <p className="text-xl text-gray max-w-3xl mx-auto">
+            Hear from our dedicated volunteers about their experiences and the impact they've made.
+          </p>
+        </div>
+        <div className="hidden lg:block flex-1 ml-8">
+          <div className="h-0.5 bg-gradient-to-r from-lightblue via-cyan-500 to-transparent"></div>
+        </div>
+      </div>
+    </div>
+
+    {/* Cards */}
+    <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 xl:grid-cols-3">
+      {volunteerStories.map((story, index) => (
+        <motion.div
+          key={index}
+          className="group relative overflow-hidden bg-white/20 backdrop-blur-md border border-white/30 shadow-xl rounded-2xl p-6 flex flex-col h-full"
+          whileHover={{ scale: 1.05, y: -5 }}
+          transition={{ duration: 0.3 }}
+        >
+          {/* Gradient Overlay */}
+          <div className="absolute inset-0 z-0 bg-gradient-to-r from-lightblue via-blue-400 to-lightblue opacity-20 transition-transform duration-500 -translate-x-full group-hover:translate-x-0 rounded-2xl" />
+
+          {/* Card Content */}
+          <div className="relative z-10 flex flex-col flex-1">
+            <h3 className="text-xl font-semibold text-lightblue mb-2">
+              {story.name} <span className="text-sm text-darkblue font-normal">({story.role})</span>
+            </h3>
+            <div className="text-sm text-darkblue mb-2">
+              <strong>Duration:</strong> {story.duration} &nbsp; <strong>Hours:</strong> {story.hours}
+            </div>
+            <blockquote className="italic text-gray border-l-4 border-lightblue pl-4 flex-1">
+              "{story.story}"
+            </blockquote>
+          </div>
+        </motion.div>
+      ))}
+    </div>
+  </div>
+</section>
+
 
       {/* Requirements */}
       <section className="py-20 bg-white">
