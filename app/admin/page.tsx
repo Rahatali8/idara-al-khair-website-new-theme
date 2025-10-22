@@ -12,6 +12,8 @@ import {
   Calendar,
   CheckCircle,
   Users,
+  Menu,
+  X,
 } from "lucide-react";
 
 export default function AdminPage() {
@@ -25,6 +27,7 @@ export default function AdminPage() {
   const [jobs, setJobs] = useState<any[]>([]);
   const [jobResponses, setJobResponses] = useState<any[]>([]);
   const [responsesLoading, setResponsesLoading] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   // Naye states for interview and hired candidates
   const [interviewCandidates, setInterviewCandidates] = useState<any[]>([]);
@@ -59,6 +62,22 @@ export default function AdminPage() {
   const [requirements, setRequirements] = useState("");
   const [responsibilities, setResponsibilities] = useState("");
   const [qualifications, setQualifications] = useState("");
+
+  // ✅ HEADER/FOOTER HIDE KARNE WALA USEEFFECT - YEH IMPORTANT HAI
+  useEffect(() => {
+    // Header aur Footer hide karo
+    const header = document.querySelector('header');
+    const footer = document.querySelector('footer');
+
+    if (header) header.style.display = 'none';
+    if (footer) footer.style.display = 'none';
+
+    // Cleanup function - component unmount par show karo
+    return () => {
+      if (header) header.style.display = '';
+      if (footer) footer.style.display = '';
+    };
+  }, []);
 
   const typeMap: Record<string, string> = {
     "Full-Time": "FULL_TIME",
@@ -113,6 +132,7 @@ export default function AdminPage() {
       setMessages([]); // ✅ Error mein bhi empty array
     }
   };
+
   // ✅ YEH NAYA FUNCTION - Candidates load karne ke liye
   const loadCandidates = async () => {
     try {
@@ -569,23 +589,50 @@ Idara Al-Khair
     }
   };
 
+  // Mobile sidebar toggle
+  const toggleSidebar = () => {
+    setSidebarOpen(!sidebarOpen);
+  };
+
   // --------- Sidebar Layout -----------
   if (loggedIn) {
     return (
       <div className="flex h-screen bg-gray-100">
-        {/* Sidebar */}
-        <aside className="w-64 bg-white shadow-lg flex flex-col">
-          <h1 className="text-xl font-bold text-center py-4 border-b">
-            Admin Panel
-          </h1>
-          <nav className="flex-1">
-            <ul className="space-y-2 p-4">
+        {/* Mobile Header */}
+        <div className="lg:hidden fixed top-0 left-0 right-0 bg-white shadow-md z-50 p-4">
+          <div className="flex justify-between items-center">
+            <button
+              onClick={toggleSidebar}
+              className="p-2 rounded-lg bg-gray-100 hover:bg-gray-200"
+            >
+              {sidebarOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            </button>
+            <h1 className="text-xl font-bold">Admin Panel</h1>
+            <div className="w-9"></div> {/* Spacer for balance */}
+          </div>
+        </div>
+
+        {/* Sidebar - Mobile aur Desktop dono ke liye */}
+        <aside className={`
+          fixed lg:static inset-y-0 left-0 z-40
+          w-64 bg-white shadow-lg transform transition-transform duration-300 ease-in-out
+          ${sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
+          lg:flex lg:flex-col
+          mt-16 lg:mt-0
+        `}>
+          <div className="hidden lg:block">
+            <h1 className="text-xl font-bold text-center py-4 border-b">
+              Admin Panel
+            </h1>
+          </div>
+          <nav className="flex-1 p-4">
+            <ul className="space-y-2">
               <li>
                 <button
-                  onClick={() => setActiveTab("emails")}
+                  onClick={() => { setActiveTab("emails"); setSidebarOpen(false); }}
                   className={`w-full text-left px-3 py-2 rounded-lg flex items-center gap-2 ${activeTab === "emails"
-                      ? "bg-blue-500 text-white"
-                      : "hover:bg-gray-200"
+                    ? "bg-blue-500 text-white"
+                    : "hover:bg-gray-200"
                     }`}
                 >
                   <Mail className="w-4 h-4" /> Contact Messages
@@ -593,10 +640,10 @@ Idara Al-Khair
               </li>
               <li>
                 <button
-                  onClick={() => setActiveTab("addjob")}
+                  onClick={() => { setActiveTab("addjob"); setSidebarOpen(false); }}
                   className={`w-full text-left px-3 py-2 rounded-lg flex items-center gap-2 ${activeTab === "addjob"
-                      ? "bg-blue-500 text-white"
-                      : "hover:bg-gray-200"
+                    ? "bg-blue-500 text-white"
+                    : "hover:bg-gray-200"
                     }`}
                 >
                   <Briefcase className="w-4 h-4" /> Add Job
@@ -604,10 +651,10 @@ Idara Al-Khair
               </li>
               <li>
                 <button
-                  onClick={() => setActiveTab("recentjobs")}
+                  onClick={() => { setActiveTab("recentjobs"); setSidebarOpen(false); }}
                   className={`w-full text-left px-3 py-2 rounded-lg flex items-center gap-2 ${activeTab === "recentjobs"
-                      ? "bg-blue-500 text-white"
-                      : "hover:bg-gray-200"
+                    ? "bg-blue-500 text-white"
+                    : "hover:bg-gray-200"
                     }`}
                 >
                   <Clock className="w-4 h-4" /> Recent Jobs
@@ -615,10 +662,10 @@ Idara Al-Khair
               </li>
               <li>
                 <button
-                  onClick={() => setActiveTab("oldjobs")}
+                  onClick={() => { setActiveTab("oldjobs"); setSidebarOpen(false); }}
                   className={`w-full text-left px-3 py-2 rounded-lg flex items-center gap-2 ${activeTab === "oldjobs"
-                      ? "bg-blue-500 text-white"
-                      : "hover:bg-gray-200"
+                    ? "bg-blue-500 text-white"
+                    : "hover:bg-gray-200"
                     }`}
                 >
                   <Archive className="w-4 h-4" /> Old Jobs
@@ -626,10 +673,10 @@ Idara Al-Khair
               </li>
               <li>
                 <button
-                  onClick={() => setActiveTab("jobresponse")}
+                  onClick={() => { setActiveTab("jobresponse"); setSidebarOpen(false); }}
                   className={`w-full text-left px-3 py-2 rounded-lg flex items-center gap-2 ${activeTab === "jobresponse"
-                      ? "bg-blue-500 text-white"
-                      : "hover:bg-gray-200"
+                    ? "bg-blue-500 text-white"
+                    : "hover:bg-gray-200"
                     }`}
                 >
                   <FileText className="w-4 h-4" /> Job Responses
@@ -637,10 +684,10 @@ Idara Al-Khair
               </li>
               <li>
                 <button
-                  onClick={() => setActiveTab("candidates")}
+                  onClick={() => { setActiveTab("candidates"); setSidebarOpen(false); }}
                   className={`w-full text-left px-3 py-2 rounded-lg flex items-center gap-2 ${activeTab === "candidates"
-                      ? "bg-blue-500 text-white"
-                      : "hover:bg-gray-200"
+                    ? "bg-blue-500 text-white"
+                    : "hover:bg-gray-200"
                     }`}
                 >
                   <Users className="w-4 h-4" /> Candidates
@@ -648,10 +695,10 @@ Idara Al-Khair
               </li>
               <li>
                 <button
-                  onClick={() => setActiveTab("interview")}
+                  onClick={() => { setActiveTab("interview"); setSidebarOpen(false); }}
                   className={`w-full text-left px-3 py-2 rounded-lg flex items-center gap-2 ${activeTab === "interview"
-                      ? "bg-blue-500 text-white"
-                      : "hover:bg-gray-200"
+                    ? "bg-blue-500 text-white"
+                    : "hover:bg-gray-200"
                     }`}
                 >
                   <Calendar className="w-4 h-4" /> Interview
@@ -659,10 +706,10 @@ Idara Al-Khair
               </li>
               <li>
                 <button
-                  onClick={() => setActiveTab("hired")}
+                  onClick={() => { setActiveTab("hired"); setSidebarOpen(false); }}
                   className={`w-full text-left px-3 py-2 rounded-lg flex items-center gap-2 ${activeTab === "hired"
-                      ? "bg-blue-500 text-white"
-                      : "hover:bg-gray-200"
+                    ? "bg-blue-500 text-white"
+                    : "hover:bg-gray-200"
                     }`}
                 >
                   <CheckCircle className="w-4 h-4" /> Hired
@@ -672,26 +719,34 @@ Idara Al-Khair
           </nav>
 
           {/* Footer */}
-          <div className="p-4 border-t flex justify-between items-center">
-            <button
+          <div className="p-4 border-t flex justify-center items-center">
+            {/* <button
               onClick={reload}
               disabled={loading}
               className="text-xs text-indigo-600 hover:underline flex items-center gap-1"
             >
               <RefreshCw className="w-3 h-3" />
               {loading ? "Loading..." : "Reload"}
-            </button>
+            </button> */}
             <button
               onClick={handleLogout}
-              className="text-xs text-red-600 hover:underline flex items-center gap-1"
+              className="w-full bg-gradient-to-r bg-red-500 text-white font-medium py-3 rounded-xl shadow-md hover:bg-red-700 transition-all disabled:opacity-70 flex justify-center items-center gap-2"
             >
               <LogOut className="w-3 h-3" /> Logout
             </button>
           </div>
         </aside>
 
+        {/* Overlay for mobile */}
+        {sidebarOpen && (
+          <div
+            className="fixed inset-0 bg-black bg-opacity-50 z-30 lg:hidden"
+            onClick={() => setSidebarOpen(false)}
+          />
+        )}
+
         {/* Main Content */}
-        <main className="flex-1 p-6 overflow-y-auto">
+        <main className="flex-1 p-4 lg:p-6 overflow-y-auto mt-16 lg:mt-0">
           {/* Emails */}
           {activeTab === "emails" && (
             <div>
@@ -753,8 +808,8 @@ Idara Al-Khair
                     </div>
                   </div>
 
-                  <div className="grid md:grid-cols-5 gap-4">
-                    <div>
+                  <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
+                    <div className="md:col-span-1">
                       <label className="block text-sm font-semibold text-gray-700 mb-1">Job Type</label>
                       <select value={jobType} onChange={(e) => setJobType(e.target.value)} className="w-full rounded-xl border border-gray-300 px-4 py-3 bg-white focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition">
                         <option>Full-Time</option>
@@ -763,25 +818,25 @@ Idara Al-Khair
                         <option>Contract</option>
                       </select>
                     </div>
-                    <div>
+                    <div className="md:col-span-1">
                       <label className="block text-sm font-semibold text-gray-700 mb-1">Category</label>
                       <input value={category} onChange={(e) => setCategory(e.target.value)} className="w-full rounded-xl border border-gray-300 px-4 py-3" />
                     </div>
-                    <div>
+                    <div className="md:col-span-1">
                       <label className="block text-sm font-semibold text-gray-700 mb-1">Department</label>
                       <input value={department} onChange={(e) => setDepartment(e.target.value)} className="w-full rounded-xl border border-gray-300 px-4 py-3" />
                     </div>
-                    <div>
+                    <div className="md:col-span-1">
                       <label className="block text-sm font-semibold text-gray-700 mb-1">Employment Level</label>
                       <input value={employmentLevel} onChange={(e) => setEmploymentLevel(e.target.value)} className="w-full rounded-xl border border-gray-300 px-4 py-3" />
                     </div>
-                    <div>
+                    <div className="md:col-span-1">
                       <label className="block text-sm font-semibold text-gray-700 mb-1">Deadline</label>
                       <input type="date" value={deadlineAt} onChange={(e) => setDeadlineAt(e.target.value)} className="w-full rounded-xl border border-gray-300 px-4 py-3" />
                     </div>
                   </div>
 
-                  <div className="grid md:grid-cols-3 gap-4">
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div>
                       <label className="block text-sm font-semibold text-gray-700 mb-1">Requirements</label>
                       <textarea value={requirements} onChange={(e) => setRequirements(e.target.value)} rows={3} className="w-full rounded-xl border border-gray-300 px-4 py-3" />
@@ -905,10 +960,10 @@ Idara Al-Khair
                 <button
                   onClick={loadJobResponses}
                   disabled={responsesLoading}
-                  className="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 disabled:opacity-60 flex items-center gap-2"
+                  className="px-3 py-1.5 sm:px-4 sm:py-2 bg-indigo-600 text-white rounded-md sm:rounded-lg hover:bg-indigo-700 disabled:opacity-60 flex items-center gap-2"
                 >
                   <RefreshCw className={`w-4 h-4 ${responsesLoading ? 'animate-spin' : ''}`} />
-                  {responsesLoading ? "Loading..." : "Refresh"}
+                  <span className="text-sm sm:text-base">{responsesLoading ? "Loading..." : "Refresh"}</span>
                 </button>
               </div>
 
@@ -919,7 +974,7 @@ Idara Al-Khair
                   <p className="text-gray-400 text-sm">Applications will appear here when candidates apply to your jobs</p>
                   <button
                     onClick={loadJobResponses}
-                    className="mt-4 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700"
+                    className="mt-4 px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700"
                   >
                     Check for Applications
                   </button>
@@ -927,64 +982,73 @@ Idara Al-Khair
               ) : (
                 <div className="space-y-6">
                   {jobResponses.map((application) => (
-                    <div key={application.id} className="bg-white border rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow">
-                      <div className="flex justify-between items-start mb-4">
-                        <div>
-                          <h3 className="font-bold text-xl text-gray-800">{application.applicantName}</h3>
-                          <p className="text-indigo-600 text-lg">{application.applicantEmail}</p>
+                    <div
+                      key={application.id}
+                      className="relative bg-white border rounded-xl p-4 sm:p-6 shadow-sm hover:shadow-md transition-shadow overflow-hidden"
+                    >
+                      {/* Badge + Date placed absolutely within card but responsive */}
+                      <div className="absolute top-4 right-4 flex flex-col items-end space-y-2">
+                        <span className="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">
+                          New
+                        </span>
+                        <p className="text-gray-500 text-xs sm:text-sm">
+                          {new Date(application.createdAt).toLocaleDateString()}
+                        </p>
+                      </div>
+
+                      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-3 sm:gap-0">
+                        <div className="flex-1 min-w-0">
+                          <h3 className="font-bold text-lg sm:text-xl text-gray-800 truncate">{application.applicantName}</h3>
+                          <p className="text-indigo-600 text-sm sm:text-lg truncate">{application.applicantEmail}</p>
                           {application.applicantPhone && (
-                            <p className="text-gray-600 mt-1">📞 {application.applicantPhone}</p>
+                            <p className="text-gray-600 mt-1 text-sm">📞 {application.applicantPhone}</p>
                           )}
                         </div>
-                        <div className="text-right">
-                          <span className="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">
-                            New
-                          </span>
-                          <p className="text-gray-500 text-sm mt-1">
+
+                        {/* Keep small metadata on the right for larger screens; on mobile it stacks */}
+                        <div className="sm:w-40 text-right hidden sm:block">
+                          {/* hidden on mobile because we show date in absolute position */}
+                          <p className="text-gray-500 text-sm">
                             {new Date(application.createdAt).toLocaleDateString()}
                           </p>
+                          <p className="text-gray-500 text-xs mt-1">Application ID: {application.id}</p>
+                          <p className="text-gray-500 text-xs">Job ID: {application.jobId}</p>
                         </div>
                       </div>
 
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4 p-4 bg-gray-50 rounded-lg">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-4 p-3 bg-gray-50 rounded-lg">
                         <div>
-                          <p className="font-semibold text-gray-700">Applied For:</p>
-                          <p className="text-gray-800 text-lg">{application.job?.title || "N/A"}</p>
+                          <p className="font-semibold text-gray-700 text-sm">Applied For:</p>
+                          <p className="text-gray-800 text-base sm:text-lg break-words">{application.job?.title || "N/A"}</p>
                         </div>
 
                         <div>
-                          <p className="font-semibold text-gray-700">Candidate Details:</p>
+                          <p className="font-semibold text-gray-700 text-sm">Candidate Details:</p>
                           <div className="space-y-1 text-sm">
-                            {application.yearsOfExperience && (
-                              <p>💼 {application.yearsOfExperience} years experience</p>
-                            )}
-                            {application.highestEducation && (
-                              <p>🎓 {application.highestEducation}</p>
-                            )}
-                            {application.city && (
-                              <p>📍 {application.city}</p>
-                            )}
+                            {application.yearsOfExperience && <p>💼 {application.yearsOfExperience} years experience</p>}
+                            {application.highestEducation && <p>🎓 {application.highestEducation}</p>}
+                            {application.city && <p>📍 {application.city}</p>}
                           </div>
                         </div>
                       </div>
 
                       {application.coverLetter && (
                         <div className="mb-4">
-                          <p className="font-semibold text-gray-700 mb-2">Cover Letter:</p>
-                          <div className="bg-gray-50 p-4 rounded-lg border">
-                            <p className="text-gray-700 whitespace-pre-line">{application.coverLetter}</p>
+                          <p className="font-semibold text-gray-700 mb-2 text-sm">Cover Letter:</p>
+                          <div className="bg-gray-50 p-3 rounded-lg border max-h-40 overflow-auto">
+                            <p className="text-gray-700 text-sm whitespace-pre-line break-words">{application.coverLetter}</p>
                           </div>
                         </div>
                       )}
 
                       {application.resumeUrl && (
-                        <div className="flex items-center gap-4 mb-4">
-                          <p className="font-semibold text-gray-700">Resume:</p>
+                        <div className="flex items-center gap-3 mb-4">
+                          <p className="font-semibold text-gray-700 text-sm">Resume:</p>
                           <a
                             href={application.resumeUrl}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-indigo-600 hover:text-indigo-800 flex items-center gap-2 px-4 py-2 border border-indigo-600 rounded-lg hover:bg-indigo-50 transition-colors"
+                            className="text-indigo-600 hover:text-indigo-800 flex items-center gap-2 px-3 py-1.5 border border-indigo-600 rounded-md hover:bg-indigo-50 transition-colors text-sm"
                           >
                             <FileText className="w-4 h-4" />
                             View Resume
@@ -993,27 +1057,30 @@ Idara Al-Khair
                       )}
 
                       {/* Action Buttons */}
-                      <div className="flex gap-3 mt-4">
+                      <div className="flex gap-2 mt-2 flex-wrap">
                         <button
                           onClick={() => markForInterview(application)}
-                          className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 flex items-center gap-2"
+                          className="px-3 py-1.5 bg-blue-600 text-white rounded-md hover:bg-blue-700 flex items-center gap-2 text-sm"
                         >
                           <Calendar className="w-4 h-4" />
-                          Mark for Interview
+                          <span>Mark for Interview</span>
                         </button>
 
                         <button
                           onClick={() => markAsHired(application)}
-                          className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 flex items-center gap-2"
+                          className="px-3 py-1.5 bg-green-600 text-white rounded-md hover:bg-green-700 flex items-center gap-2 text-sm"
                         >
                           <CheckCircle className="w-4 h-4" />
-                          Mark as Hired
+                          <span>Mark as Hired</span>
                         </button>
-                      </div>
 
-                      <div className="border-t pt-4 mt-4 flex justify-between items-center text-sm text-gray-500">
-                        <span>Application ID: {application.id}</span>
-                        <span>Job ID: {application.jobId}</span>
+                        {/* Show IDs on mobile under actions so layout doesn't overflow */}
+                        <div className="sm:hidden text-xs text-gray-500 mt-2 w-full">
+                          <div className="flex justify-between">
+                            <span>Application ID: {application.id}</span>
+                            <span>Job ID: {application.jobId}</span>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   ))}
@@ -1030,21 +1097,22 @@ Idara Al-Khair
                   <Users className="w-6 h-6" />
                   Candidates ({candidates.length})
                 </h2>
-                <div className="flex gap-3">
+                <div className="flex flex-wrap gap-2 sm:gap-3">
                   <button
                     onClick={() => setShowAddForm(!showAddForm)}
-                    className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 flex items-center gap-2"
+                    className="px-3 py-1.5 sm:px-4 sm:py-2 text-sm sm:text-base bg-green-600 text-white rounded-md sm:rounded-lg hover:bg-green-700 flex items-center gap-1 sm:gap-2 transition-all"
                   >
                     {showAddForm ? '❌ Cancel' : '➕ Add New Candidate'}
                   </button>
-                  <button
-                    onClick={loadCandidates}
-                    className="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 flex items-center gap-2"
-                  >
-                    <RefreshCw className="w-4 h-4" />
+                  {/* <button
+                   onClick={loadCandidates}
+                   className="px-3 py-1.5 sm:px-4 sm:py-2 text-sm sm:text-base bg-indigo-600 text-white rounded-md sm:rounded-lg hover:bg-indigo-700 flex items-center gap-1 sm:gap-2 transition-all"
+                    >
+                    <RefreshCw className="w-4 h-4 sm:w-5 sm:h-5" />
                     Refresh
-                  </button>
+                  </button> */}
                 </div>
+
               </div>
 
               {/* ✅ Add Candidate Form */}
@@ -1155,67 +1223,69 @@ Idara Al-Khair
                 </div>
               ) : (
                 <div className="bg-white rounded-xl border overflow-hidden shadow-lg">
-                  <table className="w-full">
-                    <thead className="bg-gray-50">
-                      <tr>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Position</th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Phone</th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
-                      </tr>
-                    </thead>
-                    <tbody className="divide-y divide-gray-200">
-                      {candidates.map(candidate => (
-                        <tr key={candidate.id} className="hover:bg-gray-50 transition-colors">
-                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{candidate.id}</td>
-                          <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{candidate.name}</td>
-                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{candidate.email}</td>
-                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{candidate.position}</td>
-                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                            {candidate.phone || <span className="text-gray-400">N/A</span>}
-                          </td>
-                          <td className="px-6 py-4 whitespace-nowrap">
-                            <span className={`px-2 py-1 text-xs rounded-full ${candidate.status === 'INTERVIEW_SCHEDULED'
+                  <div className="overflow-x-auto">
+                    <table className="w-full min-w-full">
+                      <thead className="bg-gray-50">
+                        <tr>
+                          <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
+                          <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
+                          <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
+                          <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Position</th>
+                          <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Phone</th>
+                          <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                          <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-gray-200">
+                        {candidates.map(candidate => (
+                          <tr key={candidate.id} className="hover:bg-gray-50 transition-colors">
+                            <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-900">{candidate.id}</td>
+                            <td className="px-4 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{candidate.name}</td>
+                            <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-500">{candidate.email}</td>
+                            <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-500">{candidate.position}</td>
+                            <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-500">
+                              {candidate.phone || <span className="text-gray-400">N/A</span>}
+                            </td>
+                            <td className="px-4 py-4 whitespace-nowrap">
+                              <span className={`px-2 py-1 text-xs rounded-full ${candidate.status === 'INTERVIEW_SCHEDULED'
                                 ? 'bg-blue-100 text-blue-800'
                                 : candidate.status === 'HIRED'
                                   ? 'bg-green-100 text-green-800'
                                   : 'bg-gray-100 text-gray-800'
-                              }`}>
-                              {candidate.status || 'PENDING'}
-                            </span>
-                          </td>
-                          <td className="px-6 py-4 whitespace-nowrap text-sm space-x-2">
-                            <button
-                              onClick={() => scheduleInterview(
-                                candidate.id,
-                                candidate.name,
-                                candidate.email,
-                                candidate.position
-                              )}
-                              className="bg-blue-600 text-white px-3 py-1 rounded-lg hover:bg-blue-700 flex items-center gap-1 text-xs transition-colors"
-                            >
-                              📅 Interview
-                            </button>
-                            <button
-                              onClick={() => markAsHired(candidate)}
-                              className="bg-green-600 text-white px-3 py-1 rounded-lg hover:bg-green-700 flex items-center gap-1 text-xs transition-colors"
-                            >
-                              ✅ Hire
-                            </button>
-                            <button
-                              onClick={() => deleteCandidate(candidate.id)}
-                              className="bg-red-600 text-white px-3 py-1 rounded-lg hover:bg-red-700 flex items-center gap-1 text-xs transition-colors"
-                            >
-                              🗑️ Delete
-                            </button>
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
+                                }`}>
+                                {candidate.status || 'PENDING'}
+                              </span>
+                            </td>
+                            <td className="px-4 py-4 whitespace-nowrap text-sm space-x-2">
+                              <button
+                                onClick={() => scheduleInterview(
+                                  candidate.id,
+                                  candidate.name,
+                                  candidate.email,
+                                  candidate.position
+                                )}
+                                className="bg-blue-600 text-white px-3 py-1 rounded-lg hover:bg-blue-700 flex items-center gap-1 text-xs transition-colors"
+                              >
+                                📅 Interview
+                              </button>
+                              <button
+                                onClick={() => markAsHired(candidate)}
+                                className="bg-green-600 text-white px-3 py-1 rounded-lg hover:bg-green-700 flex items-center gap-1 text-xs transition-colors"
+                              >
+                                ✅ Hire
+                              </button>
+                              <button
+                                onClick={() => deleteCandidate(candidate.id)}
+                                className="bg-red-600 text-white px-3 py-1 rounded-lg hover:bg-red-700 flex items-center gap-1 text-xs transition-colors"
+                              >
+                                🗑️ Delete
+                              </button>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
               )}
             </div>
@@ -1277,7 +1347,7 @@ Idara Al-Khair
                         </div>
                       </div>
 
-                      <div className="flex gap-3">
+                      <div className="flex gap-3 flex-wrap">
                         <button
                           onClick={() => markAsHired(candidate)}
                           className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 flex items-center gap-2"
