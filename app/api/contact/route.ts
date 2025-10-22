@@ -1,8 +1,10 @@
 import nodemailer from 'nodemailer';
-import { Resend } from 'resend';
 import type { NextRequest } from 'next/server';
 import fs from 'fs/promises';
 import path from 'path';
+import { PrismaClient } from '@prisma/client';
+
+const prisma = new PrismaClient();
 
 async function saveFallback(payload: Record<string, any>) {
   const dir = path.join(process.cwd(), '.debug-mails');
@@ -12,6 +14,76 @@ async function saveFallback(payload: Record<string, any>) {
   const full = path.join(dir, filename);
   await fs.writeFile(full, JSON.stringify({ ...payload, savedAt: new Date().toISOString() }, null, 2), 'utf8');
   return full;
+}
+
+// ✅ 1. Thank you email user ko bhejne ke liye
+async function sendThankYouEmail(userName: string, userEmail: string, userPhone: string | null, userMessage: string) {
+  const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: process.env.EMAIL_USER,
+      pass: process.env.EMAIL_PASS,
+    },
+  });
+
+  await transporter.sendMail({
+    from: `"${process.env.COMPANY_NAME}" <${process.env.EMAIL_USER}>`,
+    to: userEmail,
+    subject: `Thank You for Contacting ${process.env.COMPANY_NAME}`,
+    html: `
+      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+        <div style="background: #2563eb; color: white; padding: 20px; text-align: center;">
+          <h1>Thank You for Contacting ${process.env.COMPANY_NAME}</h1>
+        </div>
+        <div style="padding: 20px; background: #f9fafb;">
+          <p>Dear <strong>${userName}</strong>,</p>
+          <p>Thank you for reaching out to us. We have received your message and will respond within 24-48 hours.</p>
+          ${userMessage ? `<p><strong>Your Message:</strong></p>
+          <p style="background: white; padding: 15px; border-left: 4px solid #2563eb; border-radius: 4px;">${userMessage}</p>` : ''}
+          ${userPhone ? `<p><strong>Phone:</strong> ${userPhone}</p>` : ''}
+          <p>Best regards,<br><strong>${process.env.COMPANY_NAME} Team</strong></p>
+        </div>
+      </div>
+    `
+  });
+}
+
+// ✅ 2. Admin ko user ka complete data bhejne ke liye
+async function sendAdminNotification(name: string, email: string, phone: string | null, date: string | null, message: string) {
+  const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: process.env.EMAIL_USER,
+      pass: process.env.EMAIL_PASS,
+    },
+  });
+
+  const adminEmail = process.env.ADMIN_EMAIL || process.env.EMAIL_USER;
+
+  await transporter.sendMail({
+    from: `"Contact Form" <${process.env.EMAIL_USER}>`,
+    to: adminEmail,
+    subject: `📧 New Contact Message from ${name}`,
+    html: `
+      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+        <div style="background: #dc2626; color: white; padding: 20px; text-align: center;">
+          <h1>🚨 New Contact Form Submission</h1>
+        </div>
+        <div style="padding: 20px; background: #f9fafb;">
+          <h3>Contact Details:</h3>
+          <p><strong>👤 Name:</strong> ${name}</p>
+          <p><strong>📧 Email:</strong> ${email}</p>
+          <p><strong>📞 Phone:</strong> ${phone || 'Not provided'}</p>
+          <p><strong>📅 Preferred Date:</strong> ${date || 'Not specified'}</p>
+          <p><strong>💬 Message:</strong></p>
+          <div style="background: white; padding: 15px; border-left: 4px solid #dc2626; border-radius: 4px; margin: 10px 0;">
+            ${message.replace(/\n/g, '<br/>')}
+          </div>
+          <p><strong>⏰ Received:</strong> ${new Date().toLocaleString()}</p>
+        </div>
+      </div>
+    `
+  });
 }
 
 export async function POST(req: NextRequest) {
@@ -25,165 +97,91 @@ export async function POST(req: NextRequest) {
       return new Response(JSON.stringify({ error: 'Name, email and message are required.' }), { status: 400 });
     }
 
-    // Configure transporter. Prefer environment SMTP settings; otherwise create an ethereal test account.
-    let transporter;
-    let info;
-    let previewUrl: string | undefined;
-
-    if (process.env.SMTP_HOST && process.env.SMTP_PORT && process.env.SMTP_USER) {
-      transporter = nodemailer.createTransport({
-        host: process.env.SMTP_HOST,
-        port: Number(process.env.SMTP_PORT),
-        secure: process.env.SMTP_SECURE === 'true',
-        auth: {
-          user: process.env.SMTP_USER,
-          pass: process.env.SMTP_PASS || undefined,
-        },
+    // ✅ STEP 1: PEHLE DATABASE MEIN SAVE KARO (FIXED)
+    let dbSaved = false;
+    let savedMessageId = null;
+    
+    try {
+      // Database schema ke according data save karo
+      const savedMessage = await prisma.contactMessage.create({
+        data: { 
+          name, 
+          email, 
+          phone: phone || null, 
+          message
+          // preferredDate field hata diya kyunke schema mein nahi hai
+        }
       });
-    } else {
-      // Create Ethereal account for local testing
-      console.log('[api/contact] No SMTP env configured — creating Ethereal test account');
-      const testAccount = await nodemailer.createTestAccount();
-      console.log('[api/contact] Ethereal account created', { user: testAccount.user });
-      transporter = nodemailer.createTransport({
-        host: testAccount.smtp.host,
-        port: testAccount.smtp.port,
-        secure: testAccount.smtp.secure,
-        auth: { user: testAccount.user, pass: testAccount.pass },
-      });
-    }
-
-    // Verify transporter connectivity (helpful to fail fast with useful message)
-    try {
-      // transporter.verify may throw if connection/auth fails
-      // Note: some transports (Ethereal) should verify successfully
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
-      await transporter.verify();
-      console.log('[api/contact] transporter verified');
-    } catch (verifyErr) {
-      console.error('[api/contact] transporter.verify failed', verifyErr);
-      // Save message locally as fallback so no submissions are lost
-      try {
-        const saved = await saveFallback({ name, email, phone, date, message });
-        return new Response(JSON.stringify({ ok: true, savedTo: saved, warning: 'Transporter verification failed; message saved locally.' }), { status: 200 });
-      } catch (saveErr) {
-        console.error('[api/contact] failed to save fallback', saveErr);
-        const payload: any = { error: 'Transporter verification failed and fallback save failed.' };
-        if (process.env.NODE_ENV !== 'production') payload.details = String(verifyErr);
-        return new Response(JSON.stringify(payload), { status: 502 });
+      
+      console.log('[api/contact] Message saved to database ID:', savedMessage.id);
+      dbSaved = true;
+      savedMessageId = savedMessage.id;
+      
+    } catch (dbError: any) {
+      console.error('[api/contact] Database save failed:', dbError);
+      
+      // Specific error log karo
+      if (dbError.message.includes('preferredDate')) {
+        console.error('[api/contact] ERROR: preferredDate field does not exist in database schema');
       }
+      
+      // Continue even if database fails
     }
 
-  // Default recipient: user's requested address. This can be overridden with CONTACT_TO_EMAIL env var.
-  const toAddress = process.env.CONTACT_TO_EMAIL || 'info@idaraalkhair.com';
-
-  // Prefer Resend API if configured (better deliverability and no SMTP needed)
-  if (process.env.RESEND_API_KEY) {
+    // ✅ STEP 2: User ko thank you email bhejo
+    let thankYouSent = false;
     try {
-      console.log('[api/contact] Sending via Resend API');
-      const resend = new Resend(process.env.RESEND_API_KEY);
-      const sendResult = await resend.emails.send({
-        from: process.env.SENDER_EMAIL || `no-reply@${process.env.NEXT_PUBLIC_SITE_DOMAIN || 'example.com'}`,
-        to: toAddress,
-        subject: `Website Contact Form: ${name}`,
-        html: `<h3>New contact form submission</h3>
-          <p><strong>Name:</strong> ${name}</p>
-          <p><strong>Email:</strong> ${email}</p>
-          <p><strong>Phone:</strong> ${phone || 'N/A'}</p>
-          <p><strong>Preferred Date:</strong> ${date || 'N/A'}</p>
-          <p><strong>Message:</strong><br/>${message.replace(/\n/g, '<br/>')}</p>`,
-      });
-      console.log('[api/contact] Resend result:', sendResult);
-      // Save a copy locally for admin viewing / audit
-      try {
-        const saved = await saveFallback({ name, email, phone, date, message, resendId: (sendResult as any)?.id || null });
-        return new Response(JSON.stringify({ ok: true, resendId: (sendResult as any)?.id || null, savedTo: saved }), { status: 200 });
-      } catch (saveErr) {
-        console.error('[api/contact] failed to save fallback after Resend success', saveErr);
-        return new Response(JSON.stringify({ ok: true, resendId: (sendResult as any)?.id || null, warning: 'Resend succeeded but saving fallback failed.' }), { status: 200 });
-      }
-    } catch (resendErr) {
-      console.error('[api/contact] Resend send failed', resendErr);
-      try {
-        const saved = await saveFallback({ name, email, phone, date, message, sendError: String(resendErr) });
-        return new Response(JSON.stringify({ ok: true, savedTo: saved, warning: 'Resend send failed; message saved locally.' }), { status: 200 });
-      } catch (saveErr) {
-        console.error('[api/contact] failed to save fallback after Resend error', saveErr);
-        const payload: any = { error: 'Resend failed and fallback save failed.' };
-        if (process.env.NODE_ENV !== 'production') payload.details = String(resendErr);
-        return new Response(JSON.stringify(payload), { status: 500 });
-      }
-    }
-  }
-
-  try {
-    info = await transporter.sendMail({
-      from: `${name} <${email}>`,
-      to: toAddress,
-      subject: `Website Contact Form: ${name}`,
-      html: `<h3>New contact form submission</h3>
-        <p><strong>Name:</strong> ${name}</p>
-        <p><strong>Email:</strong> ${email}</p>
-        <p><strong>Phone:</strong> ${phone || 'N/A'}</p>
-        <p><strong>Preferred Date:</strong> ${date || 'N/A'}</p>
-        <p><strong>Message:</strong><br/>${message.replace(/\n/g, '<br/>')}</p>`,
-    });
-    console.log('[api/contact] sendMail info:', info);
-    // Save a copy locally for admin viewing / audit
-    try {
-      const saved = await saveFallback({ name, email, phone, date, message });
-      // If ethereal preview exists, include it as well
-      let previewUrl: string | undefined;
-      try {
-        // @ts-ignore
-        previewUrl = nodemailer.getTestMessageUrl(info) || undefined;
-      } catch (e) {
-        previewUrl = undefined;
-      }
-      return new Response(JSON.stringify({ ok: true, preview: previewUrl || null, savedTo: saved }), { status: 200 });
-    } catch (saveErr) {
-      console.error('[api/contact] failed to save fallback after sendMail success', saveErr);
-      try {
-        // still try to return preview if available
-        // @ts-ignore
-        const previewUrl = nodemailer.getTestMessageUrl(info) || undefined;
-        return new Response(JSON.stringify({ ok: true, preview: previewUrl || null, warning: 'Message sent but saving fallback failed.' }), { status: 200 });
-      } catch (_) {
-        return new Response(JSON.stringify({ ok: true, warning: 'Message sent but saving fallback failed.' }), { status: 200 });
-      }
-    }
-  } catch (sendErr) {
-    console.error('[api/contact] sendMail failed', sendErr);
-    try {
-      const saved = await saveFallback({ name, email, phone, date, message, sendError: String(sendErr) });
-      return new Response(JSON.stringify({ ok: true, savedTo: saved, warning: 'sendMail failed; message saved locally.' }), { status: 200 });
-    } catch (saveErr) {
-      console.error('[api/contact] failed to save fallback after sendMail error', saveErr);
-      const payload: any = { error: 'sendMail failed and fallback save failed.' };
-      if (process.env.NODE_ENV !== 'production') payload.details = String(sendErr);
-      return new Response(JSON.stringify(payload), { status: 500 });
-    }
-  }
-
-    // If using ethereal, provide preview URL
-    try {
-      // @ts-ignore
-      previewUrl = nodemailer.getTestMessageUrl(info) || undefined;
-    } catch (e) {
-      previewUrl = undefined;
+      await sendThankYouEmail(name, email, phone, message);
+      console.log('[api/contact] Thank you email sent to user');
+      thankYouSent = true;
+    } catch (thankYouError) {
+      console.error('[api/contact] Thank you email failed:', thankYouError);
     }
 
-    return new Response(JSON.stringify({ ok: true, preview: previewUrl || null }), { status: 200 });
+    // ✅ STEP 3: Admin ko complete data bhejo
+    let adminNotificationSent = false;
+    try {
+      await sendAdminNotification(name, email, phone, date, message);
+      console.log('[api/contact] Admin notification sent with complete data');
+      adminNotificationSent = true;
+    } catch (adminEmailError) {
+      console.error('[api/contact] Admin email failed:', adminEmailError);
+    }
+
+    // ✅ STEP 4: Success response with status
+    return new Response(JSON.stringify({ 
+      ok: true, 
+      message: 'Contact form submitted successfully!',
+      databaseSaved: dbSaved,
+      messageId: savedMessageId,
+      userThankYouSent: thankYouSent,
+      adminNotificationSent: adminNotificationSent
+    }), { status: 200 });
+
   } catch (err: any) {
     console.error('[api/contact] unexpected error', err);
-    const payload: any = { error: err?.message || String(err) };
-    if (process.env.NODE_ENV !== 'production') {
-      payload.stack = err?.stack || null;
+    
+    // Final fallback - local save
+    try {
+      const saved = await saveFallback({ 
+        error: err.message,
+        body: await req.json().catch(() => ({}))
+      });
+      
+      return new Response(JSON.stringify({ 
+        ok: true, 
+        savedTo: saved, 
+        warning: 'Server error but message saved locally.' 
+      }), { status: 200 });
+    } catch (saveErr) {
+      return new Response(JSON.stringify({ 
+        error: 'Failed to process contact form' 
+      }), { status: 500 });
     }
-    return new Response(JSON.stringify(payload), { status: 500 });
+  } finally {
+    // ✅ Prisma connection close karo
+    await prisma.$disconnect();
   }
 }
 
-// Use Node.js runtime for this route because Nodemailer depends on Node built-ins (stream, buffer, etc.)
 export const runtime = 'nodejs';

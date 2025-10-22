@@ -8,7 +8,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
 enum UserRole {
   ADMIN
   USER
@@ -24,6 +23,13 @@ enum JobType {
 enum JobStatus {
   OPEN
   CLOSED
+}
+
+enum ApplicationStatus {
+  PENDING
+  INTERVIEW
+  HIRED
+  REJECTED
 }
 
 model User {
@@ -48,6 +54,7 @@ model JobPost {
   status      JobStatus    @default(OPEN)
   createdAt   DateTime     @default(now())
   updatedAt   DateTime     @updatedAt
+  isActive    Boolean      @default(true)
 
   createdBy   User         @relation(fields: [createdById], references: [id])
   createdById Int
@@ -73,9 +80,10 @@ model JobApplication {
   applicantPhone String?
   coverLetter    String?
   resumeUrl      String?
-  yearsOfExperience Int?
+  yearsOfExperience Int? 
   highestEducation  String?
   city              String?
+  status        ApplicationStatus @default(PENDING)
   createdAt      DateTime  @default(now())
 
   job        JobPost  @relation(fields: [jobId], references: [id])
@@ -83,6 +91,63 @@ model JobApplication {
   appliedBy  User?    @relation(fields: [appliedById], references: [id])
   appliedById Int?
 
+  interviewCandidate InterviewCandidate?
+  hiredCandidate HiredCandidate?
+
   @@index([jobId])
   @@index([appliedById])
+}
+
+model InterviewCandidate {
+  id Int @id @default(autoincrement())
+  applicationId Int @unique
+  candidateName String
+  candidateEmail String
+  jobTitle String
+  jobId Int
+  markedAt DateTime @default(now())
+  interviewDate String?    // ✅ ADD THIS
+  interviewTime String?    // ✅ ADD THIS
+  status String @default("SCHEDULED") // SCHEDULED, COMPLETED, CANCELLED
+  
+  application JobApplication @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+  
+  @@map("interview_candidates")
+}
+model HiredCandidate {
+  id Int @id @default(autoincrement())
+  applicationId Int @unique
+  candidateName String
+  candidateEmail String
+  jobTitle String
+  jobId Int
+  hiredAt DateTime @default(now())
+  
+  application JobApplication @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+  
+  @@map("hired_candidates")
+}
+
+model ContactMessage {
+  id            Int      @id @default(autoincrement())
+  name          String
+  email         String
+  phone         String?
+  message       String
+  preferredDate String?
+  createdAt     DateTime @default(now())
+}
+model Candidate {
+  id          Int      @id @default(autoincrement())
+  name        String
+  email       String   @unique
+  position    String
+  phone       String?
+  experience  String?
+  education   String?
+  status      String   @default("PENDING")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("candidates")
 }

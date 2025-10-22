@@ -268,3 +268,14 @@ body p, main p, section p, article p, div p {
 footer p, footer .text-gray, footer span, footer li, footer address, footer a, footer h3 {
   color: #fff !important;
 }
+/* hide scrollbar */
+/* Hide scrollbar for Chrome, Safari and Edge */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for Firefox, Edge (modern), IE */
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* for Internet Explorer and Edge */
+  scrollbar-width: none;     /* for Firefox */
+}

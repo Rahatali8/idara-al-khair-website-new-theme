@@ -1,21 +1,33 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import ReCAPTCHA from "react-google-recaptcha";
+import AutoCaptcha from "@/components/AutoCaptcha";
 
-
+// Job type update karein
 type Job = {
   id: number;
   title: string;
   description: string;
   location: string;
-  jobType: string;
+  jobType: string; // 'FULL_TIME', 'PART_TIME', etc.
   createdAt?: string;
   requirements?: string;
   responsibilities?: string;
   qualifications?: string;
   deadlineAt?: string;
+};
+
+const prettyType = (t?: string) => {
+  if (!t) return "";
+  // Convert 'FULL_TIME' to 'Full Time'
+  return t.toLowerCase().replace('_', ' ');
+};
+// AutoCaptcha handle type define karo
+type AutoCaptchaHandle = {
+  getToken: () => string | null;
+  reset: () => void;
+  isVerified: () => boolean;
 };
 
 export default function JobPage() {
@@ -37,16 +49,8 @@ export default function JobPage() {
   const [city, setCity] = useState("");
   const [uploading, setUploading] = useState(false);
 
-  // reCAPTCHA token store karne ke liye ek state
-  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
-
-  // reCAPTCHA ke response ko handle karne wala function
-  const onchange = (value: string | null) => {
-    console.log("ReCAPTCHA response:", value);
-    setCaptchaToken(value);
-  };
-
-
+  // AutoCaptcha ref
+  const captchaRef = useRef<AutoCaptchaHandle>(null);
 
   useEffect(() => {
     const load = async () => {
@@ -77,11 +81,17 @@ export default function JobPage() {
     e.preventDefault();
     if (!selectedJob) return;
 
-    // reCAPTCHA token check
-    if (!captchaToken) {
-      alert("Please complete the reCAPTCHA");
+    // AutoCaptcha verification check
+    if (!captchaRef.current?.isVerified()) {
+      alert("Please complete the CAPTCHA verification");
       return;
     }
+
+    // Get token from AutoCaptcha
+    const captchaToken = captchaRef.current?.getToken();
+
+    console.log("Submitting application for job:", selectedJob.id);
+    console.log("Captcha token:", captchaToken);
 
     setApplying(true);
     try {
@@ -97,15 +107,20 @@ export default function JobPage() {
           yearsOfExperience: yearsExp ? Number(yearsExp) : undefined,
           highestEducation: highestEducation || undefined,
           city: city || undefined,
-          recaptchaToken: captchaToken, // backend me verify karne ke liye token bheje
+          captchaToken: captchaToken,
         }),
       });
+
       const data = await res.json();
+      console.log("Apply API response:", data);
+
       if (!res.ok) {
         alert(data?.error || "Failed to apply");
         return;
       }
+
       alert("Application submitted successfully");
+      
       // Form reset
       setAppName("");
       setAppEmail("");
@@ -115,10 +130,14 @@ export default function JobPage() {
       setYearsExp("");
       setHighestEducation("");
       setCity("");
-      setCaptchaToken(null); // token reset
+      
+      // Reset captcha
+      captchaRef.current?.reset();
       setApplyOpen(false);
+      
     } catch (err: any) {
-      alert(String(err));
+      console.error("Application error:", err);
+      alert("Failed to submit application. Please try again.");
     } finally {
       setApplying(false);
     }
@@ -145,22 +164,28 @@ export default function JobPage() {
     }
   };
 
+  // Reset captcha when modal closes
+  const handleApplyModalClose = () => {
+    setApplyOpen(false);
+    captchaRef.current?.reset();
+  };
+
   return (
-    <main className="min-h-screen bg-gray-50 p-6">
+    <main className="min-h-screen bg-gray-500 p-6">
       <div className="max-w-5xl mx-auto">
-        <h1 className="text-3xl font-bold text-indigo-600 mb-6">Job Openings</h1>
+        <h1 className="text-3xl font-bold text-darkblue hover:underline decoration-lightblue mb-6">Job Openings</h1>
 
         {error && <p className="mb-4 text-sm text-red-600">{error}</p>}
 
         {/* Job list */}
-        <ul className="bg-white rounded-xl border divide-y">
+        <ul className="bg-sky-100 rounded-xl hover:border-2 border-sky-500 divide-y divide-lightblue">
           {jobs.map((job) => (
-            <li key={job.id} className="p-4 flex items-start justify-between gap-4">
+            <li key={job.id} className="p-4 flex items-center justify-between gap-4" >
               <div className="min-w-0">
-                <h3 className="font-semibold text-gray-900 truncate">{job.title}</h3>
+                <h3 className="font-semibold uppercase text-gray-900 truncate">{job.title}</h3>
                 <p className="text-sm text-gray-600 mt-1 line-clamp-2">{job.description}</p>
                 <div className="text-xs text-gray-500 mt-2">
-                  <span className="mr-3">📍 {job.location}</span>
+                  <span className="mr-3">📍{job.location}</span>
                   <span>🕒 {prettyType(job.jobType)}</span>
                   {job.createdAt && (
                     <span className="ml-3">📅 {new Date(job.createdAt).toLocaleDateString()}</span>
@@ -173,7 +198,7 @@ export default function JobPage() {
                     setSelectedJob(job);
                     setOpen(true);
                   }}
-                  className="px-4 py-2 rounded-lg bg-indigo-600 text-white text-sm font-medium hover:bg-indigo-700 shadow"
+                  className="px-4 py-2 rounded-lg bg-darkblue text-white text-sm font-medium hover:bg-indigo-950 shadow"
                 >
                   View details
                 </button>
@@ -185,12 +210,12 @@ export default function JobPage() {
 
       {/* Job details dialog */}
       <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent className="w-[96vw] sm:max-w-3xl md:max-w-4xl">
+        <DialogContent className="w-[96vw] sm:max-w-3xl md:max-w-4xl border-4 border-darkblue bg-sky-100">
           <DialogHeader>
-            <DialogTitle>{selectedJob?.title}</DialogTitle>
+            <DialogTitle className="flex justify-center gap-2 uppercase text-darkblue">{selectedJob?.title}</DialogTitle>
             <DialogDescription>
               {selectedJob ? (
-                <span className="text-xs text-gray-500">
+                <span className="text-xs text-gray-500 flex justify-center gap-2">
                   📍 {selectedJob.location} • {prettyType(selectedJob.jobType)}
                   {selectedJob.createdAt && (
                     <> • {new Date(selectedJob.createdAt).toLocaleDateString()}</>
@@ -200,74 +225,99 @@ export default function JobPage() {
             </DialogDescription>
           </DialogHeader>
 
-          <div className="space-y-4 max-h-[75vh] overflow-y-auto pr-1">
-            <section>
-              <h4 className="font-semibold text-gray-800">Description</h4>
-              <p className="text-sm text-gray-700 mt-1 whitespace-pre-line">
-                {selectedJob?.description}
-              </p>
-            </section>
+          <div className="mt-8 border-t border-darkblue pt-6 space-y-2 max-h-[75vh] overflow-y-auto pr-2">
+            {/* Grid layout: Description + Requirements (Left), Responsibilities + Qualifications (Right) */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+              {/* Left column */}
+              <div className="space-y-8">
+                <section>
+                  <h4 className="font-semibold text-gray-800 text-lg mb-2">○ Description:</h4>
+                  <p className="text-sm text-gray-700 leading-relaxed whitespace-pre-line">
+                    {selectedJob?.description}
+                  </p>
+                </section>
 
-            {selectedJob?.requirements && (
-              <section>
-                <h4 className="font-semibold text-gray-800">Requirements</h4>
-                <p className="text-sm text-gray-700 mt-1 whitespace-pre-line">{selectedJob.requirements}</p>
-              </section>
-            )}
+                {selectedJob?.requirements && (
+                  <section>
+                    <h4 className="font-semibold text-gray-800 text-lg mb-2">○ Requirements:</h4>
+                    <p className="text-sm text-gray-700 leading-relaxed whitespace-pre-line mb-4">
+                      {selectedJob.requirements}
+                    </p>
+                  </section>
+                )}
+              </div>
 
-            {selectedJob?.responsibilities && (
-              <section>
-                <h4 className="font-semibold text-gray-800">Responsibilities</h4>
-                <p className="text-sm text-gray-700 mt-1 whitespace-pre-line">{selectedJob.responsibilities}</p>
-              </section>
-            )}
+              {/* Right column */}
+              <div className="space-y-8">
+                {selectedJob?.responsibilities && (
+                  <section>
+                    <h4 className="font-semibold text-gray-800 text-lg mb-2">○ Responsibilities:</h4>
+                    <p className="text-sm text-gray-700 leading-relaxed whitespace-pre-line">
+                      {selectedJob.responsibilities}
+                    </p>
+                  </section>
+                )}
 
-            {selectedJob?.qualifications && (
-              <section>
-                <h4 className="font-semibold text-gray-800">Qualifications</h4>
-                <p className="text-sm text-gray-700 mt-1 whitespace-pre-line">{selectedJob.qualifications}</p>
-              </section>
-            )}
+                {selectedJob?.qualifications && (
+                  <section>
+                    <h4 className="font-semibold text-gray-800 text-lg mb-2">○ Qualifications:</h4>
+                    <p className="text-sm text-gray-700 leading-relaxed whitespace-pre-line">
+                      {selectedJob.qualifications}
+                    </p>
+                  </section>
+                )}
+              </div>
+            </div>
 
-            {selectedJob?.deadlineAt && (
-              <section>
-                <h4 className="font-semibold text-gray-800">Deadline</h4>
-                <p className="text-sm text-gray-700 mt-1">{new Date(selectedJob.deadlineAt).toLocaleDateString()}</p>
-              </section>
-            )}
+            {/* Footer: Deadline (left) and Apply button (right) */}
+            <div className="mt-10 border-t border-gray-800 pt-4">
+              <DialogFooter className="p-0 w-full">
+                <div className="flex items-center justify-between w-full">
+                  {selectedJob?.deadlineAt && (
+                    <div className="text-left">
+                      <h4 className="font-semibold text-red-800">Deadline</h4>
+                      <p className="text-sm text-gray-700 mt-1">
+                        {new Date(selectedJob.deadlineAt).toLocaleDateString()}
+                      </p>
+                    </div>
+                  )}
 
-            <DialogFooter>
-              <button onClick={openApplyModal} className="px-4 py-2 rounded-lg bg-indigo-600 text-white text-sm font-medium hover:bg-indigo-700">
-                Apply Now
-              </button>
-            </DialogFooter>
+                  <button
+                    onClick={openApplyModal}
+                    className="px-6 py-2.5 rounded-lg bg-darkblue text-white text-sm font-medium hover:bg-darkblue/80 focus:outline-none focus:ring-2 focus:ring-indigo-300 transition-all duration-200"
+                  >
+                    Apply Now
+                  </button>
+                </div>
+              </DialogFooter>
+            </div>
           </div>
         </DialogContent>
       </Dialog>
 
       {/* Apply modal */}
-      <Dialog open={applyOpen} onOpenChange={setApplyOpen}>
-        <DialogContent className="w-[96vw] sm:max-w-3xl md:max-w-4xl  " >
+      <Dialog open={applyOpen} onOpenChange={handleApplyModalClose}>
+        <DialogContent className="w-[96vw] sm:max-w-3xl md:max-w-4xl bg-sky-50">
           <DialogHeader>
-            <DialogTitle>Apply for this job</DialogTitle>
+            <DialogTitle className="semibold uppercase text-darkblue">Apply for this job</DialogTitle>
             <DialogDescription>
               Please fill the form below. Job info is prefilled.
             </DialogDescription>
           </DialogHeader>
 
-          <form onSubmit={handleApplySubmit} className="space-y-4 max-h-[75vh] overflow-y-auto pr-1    relative z-[99999] ">
+          <form onSubmit={handleApplySubmit} className="space-y-4 max-h-[75vh] overflow-y-scroll pr-1 scrollbar-hide relative z-[99999] border-t border-gray-900 pt-4">
             {/* Job info (read-only) */}
             <div>
               <label className="block text-xs font-medium text-gray-700">Job Title</label>
-              <input value={selectedJob?.title || ""} readOnly className="mt-1 w-full border rounded-lg px-3 py-2 bg-gray-50" />
+              <input value={selectedJob?.title || ""} readOnly className="mt-1 w-full border rounded-lg px-3 py-2 bg-gray-100" />
             </div>
             <div>
               <label className="block text-xs font-medium text-gray-700">Job Description</label>
-              <textarea value={selectedJob?.description || ""} readOnly rows={3} className="mt-1 w-full border rounded-lg px-3 py-2 bg-gray-50" />
+              <textarea value={selectedJob?.description || ""} readOnly rows={3} className="mt-1 w-full border rounded-lg px-3 py-2 bg-gray-100" />
             </div>
 
             {/* Applicant info */}
-            <div className="grid md:grid-cols-2 gap-3 ">
+            <div className="grid md:grid-cols-2 gap-3">
               <div>
                 <label className="block text-xs font-medium text-gray-700">Full name</label>
                 <input required value={appName} onChange={(e) => setAppName(e.target.value)} className="mt-1 w-full border rounded-lg px-3 py-2" placeholder="Your full name" />
@@ -314,13 +364,9 @@ export default function JobPage() {
               <textarea value={coverLetter} onChange={(e) => setCoverLetter(e.target.value)} rows={3} className="mt-1 w-full border rounded-lg px-3 py-2" placeholder="Why are you a good fit?" />
             </div>
 
-            {/* reCAPTCHA */}
-            <div className="mt-4  relative z-[99999]"> {/* Ek wrapper div use karein */}
-              <ReCAPTCHA
-                sitekey="6LeeF90rAAAAANYOXyCXWH69iyOsX8eWt03msPvy"
-                onChange={onchange}
-          
-              />
+            {/* AutoCaptcha */}
+            <div className="mt-4 relative z-[99999]">
+              <AutoCaptcha ref={captchaRef} />
             </div>
 
             {/* Submit button */}
@@ -328,7 +374,7 @@ export default function JobPage() {
               <button
                 type="submit"
                 disabled={applying}
-                className="px-4 py-2 rounded-lg bg-indigo-600 text-white text-sm font-medium hover:bg-indigo-700 disabled:opacity-60"
+                className="px-4 py-2 rounded-lg bg-darkblue text-white text-sm font-medium hover:bg-darkblue/80 disabled:opacity-60"
               >
                 {applying ? "Submitting..." : "Submit Application"}
               </button>

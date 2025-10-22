@@ -49,17 +49,29 @@ function FloatingBooks() {
   }, [])
 
   const books = useMemo(() => {
-    return Array.from({ length: 8 }, (_, i) => ({
-      position: [(Math.random() - 0.8) * 12, (Math.random() - 0.5) * 10, (Math.random() - 0.5) * 15] as [
-        number,
-        number,
-        number,
-      ],
-      rotation: [Math.random() * Math.PI, Math.random() * Math.PI, Math.random() * Math.PI] as [number, number, number],
-      scale: Math.random() * 0.3 + 0.2,
-      speed: Math.random() * 2 + 1,
-      color: Math.random() > 0.5 ? "#03045e" : "#00b4d8",
-    }))
+    return Array.from({ length: 8 }, (_, i) => {
+      const seed = i * 54321; // Different seed for books
+      const seededRandom = (offset = 0) => {
+        const s = (seed + offset * 9301 + 49297) % 233280;
+        return s / 233280;
+      };
+      
+      return {
+        position: [
+          (seededRandom(1) - 0.8) * 12, 
+          (seededRandom(2) - 0.5) * 10, 
+          (seededRandom(3) - 0.5) * 15
+        ] as [number, number, number],
+        rotation: [
+          seededRandom(4) * Math.PI, 
+          seededRandom(5) * Math.PI, 
+          seededRandom(6) * Math.PI
+        ] as [number, number, number],
+        scale: seededRandom(7) * 0.3 + 0.2,
+        speed: seededRandom(8) * 2 + 1,
+        color: seededRandom(9) > 0.5 ? "#03045e" : "#00b4d8",
+      }
+    })
   }, [])
 
   if (!mounted) return null
@@ -85,17 +97,26 @@ function GeometricShapes() {
   }, [])
 
   const shapes = useMemo(() => {
-    return Array.from({ length: 6 }, (_, i) => ({
-      position: [(Math.random() - 0.8) * 15, (Math.random() - 0.5) * 15, (Math.random() - 0.5) * 20] as [
-        number,
-        number,
-        number,
-      ],
-      scale: Math.random() * 0.4 + 0.3,
-      speed: Math.random() * 1.5 + 0.5,
-      shape: Math.random() > 0.5 ? "octahedron" : "sphere",
-      color: Math.random() > 0.5 ? "#03045e" : "#00b4d8",
-    }))
+    // Use deterministic values based on index to ensure consistent rendering
+    return Array.from({ length: 6 }, (_, i) => {
+      const seed = i * 12345; // Deterministic seed based on index
+      const seededRandom = (offset = 0) => {
+        const s = (seed + offset * 9301 + 49297) % 233280;
+        return s / 233280;
+      };
+      
+      return {
+        position: [
+          (seededRandom(1) - 0.8) * 15, 
+          (seededRandom(2) - 0.5) * 15, 
+          (seededRandom(3) - 0.5) * 20
+        ] as [number, number, number],
+        scale: seededRandom(4) * 0.4 + 0.3,
+        speed: seededRandom(5) * 1.5 + 0.5,
+        shape: seededRandom(6) > 0.5 ? "octahedron" : "sphere",
+        color: seededRandom(7) > 0.5 ? "#03045e" : "#00b4d8",
+      }
+    })
   }, [])
 
   if (!mounted) return null
@@ -138,9 +159,15 @@ function FloatingParticles() {
   const positions = useMemo(() => {
     const pos = new Float32Array(particleCount * 3)
     for (let i = 0; i < particleCount; i++) {
-      pos[i * 3] = (Math.random() - 0.5) * 25
-      pos[i * 3 + 1] = (Math.random() - 0.5) * 20
-      pos[i * 3 + 2] = (Math.random() - 0.5) * 25
+      const seed = i * 98765; // Different seed for particles
+      const seededRandom = (offset = 0) => {
+        const s = (seed + offset * 9301 + 49297) % 233280;
+        return s / 233280;
+      };
+      
+      pos[i * 3] = (seededRandom(1) - 0.5) * 25
+      pos[i * 3 + 1] = (seededRandom(2) - 0.5) * 20
+      pos[i * 3 + 2] = (seededRandom(3) - 0.5) * 25
     }
     return pos
   }, [])

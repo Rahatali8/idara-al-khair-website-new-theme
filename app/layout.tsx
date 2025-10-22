@@ -33,7 +33,7 @@ export default function RootLayout({
       <head>
         <link rel="icon" href="/alkhairwhitelogo.png" type="image/png" />
       </head>
-      <body className={`${inter.variable} ${poppins.variable} font-sans antialiased overflow-x-hidden`}>
+      <body className={`${inter.variable} ${poppins.variable} font-sans antialiased overflow-x-hidden`} suppressHydrationWarning={true}>
         <FontFallback />
         <Header />
         {/* < CustomCursor/> */}

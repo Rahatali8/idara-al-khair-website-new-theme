@@ -21,9 +21,13 @@ export default function Header() {
   useEffect(() => {
     // keep a ref of isMenuOpen so the scroll handler can read latest value
     isMenuOpenRef.current = isMenuOpen
-  const handleScroll = () => {
+    
+    // Only add scroll listener on client side after hydration
+    if (typeof window === "undefined") return
+    
+    const handleScroll = () => {
       // On small screens (mobile) do not auto-hide header; rely on the menu button only
-      if (typeof window !== 'undefined' && window.innerWidth < 768) return
+      if (window.innerWidth < 768) return
       const currentScrollY = window.scrollY
       // if mobile menu is open, keep header visible and don't auto-toggle
       if (isMenuOpenRef.current) {
@@ -45,6 +49,7 @@ export default function Header() {
       }
       lastScrollY.current = currentScrollY
     }
+    
     window.addEventListener("scroll", handleScroll)
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
@@ -55,6 +60,9 @@ export default function Header() {
   }, [isMenuOpen])
 
   useEffect(() => {
+    // Only run on client side after hydration
+    if (typeof window === "undefined") return
+    
     function handleHashLink(e: MouseEvent) {
       const target = e.target as HTMLElement;
       const anchor = target.closest('a[href^="/about#"]') as HTMLAnchorElement | null;
@@ -100,12 +108,12 @@ export default function Header() {
       priority
     />
   </div>
-  <div className="">
+  {/* <div className="">
     <h1 className=  "  text-base sm: font-bold bg-gradient-to-r from-darkblue to-lightblue bg-clip-text text-transparent">
       Idara Al-Khair
     </h1>
     <p className="text-xs text-gray-600">Serving Humanity</p>
-  </div>
+  </div> */}
 </Link>
 
           {/* Desktop Navigation */}
@@ -318,12 +326,12 @@ export default function Header() {
                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-lightblue to-blue-500 transition-all duration-300 group-hover:w-full"></span>
               </span>
             </Link>
-            <Link href="/admin" className="relative group">
+            {/* <Link href="/admin" className="relative group">
               <span className="relative text-gray-700 hover:text-lightblue font-semibold transition-all duration-300 group-hover:scale-105">
                 Admin
                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-lightblue to-blue-500 transition-all duration-300 group-hover:w-full"></span>
               </span>
-            </Link>
+            </Link> */}
             <Link href="/jobs" className="relative group">
               <span className="relative text-gray-700 hover:text-lightblue font-semibold transition-all duration-300 group-hover:scale-105">
                 Jobs
@@ -459,10 +467,10 @@ export default function Header() {
               <Users />
        <span>       Volunteers</span>
               </Link>
-              <Link href="/admin" className=" flex space-x-2 text-gray-700 hover:text-teal-600 font-medium" onClick={() => setIsMenuOpen(false)}>
+              {/* <Link href="/admin" className=" flex space-x-2 text-gray-700 hover:text-teal-600 font-medium" onClick={() => setIsMenuOpen(false)}>
               <KeyRound />
               <span>Admin</span>
-              </Link>
+              </Link> */}
               <Link href="/contact" className="flex  space-x-2 text-gray-700 hover:text-teal-600 font-medium" onClick={() => setIsMenuOpen(false)}>
               <Phone />
               <span> Contact Us</span>

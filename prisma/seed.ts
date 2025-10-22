@@ -1,31 +1,40 @@
-import prisma from '../lib/prisma';
-import { hashPassword } from '../lib/auth';
+import { NextResponse } from 'next/server';
+import prisma from '@/lib/prisma';
+import { createSessionToken, getSessionCookieName } from '@/lib/auth';
 
-async function main() {
-  const adminEmail = process.env.ADMIN_EMAIL || 'admin@example.com';
-  const adminPass = process.env.ADMIN_PASSWORD || 'admin123';
+export async function POST(req: Request) {
+  try {
+    const { email, password } = await req.json();
+    if (!email || !password) {
+      return NextResponse.json({ error: 'Email and password required' }, { status: 400 });
+    }
 
-  const existing = await prisma.user.findUnique({ where: { email: adminEmail } });
-  if (!existing) {
-    await prisma.user.create({
-      data: {
-        email: adminEmail,
-        name: 'Admin',
-        role: 'ADMIN',
-        passwordHash: await hashPassword(adminPass),
-      },
+    const user = await prisma.user.findUnique({ where: { email } });
+    if (!user) {
+      return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 });
+    }
+
+    // CHANGE: Direct password compare (remove verifyPassword)
+    const ok = password === user.passwordHash;
+    if (!ok) {
+      return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 });
+    }
+
+    const token = await createSessionToken({ userId: user.id, role: user.role, email: user.email });
+    const res = NextResponse.json({ ok: true, user: { id: user.id, email: user.email, role: user.role, name: user.name } });
+    res.cookies.set({
+      name: getSessionCookieName(),
+      value: token,
+      httpOnly: true,
+      sameSite: 'lax',
+      secure: process.env.NODE_ENV === 'production',
+      path: '/',
+      maxAge: 60 * 60 * 24 * 7,
     });
-    console.log('Seeded admin user:', adminEmail);
-  } else {
-    console.log('Admin user already exists:', adminEmail);
+    return res;
+  } catch (err: any) {
+    return NextResponse.json({ error: err?.message || String(err) }, { status: 500 });
   }
 }
 
-main()
-  .then(() => process.exit(0))
-  .catch((e) => {
-    console.error(e);
-    process.exit(1);
-  });
-
-
+export const runtime = 'nodejs';

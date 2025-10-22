@@ -62,9 +62,9 @@ export default function StatsSection() {
     <Animated3DIcon Icon={Users} color="text-lightblue" delay={0.2} />
   </div>
   <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-darkblue mt-2 mb-1">
-    <AnimatedCounter end={850750} />
+    <AnimatedCounter end={250960} />
   </h3>
-  <p className="text-sm sm:text-base text-gray">People Served Since 1987</p>
+  <p className="text-sm sm:text-base text-gray">Innovation Projects Since 1987</p>
 </div>
 
     </GlassmorphismCard>
@@ -78,9 +78,9 @@ export default function StatsSection() {
     <Animated3DIcon Icon={Users} color="text-lightblue" delay={0.2} />
   </div>
   <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-darkblue mt-2 mb-1">
-    <AnimatedCounter end={850750} />
+    <AnimatedCounter end={150686} />
   </h3>
-  <p className="text-sm sm:text-base text-gray">People Served Since 1987</p>
+  <p className="text-sm sm:text-base text-gray">Communities Served Since 1987</p>
 </div>
 
     </GlassmorphismCard>
@@ -94,9 +94,9 @@ export default function StatsSection() {
     <Animated3DIcon Icon={Users} color="text-lightblue" delay={0.2} />
   </div>
   <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-darkblue mt-2 mb-1">
-    <AnimatedCounter end={850750} />
+    <AnimatedCounter end={120750} />
   </h3>
-  <p className="text-sm sm:text-base text-gray">People Served Since 1987</p>
+  <p className="text-sm sm:text-base text-gray">Health Centers Served Since 1987</p>
 </div>
 
     </GlassmorphismCard>

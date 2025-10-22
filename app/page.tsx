@@ -26,15 +26,20 @@ const FloatingElements = dynamic(() => import("@/components/floating-elements"),
 })
 
 const heroSlides = [
-  {
-    title: "Hospital Ward",
-    description: "Quality, affordable healthcare for underserved communities — accessible, compassionate, and reliable.",
+   {
+    title: "Welcome to Idara Al-Khair",
+    description: "We reach every person in need – we build the future through Education and Employment, and provide the Best Healthcare Facilities. Our goal is to bring every individual to the destination of progress and prosperity",
     image: "/al-khair.png?height=500&width=600",
   },
   {
     title: "Education Support",
     description: "Skill-focused education and vocational training that opens pathways to sustainable livelihoods.",
     image: "/al khair c-6.png?height=500&width=600",
+  },
+  {
+    title: "Healthcare Services",
+    description: "Comprehensive healthcare services that prioritize patient well-being and community health.",
+    image: "/al-khair.png?height=500&width=600",
   },
   {
     title: "Emergency Relief",

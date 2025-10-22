@@ -145,7 +145,7 @@ export default function Footer() {
 
       {/* COPYRIGHT STRIP */}
       <div className="border-t border-white/20 bg-darkblue text-white text-center text-xs sm:text-sm py-4 px-3 tracking-wide">
-        © 1987 - {new Date().getFullYear()} All rights reserved | Idara Al-Khair – Your welfare, our priority!
+        © 1987 - 2024 All rights reserved | Idara Al-Khair – Your welfare, our priority!
       </div>
     </>
   )

@@ -73,6 +73,9 @@ export default function DonorsCarousel() {
   const [itemsPerView, setItemsPerView] = useState(4)
 
   useEffect(() => {
+    // Only run on client side after hydration
+    if (typeof window === "undefined") return
+    
     const handleResize = () => {
       if (window.innerWidth < 640) {
         setItemsPerView(1)

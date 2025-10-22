@@ -23,6 +23,9 @@ const CustomCursor = () => {
   }, [position]);
 
   useEffect(() => {
+    // Only run on client side after hydration
+    if (typeof window === "undefined") return
+    
     const handleMouseMove = (e: MouseEvent) => {
       setPosition({ x: e.clientX, y: e.clientY });
     };
