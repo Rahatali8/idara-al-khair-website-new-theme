@@ -84,7 +84,7 @@ export async function DELETE(request: Request) {
     }
 
     await prisma.candidate.delete({
-      where: { id: parseInt(id) }
+      where: { id: Number.parseInt(id, 10) }
     });
 
     return NextResponse.json({ 

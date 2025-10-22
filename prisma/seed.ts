@@ -1,40 +1,39 @@
-import { NextResponse } from 'next/server';
-import prisma from '@/lib/prisma';
-import { createSessionToken, getSessionCookieName } from '@/lib/auth';
+import { PrismaClient } from '@prisma/client';
+import { hashPassword } from '../lib/auth';
 
-export async function POST(req: Request) {
-  try {
-    const { email, password } = await req.json();
-    if (!email || !password) {
-      return NextResponse.json({ error: 'Email and password required' }, { status: 400 });
-    }
+const prisma = new PrismaClient();
+const ADMIN_ROLE = 'ADMIN';
 
-    const user = await prisma.user.findUnique({ where: { email } });
-    if (!user) {
-      return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 });
-    }
+async function main() {
+  // Create admin user if it doesn't exist
+  const adminEmail = 'admin@idaraalkhair.com';
+  const adminPassword = 'admin123'; // Change this in production!
+  
+  const existingAdmin = await prisma.user.findUnique({
+    where: { email: adminEmail }
+  });
 
-    // CHANGE: Direct password compare (remove verifyPassword)
-    const ok = password === user.passwordHash;
-    if (!ok) {
-      return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 });
-    }
-
-    const token = await createSessionToken({ userId: user.id, role: user.role, email: user.email });
-    const res = NextResponse.json({ ok: true, user: { id: user.id, email: user.email, role: user.role, name: user.name } });
-    res.cookies.set({
-      name: getSessionCookieName(),
-      value: token,
-      httpOnly: true,
-      sameSite: 'lax',
-      secure: process.env.NODE_ENV === 'production',
-      path: '/',
-      maxAge: 60 * 60 * 24 * 7,
+  if (!existingAdmin) {
+    const hashedPassword = await hashPassword(adminPassword);
+    await prisma.user.create({
+      data: {
+        email: adminEmail,
+        name: 'Admin User',
+        passwordHash: hashedPassword,
+        role: ADMIN_ROLE
+      }
     });
-    return res;
-  } catch (err: any) {
-    return NextResponse.json({ error: err?.message || String(err) }, { status: 500 });
+    console.log('Admin user created successfully');
+  } else {
+    console.log('Admin user already exists');
   }
 }
 
-export const runtime = 'nodejs';
+main()
+  .catch((e) => {
+    console.error(e);
+    process.exit(1);
+  })
+  .finally(async () => {
+    await prisma.$disconnect();
+  });
