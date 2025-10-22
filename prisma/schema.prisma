@@ -23,6 +23,7 @@ enum JobType {
 enum JobStatus {
   OPEN
   CLOSED
+  HIRED    // ✅ YEH ADD KARO
 }
 
 enum ApplicationStatus {
@@ -55,6 +56,7 @@ model JobPost {
   createdAt   DateTime     @default(now())
   updatedAt   DateTime     @updatedAt
   isActive    Boolean      @default(true)
+  hiredAt     DateTime?    // When this job was marked as hired
 
   createdBy   User         @relation(fields: [createdById], references: [id])
   createdById Int
@@ -106,14 +108,15 @@ model InterviewCandidate {
   jobTitle String
   jobId Int
   markedAt DateTime @default(now())
-  interviewDate String?    // ✅ ADD THIS
-  interviewTime String?    // ✅ ADD THIS
-  status String @default("SCHEDULED") // SCHEDULED, COMPLETED, CANCELLED
+  interviewDate String?
+  interviewTime String?
+  status String @default("SCHEDULED")
   
   application JobApplication @relation(fields: [applicationId], references: [id], onDelete: Cascade)
   
   @@map("interview_candidates")
 }
+
 model HiredCandidate {
   id Int @id @default(autoincrement())
   applicationId Int @unique
@@ -137,6 +140,7 @@ model ContactMessage {
   preferredDate String?
   createdAt     DateTime @default(now())
 }
+
 model Candidate {
   id          Int      @id @default(autoincrement())
   name        String

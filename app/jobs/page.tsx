@@ -4,14 +4,16 @@ import React, { useEffect, useState, useRef } from "react";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import AutoCaptcha from "@/components/AutoCaptcha";
 
-// Job type update karein
+// Job type update karein with status field
 type Job = {
   id: number;
   title: string;
   description: string;
   location: string;
-  jobType: string; // 'FULL_TIME', 'PART_TIME', etc.
+  jobType: string;
+  status?: string;
   createdAt?: string;
+  updatedAt?: string;
   requirements?: string;
   responsibilities?: string;
   qualifications?: string;
@@ -20,14 +22,39 @@ type Job = {
 
 const prettyType = (t?: string) => {
   if (!t) return "";
-  // Convert 'FULL_TIME' to 'Full Time'
   return t.toLowerCase().replace('_', ' ');
 };
+
 // AutoCaptcha handle type define karo
 type AutoCaptchaHandle = {
   getToken: () => string | null;
   reset: () => void;
   isVerified: () => boolean;
+};
+
+// ✅ Helper functions (component ke bahar)
+const isDeadlinePassed = (job: Job) => {
+  if (!job.deadlineAt) return false;
+  return new Date(job.deadlineAt) < new Date();
+};
+
+const isDeadlineNear = (job: Job) => {
+  if (!job.deadlineAt) return false;
+  const deadline = new Date(job.deadlineAt);
+  const now = new Date();
+  const twoDays = 2 * 24 * 60 * 60 * 1000;
+  return (deadline.getTime() - now.getTime()) < twoDays;
+};
+
+const shouldHideJob = (job: Job) => {
+  if (job.status !== "HIRED") return false;
+  if (!job.updatedAt) return false;
+  
+  const hiredTime = new Date(job.updatedAt).getTime();
+  const currentTime = new Date().getTime();
+  const oneDay = 24 * 60 * 60 * 1000;
+  
+  return (currentTime - hiredTime) > oneDay;
 };
 
 export default function JobPage() {
@@ -73,6 +100,20 @@ export default function JobPage() {
 
   const openApplyModal = () => {
     if (!selectedJob) return;
+    
+    const isHired = selectedJob.status === "HIRED";
+    const isDeadlinePassed = selectedJob.deadlineAt && new Date(selectedJob.deadlineAt) < new Date();
+    
+    if (isHired) {
+      alert(`🚫 Hiring for "${selectedJob.title}" has been completed.\n\nWe are no longer accepting applications for this position.`);
+      return;
+    }
+    
+    if (isDeadlinePassed) {
+      alert(`🚫 Deadline for "${selectedJob.title}" has passed.\n\nWe are no longer accepting applications.`);
+      return;
+    }
+    
     setOpen(false);
     setApplyOpen(true);
   };
@@ -80,6 +121,19 @@ export default function JobPage() {
   const handleApplySubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!selectedJob) return;
+
+    const isHired = selectedJob.status === "HIRED";
+    const isDeadlinePassed = selectedJob.deadlineAt && new Date(selectedJob.deadlineAt) < new Date();
+    
+    if (isHired) {
+      alert(`🚫 Hiring for "${selectedJob.title}" has been completed.\n\nWe are no longer accepting applications for this position.`);
+      return;
+    }
+
+    if (isDeadlinePassed) {
+      alert(`🚫 Deadline for "${selectedJob.title}" has passed.\n\nWe are no longer accepting applications.`);
+      return;
+    }
 
     // AutoCaptcha verification check
     if (!captchaRef.current?.isVerified()) {
@@ -177,42 +231,121 @@ export default function JobPage() {
 
         {error && <p className="mb-4 text-sm text-red-600">{error}</p>}
 
-        {/* Job list */}
+        {/* Job list - UPDATED WITH ALL CONDITIONS */}
         <ul className="bg-sky-100 rounded-xl hover:border-2 border-sky-500 divide-y divide-lightblue">
-          {jobs.map((job) => (
-            <li key={job.id} className="p-4 flex items-center justify-between gap-4" >
-              <div className="min-w-0">
-                <h3 className="font-semibold uppercase text-gray-900 truncate">{job.title}</h3>
-                <p className="text-sm text-gray-600 mt-1 line-clamp-2">{job.description}</p>
-                <div className="text-xs text-gray-500 mt-2">
-                  <span className="mr-3">📍{job.location}</span>
-                  <span>🕒 {prettyType(job.jobType)}</span>
-                  {job.createdAt && (
-                    <span className="ml-3">📅 {new Date(job.createdAt).toLocaleDateString()}</span>
-                  )}
+          {jobs.map((job) => {
+            const isHired = job.status === "HIRED";
+            const isClosed = job.status === "CLOSED";
+            const isOpen = job.status === "OPEN";
+            
+            // ✅ CLOSED jobs kabhi na dikhayein
+            if (isClosed) {
+              return null;
+            }
+            
+            // ✅ HIRED jobs 1 din bad hide
+            if (isHired && shouldHideJob(job)) {
+              return null;
+            }
+            
+            // ✅ OPEN jobs deadline cross hone par hide
+            if (isOpen && isDeadlinePassed(job)) {
+              return null;
+            }
+
+            return (
+              <li key={job.id} className="p-4 flex items-center justify-between gap-4">
+                <div className="min-w-0 flex-1">
+                  <div className="flex items-center gap-2 mb-1">
+                    <h3 className="font-semibold uppercase text-gray-900 truncate">{job.title}</h3>
+                    {/* ✅ STATUS BADGES */}
+                    {isHired && (
+                      <span className="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full shrink-0">
+                        ✅ Hired
+                      </span>
+                    )}
+                    {isOpen && isDeadlineNear(job) && (
+                      <span className="bg-orange-100 text-orange-800 text-xs px-2 py-1 rounded-full shrink-0">
+                        ⏳ Ending Soon
+                      </span>
+                    )}
+                  </div>
+                  <p className="text-sm text-gray-600 mt-1 line-clamp-2">{job.description}</p>
+                  <div className="text-xs text-gray-500 mt-2">
+                    <span className="mr-3">📍{job.location}</span>
+                    <span>🕒 {prettyType(job.jobType)}</span>
+                    {job.createdAt && (
+                      <span className="ml-3">📅 {new Date(job.createdAt).toLocaleDateString()}</span>
+                    )}
+                    {/* ✅ DEADLINE INFO */}
+                    {job.deadlineAt && (
+                      <span className={`ml-3 ${isDeadlineNear(job) ? 'text-red-600 font-medium' : 'text-gray-500'}`}>
+                        ⏰ {new Date(job.deadlineAt).toLocaleDateString()}
+                      </span>
+                    )}
+                  </div>
                 </div>
-              </div>
-              <div className="shrink-0">
-                <button
-                  onClick={() => {
-                    setSelectedJob(job);
-                    setOpen(true);
-                  }}
-                  className="px-4 py-2 rounded-lg bg-darkblue text-white text-sm font-medium hover:bg-indigo-950 shadow"
-                >
-                  View details
-                </button>
-              </div>
-            </li>
-          ))}
+                <div className="shrink-0">
+                  <button
+                    onClick={() => {
+                      if (isHired) {
+                        alert(`🚫 Hiring for "${job.title}" has been completed.\n\nWe are no longer accepting applications for this position.`);
+                      } else if (isDeadlinePassed(job)) {
+                        alert(`🚫 Deadline for "${job.title}" has passed.\n\nWe are no longer accepting applications.`);
+                      } else {
+                        setSelectedJob(job);
+                        setOpen(true);
+                      }
+                    }}
+                    className={`px-4 py-2 rounded-lg text-sm font-medium shadow ${
+                      isHired || isDeadlinePassed(job)
+                        ? "bg-gray-400 text-white cursor-not-allowed" 
+                        : "bg-darkblue text-white hover:bg-indigo-950"
+                    }`}
+                    disabled={isHired || isDeadlinePassed(job)}
+                  >
+                    {isHired ? "Hiring Completed" : 
+                     isDeadlinePassed(job) ? "Deadline Passed" : 
+                     "View details"}
+                  </button>
+                </div>
+              </li>
+            );
+          })}
         </ul>
+
+        {/* ✅ EMPTY STATE AGAR SAB JOBS HIDDEN HAIN */}
+        {jobs.filter(job => {
+          const isHired = job.status === "HIRED";
+          const isClosed = job.status === "CLOSED";
+          const isOpen = job.status === "OPEN";
+          
+          if (isClosed) return false;
+          if (isHired && shouldHideJob(job)) return false;
+          if (isOpen && isDeadlinePassed(job)) return false;
+          
+          return true;
+        }).length === 0 && (
+          <div className="text-center py-12 bg-white rounded-xl border">
+            <p className="text-gray-500 text-lg mb-2">No job openings at the moment</p>
+            <p className="text-gray-400 text-sm">Please check back later for new opportunities</p>
+          </div>
+        )}
       </div>
 
       {/* Job details dialog */}
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent className="w-[96vw] sm:max-w-3xl md:max-w-4xl border-4 border-darkblue bg-sky-100">
           <DialogHeader>
-            <DialogTitle className="flex justify-center gap-2 uppercase text-darkblue">{selectedJob?.title}</DialogTitle>
+            <DialogTitle className="flex justify-center gap-2 uppercase text-darkblue">
+              {selectedJob?.title}
+              {/* ✅ HIRED BADGE IN MODAL */}
+              {selectedJob?.status === "HIRED" && (
+                <span className="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">
+                  ✅ Hired
+                </span>
+              )}
+            </DialogTitle>
             <DialogDescription>
               {selectedJob ? (
                 <span className="text-xs text-gray-500 flex justify-center gap-2">
@@ -226,6 +359,30 @@ export default function JobPage() {
           </DialogHeader>
 
           <div className="mt-8 border-t border-darkblue pt-6 space-y-2 max-h-[75vh] overflow-y-auto pr-2">
+            {/* ✅ HIRED MESSAGE AGAR JOB HIRED HAI */}
+            {selectedJob?.status === "HIRED" && (
+              <div className="mb-6 p-4 bg-green-100 border border-green-300 rounded-lg">
+                <p className="text-green-800 font-semibold text-center text-lg">
+                  🚫 Hiring Completed
+                </p>
+                <p className="text-green-600 text-center mt-1">
+                  This position has been filled and we are no longer accepting applications.
+                </p>
+              </div>
+            )}
+
+            {/* ✅ DEADLINE PASSED MESSAGE */}
+            {selectedJob?.deadlineAt && isDeadlinePassed(selectedJob) && (
+              <div className="mb-6 p-4 bg-red-100 border border-red-300 rounded-lg">
+                <p className="text-red-800 font-semibold text-center text-lg">
+                  ⏰ Deadline Passed
+                </p>
+                <p className="text-red-600 text-center mt-1">
+                  The application deadline for this position has passed.
+                </p>
+              </div>
+            )}
+
             {/* Grid layout: Description + Requirements (Left), Responsibilities + Qualifications (Right) */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
               {/* Left column */}
@@ -284,9 +441,16 @@ export default function JobPage() {
 
                   <button
                     onClick={openApplyModal}
-                    className="px-6 py-2.5 rounded-lg bg-darkblue text-white text-sm font-medium hover:bg-darkblue/80 focus:outline-none focus:ring-2 focus:ring-indigo-300 transition-all duration-200"
+                    disabled={selectedJob?.status === "HIRED" || (selectedJob?.deadlineAt && isDeadlinePassed(selectedJob))}
+                    className={`px-6 py-2.5 rounded-lg text-sm font-medium focus:outline-none focus:ring-2 focus:ring-indigo-300 transition-all duration-200 ${
+                      selectedJob?.status === "HIRED" || (selectedJob?.deadlineAt && isDeadlinePassed(selectedJob))
+                        ? "bg-gray-400 text-white cursor-not-allowed" 
+                        : "bg-darkblue text-white hover:bg-darkblue/80"
+                    }`}
                   >
-                    Apply Now
+                    {selectedJob?.status === "HIRED" ? "Hiring Completed" : 
+                     selectedJob?.deadlineAt && isDeadlinePassed(selectedJob) ? "Deadline Passed" : 
+                     "Apply Now"}
                   </button>
                 </div>
               </DialogFooter>

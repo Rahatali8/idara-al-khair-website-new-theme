@@ -2,7 +2,7 @@ import AnimatedCounter from "@/components/animated-counter"
 import FadeInSection from "@/components/fade-in-section"
 import GlassmorphismCard from "@/components/glassmorphism-card"
 import Animated3DIcon from "@/components/animated-3d-icon"
-import { Users, GraduationCap, Heart, Building } from "lucide-react"
+import { Users,} from "lucide-react"
 
 export default function StatsSection() {
   return (
@@ -46,7 +46,7 @@ export default function StatsSection() {
     <Animated3DIcon Icon={Users} color="text-lightblue" delay={0.2} />
   </div>
   <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-darkblue mt-2 mb-1">
-    <AnimatedCounter end={850750} />
+    <AnimatedCounter end={85750} />
   </h3>
   <p className="text-sm sm:text-base text-gray">People Served Since 1987</p>
 </div>
@@ -62,7 +62,7 @@ export default function StatsSection() {
     <Animated3DIcon Icon={Users} color="text-lightblue" delay={0.2} />
   </div>
   <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-darkblue mt-2 mb-1">
-    <AnimatedCounter end={250960} />
+    <AnimatedCounter end={2960} />
   </h3>
   <p className="text-sm sm:text-base text-gray">Innovation Projects Since 1987</p>
 </div>
@@ -78,7 +78,7 @@ export default function StatsSection() {
     <Animated3DIcon Icon={Users} color="text-lightblue" delay={0.2} />
   </div>
   <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-darkblue mt-2 mb-1">
-    <AnimatedCounter end={150686} />
+    <AnimatedCounter end={1506} />
   </h3>
   <p className="text-sm sm:text-base text-gray">Communities Served Since 1987</p>
 </div>
@@ -94,7 +94,7 @@ export default function StatsSection() {
     <Animated3DIcon Icon={Users} color="text-lightblue" delay={0.2} />
   </div>
   <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-darkblue mt-2 mb-1">
-    <AnimatedCounter end={120750} />
+    <AnimatedCounter end={50} />
   </h3>
   <p className="text-sm sm:text-base text-gray">Health Centers Served Since 1987</p>
 </div>
