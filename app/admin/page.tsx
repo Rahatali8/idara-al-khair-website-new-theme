@@ -850,6 +850,7 @@ Idara Al-Khair
                       <textarea value={qualifications} onChange={(e) => setQualifications(e.target.value)} rows={3} className="w-full rounded-xl border border-gray-300 px-4 py-3" />
                     </div>
                   </div>
+
                   <button
                     type="submit"
                     disabled={jobSubmitting}
