@@ -4,8 +4,8 @@ const { hashPassword } = require('../lib/auth');
 
 // Simple script to insert a default admin user
 async function main() {
-  const adminEmail = 'admin@test.com';
-  const adminPass = 'admin123';
+  const adminEmail = 'hr@iak.ngo';
+  const adminPass = 'iak-admin-hr';
 
   const existing = await prisma.user.findUnique({ where: { email: adminEmail } });
   if (!existing) {

@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import prisma from '@/lib/prisma';
-import { createSessionToken, getSessionCookieName } from '@/lib/auth';
+import { createSessionToken, getSessionCookieName, verifyPassword } from '@/lib/auth';
 
 export async function POST(req: Request) {
   try {
@@ -27,7 +27,7 @@ export async function POST(req: Request) {
     }
 
     // Direct password compare
-    const ok = password === user.passwordHash;
+    const ok = await verifyPassword(password, user.passwordHash);
     console.log('Password match:', ok);
 
     if (!ok) {
