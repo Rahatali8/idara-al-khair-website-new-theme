@@ -38,6 +38,11 @@ export async function POST(req: Request) {
     console.log('LOGIN SUCCESS');
     
     const token = await createSessionToken({ userId: user.id, role: user.role, email: user.email });
+    
+    // ✅ ADDED DEBUG LINES:
+    console.log('Token created, length:', token.length);
+    console.log('Cookie name:', getSessionCookieName());
+    
     const res = NextResponse.json({ ok: true, user: { id: user.id, email: user.email, role: user.role, name: user.name } });
     res.cookies.set({
       name: getSessionCookieName(),
@@ -48,6 +53,9 @@ export async function POST(req: Request) {
       path: '/',
       maxAge: 60 * 60 * 24 * 7,
     });
+
+    // ✅ ADDED DEBUG LINE:
+    console.log('Cookie set successfully');
     return res;
   } catch (err: any) {
     console.log('ERROR:', err);

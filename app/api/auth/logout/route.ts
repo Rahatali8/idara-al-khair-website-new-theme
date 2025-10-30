@@ -2,19 +2,16 @@ import { NextResponse } from 'next/server';
 import { getSessionCookieName } from '@/lib/auth';
 
 export async function POST() {
-  const res = NextResponse.json({ ok: true });
-  res.cookies.set({
+  const response = NextResponse.json({ ok: true });
+  
+  response.cookies.set({
     name: getSessionCookieName(),
     value: '',
-    httpOnly: true,
-    sameSite: 'lax',
-    secure: process.env.NODE_ENV === 'production',
+    expires: new Date(0),
     path: '/',
-    maxAge: 0,
   });
-  return res;
+
+  return response;
 }
 
 export const runtime = 'nodejs';
-
-

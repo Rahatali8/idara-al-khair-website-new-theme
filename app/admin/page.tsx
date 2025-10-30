@@ -19,7 +19,7 @@ import {
 export default function AdminPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(true);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [messages, setMessages] = useState<any[]>([]);
@@ -1008,11 +1008,11 @@ Idara Al-Khair
                         {/* Keep small metadata on the right for larger screens; on mobile it stacks */}
                         <div className="sm:w-40 text-right hidden sm:block">
                           {/* hidden on mobile because we show date in absolute position */}
-                          <p className="text-gray-500 text-sm">
+                          {/* <p className="text-gray-500 text-sm">
                             {new Date(application.createdAt).toLocaleDateString()}
-                          </p>
-                          <p className="text-gray-500 text-xs mt-1">Application ID: {application.id}</p>
-                          <p className="text-gray-500 text-xs">Job ID: {application.jobId}</p>
+                          </p> */}
+                          {/* <p className="text-gray-500 text-xs mt-1">Application ID: {application.id}</p>
+                          <p className="text-gray-500 text-xs">Job ID: {application.jobId}</p> */}
                         </div>
                       </div>
 

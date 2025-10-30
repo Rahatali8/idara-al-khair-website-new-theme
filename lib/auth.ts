@@ -23,7 +23,7 @@ export async function createSessionToken(payload: SessionPayload, maxAgeSeconds 
   const token = await new SignJWT(payload)
     .setProtectedHeader({ alg: 'HS256' })
     .setIssuedAt()
-    .setExpirationTime(`${maxAgeSeconds}s`)
+    .setExpirationTime(Math.floor(Date.now() / 1000) + maxAgeSeconds) // ✅ CORRECT FORMAT
     .sign(JWT_SECRET);
   return token;
 }
@@ -40,5 +40,3 @@ export async function verifySessionToken(token: string): Promise<SessionPayload 
 export function getSessionCookieName() {
   return SESSION_COOKIE;
 }
-
-
